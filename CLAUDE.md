@@ -30,38 +30,47 @@ Nemotron sonuçları çok iyi çıktığı için henüz yapılmadı, gerek kalma
 ariza-tespit-siniflandirici/
 ├── data/
 │   ├── seed/
-│   │   ├── seed.jsonl              # few-shot yemi, ~96 kayit (bkz. "Veri Durumu")
-│   │   ├── gold.jsonl              # bozulmamis test seti, ~79 kayit
+│   │   ├── seed.jsonl              # few-shot yemi, 93 kayit
+│   │   ├── gold.jsonl              # bozulmamis test seti, 80 kayit (8x10)
 │   │   ├── seed_v1_backup.jsonl    # Gemini ile ilk deneme (arsiv)
 │   │   ├── gold_v1_backup.jsonl
-│   │   ├── seed_v3_groq_fixed_backup.jsonl  # Groq/Llama3.3 duzeltilmis prompt (arsiv)
-│   │   └── gold_v3_groq_fixed_backup.jsonl
-│   ├── raw/                        # BOS -- Adim 2b'de Ollama ciktisi buraya
-│   └── processed/                  # BOS -- Adim 3'te train/val/test buraya
-├── model/                          # BOS -- egitilmis model buraya
+│   │   ├── seed_v2_groq_backup.jsonl
+│   │   ├── gold_v2_groq_backup.jsonl
+│   │   ├── seed_v3_groq_fixed_backup.jsonl  # Groq/Llama3.3 duzeltilmis prompt
+│   │   ├── gold_v3_groq_fixed_backup.jsonl
+│   │   └── gold_v4_pre_guvenlik_backup.jsonl  # guvenlik yeniden uretiminden once
+│   ├── raw/
+│   │   └── amplified.jsonl         # Adim 2b ciktisi, 1586 kayit
+│   └── processed/                  # Adim 3 ciktisi
+│       ├── clean.csv               # 1586 (bolunmemis, temizlenmis havuz)
+│       ├── train.csv               # 1269
+│       ├── val.csv                 #  159
+│       ├── test.csv                #  158
+│       └── gold_test.csv           #   80  (gold.jsonl'den, egitime GIRMEZ)
+├── model/                          # BOS -- egitilmis model buraya (Adim 4)
 ├── src/
 │   ├── __init__.py
 │   ├── config.py                   # TEK dogruluk kaynagi, asagida detay
-│   ├── generate_seed.py            # seed/gold ureten script (coklu saglayici)
-│   ├── review.py                   # otomatik kalite triyaj araci
-│   ├── apply_review.py             # elle onaylanan duzeltmeleri uygular
+│   ├── generate_seed.py            # seed/gold uretimi (coklu saglayici, --category)
+│   ├── generate_data.py            # Adim 2b -- cogaltma (hibrit saglayici)
+│   ├── preprocess.py               # Adim 3 -- kumeleme + train/val/test bolme
+│   ├── review.py                   # kalite triyaji (seed/gold/amplified)
+│   ├── apply_review.py             # elle onaylanan duzeltmeleri uygular (idempotent)
 │   ├── check_openrouter_models.py  # OpenRouter canli model/fiyat listesi
-│   ├── generate_data.py            # YOK -- Adim 2b'de yazilacak (cogaltma)
-│   ├── preprocess.py                # YOK -- Adim 3'te yazilacak
 │   ├── train.py                     # YOK -- Adim 4'te yazilacak
 │   └── evaluate.py                  # YOK -- Adim 4'te yazilacak
 ├── backend/
 │   └── main.py                      # YOK -- Adim 5'te yazilacak (FastAPI)
 ├── frontend/                        # YOK -- Adim 6'da yazilacak (React)
 ├── venv/
+├── requirements.txt                 # pip freeze ile donduruldu (35 paket)
 └── .env                             # GEMINI_API_KEY, GROQ_API_KEY,
                                       # OPENROUTER_API_KEY var; ANTHROPIC_API_KEY yok
 ```
 
-`requirements.txt` henuz konsolide edilmedi -- su ana kadar `pip install`
-ile tek tek kuruldu (python-dotenv, google-genai, anthropic, requests, groq,
-openai). Adim 2b'ye gecmeden once `pip freeze > requirements.txt` ile
-donduruleblir.
+NOT: `data/raw`, `data/processed`, `model` bos olduklarinda git'e girmez (git
+bos klasor takip etmez), ama `config.py` import edilir edilmez bunlari kendisi
+olusturur -- klonlayan icin hicbir sey kirilmaz.
 
 ## config.py — Projenin Tek Doğruluk Kaynağı
 
@@ -111,15 +120,35 @@ hayatta İngilizce klavyeyle hızlı yazan biri her stilde bunu yapabilir.
 Bu davranış bir "hata" değil, modelin dayanıklı olması gereken doğal bir
 varyasyon olarak kabul edildi (bkz. review.py bölümü).
 
-### Hedef Veri Hacmi
+### Hedef Veri Hacmi — hedef vs GERÇEKLEŞEN
 
-- Seed: 12/kategori × 8 = 96 (few-shot yemi, Ollama'ya verilecek)
-- Gold: 10/kategori × 8 = 80 (few-shot'ta **asla** kullanılmaz, saf test seti)
-- Nihai eğitim verisi (çoğaltma sonrası): **200/kategori × 8 = 1600**
+| set | hedef | gerçekleşen | not |
+|---|---|---|---|
+| seed | 12/kat × 8 = 96 | **93** | elle triyajda 3 kayıt silindi |
+| gold | 10/kat × 8 = 80 | **80** | tam, 8 kategori × 10 |
+| çoğaltma | 200/kat × 8 = 1600 | **1586** | `altyapi_insaat` 186 (aşağıda) |
+
+Çoğaltma sonrası bölme (Adım 3): train **1269** / val **159** / test **158**
+(%80/%10/%10), ayrıca gold_test **80** (eğitime hiç girmez).
 
 (Not: orijinal PDF taslağında 70/kategori × 6 kategori = 420 yazıyordu.
 Kategori sayısı 6'dan 8'e, hedef hacim 70'ten 200'e çıkarıldı — rapor
 güncellenmeli.)
+
+### Çoğaltma Ayarları (Adım 2b, config.py)
+
+- `AMPLIFY_PROVIDER = "hybrid"` — OpenRouter birincil, kalıcı hatada Ollama
+- `AMPLIFY_BATCH_SIZE = 40` — çağrı başına örnek (gerekçesi aşağıda)
+- `AMPLIFY_FEWSHOT_N = 6`, `AMPLIFY_AVOID_N = 12`
+- `OLLAMA_MODEL = "qwen2.5:14b"`, `OLLAMA_NUM_CTX = 8192`,
+  `OLLAMA_NUM_PREDICT = 4096`
+
+**`OLLAMA_NUM_CTX` neden açıkça ayarlandı:** Ollama'nın varsayılan bağlam
+penceresi 2048 token. Çoğaltma prompt'u (kategori kapsamı + stil tanımı +
+few-shot + "bunları tekrarlama" listesi) bunun büyük kısmını yiyor, çıktıya
+yer kalmıyordu: 25 örnek istenmesine rağmen model 1-2 örnek döndürüp
+kesiliyordu. 8192'ye çıkarılınca aynı iş 5 çağrıda 8 kayıt yerine 7 çağrıda
+40 kayıt üretti.
 
 ### Eğitim Hiperparametreleri (henüz kullanılmadı, Adım 4 için hazır)
 
@@ -171,6 +200,43 @@ scripti tam da bunun için yazıldı — tahmin etmek yerine anlık sorgula.
 **Karar:** Claude API'ye ($5 minimum ödeme) hiç gerek kalmadı. OpenRouter'ın
 ücretsiz Nemotron 3 Ultra modeli yeterli kaliteyi verdi.
 
+### Adım 2b'de ikinci ölçüm: Nemotron vs Ollama (18 Ağu 2026)
+
+Çoğaltmaya başlarken "hangi model" sorusu için ikisi **aynı görevde, aynı
+prompt'la, aynı hedefle** (İstasyon Mekanik, 40 kayıt) ölçüldü:
+
+| | Ollama qwen2.5:14b | OpenRouter Nemotron 3 Ultra |
+|---|---|---|
+| gereken çağrı | 7 | **4** |
+| süre | 6:45 | **2:11** |
+| `review.py` işaretli | **%18** | **%5** |
+| near-dup reddi | 5 | **0** |
+| uydurma istasyon adı | `marmaraisi`, `yersenlik`, `leventtünel` | yok |
+| uydurma teknik terim | `perde çarkı`, `motorı tıkranıyor` | yok |
+
+**Nihai 1586 kayıt üzerinde de aynı fark doğrulandı:**
+
+| kaynak | kayıt | işaretli |
+|---|---|---|
+| openrouter (Nemotron) | 1086 | **%4.5** |
+| ollama (qwen2.5:14b) | 500 | **%15.8** |
+
+**Ders 2'nin ikinci teyidi.** Ayrıca yeni bir gözlem: qwen'in asıl zayıflığı
+`review.py`'nin ölçtüğü şey (uzunluk/tekrar) değil, **özel isim ve teknik
+terim uydurması** — otomatik triyaj bunu yakalamıyor, elle okumak gerekiyor.
+Yani düşük işaretli oran tek başına kalite garantisi değil.
+
+**`AMPLIFY_BATCH_SIZE` 25→40 kararı:** bağlayıcı kısıt örnek sayısı değil
+ÇAĞRI sayısı. OpenRouter ücretsiz katmanı ~50 istek/gün; 25'lik partilerle
+1600 örnek 64 çağrı gerektiriyordu, yani son ~350 kayıt zorunlu olarak
+Ollama'ya kalıyordu. 40'lık partiyle ~40 çağrı yetiyor. (Pratikte 45
+OpenRouter çağrısı yapılabildi, sonra kota bitti.)
+
+**Hibrit devir sahada çalıştı:** kota `altyapi_insaat` ortasında bitti,
+script otomatik Ollama'ya geçti ve durmadan devam etti. Ayrıca bir parti
+bozuk JSON döndürdüğünde tüm çalıştırmayı çökertmek yerine o partiyi atlayıp
+devam etti (kalıcı/geçici hata ayrımı — Genel İlke 5).
+
 ## review.py — Kalite Kontrol Sistemi
 
 Otomatik olarak şunları işaretler (elle bakılması gerekenler):
@@ -192,6 +258,44 @@ otomatik çıkarılan bir sözlükle gerçek aksan-düşürme tespit edildi
 "sorun" listesinden çıkarılıp sadece kategori özetinde "aksan-düşük%" olarak
 bilgi amaçlı raporlanmaya çevrildi — **artık işaretli sayıya dahil değil.**
 
+**`--file amplified` eklendi:** Adım 2b çıktısı da aynı araçla taranıyor.
+Varsayılan taramaya dahil değil (1586 kayıtlık rapor seed/gold raporunu
+boğar), açıkça seçilmesi gerekiyor.
+
+**`similarity()` simetrik hâle getirildi (18 Ağu 2026, gerçek hata):**
+`SequenceMatcher` argüman sırasına duyarlı (autojunk sezgiseli). Ölçüldü: bir
+çift için `similarity(a,b) = 0.8511`, `similarity(b,a) = 0.8298` — yani 0.85
+eşiğinin iki yanında. Sonuç: aynı çift, nerede karşılaştırıldığına göre farklı
+karar alıyordu. `generate_data` `(yeni, mevcut)` sırasıyla çağırıp kabul
+ederken, `preprocess` `(mevcut, yeni)` sırasıyla çağırıp aynı çifti
+near-duplicate sayıyordu. Sızıntı savunmasının tamamı bu eşiğe dayandığı için
+girdiler artık kanonik sıraya sokuluyor (`sorted((a, b))`); 2000 rastgele
+çiftle simetri doğrulandı.
+
+**Bilinen boşluk — kategori sınırı denetlenmiyor:** `review.py` bir bildirimin
+YANLIŞ kategoride olduğunu tespit edemiyor; sadece tekrar/uzunluk/sızıntı
+bakıyor. Gold'da yanlış kategorili bir kayıt (peron kapısı PSD arızası
+`guvenlik_emniyet` etiketiyle) ancak şans eseri "uzunluk" bayrağıyla
+yakalandı. Ölçüm: çoğaltılmış 1586 kayıtta kategoriler arası çelişkili
+(neredeyse aynı metin, farklı etiket) **2 çift** var — %0.13, eğitim için
+ihmal edilebilir ama araç bunu görmüyor.
+
+## generate_seed.py — `--category` desteği (18 Ağu 2026 eklendi)
+
+Sorun: `resume` mantığı bir kategoriyi %80 eşiğini (8/10) geçtiğinde "tamam"
+sayıyordu, bu yüzden 9/10 kalan `guvenlik_emniyet` otomatik tamamlanmıyordu
+ve elle müdahale yolu da yoktu.
+
+- `--category KEY [KEY ...]` — sadece o kategori(ler)i işler, **%80 eşiği
+  yerine tam hedefe** tamamlar, diğer kategorilere hiç dokunmaz.
+- `--force` artık `--category` ile birlikte **yalnızca seçili kategoriyi**
+  sıfırlar (tek başına kullanıldığında eski davranış: hepsini sıfırlar).
+- Tamamlamada **az temsil edilen stiller önceliklendirilir** — böylece
+  tamamlama stil dengesini bozmak yerine düzeltir.
+- Rapor artık sessiz kalmıyor: eşiği geçmiş ama hedefin altındaki kategoriler
+  `<-- 1 eksik (--category X ile tamamlanabilir)` diye işaretleniyor. Asıl
+  sorun bu boşluktu.
+
 ## Elle Yapılan Son Düzeltmeler (apply_review.py ile)
 
 v4 (Nemotron) verisi üzerinde elle triyaj yapıldı, onaylanan değişiklikler:
@@ -210,60 +314,128 @@ v4 (Nemotron) verisi üzerinde elle triyaj yapıldı, onaylanan değişiklikler:
 - 4 stil düzeltmesi: `elektrik_enerji` kategorisinde `devrik`/`cok_kisa`
   etiketli ama aslında tam resmi cümle olan 4 kayıt → `standart`
 
-## ⚠️ Doğrulanmamış / Açık Noktalar (Claude Code önce bunları kontrol etsin)
+### İkinci tur (18 Ağu 2026)
 
-1. **`apply_review.py` gerçekten çalıştırıldı mı, sonucu doğrulandı mı?**
-   Son mesajda "çalıştır, sonra `review.py --only-flagged` ile doğrula"
-   denildi ama çalıştırma çıktısı bu konuşmada paylaşılmadı. İlk iş: bunu
-   çalıştırıp/doğrulayıp gerçek son hâli teyit et.
-2. **Gold'da bir kategori eksik:** v4 sonucunda `Güvenlik / Emniyet`
-   kategorisinde 9/10 kayıt vardı (10 değil). `resume` mantığı %80 eşiğini
-   (8/10) geçtiği için otomatik tamamlamadı. İsteğe bağlı: `python -m
-   src.generate_seed --only gold --provider openrouter` ile üstüne
-   eklenebilir (mevcut kategoriler dokunulmadan kalır, sadece eksik
-   kategori denenir çünkü 9 < 8 değil aslında -- yani bu otomatik
-   tetiklenmez, elle `--force` ile o kategoriye özel bir tamamlama
-   gerekebilir; script şu an kategori-özel force desteklemiyor, küçük bir
-   ek gerekebilir).
-3. **`SEED_PROVIDER` düzeltildi:** Bu md yazılırken fark edildi ki
-   `config.py`'de hâlâ `"groq"` yazıyordu, gerçek kazanan `"openrouter"`
-   idi. Bu dosyada düzeltildi, ama teyit et.
-4. **qwen2.5:14b vs gemma2:9b karşılaştırması hiç yapılmadı.** Ollama'da
-   qwen2.5:14b kurulu ve varsayılan seçildi (RAM yeterli olduğu için), ama
-   planlanan yan-yana kalite testi atlandı çünkü Nemotron sonuçları zaten
-   tatmin ediciydi. Adım 2b'ye başlarken hâlâ gerekli mi karar verilmeli.
-5. **Açık karar: Adım 2b'de (çoğaltma) hangi model kullanılacak?**
-   Orijinal plan "seed/gold güçlü modelle, çoğaltma Ollama'yla (ücretsiz,
-   yerel)" şeklindeydi. Ama OpenRouter/Nemotron 3 Ultra bu kadar iyi
-   sonuç verdiği için, 1600 cümlelik çoğaltmayı da OpenRouter üzerinden
-   yapmak (aynı ücretsiz kota dahilinde, ~50 istek/gün limiti göz önünde
-   bulundurularak batch'lenerek) kalite açısından daha iyi olabilir. Bu
-   konuşulmadı, karar verilmesi lazım. Ollama'nın avantajı: tamamen
-   yerel, kota derdi yok, MacBook'un fanı hariç bedel yok.
+**Seed:**
+- `makinist kabini fren manasi tikaniyo` → `...fren manivelasi tikaniyo`.
+  "Fren manası" diye bir parça yok; aynı ifadenin `standart` stildeki ikizi
+  ilk turda silinmişti ama bu `yazim_yanlisi` varyantı gözden kaçmıştı.
+  Few-shot yemi olduğu için hatalı terimi 1600 örneğe taşıma riski vardı.
+
+**Gold:**
+- `guvenlik_emniyet` kategorisi `--force` ile tamamen yeniden üretildi.
+  Sebep: 9 kaydın 3'ü bozuktu — biri **Arapça harf** içeriyordu
+  (`Peron kapısı arıza, güvenlik بوğu`), biri var olmayan bir kelime
+  kullanıyordu (`yangın merchı`), biri çatı hatası taşıyordu
+  (`güvenlik ekipleri bölgeyi kuşatıldı`). Yedek:
+  `gold_v4_pre_guvenlik_backup.jsonl`
+- Yeniden üretim sonrası 1 kayıt silindi: `Peron kapısı aralıklı açılıyor,
+  sıkışma riski var.` — taksonomiye göre **yanlış kategori** (config'de
+  "peron kapısı (PSD)" açıkça `istasyon_mekanik` kapsamında). Gold'da etiket
+  hatası doğru tahmini yanlış saydırır, bu yüzden yazım hatasının aksine
+  tolere edilmez. Yerine 1 kayıt üretildi.
+- 2 stil düzeltmesi (metne dokunulmadan).
+
+**Bilinçli olarak DÜZELTİLMEYENLER (kullanıcı kararı):** `trensformatörü`
+(transformatörü), `kırıkMetal` (yapışık kelime), `Ayrılıkçeşmesi` (istasyon
+adı kısaltması). Ölçüt: *"Metro İstanbul'da bir personel aceleyle yazarken
+bunu yazar mıydı?"* — evetse gerçekçi gürültüdür, gold'a aittir. Ayrıca
+teknik olarak metriğe sadece `metin` + `kategori` giriyor; `stil` etiketi
+muhasebe alanı, model `kategori` tahmin ediyor.
+
+## ✅ Kapanan Açık Noktalar (18 Ağu 2026)
+
+Önceki sürümdeki 5 maddenin tamamı kapandı:
+
+1. **`apply_review.py` doğrulandı** — daha önce çalıştırılmıştı; 9
+   değişikliğin her biri dosyada tek tek kontrol edilerek teyit edildi.
+   Ayrıca script tekrar çalıştırılabilir (idempotent) hâle getirildi:
+   "zaten uygulanmış" ile "hiç bulunamadı" ayırt ediliyor, sahte UYARI
+   basmıyor.
+2. **Gold'daki eksik kategori tamamlandı** — `generate_seed.py`'ye
+   `--category KEY` eklendi (aşağıda). `guvenlik_emniyet` `--force` ile
+   yeniden üretildi, gold 80/80 oldu.
+3. **`SEED_PROVIDER = "openrouter"` teyit edildi** (config.py).
+4. **qwen2.5:14b vs gemma2:9b karşılaştırması hâlâ yapılmadı** ve artık
+   gereksiz: Adım 2b'de qwen2.5:14b ile Nemotron doğrudan ölçüldü, qwen
+   belirgin şekilde geride kaldı. Daha küçük bir yerel modeli denemenin
+   kazandıracağı bir şey yok.
+5. **Adım 2b model kararı verildi:** hibrit (aşağıda).
+
+## ⚠️ Güncel Açık Noktalar
+
+1. **`altyapi_insaat` 186/200 (14 eksik).** `devrik` stili 36/50'de takıldı:
+   Ollama o grup için yeni örnek üretemez hâle geldi (üst üste near-dup),
+   script sonsuz döngüye girmemek için grubu bıraktı. Kota yenilenince
+   `python -m src.generate_data --category altyapi_insaat` ile tamamlanabilir.
+2. **Ollama'dan gelen 500 kayıt değiştirilecek (kullanıcı kararı).** Kota
+   bittiği için `yolcu_operasyon` ve `temizlik_cevre` kategorilerinin
+   TAMAMI, `altyapi_insaat`'ın da yarısı qwen2.5:14b'den geldi. Bu
+   sistematik: iki sınıf tamamen zayıf modelle eğitilmiş olur, F1'leri
+   düşebilir ve confusion matrix yanıltır. Plan: kota yenilenince bu
+   kayıtlar Nemotron'la değiştirilecek, iki sürüm cümle bazında
+   karşılaştırılacak.
+   - **Önce yedek al:** `amplified_ollama_backup.jsonl` — yoksa kıyaslanacak
+     eski cümle kalmaz.
+   - **Gerekli ek:** `generate_data.py` şu an sadece `--category` +
+     `--force` destekliyor, o da tüm kategoriyi siler. `altyapi_insaat`
+     karışık (86 Nemotron + 100 Ollama) olduğu için "sadece belirli
+     kaynaktan gelen kayıtları değiştir" seçeneği (`--replace-source
+     ollama` gibi) eklenmeli, yoksa 86 iyi kayıt da gider.
+   - **Değişimden sonra Adım 3 MUTLAKA yeniden çalıştırılmalı** — mevcut
+     train/val/test.csv geçersiz olur. Adım 4'e (eğitim) eski split'le
+     başlanmamalı.
+3. **Near-dup eşiği (0.85) henüz kalibre edilmedi.** Şu anki veriyle
+   kümeleme 1586 kayıtta sadece 1 küme buldu — çünkü `generate_data` zaten
+   üretim anında aynı fonksiyonla near-dup reddediyor (247 kayıt reddedildi),
+   iş yukarıda hallolmuş. Eşik Ollama verisine göre sabitlenmemeli; veri
+   Nemotron'la değişince yeniden bakılmalı.
+4. **`review.py` kategori sınırı denetlemiyor** (yukarıda detaylı). Ölçülen
+   etki şimdilik küçük (2 çelişkili çift / 1586), ama araç bu tür hatayı
+   göremiyor.
+5. **`CONFIDENCE_THRESHOLD = 0.60` hâlâ kalibre edilmedi** — `evaluate.py`
+   yazılıp gerçek güven dağılımı görülünce ayarlanacak (Adım 4 sonrası).
 
 ## Yol Haritası — Kalan Adımlar
 
-**Adım 2b — Çoğaltma (Amplification):** `src/generate_data.py` yazılacak.
-Few-shot olarak `seed.jsonl` kullanılacak (gold ASLA kullanılmaz). Model
-seçimi yukarıdaki açık karara bağlı (Ollama qwen2.5:14b veya OpenRouter
-Nemotron). `SLOT_VALUES` (istasyon/konum/zaman/aciliyet listeleri
-`config.py`'de hazır) her çağrıda rastgele enjekte edilerek çeşitlilik
-prompt seviyesinde zorlanacak. Hedef: 200/kategori × 8 = 1600. `review.py`
-bu çıktı için de kullanılmalı (kategori/stil argümanları zaten genel).
+**✅ Adım 2b — Çoğaltma (TAMAMLANDI):** `src/generate_data.py` yazıldı ve
+çalıştırıldı, 1586 kayıt üretildi.
+- Few-shot **yalnızca** `seed.jsonl`'den; `gold.jsonl` bu dosyada hiç okunmuyor.
+- Her çağrı **tek (kategori, stil)** ikilisi için. Sebep: Adım 2a'da en sık
+  hata uzunluk kuralına uymamaktı; tek stil isteyince model aynı anda dört
+  farklı uzunluk aralığını yönetmek zorunda kalmıyor.
+- Few-shot iki başlığa ayrıldı: *stil örnekleri* (uzunluğu öğretir) ve *konu
+  örnekleri* (kategoriyi öğretir, "uzunluğunu taklit etme" notuyla). Karışık
+  gösterildiğinde model yanlış uzunluk sinyali alıyordu.
+- Çeşitlilik üç katmanda zorlanıyor: her çağrıda rastgele `SLOT_VALUES`
+  enjeksiyonu, üretilmişlerden örneklem ile "bunları tekrarlama" listesi, ve
+  eklemeden önce `review.similarity` ile near-dup reddi.
+- CLI: `--provider {hybrid,openrouter,ollama}`, `--category`, `--target`,
+  `--dry-run` (LLM çağırmadan prompt'u yazdırır — kota harcamadan test için).
 
-**Adım 3 — Ön İşleme:** `src/preprocess.py` yazılacak.
-- **Kritik:** Split'ten önce near-duplicate kümeleme yapılmalı (çoğaltılmış
-  veri birbirine çok benzeyecek, rastgele split yaparsa aynı cümlenin
-  varyasyonu hem train hem test'e düşer, sahte yüksek doğruluk çıkar).
-  `review.py`'deki `similarity()` fonksiyonu bu iş için yeniden
-  kullanılabilir.
-  - %80/%10/%10 train/val/test split
-- Gold seti asla train/val'e karışmaz, ayrı `gold_test.csv` olarak kalır
-  (iki ayrı test metriği raporlanacak: normal test + gold test — aradaki
-  fark "sentetik veri ne kadar gerçekçi" sorusunun kanıtı olur, rapora
-  güçlü bir savunma katar)
+**✅ Adım 3 — Ön İşleme (TAMAMLANDI):** `src/preprocess.py` yazıldı ve
+çalıştırıldı (5.6 sn).
+- Near-duplicate **kümeleme split'ten önce** yapılıyor (union-find), bir
+  kümenin tüm üyeleri hep aynı bölmede kalıyor — çoğaltılmış verinin
+  train/test'e sızıp sahte yüksek doğruluk üretmesini engelleyen asıl
+  mekanizma. `review.similarity` ile AYNI ölçüt kullanılıyor.
+- Katmanlı bölme: her kategori kendi içinde bölünüyor, sınıf dengesi üç
+  bölmede de korunuyor. Sonuç tam %80/%10/%10.
+- Temizlik: boş/uzunluk dışı kayıtlar, birebir tekrarlar ve **etiket
+  çakışmaları** (aynı metin iki farklı kategoride → ikisi de atılır) eleniyor.
+- **Gold sızıntı kontrolü her çalıştırmada otomatik**: hiçbir gold metni
+  eğitim havuzunda olmamalı; doğrulandı, temiz.
+- Raporda kaynak dağılımı da var (hangi modelin verisi hangi bölmeye düştü).
+- CLI: `--include-seed` (seed.jsonl'i de eğitime katar; şu an KAPALI),
+  `--report-only` (dosya yazmadan rapor).
+- Doğrulandı: label↔kategori uyumsuzluğu 0, bölmeler arası birebir kesişim 0,
+  gold ↔ train/test kesişim 0.
 
 **Adım 4 — Model Eğitimi:** `src/train.py` + `src/evaluate.py` yazılacak.
+
+> ⚠️ **Başlamadan önce:** Güncel Açık Noktalar #2'ye bak. Ollama'dan gelen
+> 500 kayıt Nemotron'la değiştirilecekse, `preprocess.py` yeniden
+> çalıştırılmadan eğitime başlanmamalı — yoksa model eski split'le eğitilir.
 BERT + LoRA fine-tuning, HuggingFace Trainer, scikit-learn ile
 accuracy/macro-F1/confusion matrix. Hedefler `config.py`'de tanımlı
 (TARGET_ACCURACY, TARGET_MACRO_F1, MIN_PER_CLASS_F1). Apple Silicon'da MPS
@@ -306,16 +478,26 @@ Bu proje adım adım (Adım 2b, 3, 4, 5, 6...) ilerliyor. Her adım için şu s�
    gerçekten çalıştır, çıktısını gör, hata varsa düzelt, tekrar çalıştır.
    "Kodu düzenledim" ile "denedim ve çalıştığını doğruladım" farklı
    şeylerdir; sadece ikincisi bir adımı tamamlanmış sayar.
-3. **Adım gerçekten çalıştığı doğrulanınca**, bana kısaca ne yapıldığını ve
-   test sonucunu özetle, **git'e commit + push için onay iste.**
-4. **Benden açık onay gelmeden asla `git push` yapma.** "Onaylıyorum",
+3. **Bu dosyayı (`CLAUDE.md`) güncelle.** Bu ayrı bir iş veya sonraya
+   bırakılabilir bir ek DEĞİL — adımın tamamlanma tanımının parçası.
+   Güncellenecek tipik yerler: klasör yapısı (yeni yazılan dosya artık "YOK"
+   görünmesin), veri sayıları, yeni config ayarları ve CLI argümanları,
+   alınan kararlar ve gerekçeleri, ölçüm sonuçları, ve artık geçerli olmayan
+   "Açık Noktalar" maddelerinin kapatılması. Sebep: bu dosya sıradan bir
+   README değil, oturumlar arası taşınan tek bağlam kaynağı ve staj
+   sunumunun dayanağı; güncellenmezse bir sonraki oturum yanlış bilgiyle
+   başlar.
+4. **Adım gerçekten çalıştığı doğrulanınca**, bana kısaca ne yapıldığını ve
+   test sonucunu özetle, **git'e commit + push için onay iste.** Kod
+   değişikliği ile `CLAUDE.md` güncellemesi AYNI commit'te sunulur.
+5. **Benden açık onay gelmeden asla `git push` yapma.** "Onaylıyorum",
    "push'la", "evet" gibi net bir cevap bekle. Onay gelmeden bir sonraki
    adıma da geçme — sırayla ilerle.
-5. Onay gelince o adımı **kendi başına bir commit** olarak işle (önceki
+6. Onay gelince o adımı **kendi başına bir commit** olarak işle (önceki
    adımlarla birleştirme) ve push et. Commit mesajı hangi adım olduğunu
    ve ne yapıldığını açıkça belirtsin (ör. `Adım 2b: Ollama ile çoğaltma
    scripti (generate_data.py) + 1600 örnek üretimi`).
-6. Böylece git geçmişinde proje adım adım, her biri çalıştığı doğrulanmış
+7. Böylece git geçmişinde proje adım adım, her biri çalıştığı doğrulanmış
    halde görünür — bu hem staj sunumunda ilerlemeyi göstermek hem de bir
    adımda sorun çıkarsa geri dönebilmek için önemli.
 
@@ -340,3 +522,18 @@ remote'a (GitHub vb.) push edeceğimizi netleştirelim.
   seçtim" sorusuna veriye dayalı bir cevap.
 - Sentetik veri + gold test seti ayrımı, "veri gerçekçi mi" eleştirisine
   karşı somut bir savunma sağlıyor.
+- **İkinci ampirik karşılaştırma (Adım 2b):** aynı görevde Nemotron %4.5 vs
+  qwen2.5:14b %15.8 işaretli, 1586 kayıt üzerinden. Bulut/yerel model
+  tercihini veriye dayandıran ikinci bir tablo.
+- **"Düşük işaretli oran ≠ kalite" bulgusu:** qwen'in asıl zayıflığı otomatik
+  triyajın ölçtüğü şey değil, özel isim/teknik terim uydurmasıydı
+  (`marmaraisi`, `perde çarkı`). Otomatik metriklerin kör noktası olduğunu
+  gösteren somut bir örnek — rapora olgunluk katar.
+- **Veri sızıntısına karşı üç katmanlı savunma** anlatılabilir: (1) üretim
+  anında near-dup reddi, (2) split öncesi kümeleme, (3) her çalıştırmada
+  otomatik gold sızıntı kontrolü. Ayrıca kümeleme eşiğinde bulunup düzeltilen
+  simetri hatası, "eşiğe dayanan sistemde ölçütün tutarlılığı kritiktir"
+  dersinin somut örneği.
+- **Gold'da yazım hatası bilinçli olarak korundu** ("personel aceleyle bunu
+  yazar mıydı?" ölçütü). Gerçekçi gürültü kalır, üretim artığı temizlenir.
+  Gold'u gerçek hayattan temiz yapmak başarı oranını şişirirdi.

@@ -104,12 +104,22 @@ def normalize(text: str) -> str:
 
 
 def similarity(a: str, b: str) -> float:
-    """Iki normalize metnin benzerligi.
+    """Iki normalize metnin benzerligi. SIMETRIKTIR: similarity(a,b) her zaman
+    similarity(b,a) ile aynidir.
 
     SequenceMatcher tek basina uzunluk farkini fazla cezalandiriyor: ayni
     seyi soyleyen kisa ve uzun iki cumle dusuk skor aliyor. Kelime kumesi
     ortusmesini (Jaccard) de olcup ikisinin buyugunu aliyoruz.
+
+    NOT: SequenceMatcher argüman sirasina duyarlidir (autojunk sezgiseli
+    nedeniyle) -- olculdu: bir cift icin (a,b) 0.8511, (b,a) 0.8298 veriyordu,
+    yani 0.85 esiginin iki yaninda. Bu, ayni ciftin nerede karsilastirildigina
+    gore farkli karar almasina yol aciyordu: generate_data (yeni, mevcut)
+    sirasiyla cagirip kabul ederken, preprocess (mevcut, yeni) sirasiyla
+    cagirip ayni cifti near-duplicate sayiyordu. Sizinti savunmasinin tamami
+    bu esige dayandigi icin girdileri once kanonik siraya sokuyoruz.
     """
+    a, b = sorted((a, b))
     seq = SequenceMatcher(None, a, b).ratio()
     wa, wb = set(a.split()), set(b.split())
     jac = len(wa & wb) / max(1, len(wa | wb))

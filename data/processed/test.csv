@@ -1,0 +1,159 @@
+metin,kategori,label,stil,kaynak
+Kadıköy istasyonunda makinist kabini sağ tarafı ayna kırık.,arac_tren,0,standart,openrouter:amplify
+Motor sürücü ünitesi hata kodu veriyor,arac_tren,0,devrik,openrouter:amplify
+Tekerlekten anormal ısınma 5. vagon,arac_tren,0,devrik,openrouter:amplify
+tren pantograf arka duraqta hasar almis,arac_tren,0,yazim_yanlisi,openrouter:amplify
+Makinist kabini kapı kilidi bozuk,arac_tren,0,devrik,openrouter:amplify
+Kapı acil uyarısı yanlış 1. vagon,arac_tren,0,devrik,openrouter:amplify
+Tekerlek seti şaseye çarpar ses,arac_tren,0,devrik,openrouter:amplify
+Vagon 4 ışıklar yanıp sönüyor,arac_tren,0,cok_kisa,openrouter:amplify
+Yenikapı yönlü trende 3 numaralı vagon kapı lastiği delik deşik.,arac_tren,0,standart,openrouter:amplify
+Vagon 3 kapı kilitlenmiyor,arac_tren,0,cok_kisa,openrouter:amplify
+makinist masasindaki ekran dondu sefer basinda,arac_tren,0,yazim_yanlisi,openrouter:amplify
+Vagon kapısı açılmıyor 2. vagon,arac_tren,0,devrik,openrouter:amplify
+Makinist masası anons mikrofonu bozuk,arac_tren,0,cok_kisa,openrouter:amplify
+Vagon içi aydınlatma yanıp sönüyor 5. vagon,arac_tren,0,devrik,openrouter:amplify
+Yenikapı yönlü trende 2 numaralı vagon tekerlekten anormal titreme hissediliyor.,arac_tren,0,standart,openrouter:amplify
+Ataşehir yönlü trende 2 numaralı vagon fren basıncı düşük uyarısı veriyor.,arac_tren,0,standart,openrouter:amplify
+Mecidiyeköy yönlü trende 6 numaralı vagon aydınlatma acil modunda kalıyor.,arac_tren,0,standart,openrouter:amplify
+Tekerlekten duman çıkıyor 6. vagon acil,arac_tren,0,devrik,openrouter:amplify
+Makinist kabini saati durdu,arac_tren,0,cok_kisa,openrouter:amplify
+Vagon 3 frenenden yanan kokusu,arac_tren,0,cok_kisa,openrouter:amplify
+yuru merdiven titesi cikti 3 peron,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
+Asansör kapı contası yırtıldı Yenikapı B2,istasyon_mekanik,1,devrik,openrouter:amplify
+PSD kapı lastiği soyuldu Mecidiyeköy peron,istasyon_mekanik,1,devrik,openrouter:amplify
+"Bostancı güney peron kapısı (PSD) sol kanat takılı kalıyor, sensör hatası veriyor.",istasyon_mekanik,1,standart,openrouter:amplify
+"Ümraniye M5 A çıkışı asansörü limit anahtarı arızalı, en üste gitmiyor.",istasyon_mekanik,1,standart,openrouter:amplify
+bariyer kapi takildi itoyu sanayi giris,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
+Kartal PSD-05 kapı takıldı,istasyon_mekanik,1,cok_kisa,openrouter:amplify
+"Söğütlüçeşme M4 peron kapısı (PSD) acil açma kolu kırık, güvenlik riski.",istasyon_mekanik,1,standart,openrouter:amplify
+Yürüyen merdiven takıldı Gayrettepe peron geçiş,istasyon_mekanik,1,devrik,openrouter:amplify
+Yürüyen merdiven fren gürültü,istasyon_mekanik,1,cok_kisa,openrouter:amplify
+Turnike rotör döndürmüyor Mecidiyeköy bilet holü,istasyon_mekanik,1,devrik,openrouter:amplify
+Bağcılar YM acil durdurma,istasyon_mekanik,1,cok_kisa,openrouter:amplify
+peron kapisi raydan cikti kozyatagi peron iki,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
+Asansör kabin titreşiyor Hacıosman son durak,istasyon_mekanik,1,devrik,openrouter:amplify
+YM-04 merdiven takıntı,istasyon_mekanik,1,cok_kisa,openrouter:amplify
+Yürüyen merdiven yön değiştirmiyor Kartal alt,istasyon_mekanik,1,devrik,openrouter:amplify
+Peron kapısı kilitlemiyor,istasyon_mekanik,1,cok_kisa,openrouter:amplify
+Bariyer hidrolik yağmur,istasyon_mekanik,1,cok_kisa,openrouter:amplify
+PSD kapı takoz kırıldı,istasyon_mekanik,1,cok_kisa,openrouter:amplify
+Maltepe M4 peron sonu bariyer kolu yatay konumda takılı kalıyor.,istasyon_mekanik,1,standart,openrouter:amplify
+Kablo kanalı sızıntı izi tespit edildi,elektrik_enerji,2,devrik,openrouter:amplify
+Katener hattında kısadevre oluştu,elektrik_enerji,2,devrik,openrouter:amplify
+Kadıköy üçüncü ray ısıtıcı arızalı,elektrik_enerji,2,cok_kisa,openrouter:amplify
+kadikoy giris kat genel aydinlatma kesik oldi,elektrik_enerji,2,yazim_yanlisi,openrouter:amplify
+Yedek güç kaynağı devreye girmedi,elektrik_enerji,2,devrik,openrouter:amplify
+Jeneratör şarj regulatörü bozuk,elektrik_enerji,2,cok_kisa,openrouter:amplify
+İstasyon aydınlatması tamamen söndü aniden Seyrantepe,elektrik_enerji,2,devrik,openrouter:amplify
+Bakırköy yedek enerji devreye girmedi,elektrik_enerji,2,cok_kisa,openrouter:amplify
+Seyrantepe istasyonunda güney çıkış aydınlatması kesik kesik yanıyor.,elektrik_enerji,2,standart,openrouter:amplify
+Dudullu istasyonunda PSD-08 peron kapı aydınlatmaları tamamen söndü.,elektrik_enerji,2,standart,openrouter:amplify
+UPS alarm panosu kırmızı yanıyor Gayrettepe,elektrik_enerji,2,devrik,openrouter:amplify
+Çekmeköy istasyonunda BSO-02 bilet holü UPS cihazı arızalı.,elektrik_enerji,2,standart,openrouter:amplify
+Seyrantepe istasyonunda bilet makineleri enerji kesintisinde kapanıyor UPS yok.,elektrik_enerji,2,standart,openrouter:amplify
+kagithane 2 peron katener voltaji alinamiyor,elektrik_enerji,2,yazim_yanlisi,openrouter:amplify
+topkapi uks jenrator test calismasi basarisiz oldu,elektrik_enerji,2,yazim_yanlisi,openrouter:amplify
+Mecidiyeköy trafoya su basması,elektrik_enerji,2,cok_kisa,openrouter:amplify
+Kartal istasyonunda 1. peron aydınlatması tamamen söndü.,elektrik_enerji,2,standart,openrouter:amplify
+gayrettepe istasyon peron aydinlatmasi titreme yapiyor,elektrik_enerji,2,yazim_yanlisi,openrouter:amplify
+Bostancı istasyonunda 2. peron aydınlatma şalteri işlevsiz ışık açılmıyor.,elektrik_enerji,2,standart,openrouter:amplify
+ataturk oto sanayi 2 peron katener aislatori kirmizi isik,elektrik_enerji,2,yazim_yanlisi,openrouter:amplify
+Ağ gecikmesi SCADA verisi geç geliyor,yazilim_sistem,3,devrik,openrouter:amplify
+uskudar turnike 5 gecis onaylamiyor bekletiyor,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+Peron ekranı boş gösteriyor zaman doldu,yazilim_sistem,3,devrik,openrouter:amplify
+Atatürk Oto Sanayi BSO cihazı banknot çekip iade etmiyor.,yazilim_sistem,3,standart,openrouter:amplify
+BSO-01 ekran karardı,yazilim_sistem,3,cok_kisa,openrouter:amplify
+kadikoy peron pid dondu onceki sefer kalmis,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+Yamanevler BSO-05 otomatı iade çekmekte hata kodu 101 veriyor.,yazilim_sistem,3,standart,openrouter:amplify
+Ataköy merkezi biletleme veritabanı yedek alma hatası logarlandı.,yazilim_sistem,3,standart,openrouter:amplify
+maltepe bilet holu sunucu baglantisi yok yaziyor,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+Turnike yazılım güncellemesi yarım kaldı açılmıyor,yazilim_sistem,3,devrik,openrouter:amplify
+"Dortyol BSO-03 tuş takımını algılamıyor, işlem yapmıyor.",yazilim_sistem,3,standart,openrouter:amplify
+Ataköy bilet otomatı reçet basmıyor onay vermiyor,yazilim_sistem,3,devrik,openrouter:amplify
+bostanci mobil uygulama giris yapmiyor donuyor,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+Arayüz dondu sefer takibi durdu merkezi,yazilim_sistem,3,devrik,openrouter:amplify
+uzuncayir ag kesintisi otomatlar cevrimdisi kaldi,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+kirazli bso 2 kartin takili kaliyo hata 500,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+Bilet holü BSO dondu,yazilim_sistem,3,cok_kisa,openrouter:amplify
+Yenikapı bilet uygulaması giriş yapmıyor,yazilim_sistem,3,cok_kisa,openrouter:amplify
+esenler scada baglantisi kopmus alarm listesi bos,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+atakoy personel kapisi okuyucu tanimlamiyor kart,yazilim_sistem,3,yazim_yanlisi,openrouter:amplify
+guvenlik kamerasi kayip goruntu atakoy,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
+Şüpheli paket bildirimi üzerine peron güvenlik nedeniyle kapatıldı.,guvenlik_emniyet,4,standart,openrouter:amplify
+CCTV kayıt arama yapmıyor merkez,guvenlik_emniyet,4,devrik,openrouter:amplify
+Peron kapısı açık kalıyor Üsküdar,guvenlik_emniyet,4,devrik,openrouter:amplify
+Peron ucunda şüpheli paket var,guvenlik_emniyet,4,devrik,openrouter:amplify
+Acil durdurma iptal butonu bozuk,guvenlik_emniyet,4,devrik,openrouter:amplify
+CCTV kamera görüntüsü dondu Şişli,guvenlik_emniyet,4,devrik,openrouter:amplify
+PSD-02 turnike sayaç hata veriyor,guvenlik_emniyet,4,cok_kisa,openrouter:amplify
+Yangın algılama paneli hata kodu,guvenlik_emniyet,4,devrik,openrouter:amplify
+Güvenlik personeli yönlendirme yapmıyor,guvenlik_emniyet,4,devrik,openrouter:amplify
+Şirinevler peronunda şüpheli paket bildirimi yapıldı müdahale edildi.,guvenlik_emniyet,4,standart,openrouter:amplify
+Acil stop butonu aktif,guvenlik_emniyet,4,cok_kisa,openrouter:amplify
+Turnike acil modunda,guvenlik_emniyet,4,cok_kisa,openrouter:amplify
+acil durum butonu calismiyo yenikapi,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
+CCTV kamera görüntüleri merkeziyede bazen donup kalıyor.,guvenlik_emniyet,4,standart,openrouter:amplify
+acil durum butonu calismiyo uskudar ust kat,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
+PSD-01 turnike atlama alarmı,guvenlik_emniyet,4,cok_kisa,openrouter:amplify
+Yolcu acil butona bastı boş,guvenlik_emniyet,4,devrik,openrouter:amplify
+yangin sondurme tupu bos levent,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
+cctv kamera yerinden oynadi sisli,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
+Bayrampaşa M1 tünel segment arası ince sızıntı kireçlemesine yol açtı.,altyapi_insaat,5,standart,openrouter:amplify
+Şişhane tünel temeli aşınmış,altyapi_insaat,5,cok_kisa,ollama:amplify
+Kadıköy istasyon tavan paneli su sızıntısı damlıyor,altyapi_insaat,5,devrik,openrouter:amplify
+kadikoy vm2 tavan çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Dudullu M5 asansör huşu su sızıntısı nedeniyle geçici olarak kapatıldı.,altyapi_insaat,5,standart,openrouter:amplify
+kadikoy tunel segmentleri çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+gayrettepe peron zemin su lekeleri ortaya cıkıstı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Gayrettepe personel kapısı temel aşınmış,altyapi_insaat,5,cok_kisa,ollama:amplify
+Kağıthane M11 peron zemin dilatasyon kapak profili kırık ve yuvarlaklama var.,altyapi_insaat,5,standart,openrouter:amplify
+Uzunçayır 1. peron fayans dökülmesi,altyapi_insaat,5,cok_kisa,ollama:amplify
+banliyolu istasyon 1. perondaki su sızıntısı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Hacıosman M2 tünel segment aralarından sürekli su sızıntısı rapor edildi.,altyapi_insaat,5,standart,openrouter:amplify
+Şişhane tünel drenaj borusu kırık su basıyor,altyapi_insaat,5,devrik,openrouter:amplify
+Mecidiyeköy güney çıkış tavan sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
+Uzunçayır personel kapısı fayans dökülmesi,altyapi_insaat,5,cok_kisa,ollama:amplify
+Seyrantepe M2 istasyon gişe önü zemin dilatasyon profili kırık ve oynuyor.,altyapi_insaat,5,standart,openrouter:amplify
+Taksim üst kat korkuluk kopuk,altyapi_insaat,5,cok_kisa,ollama:amplify
+Yenikapı M1A peron duvarında fayans dökülmesi ve nemlenme var.,altyapi_insaat,5,standart,openrouter:amplify
+Kapı açılmıyor 2. peron,yolcu_operasyon,6,devrik,ollama:amplify
+Sefer seyrilleştirme Sanayi Mahallesi güney çıkış,yolcu_operasyon,6,cok_kisa,ollama:amplify
+Sefer iptal Hacıosman gece vardiyasında,yolcu_operasyon,6,cok_kisa,ollama:amplify
+Gün batımına doğru Kartal istasyonunda seferler seyreltildi çünkü yoğunluk nedeniyle güvenliği sağlamak zorlaştı.,yolcu_operasyon,6,standart,ollama:amplify
+yollar sayisini azalttik yolcular bilgi bekliyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
+Yolcu yoğunluğu Taksim koridor,yolcu_operasyon,6,cok_kisa,ollama:amplify
+Peron dolu seferlerin sayisini azalttik Şirinevler,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
+Yolcu düşmesi seyreltilmiş,yolcu_operasyon,6,devrik,ollama:amplify
+Kilit problemi oldu gecikmeli sefer,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
+Sefer gecikme Taksim,yolcu_operasyon,6,cok_kisa,ollama:amplify
+"Biletcilik bölmesinde tarife hatalı bilgiler, bazı yolcuların yanlış bilete yönlendirilmesini sağladı.",yolcu_operasyon,6,standart,ollama:amplify
+Sefer gecikme Levent alt kat,yolcu_operasyon,6,cok_kisa,ollama:amplify
+"Kartalmış peronun yolcu yoğunluğu, trenler arasında bekleme süresini artırdı.",yolcu_operasyon,6,standart,ollama:amplify
+Cikis yonlendirme yapilmadi personel eksigi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
+Anons yanlis yapan sefer geciktirildi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
+sefere kaynak oldu yolcu sagligi riskli,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
+Yolcu yoğunluğu Hacıosman asansör önündeki koridor.,yolcu_operasyon,6,cok_kisa,ollama:amplify
+Sefer seyrilleştirme Üsküdar 1. peron,yolcu_operasyon,6,cok_kisa,ollama:amplify
+Kadıköy istasyonu peron yoğunluğu nedeniyle seferlerin bekleme süreleri arttı.,yolcu_operasyon,6,standart,ollama:amplify
+personel eksigi yolcu anons yapilamiyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
+Kokulu tuvalet girişe,temizlik_cevre,7,devrik,ollama:amplify
+Tuvaletlerin kirliliği,temizlik_cevre,7,devrik,ollama:amplify
+Koridor sokaç döküntüsü,temizlik_cevre,7,cok_kisa,ollama:amplify
+Duvar grafiti alt kat,temizlik_cevre,7,cok_kisa,ollama:amplify
+asansor kabinini acil temizleme yapmak zorunlu,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
+uzun sure boyunca ayiklama yapilmadi 1. perondaki,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
+Taksim B2 giriş katında haşere aktivitesi ve toz birikimi belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
+Koku yayılıyor turnike,temizlik_cevre,7,devrik,ollama:amplify
+Gişe önündeki duvar grafiti,temizlik_cevre,7,cok_kisa,ollama:amplify
+kirmizi plakalarin etruba ayiklama yapilmadi,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
+ayakta çöpler saklanyor gokyuzu acil temizleme,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
+cevre zemin sulu kirlilik durumda acil temizleme,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
+cevre zemin yag lekeleri cok var temizlik gerekiyor,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
+Ümraniye mezzaninin giriş seviyesi çöp birikimi ve tahta parçalarıyla doludur.,temizlik_cevre,7,standart,ollama:amplify
+"Üsküdar istasyonunun turnike bölgesi çöplerle dolu, hemen temizlenecek.",temizlik_cevre,7,standart,ollama:amplify
+Koku yayılıyor ana bilet,temizlik_cevre,7,devrik,ollama:amplify
+Şişli koridor çöp taşması,temizlik_cevre,7,cok_kisa,ollama:amplify
+Kadıköy mezzaninin turnike bölgelerinde çöp birikimi ve etraftaki döküntüler var.,temizlik_cevre,7,standart,ollama:amplify
+hacıosman personel kapısı kireç ve çizgi kalmış tuvaletler acil temizleme,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
+Graffiti turnikeler,temizlik_cevre,7,devrik,ollama:amplify
