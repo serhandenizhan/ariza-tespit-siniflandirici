@@ -259,16 +259,26 @@ def report(name: str, rows: list[dict], stats: dict, only_flagged: bool) -> None
         print("\nOZET: otomatik kontroller temiz. Gold setini yine de elle oku.")
 
 
+# Taranabilir dosyalar. Yollar config'ten gelir, burada yeniden tanimlanmaz.
+FILES = {
+    "seed": C.SEED_FILE,
+    "gold": C.GOLD_FILE,
+    "amplified": C.RAW_FILE,     # Adim 2b cikti dosyasi
+}
+
+
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Seed/gold kalite triyaji")
-    ap.add_argument("--file", choices=["seed", "gold"], help="sadece birini tara")
+    ap = argparse.ArgumentParser(description="Seed/gold/amplified kalite triyaji")
+    ap.add_argument("--file", choices=list(FILES), help="sadece birini tara")
     ap.add_argument("--only-flagged", action="store_true")
     ap.add_argument("--csv", action="store_true", help="review_<ad>.csv olarak kaydet")
     args = ap.parse_args()
 
+    # amplified (Adim 2b ciktisi) varsayilan taramaya girmez: 1600 kayitlik
+    # dosyanin raporu seed/gold raporunu bogar, istenince acikca secilir.
     targets = [args.file] if args.file else ["seed", "gold"]
     for name in targets:
-        path = C.SEED_FILE if name == "seed" else C.GOLD_FILE
+        path = FILES[name]
         records = load(path)
         if not records:
             print(f"\n{name}: dosya bulunamadi veya bos ({path})")

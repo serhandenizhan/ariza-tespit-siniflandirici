@@ -265,6 +265,47 @@ LLM_TEMPERATURE = 1.0       # cesitlilik istiyoruz, dogruluk degil
 LLM_MAX_RETRIES = 3
 
 
+# --- Cogaltma (Adim 2b) ------------------------------------------------------
+# Karar (18 Agu 2026): HIBRIT strateji. OpenRouter/Nemotron kaliteyi belirledi
+# ama ucretsiz katman ~50 istek/gun; 1600 ornek icin bu yetmiyor. Bu yuzden
+# birincil saglayici OpenRouter, KALICI hata (kota/429/401) gelince kalan is
+# otomatik olarak yerel Ollama'ya devrediliyor. Boylece kaliteli modelden
+# alabildigimiz kadar aliyoruz, kalanini bedelsiz yerelde tamamliyoruz.
+# Uretilen her kaydin 'kaynak' alani hangi modelden geldigini tasir, boylece
+# iki modelin katkisi sonradan ayrilabilir (rapor icin de kullanisli).
+AMPLIFY_PROVIDER = "hybrid"     # "hybrid" | "openrouter" | "ollama"
+
+OLLAMA_HOST = "http://localhost:11434"
+OLLAMA_MODEL = "qwen2.5:14b"
+OLLAMA_TIMEOUT = 300            # 14B model Apple Silicon'da yavas olabilir
+
+# Ollama'nin varsayilan baglam penceresi 2048 token. Cogaltma prompt'u
+# (kategori kapsami + stil tanimi + few-shot + "bunlari tekrarlama" listesi)
+# tek basina bunun buyuk kismini yiyor, cikartiya yer kalmiyor: model 25 ornek
+# istenmesine ragmen 1-2 ornek dondurup kesiliyordu. Acikca genisletiyoruz.
+# qwen2.5:14b 32768 token destekliyor, 8192 hem bol hem 16GB RAM'de guvenli.
+OLLAMA_NUM_CTX = 8192
+OLLAMA_NUM_PREDICT = 4096
+
+# Her LLM cagrisinda tek (kategori, stil) ikilisi icin kac ornek istenecegi.
+# Tek cagrida tek stil istemek uzunluk kuralina uyumu ciddi artiriyor: model
+# ayni anda 4 farkli uzunluk araligini yonetmek zorunda kalmiyor.
+#
+# NOT (18 Agu 2026): 25'ten 40'a cikarildi. Baglayici kisit ornek sayisi degil
+# CAGRI sayisi: OpenRouter ucretsiz katmani ~50 istek/gun ve 25'lik partilerle
+# 1600 ornek 64 cagri gerektiriyordu -- yani son ~350 kayit zorunlu olarak
+# Ollama'ya kaliyordu. 40'lik partiyle ~40 cagri yetiyor ve veri tek gunde
+# tamamen Nemotron'dan gelebiliyor. Olcum: Nemotron 40 kaydi 4 cagride,
+# %5 isaretli oranla uretti; qwen2.5:14b ayni isi 7 cagride %18 isaretli
+# oranla ve uydurma istasyon adlariyla yapti.
+AMPLIFY_BATCH_SIZE = 40
+
+# Cogaltmada few-shot olarak kac seed ornegi gosterilecek ve modele "bunlari
+# tekrar etme" diye kac mevcut ornek hatirlatilacagi.
+AMPLIFY_FEWSHOT_N = 6
+AMPLIFY_AVOID_N = 12
+
+
 # ---------------------------------------------------------------------------
 # Egitim hiperparametreleri
 # ---------------------------------------------------------------------------
