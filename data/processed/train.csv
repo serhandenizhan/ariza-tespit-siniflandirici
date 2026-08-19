@@ -799,472 +799,483 @@ Yangın musluğu kapak açılmıyor,guvenlik_emniyet,4,devrik,openrouter:amplify
 CCTV hard disk dolu uyarı,guvenlik_emniyet,4,devrik,openrouter:amplify
 Turnikeden atlama alarmı çalıyor Sanayi,guvenlik_emniyet,4,devrik,openrouter:amplify
 Peron sonundaki acil çıkış yönlendirme ışığı gece yanmıyor.,guvenlik_emniyet,4,standart,openrouter:amplify
-Şişhane istasyonu tünel temel hasar,altyapi_insaat,5,cok_kisa,ollama:amplify
-Kadıköy vm bilet holü duvar çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
-bagcilar kuzey giriş korsan fayans döküldü,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Uzunçayır peron duvar fayansı kırık düşme riski,altyapi_insaat,5,devrik,openrouter:amplify
-Kadıköy vm 1. peron fayans döküm,altyapi_insaat,5,cok_kisa,ollama:amplify
-Bağcılar peron korkuluk hasar,altyapi_insaat,5,cok_kisa,ollama:amplify
-Ümraniye M5 tünel içi drenaj kanalı tıkama nedeniyle su basıyor.,altyapi_insaat,5,standart,openrouter:amplify
-Bağcılar koridor ray hattı hasarı,altyapi_insaat,5,cok_kisa,ollama:amplify
-Bostancı M4 viyadukt kolone betonunda yatay çatlak ve sızıntı.,altyapi_insaat,5,standart,openrouter:amplify
-sisli peron tavanindan su sızıntısı var,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Mecidiyeköy peron duvar fayans dökülmesi,altyapi_insaat,5,cok_kisa,ollama:amplify
-Kozyatağı M8 tünel drenaj hattı tıkanıklığı sonucu invert seviyesinde su birikimi.,altyapi_insaat,5,standart,openrouter:amplify
-Atatürk Oto Sanayi M3 çıkış merdiveni son basamak betonu çatlaklı.,altyapi_insaat,5,standart,openrouter:amplify
-bostanci tunnel duvar çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-kadikoy istasyon merdiven basamagi su sızıntısı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-universite istasyon alt kat korkuluk hasar,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Gayrettepe personel kapısı fayans döküm,altyapi_insaat,5,cok_kisa,ollama:amplify
-levent 1. peron duvar çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Şişhane istasyonu tünel segment sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
-Sanayi Mahallesi bilet holü zemin sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
-Taksim üst kat kum sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
-mecidiyekoy tunel duvarı çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-mecidiyekoy turnike bölgesi duvar su lekesi,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Topkapı 2. peron fayans döküm,altyapi_insaat,5,cok_kisa,ollama:amplify
-Kirazlı personel kapısı çatıra su,altyapi_insaat,5,cok_kisa,ollama:amplify
-Şirinevler koridor fayans dökülmesi,altyapi_insaat,5,cok_kisa,ollama:amplify
-Levent M2 viyadukt dilatasyonluk su geçirimsizliği bozuldu,altyapi_insaat,5,devrik,openrouter:amplify
-banliyolu vm1 merdiven basamagi hasar,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Yenikapı Marmaray transfer tüneli drenaj pompa havuzu taşması meydana geldi.,altyapi_insaat,5,standart,openrouter:amplify
-kumkapı zemin su sızıntısı raporlandı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Sanayi Mahallesi merdiven basamak fayans dökülmesi,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Terazidere M1 tünel invert drenaj borusu kırık su akıyor.,altyapi_insaat,5,standart,openrouter:amplify
+mecidiyekoy peron uc kismi fayans yukseldi yarali riski,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Levent M6 tünel drenaj pompa havuzu betonarme duvar çatlaklı.,altyapi_insaat,5,standart,openrouter:amplify
+mecidiyekoy peron uc kismi tavan paneli sarkiyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 Yavuz Selim M3 peron duvar fayansları su baskısı ile dökülmekte.,altyapi_insaat,5,standart,openrouter:amplify
-Mecidiyeköy güney giriş merdiven basamağı kırık,altyapi_insaat,5,devrik,openrouter:amplify
-Mescidiye M11 tünel drenaj pompası arıza sonucu havuz taşması gerçekleşti.,altyapi_insaat,5,standart,openrouter:amplify
-Üsküdar istasyon kuzey çıkış merdiveni çatlaklı,altyapi_insaat,5,devrik,openrouter:amplify
-cengelköy 2. peron su sızıntısı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+sishane peron zemin dilatasyon catlasi kirli su,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Kanalizasyon pompa istasyonu sızıntısı,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Bayrampaşa peron duvarı fayanslarda ayrışma var,altyapi_insaat,5,devrik,openrouter:amplify
-İkitelli Sanayi M3 viyadukt kolone betonunda karıncalanma ve armatura maruziyet.,altyapi_insaat,5,standart,openrouter:amplify
 Şişhane çıkış merdiveni son basamak betonu çatlak,altyapi_insaat,5,devrik,openrouter:amplify
-Halkalı Marmaray peron korkuluk sabitleme ankrajları betondan kopuk tespit edildi.,altyapi_insaat,5,standart,openrouter:amplify
-esenler istasyon personel kapısı su sıdıyor,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Bostancı viyadukt ray altı betonarme kirişında yatay çatlak ilerlemesi kaydedildi.,altyapi_insaat,5,standart,openrouter:amplify
-Mahmutbey peron duvar fayansı dökülme riski,altyapi_insaat,5,devrik,openrouter:amplify
-sisli peron tavan su sızıntısı raporlandı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Bağcılar koridor su damlası,altyapi_insaat,5,cok_kisa,ollama:amplify
-Olimpiyat tünel beton yüzeyinde çelik çıkığı,altyapi_insaat,5,devrik,openrouter:amplify
-kadikoy metro m2 zemin hidroik ornekleme yagmur suyu girdi,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Sanayi Mahallesi tünel duvar sızıntı,altyapi_insaat,5,cok_kisa,ollama:amplify
-Kirazlı istasyon personel kapısı çatıra fayans dökülmesi.,altyapi_insaat,5,cok_kisa,ollama:amplify
-kadikoy vm2 fayans kırıldı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-sisli vm ust gecidi duvar hasar raporlandı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Kadıköy M4 alt geçit korkuluk bağlantı elemanları çatlaklı ve sallantılı durumda.,altyapi_insaat,5,standart,openrouter:amplify
-Çağlayan M11 istasyon asansör huşu su sızıntısı dolayısıyla kullanımdan kaldırıldı.,altyapi_insaat,5,standart,openrouter:amplify
-ataturk havaalanı tünel duvar su lekesi,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+sishane tünel sag duvar su damlasi surekli,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Atatürk Oto Sanayi M3 çıkış merdiveni son basamak betonu çatlaklı.,altyapi_insaat,5,standart,openrouter:amplify
+Kağıthane M11 tünel drenaj kanalı tıkalı,altyapi_insaat,5,devrik,openrouter:amplify
+Yenikapı Marmaray aktarma koridoru tavan ıslak,altyapi_insaat,5,devrik,openrouter:amplify
+vezneciler merdiven korkuluk baglanti demiri kirdi,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Göztepe M4 peron duvar fayanslarında boşluk ve dökülme riski belirlenmiştir.,altyapi_insaat,5,standart,openrouter:amplify
+yenikapi transfer tuneli zemin dilatasyon kaucugu cikti su giris,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Şişli kuzey giriş tavan paneli sızıntı yapıyor,altyapi_insaat,5,devrik,openrouter:amplify
+Kartal peron ray yapı koroziyon,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Yenikapı Marmaray transfer tüneli drenaj pompa havuzu taşması meydana geldi.,altyapi_insaat,5,standart,openrouter:amplify
+ikitelli tünel sol duvar nemlenme buyuyor hizi,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Korkuluk bağlantı elemanı kırık,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Levent M2 viyadukt dilatasyonluk su geçirimsizliği bozuldu,altyapi_insaat,5,devrik,openrouter:amplify
+Üsküdar çıkış merdiveni betonarme çelikleri görünüyor,altyapi_insaat,5,devrik,openrouter:amplify
 Sağmalcılar M1 peron korkuluk tutma diriği betondan kopma tehlikesi.,altyapi_insaat,5,standart,openrouter:amplify
-zencidere tunnel duvar fayans döküldü,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Bostancı istasyon asansör hücresi su birikintisi,altyapi_insaat,5,devrik,openrouter:amplify
+Aksaray transfer geçidi tavan sızıntısı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Ümraniye M5 tünel içi drenaj kanalı tıkama nedeniyle su basıyor.,altyapi_insaat,5,standart,openrouter:amplify
+Merdiven basamak altı boşluk,altyapi_insaat,5,cok_kisa,openrouter:amplify
+topkapi peron zemin fayans yukseldi yarali riski,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Şirinevler kuzey giriş tavan sızıntısı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+altunizade tünel tavan beton copuk yuze dokuluyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Tavşantepe M4 istasyon gişe önü zemin kaplama fayanslarında çatlak ve ayrışma.,altyapi_insaat,5,standart,openrouter:amplify
+Peron bordür taşı dökülmesi,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Pendik M4 depoya giriş tüneli su sızıntısı kanalizasyona karışım riski var.,altyapi_insaat,5,standart,openrouter:amplify
+Peron duvarı fayans dökülmesi,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Gayrettepe M2 peronu duvar fayanslarında çatlaklar ve dökülmeler tespit edildi.,altyapi_insaat,5,standart,openrouter:amplify
-Taksim personel kapısı su sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
-Topkapı 2. peron tavan çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
+Kirazlı gişe önü zemin fayansı ayrıldı,altyapi_insaat,5,devrik,openrouter:amplify
+mahmutbey m3 tünel segment boltu sizintisi noktasi,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Mescidiye M11 tünel drenaj pompası arıza sonucu havuz taşması gerçekleşti.,altyapi_insaat,5,standart,openrouter:amplify
+Olimpiyat tünel beton yüzeyinde çelik çıkığı,altyapi_insaat,5,devrik,openrouter:amplify
+kirazli peron zemin dilatasyon kaucugu cikmis su,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 Vezneciler peron zemin fayansı kırık,altyapi_insaat,5,devrik,openrouter:amplify
+Gayrettepe viyadukt dilatasyonluk kauçuk yıprandı,altyapi_insaat,5,devrik,openrouter:amplify
+Uzunçayır peron duvar fayansı kırık düşme riski,altyapi_insaat,5,devrik,openrouter:amplify
+İkitelli Sanayi M3 viyadukt kolone betonunda karıncalanma ve armatura maruziyet.,altyapi_insaat,5,standart,openrouter:amplify
+Bostancı tünel ağzı drenaj poması arızalı,altyapi_insaat,5,devrik,openrouter:amplify
+haznedar tünel sag tarafta beton copurmesi goruldu,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Çağlayan M11 istasyon asansör huşu su sızıntısı dolayısıyla kullanımdan kaldırıldı.,altyapi_insaat,5,standart,openrouter:amplify
 Sağmalcılar tünel drenaj kanalı taşması riski,altyapi_insaat,5,devrik,openrouter:amplify
 Taksim viyadukt ray altı betonarme kırışması onarım bekliyor,altyapi_insaat,5,devrik,openrouter:amplify
+Kartal bilet holü su damlaması,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Tünel tavan armatür dökülmesi,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Tünel yan duvar sızıntısı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Uzunçayır kuzey giriş çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Asansör kapı çerçevesi kırık,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Koridor duvar fayans çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Bağcılar peron duvarı beton çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Kanalizasyon revis kapak kayması,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Kirazlı istasyon tavan paneli su geçirdi,altyapi_insaat,5,devrik,openrouter:amplify
-Hacıosman merdiven basamak çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
-Şişhane tünel segment çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
-Şişhane istasyonu tünel betonarme kırışıklık,altyapi_insaat,5,cok_kisa,ollama:amplify
-sisli istasyon kuzey giriş su sızıntısı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Üsküdar istasyon kuzey çıkış merdiveni çatlaklı,altyapi_insaat,5,devrik,openrouter:amplify
+levent tunel sag duvar nem halkasi genisliyor alg var,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Kadıköy M4 alt geçit korkuluk bağlantı elemanları çatlaklı ve sallantılı durumda.,altyapi_insaat,5,standart,openrouter:amplify
+Mecidiyeköy güney giriş merdiven basamağı kırık,altyapi_insaat,5,devrik,openrouter:amplify
+Kozyatağı M8 tünel drenaj hattı tıkanıklığı sonucu invert seviyesinde su birikimi.,altyapi_insaat,5,standart,openrouter:amplify
+Şişli peron duvar fayansları dökülmeye başladı,altyapi_insaat,5,devrik,openrouter:amplify
+Tünel betonarme gözenek açığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Halkalı Marmaray peron korkuluk sabitleme ankrajları betondan kopuk tespit edildi.,altyapi_insaat,5,standart,openrouter:amplify
+Bostancı viyadukt ray altı betonarme kirişında yatay çatlak ilerlemesi kaydedildi.,altyapi_insaat,5,standart,openrouter:amplify
+Fevzi Çakmak peron tavan ısıtma borusu sızıntısı,altyapi_insaat,5,devrik,openrouter:amplify
+mecidiyekoy m7 tünel duvar nemlenme alg var,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Mahmutbey peron duvar fayansı dökülme riski,altyapi_insaat,5,devrik,openrouter:amplify
+Yenikapı M1 peron korkuluk bağı bağlantısı kopuk,altyapi_insaat,5,devrik,openrouter:amplify
+Peron zemin dilatasyon açığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Asansör haznesi su birikintisi,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Levent M2 peron duvarında fayans dökülmesi ve alt yapı hasarı bildirildi.,altyapi_insaat,5,standart,openrouter:amplify
-Bağcılar alt kat drenaj bozuk,altyapi_insaat,5,cok_kisa,ollama:amplify
-Şirinevler koridor tavan çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
-akvaryum bilet holu zemin hidroik yagmur sızıntısı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Topkapı M1 istasyon peron zeminde dilatasyon boşluğu taşıma riski oluşturuyor.,altyapi_insaat,5,standart,openrouter:amplify
-cengelköy peron tavan su lekesi,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Topkapı 2. peron temel aşınmış,altyapi_insaat,5,cok_kisa,ollama:amplify
-Uzunçayır bilet holluğu perona kum,altyapi_insaat,5,cok_kisa,ollama:amplify
-Şirinevler koridor drenaj bozuk,altyapi_insaat,5,cok_kisa,ollama:amplify
+vezneciler metro peron zemin fayans dokuldu buyuk alan,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Drenaj pompa havuzu taşması,altyapi_insaat,5,cok_kisa,openrouter:amplify
+levent tünel duvar sivasi dokuluyor buyuk alan,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+kadikoy b cikis koridor tavan paneli sarki cimento dökuluyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+osmanbey peron tavan paneli sarkma riski var,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+ayazaga merdiven basamak nezasi fayans cikmis,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Merdiven iniş koridor çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Geçiş merdiveni basamak yırtılması,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Ray yatak drenaj tıkanıklığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Emniyet-Fatih tünel betonarme kırışması tespit edildi,altyapi_insaat,5,devrik,openrouter:amplify
-Kirazlı personel kapısı duvar hasarı,altyapi_insaat,5,cok_kisa,ollama:amplify
+4. levend tünel sol duvar nem cemberi genisliyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 Şişli M2 alt geçit tavan panellerinde su birikimi ve çatlak gözlemlendi.,altyapi_insaat,5,standart,openrouter:amplify
-Vezneciler personel kapısı korkuluk hasar,altyapi_insaat,5,cok_kisa,ollama:amplify
-bostanci turnike bölgesi su sızıntısı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Şişhane istasyonu tünel duvar çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
-Gayrettepe tünel beton yüzeyinde çatlak gelişti,altyapi_insaat,5,devrik,openrouter:amplify
-kartal istasyon peron zemin çatlak ortaya çıktı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Üsküdar merdiven basamak altı çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
+kirazli tünel agzi kazik duvari sizintisi var,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Pendik tünel drenaj boru tıkanıklığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+gayrettepe asansor kulesi duvar catlasi buyudu,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Başakşehir M3 viyadukt ray altı beton kiriş yer değiştirmesi ölçüldü.,altyapi_insaat,5,standart,openrouter:amplify
 Pendik istasyon zemin döşeme fayansı yarık,altyapi_insaat,5,devrik,openrouter:amplify
-İTÜ Ayazağa peron korkuluk sapı kırık tutunmuyor,altyapi_insaat,5,devrik,openrouter:amplify
+Ray düzey bozulması belirgin,altyapi_insaat,5,cok_kisa,openrouter:amplify
+bakirkoy merdiven basamagi cimenti ayrildi tehlikeli,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 4. Levent tünel segment arası jelatin sızıntısı,altyapi_insaat,5,devrik,openrouter:amplify
 Gayrettepe M11 kazı tüneli shotcrete yüzeyinde çatlak ağları oluştu.,altyapi_insaat,5,standart,openrouter:amplify
+Koridor tavan paneli çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Karadeniz Mahallesi M11 tünel segment bolti contası bozulmuş sızıntı var.,altyapi_insaat,5,standart,openrouter:amplify
-Vezneciler koridor duvar su sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
-zeytinburnu tünel segmentleri çatlak ortaya cikti,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Şirinevler koridor kum sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
+Peron zemin fayans boşalması,altyapi_insaat,5,cok_kisa,openrouter:amplify
+sisli ust gecit merdiven basamagi kirdi metal cikti,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Hacıosman peron korkuluk sallantısı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+sisli istasyon peron tavan sizintisi buyuyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 Kartal M4 viyadukt ray altı beton kirişlerde yatay çatlak tespit edildi.,altyapi_insaat,5,standart,openrouter:amplify
-uzunçayır vm1 korkuluk su sızıntısı raporlandı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+yenikapi marmaray gecidi tavan sizintisi elektrik tehlikesi,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+sisli asansor ondu duvar catlasi genisliyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Üsküdar peron tavan sızıntı kaynaklı çürüme,altyapi_insaat,5,devrik,openrouter:amplify
 Yenimahalle M1A viyadukt dilatasyon su geçirmezlik detayı hasar gördü.,altyapi_insaat,5,standart,openrouter:amplify
 Taksim M2 viyadukt kolone betonarme örtü betonu dökülmesi armatürk açıklığı oluşturdu.,altyapi_insaat,5,standart,openrouter:amplify
 Kirazlı M3 peron duvarında sıva dökülmesi ve nem lekesi genişlemesi mevcut.,altyapi_insaat,5,standart,openrouter:amplify
-sariyer merdiven basamak kırıldı 3.kat,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Mecidiyeköy tünel segment hasar,altyapi_insaat,5,cok_kisa,ollama:amplify
+Gayrettepe M11 tünel duvarı betonarme kırışması,altyapi_insaat,5,devrik,openrouter:amplify
+Bilet holü duvar nemlenme,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Sanayi M3 viyadukt ray altı betonarme kırışması,altyapi_insaat,5,devrik,openrouter:amplify
 Atatürk Mahallesi M9 peron korkuluk alt destek profili çatlaklı durumda.,altyapi_insaat,5,standart,openrouter:amplify
 Mahmutbey M3 ve M7 viyadukt dilatasyon jointi hasarı su sızıntısına yol açıyor.,altyapi_insaat,5,standart,openrouter:amplify
 Olimpiyat M9 tünel segment arası kauçuk contalar bozulması kaynaklı sızıntı var.,altyapi_insaat,5,standart,openrouter:amplify
-Hacıosman personel kapısı tavan çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
+Aksaray transfer tüneli zemin su basıncı arttı,altyapi_insaat,5,devrik,openrouter:amplify
 Kartal peron korkuluk bağlantısı sallanıyor güvenlik riski,altyapi_insaat,5,devrik,openrouter:amplify
-Uzunçayır bilet holluğu duvar fayans çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
+gayrettepe peron duvarinda buyuk catlak goruldu beton copurmesi,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 Maltepe tünel drenaj borusu tıkanıp sızıyor,altyapi_insaat,5,devrik,openrouter:amplify
-kadikoy tünel segmentlerde yüksek basınçlı su,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-ataturk havaalanı tünel korsan fayans çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+taksim guney cikis tavan sivasi cokuyor su damliyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+kadikoy peron duvar fayans parcalari yere dokuluyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 Üsküdar tünel segment arası basınçlı su sızıntısı,altyapi_insaat,5,devrik,openrouter:amplify
 Otogar M1A peron üst geçit merdiven basamağı nosing profili kırıldı.,altyapi_insaat,5,standart,openrouter:amplify
-kemence istasyon 2 peronda duvar nemleniyor,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Kartal 1 peron merdiven basamağı kırık,altyapi_insaat,5,devrik,openrouter:amplify
 Topkapı istasyon kuzey giriş tavan paneli düştü,altyapi_insaat,5,devrik,openrouter:amplify
-Levent M6 tünel drenaj pompa havuzu betonarme duvar çatlaklı.,altyapi_insaat,5,standart,openrouter:amplify
-aksaray tunnel segmentleri çatlak ortaya cikti,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Fevzi Çakmak peron tavan ısıtma borusu sızıntısı,altyapi_insaat,5,devrik,openrouter:amplify
-Başakşehir M3 viyadukt ray altı beton kiriş yer değiştirmesi ölçüldü.,altyapi_insaat,5,standart,openrouter:amplify
-tekdüzentim caddesi tunnel çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Kirazlı personel kapısı korkuluk kopuk,altyapi_insaat,5,cok_kisa,ollama:amplify
-Pendik M4 depoya giriş tüneli su sızıntısı kanalizasyona karışım riski var.,altyapi_insaat,5,standart,openrouter:amplify
-Bostancı istasyon asansör hücresi su birikintisi,altyapi_insaat,5,devrik,openrouter:amplify
-Tavşantepe M4 istasyon gişe önü zemin kaplama fayanslarında çatlak ve ayrışma.,altyapi_insaat,5,standart,openrouter:amplify
-Şişhane bilet holü su sızıntısı,altyapi_insaat,5,cok_kisa,ollama:amplify
-yalovacık merdiven basamak hasar,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Terazidere M1 tünel invert drenaj borusu kırık su akıyor.,altyapi_insaat,5,standart,openrouter:amplify
-Göztepe M4 peron duvar fayanslarında boşluk ve dökülme riski belirlenmiştir.,altyapi_insaat,5,standart,openrouter:amplify
-Sanayi Mahallesi tünel duvarı çatlak,altyapi_insaat,5,cok_kisa,ollama:amplify
-Aksaray transfer tüneli zemin su basıncı arttı,altyapi_insaat,5,devrik,openrouter:amplify
+İTÜ Ayazağa peron korkuluk sapı kırık tutunmuyor,altyapi_insaat,5,devrik,openrouter:amplify
+Çıkış merdiveni basamak kırığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Bostancı M4 viyadukt kolone betonunda yatay çatlak ve sızıntı.,altyapi_insaat,5,standart,openrouter:amplify
+Topkapı M1 istasyon peron zeminde dilatasyon boşluğu taşıma riski oluşturuyor.,altyapi_insaat,5,standart,openrouter:amplify
+Tünel duvar beton çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Koridor zemin fayans kırığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Gayrettepe tünel beton yüzeyinde çatlak gelişti,altyapi_insaat,5,devrik,openrouter:amplify
+Bilet matik altı sızıntı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Çıkış merdiveni çelik açığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Uzunçayır istasyonu giriş katı tavan panellerinde su birikimi gözlemlendi.,altyapi_insaat,5,standart,openrouter:amplify
 İkitelli tünel drenaj havuzu taşması oldu,altyapi_insaat,5,devrik,openrouter:amplify
 Levent M2 istasyon 2. peron duvar fayanslarında dökülmeler tespit edildi.,altyapi_insaat,5,standart,openrouter:amplify
 Kartal viyadukt ray altı betonarme çatlaklı,altyapi_insaat,5,devrik,openrouter:amplify
-ulus peron tavan çatlak ortaya cikti,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Kocatepe M1 tünel duvarında su baskısı ile fayans dökülmesi başladı.,altyapi_insaat,5,standart,openrouter:amplify
-Sanayi Mahallesi tünel temel hasar,altyapi_insaat,5,cok_kisa,ollama:amplify
-ulus bilet holu zemin su sızıntısı raporlandı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+Şişli-Mecidiyeköy M7 peron zemin dilatasyon jointi genişlemesi ve su geçirimi tespit edildi.,altyapi_insaat,5,standart,openrouter:amplify
+uzuncayir tünel tavan segment sizintisi yavasladi,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Peron direk koruyucu hasarı,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Bilet kasası koridoru su baskını,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Kirazlı tünel segment arası su geliyor,altyapi_insaat,5,devrik,openrouter:amplify
 Kartal M4 viyadukt dilatasyon profili hasarı su sızıntısına yol açtı.,altyapi_insaat,5,standart,openrouter:amplify
-Şirinevler merdiven basamağı kırık,altyapi_insaat,5,cok_kisa,ollama:amplify
-aksaray tunnel segmentleri kırıldı zemin su yagmur,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
+kozyatagi peron uc kismi tavan sizintisi elektrik,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+bagcilar merdiven basamagi kirdi korkuluk salliyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
 Otogar tünel segment arası su sızıntısı devam ediyor,altyapi_insaat,5,devrik,openrouter:amplify
-topkapi tünel duvar alg ve nem,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-banliyolu istasyon merdiven basamak hasar,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-taksim peron duvar çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Ziya Gökalp M3 istasyon tavan kaplama panelleri su hasarı ile deform oldu.,altyapi_insaat,5,standart,openrouter:amplify
-esenler vm2 peron su sızıntısı raporlandı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Nurtepe M11 tünel duvarında yan segment arası su sızıntısı şiddetlenmekte.,altyapi_insaat,5,standart,openrouter:amplify
-ataturk havaalanı tünel duvar çatlak raporlandı,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Haliç M2 viyadukt dayama kirişi çatlaklı,altyapi_insaat,5,devrik,openrouter:amplify
-bostanci turnike bölgesi duvar çatlak,altyapi_insaat,5,yazim_yanlisi,ollama:amplify
-Ümraniye M5 istasyon personel kapısı önü merdiven basamağı kırılması rapor edildi.,altyapi_insaat,5,standart,openrouter:amplify
-Seferlerin seyreltilmesi oldu yolcu sirlanimi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Bostancı istasyonunda peronun yoğunluğu sefer aksama riskini artırdı ve ek seferler ilan edilecektir.,yolcu_operasyon,6,standart,ollama:amplify
-Kapı kapanmıyor A1 vagon,yolcu_operasyon,6,devrik,ollama:amplify
-Bilgi anonsu yapım hatası Şişli koridor,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Kayıp eşya Şişhane,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Yolcu bilgilendirme eksik Taksim,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Bilet alınamadı karta para yatırıldı,yolcu_operasyon,6,devrik,ollama:amplify
-Tarife hatası Kadıköy,yolcu_operasyon,6,devrik,ollama:amplify
-Yolcu yoğunluğu Sanayi Mahallesi güney çıkış,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Yolcu cekilmesi iptal oldu sefer acil durumda,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Anons yapım sorunu Şişhane,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Peron dolu yollar iptal etmeyi tercih ettik,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Kayıp eşya buldu 1. peron Kadıköy,yolcu_operasyon,6,devrik,ollama:amplify
-Yolcu yoğunluğu nedeniyle seferlerin düzenli ilanında hata var olan bir durumla karşı karşıyayız.,yolcu_operasyon,6,standart,ollama:amplify
-"Yolcu yoğunluğu nedeniyle, Kartal istasyondaki trenlerin bekleme süreleri arttı.",yolcu_operasyon,6,standart,ollama:amplify
-Kart okuyucu bosanmis ucret odendi bileye alamadi.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Geciken sefer bilet alimi aktif degil,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Taksim istasyonunda yolcu yoğunluğu nedeniyle sefer gecikmelerine yol açıldı.,yolcu_operasyon,6,standart,ollama:amplify
-Kapilar acilmadi yolcular ortalarda bekliyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Peronda su var Hacıosman,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Kayıp eşya Mecidiyeköy,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Tarife hatası Taksim biletmatik,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Sefer iptal edildi Topkapi,yolcu_operasyon,6,devrik,ollama:amplify
-Yolcu yönlendirme sorunu Yenikapı,yolcu_operasyon,6,devrik,ollama:amplify
-Peron kalabalık Hacıosman.,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Yolcu yoğunluğu Kadıköy peronda,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Sefer gecikmesi yolcular şaşırdı,yolcu_operasyon,6,devrik,ollama:amplify
-Sefer gecikmesi Taksim koridor.,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Peronda kalabalık Mecidiyeköy,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Sefer gecikti yolcular biliyorlar anons yapilmadi.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Kayip biletli yolcu cikis saglam yapilamiyor.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Kapilar acilmadi yolcular peronun disinda,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Bostancı yönlü tren anons yapmadan geçti ve yolcular yanlış tarih bilgileriyle biletleşme durumuna girdiler.,yolcu_operasyon,6,standart,ollama:amplify
-Gecmis sefer 1. peronda kaynak oldu.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Öğle saati peronlar cok dogru anons yapilamadi.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Peron çok dolu Bağcılar,yolcu_operasyon,6,devrik,ollama:amplify
-Anons yanlış durak gösteriyorsa düzeltildi,yolcu_operasyon,6,devrik,ollama:amplify
-"Anons yok, yolcular şaşırdı Bağcılar",yolcu_operasyon,6,devrik,ollama:amplify
-peronlar dolu yolcu geri kalan seferlere gonderildi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Tarife sistemi hatası,yolcu_operasyon,6,devrik,ollama:amplify
-Kadıköy istasyonu peron dolulukları sayesinde bir sonraki trenlere yönlendirme yapıldı.,yolcu_operasyon,6,standart,ollama:amplify
-Kirazlı istasyondaki sefer gecikmeleri yolcuların yanlış tarih bilgileriyle biletleşmesine neden oldu.,yolcu_operasyon,6,standart,ollama:amplify
-"Öğleden sonra Taksim istasyonun yoğunluğu, trenler arasındaki bekleme süresini artırma kararı alındı.",yolcu_operasyon,6,standart,ollama:amplify
-Personel eksik 2. peron,yolcu_operasyon,6,devrik,ollama:amplify
-Sefer geciktirildi seferlerin sayisini azalttik,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Peron kalabalık Yenikapı 1. perondaki,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Peron gecmis yolcular perondan ciktirildi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Tarife hata,yolcu_operasyon,6,devrik,ollama:amplify
-Bilet alınıyor ama geçmiyor Taksim,yolcu_operasyon,6,devrik,ollama:amplify
-Bir sonraki trene guidiliyor iptal edilen sefer.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-"Gece yarısı yoğunlukta, Hacıosman peronu doluluk nedeniyle bir tren aksaması oldu.",yolcu_operasyon,6,standart,ollama:amplify
-Bilet alındı ama geçme engel,yolcu_operasyon,6,devrik,ollama:amplify
-Anons yapım sorunları Üsküdar gişe önündeki koridor.,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Bilet kart okumuyor para yatırıldı,yolcu_operasyon,6,devrik,ollama:amplify
-Sanayi Mahallesi istasyondaki personel eksikliği yolcu yollarında karışıklığa yol açtı.,yolcu_operasyon,6,standart,ollama:amplify
-Anons yanlis yapti yolcular bilgiyi bekliyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Sefer sayisini azalttik seferler seyreldi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Yolcu kaybi islam holde personel eksigi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Kayıp eşya Taksim gişe önündeki,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Yolcu yoğunluğu Levent alt kat,yolcu_operasyon,6,cok_kisa,ollama:amplify
-peron kalabalik sefer geciktirildi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Anons yapım sorunu Şişli koridor,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Tünel ağzında bir yolcu bilgi cihazı çalışmadığı için bazı yolcular yanlış yönlendirilip yanlış trenlere bindiler.,yolcu_operasyon,6,standart,ollama:amplify
-Anons yapilmadi yolcular bilgiyi bilmiyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Yolcu düşmesi sefer gecikme Topkapi,yolcu_operasyon,6,devrik,ollama:amplify
-Sefer iptal Taksim,yolcu_operasyon,6,cok_kisa,ollama:amplify
-"Öğle saatlerinde, Üsküdar istasyonunun girişi öbekleyen yolcu akını yüzünden peronlar sıkıştı.",yolcu_operasyon,6,standart,ollama:amplify
-Yolcu yönlendirme sorun Şişhane,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Öğleden sonraki yoğunlukta peronlar bir anda dolu haline geldi ve yolcu yönetimi eziyet geçirdi.,yolcu_operasyon,6,standart,ollama:amplify
-Yolcu kavga etti personel yardim istendi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Yolcu yoğunluğu 3. peron,yolcu_operasyon,6,devrik,ollama:amplify
-Sanayi Mahallesi istasyonun 2. peronu yoğun olmasına rağmen seferler devam etti.,yolcu_operasyon,6,standart,ollama:amplify
-Kontrol paneli donustu cihazlar etkisiz.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Yolcu kaybi para cikis yonlendirmesi yapilamiyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Sefer gecikme Üsküdar,yolcu_operasyon,6,cok_kisa,ollama:amplify
-"Kadıköy istasyonu, yoğunlukla mücadele etmek için seferlerin seyreltilmesi kararı alındı.",yolcu_operasyon,6,standart,ollama:amplify
-Peron doluluk Şişhane,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Bostancı yönlü trene giden yolcular yanlış bilgi aldı ve doğru tarih için biletti alamadı.,yolcu_operasyon,6,standart,ollama:amplify
-Tarife hatası Sanayi Mahallesi biletmatik,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Tren yoğunluğu sırasında Mecidiyeköy peronun yoğunlukta bir anlık aksamayı yaşadı.,yolcu_operasyon,6,standart,ollama:amplify
-Mecidiyeköy istasyonunda yolcu yoğunluğu gittikçe artan bir trendeki yolculara yol vermek için belirli ara seferlere ihtiyaç duyuldu.,yolcu_operasyon,6,standart,ollama:amplify
-Personel eksik Yenikapı personel kapısı,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Seferler seyreltildi koridor dolu,yolcu_operasyon,6,devrik,ollama:amplify
-Çekilme iptal oldu personel eksigi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Kart okuma hatası para yatırıldı ama geçmiyor,yolcu_operasyon,6,devrik,ollama:amplify
-kuzey giris acil miyorda yolcular bekliyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Sanayi Mahallesi istasyonun koridoru yoğunlukta bir trene girme imkanı yoktu.,yolcu_operasyon,6,standart,ollama:amplify
-asansor calismiyor cikis zor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Peron yoğunluğu nedeniyle bir tren tedarik etme zorunluluğu doğrudan sefer aksama riskini artırdı.,yolcu_operasyon,6,standart,ollama:amplify
-Peron çok dolu yolcu yönetimi zor,yolcu_operasyon,6,devrik,ollama:amplify
-Geciktirilen sefer bilet alimi durdu,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Hacıosman peronu aşınma nedeniyle bir seferin iptal edilmesine yol açtı.,yolcu_operasyon,6,standart,ollama:amplify
-Peron kalabalık Şişli,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Gece saatleri peronlar daha fazla yoğunlukla karşılaştı ve yolcu yönetimi zorlandı.,yolcu_operasyon,6,standart,ollama:amplify
-Seferlerin seyreltilmesi oldu peronlar bos,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Yolcu yoğunluğu peron kapasitesinin üstünde,yolcu_operasyon,6,devrik,ollama:amplify
-Sefer iptal Şişhane,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Peron çok dolu sefer seyrelti Şişli hafta sonu,yolcu_operasyon,6,devrik,ollama:amplify
-Yolcu yönetimi zor Şişli,yolcu_operasyon,6,devrik,ollama:amplify
-Seferler seyreltildi Bostancı,yolcu_operasyon,6,devrik,ollama:amplify
-"Öğleden sonra, Taksim peron yoğunluğu trenlerin bekleme süresini artırmanın aksamayı engellemek zorunlu hale getirdi.",yolcu_operasyon,6,standart,ollama:amplify
-Tarife hata biletomatikte Esenler.,yolcu_operasyon,6,devrik,ollama:amplify
-Bilet yoklama hatası Şişli biletmatik,yolcu_operasyon,6,cok_kisa,ollama:amplify
-"Tarife bilgisindeki hata, yolculara yanlış ücretli bilete yönlendirme yapılmıştır.",yolcu_operasyon,6,standart,ollama:amplify
-Yolcu yoğunluğu Taksim 2. peron,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Turnike bölgesi öbekleyen yolculardan dolayı biletim olmayan yolcuların yanlış trenlerde bulunması durumu ortaya çıktı.,yolcu_operasyon,6,standart,ollama:amplify
-Yolcu sigortali gecikme oldu peronlar bos,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Peron yoğunluğu Şişhane tünel ağzında.,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Peron dolu seferler seyreltildi Mecidiyeköy.,yolcu_operasyon,6,devrik,ollama:amplify
-Kadıköy yönlü trenlerden gelen yanlış anonslar yolcuların hatalı tarih ve saatleriyle biletleşmesine neden oldu.,yolcu_operasyon,6,standart,ollama:amplify
-Calisan eksigi yemek seferleri zamanlamadi.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Anons eksik Levent koridor,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Anons yapilamdi gecikme duyurulmedi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Sarıyer istasyonu peronu yoğunluk nedeniyle seferler seyreltildi.,yolcu_operasyon,6,standart,ollama:amplify
-"Biletcilik bilgilerindeki bazı hatalar, yolculara yanlış tarih saatleriyle bilete yönlendirilmesine neden oldu.",yolcu_operasyon,6,standart,ollama:amplify
-sefer iptal oldu sonraki sefere gonderildi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Kadıköy istasyonundaki biletcilik personeli eksik kalırken tarife bilgileri hatalı yönlendirmeler yaptı.,yolcu_operasyon,6,standart,ollama:amplify
-Yolcu yoğunluğu Mecidiyeköy personel kapısı,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Kayıp eşya Şişli 2. peron,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Motor sesi geliyor Mecidiyeköy 2. peron,yolcu_operasyon,6,devrik,ollama:amplify
-Sefer iptali sabah vardiyasında Kadıköy.,yolcu_operasyon,6,cok_kisa,ollama:amplify
-2. peronda yolcu gostergesi bozuldu acil seyrett.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Seferlerin yoğunluğu düşürüldü,yolcu_operasyon,6,devrik,ollama:amplify
-Peron bulten kapaniyor yolcular beklemek zor.,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Yolcu kaynakları nedeniyle yollarda belirli saatlerde belirli seyreltme uygulamasına ihtiyaç duyuldu.,yolcu_operasyon,6,standart,ollama:amplify
-Biletcilik bölgelerindeki bilgi hatalarının yolcuların yanlış bilete yönlendirilmesine neden olması durumu fark edildi.,yolcu_operasyon,6,standart,ollama:amplify
-"Öğle saatlerinde, Taksim istasyonu yoğunlukta bir anlık tren aksamalarını yaşadı.",yolcu_operasyon,6,standart,ollama:amplify
-Yolcu kaybi kilit kapida bekliyor,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Sefer gecikti Mecidiyeköy,yolcu_operasyon,6,devrik,ollama:amplify
-Peron kalabalık Üsküdar,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Tren periyodik ara duraklarla seyreltilirken yolcular bekleme süresi uzatılmaktadır.,yolcu_operasyon,6,standart,ollama:amplify
-"Adalar yönlü tren anons yapmadı, yolcular yanlış perona yönelmiştir.",yolcu_operasyon,6,standart,ollama:amplify
-Peron yoğunluğu Bostancı,yolcu_operasyon,6,devrik,ollama:amplify
-Anons yapılmamış bir trene binmekten kaçınmak için yolcular doğru tarih saatleriyle ilgili bilgi verilmemiştir.,yolcu_operasyon,6,standart,ollama:amplify
-Peron doluyken seferlerin kaldirilmasi,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Kapı kapanmıyor vagon motor sesi hatası,yolcu_operasyon,6,devrik,ollama:amplify
-Peron yoğunluğu nedeniyle seferler bekleme süresi arttı ve bir sonraki trenere yönlendirilme yapmak zorunlu oldu.,yolcu_operasyon,6,standart,ollama:amplify
-"Kartal istasyonunun yoğunluğu, bir periyotta trenlerin arasındaki bekleme süresini artırmıştır.",yolcu_operasyon,6,standart,ollama:amplify
-Sanayi Mahallesi istasyonunda yolcu yoğunluğu nedeniyle sefer gecikmeleri oldu.,yolcu_operasyon,6,standart,ollama:amplify
-Personel eksik Üsküdar tünel ağzında,yolcu_operasyon,6,cok_kisa,ollama:amplify
-"Kadıköy istasyonu, yolcu yönetiminde peronlar dolu haline geldi ve seferler seyreltildi.",yolcu_operasyon,6,standart,ollama:amplify
-Peron çok dolu Şişli sabah vardiyasında,yolcu_operasyon,6,devrik,ollama:amplify
-"Öğleden sonra, Kartal yönlü seferlerde peron doluluk nedeniyle seyreltilme kararı alındı.",yolcu_operasyon,6,standart,ollama:amplify
-Kart okuma hatası bilet alamadı,yolcu_operasyon,6,devrik,ollama:amplify
-Sefer iptal Yenikapı,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Sefer aksıyor çok dolu peron,yolcu_operasyon,6,devrik,ollama:amplify
-Tarife hatası kart okumuyor,yolcu_operasyon,6,devrik,ollama:amplify
-Sefer aksıyor personel eksik Hacıosman,yolcu_operasyon,6,devrik,ollama:amplify
-Gecmis seferler kaldirilmasi oldu perondaki yolcular,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Personel eksik Taksim koridor,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Motor sesi geliyor Bostancı,yolcu_operasyon,6,devrik,ollama:amplify
-Bostancı yönlü tren anons yapmadan geçti ve yolcular doğru perona yönlendirilemedi.,yolcu_operasyon,6,standart,ollama:amplify
-Seferler seyreltildi yoldaş kaybı nedeniyle,yolcu_operasyon,6,devrik,ollama:amplify
-Anons yanlış Mecidiyeköy,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Anons yapılıyor ama yanlış durak Esenler,yolcu_operasyon,6,devrik,ollama:amplify
-Yolcu yönünde yanlış isabet anons,yolcu_operasyon,6,devrik,ollama:amplify
-Yolcu kayıp eşyaları istasyonda bırakti,yolcu_operasyon,6,yazim_yanlisi,ollama:amplify
-Peron doluluk Taksim,yolcu_operasyon,6,cok_kisa,ollama:amplify
-Peronlar yoğunlukta oynayan trenler arasında belirli bekleme sürelere ihtiyaç duyuldu.,yolcu_operasyon,6,standart,ollama:amplify
-"Bostancı istasyondaki yolcular, yanlış tarife bilgileri nedeniyle yanlış bilete yönlendirildiler.",yolcu_operasyon,6,standart,ollama:amplify
-Peronda su damla,temizlik_cevre,7,cok_kisa,ollama:amplify
-Tuvalet su akıyor,temizlik_cevre,7,cok_kisa,ollama:amplify
-Peronda sakız lekesi,temizlik_cevre,7,cok_kisa,ollama:amplify
-3004212 saatte ayiklama yapılmamıs istasyonda koku sorunu var acil,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Graffiti kaplıçlar,temizlik_cevre,7,devrik,ollama:amplify
-Sultangazi istasyonu peronunda çöp birikimi ve etrafta döküntüler var.,temizlik_cevre,7,standart,ollama:amplify
-Döküntüler perondan,temizlik_cevre,7,devrik,ollama:amplify
-Peronda su leke,temizlik_cevre,7,cok_kisa,ollama:amplify
-ayakta tutulan çöpler ayıklaşmamış,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Esenyurt mezzaninin turnike bölgelerinde haşere aktivitesi ve kirlilik belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-Maltepe istasyonunun mezzaninin turnike bölgelerinde dökülen içecek lekesi kayganlık riski var.,temizlik_cevre,7,standart,ollama:amplify
-Çöp tozlanmamış turnike,temizlik_cevre,7,devrik,ollama:amplify
-1. peron taş,temizlik_cevre,7,cok_kisa,ollama:amplify
-Kirli tuvalet girişe açılı,temizlik_cevre,7,devrik,ollama:amplify
-Kadıköy istasyonu 2. perondaki çöp birikimini ve haşere aktivitesini temizleme gereklilikleri belirtildi.,temizlik_cevre,7,standart,ollama:amplify
-yag lekeleri çöplerin üstünde goruldu durumu kontrol edilmeli,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Kaygan zemin dikkat,temizlik_cevre,7,devrik,ollama:amplify
-Çöpler perondan yayılıyor,temizlik_cevre,7,devrik,ollama:amplify
-Taksim B2 giriş katında tuvalet banyo kağıdı eksikliği ve kötü kokulu hava belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-Kirli çöp peronu,temizlik_cevre,7,devrik,ollama:amplify
-Sultangazi güney girişinde tuvaletlerde kötü kokular ve kirli durum belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-çöp dolaplari kirli sarilmis acil temizleme yapilmali,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Giriş kapısı周边不宜堆放杂物，保持通道畅通。请勿在入口处附近堆积任何物品，确保通行顺畅。如果需要帮助清理或有任何疑问，请联系物业管理人员。谢谢您的配合！由于助手生成的内容被截断了，以下是剩余的模拟内容以完成任务要求：）， kayganlık riski,temizlik_cevre,7,cok_kisa,ollama:amplify
-buzlanma var kapılar etruba tuzlamali,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Çöp taşmış ana bilet,temizlik_cevre,7,devrik,ollama:amplify
-Ümraniye mezzaninin peronunda çöp birikimi ve tahta parçaları tozu belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-Fare izleri kapı etrafında,temizlik_cevre,7,devrik,ollama:amplify
-bileti holunda sarimis çöp dolaplari temizlemek zorunlu,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Şişli istasyonu mezzaninin turnike bölgelerinde haşere aktivitesi ve etiketle dolu çöp birikimi tespit edildi.,temizlik_cevre,7,standart,ollama:amplify
-Döküntüler yarattı ana giriş,temizlik_cevre,7,devrik,ollama:amplify
-hacigosman istasyonu koridorunda fare izleri var ayiklama ve incelenmesi,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Şehreküstü istasyonu giriş katındaki turnike bölgelerinde çöp birikimi ve döküntüler var.,temizlik_cevre,7,standart,ollama:amplify
-Tuvalet banyo kirliliği,temizlik_cevre,7,cok_kisa,ollama:amplify
-Sultanbeyli istasyonu güney giriş katında dökülen içecek lekesi ve temizlik eksikliği belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-Yer pörtlendi perondan,temizlik_cevre,7,devrik,ollama:amplify
-2. peron kaygan zemin,temizlik_cevre,7,cok_kisa,ollama:amplify
-Döküntüler kaplıçlar,temizlik_cevre,7,devrik,ollama:amplify
-Çöp taşmış çıkışa,temizlik_cevre,7,devrik,ollama:amplify
-Peronda su birikintisi,temizlik_cevre,7,cok_kisa,ollama:amplify
-Haşere banyoda,temizlik_cevre,7,cok_kisa,ollama:amplify
-Peronda su durmuyor,temizlik_cevre,7,cok_kisa,ollama:amplify
-Peronda tuvalet kağıdı lekesi,temizlik_cevre,7,cok_kisa,ollama:amplify
-Çöp kutusu dolu,temizlik_cevre,7,cok_kisa,ollama:amplify
-Zeytinburnu mezzaninin güney çıkışında tahta parçaları tozu ve çöpler birikmiş durumda.,temizlik_cevre,7,standart,ollama:amplify
-bostancı istasyonunda koridor birkac yerde ayiklanmamis çöp birikmesi var,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Kadıköy istasyonunun mezzanin alt katındaki turnike bölgelerinde haşere aktivitesi var.,temizlik_cevre,7,standart,ollama:amplify
-yapragin sarkiyonlar altta birikmesi var cikartilmali,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Çöp taşmış girişe,temizlik_cevre,7,devrik,ollama:amplify
-Peronda çöp türbülansı,temizlik_cevre,7,cok_kisa,ollama:amplify
-Kokulu tuvalet korkutucu,temizlik_cevre,7,devrik,ollama:amplify
-Şişhane B2 giriş katında dökülen bir içecek lekesi kayganlık riski var.,temizlik_cevre,7,standart,ollama:amplify
-Kirazlı istasyonu peronda haşere aktivitesi görüldü.,temizlik_cevre,7,standart,ollama:amplify
-tuvalet kaplumbagasi acil tamir yapilmali sirlanmis,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Koku var bilet yerinde,temizlik_cevre,7,devrik,ollama:amplify
-Tuvaletler çamur içinde,temizlik_cevre,7,devrik,ollama:amplify
-Kadıköy peronu çöpler,temizlik_cevre,7,cok_kisa,ollama:amplify
-Buzlanan zemin tuzlanmadı,temizlik_cevre,7,cok_kisa,ollama:amplify
-Çöp duvarda duruyor,temizlik_cevre,7,devrik,ollama:amplify
-Çöpler duvara yapışmış,temizlik_cevre,7,devrik,ollama:amplify
-Beköy istasyonu peronunda dökülen içecek lekesi ve etraftaki kaygan zemin,temizlik_cevre,7,standart,ollama:amplify
-gokyuzu kirli plakalar sikisilmeli acil,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-kafeslerin etruba yapragin birikmesi var,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-"Şişhane istasyonu mezzaninin katında çöpler birikmiş,保洁员，请注意，您的回答需要严格符合给出的指导和格式要求，特别是关于“主题”、“写作风格”以及“JSON输出”的具体说明。当前的回答应当被替换为40个完全符合这些条件的真实状况描述报告，每个都应紧扣“清洁/环境”这一主题而不涉及泄漏或维护等其他分类，并且长度、语言风格和内容上也要一致且准确。例如：{",temizlik_cevre,7,standart,ollama:amplify
-Graffiti perondan,temizlik_cevre,7,devrik,ollama:amplify
-Kadıköy istasyonunun perondaki kırık cam碎片请忽略，以下是按照您的要求生成的符合“清洁/环境”类别的地铁站或列车状况报告。每条信息都遵循了提供的主题、写作风格以及长度的要求，并确保内容的真实性和多样性：{,temizlik_cevre,7,standart,ollama:amplify
-Peronun taşlanmalar,temizlik_cevre,7,devrik,ollama:amplify
-Peron kirliyken tuvaletler,temizlik_cevre,7,devrik,ollama:amplify
-Kadıköy istasyonunun güney çıkışında çöp birikimi ve etraftaki döküntüler var.,temizlik_cevre,7,standart,ollama:amplify
-coridor zemininde yag lekesi acil temizleme gerekli,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Topkapı perondaki haşere aktivitesi ve etiketlerle dolu çöp birikimi tespit edildi.,temizlik_cevre,7,standart,ollama:amplify
-Tuvalet odası kokuyor,temizlik_cevre,7,cok_kisa,ollama:amplify
-Tuvaletler kirli koro,temizlik_cevre,7,devrik,ollama:amplify
-Döküntüler taşındı ana bilet,temizlik_cevre,7,devrik,ollama:amplify
-2. peronda kartonlar saklanmis cikartilmali,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Ataköy istasyonunun mezzaninin girişinde tuvalet banyo kağıdı eksikliği belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-"Maltepe istasyonu güney çıkışındaki zemin kayganlıktır, dökülen içecek lekesi var.",temizlik_cevre,7,standart,ollama:amplify
-Alt kata tuzlanmamış buzlar,temizlik_cevre,7,cok_kisa,ollama:amplify
-peronda sakiz lekeleri cikarilamamis kaygan,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Buzlanan peron kayganlık riski,temizlik_cevre,7,cok_kisa,ollama:amplify
-Koridor buzlanmış zemin,temizlik_cevre,7,cok_kisa,ollama:amplify
-Tuvalet kıyafet geri kalıntıları,temizlik_cevre,7,cok_kisa,ollama:amplify
-Döküntüler taşındı girişe,temizlik_cevre,7,devrik,ollama:amplify
-tavsan goruldu bilet holu kapiniz etruba,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-1. peron koku,temizlik_cevre,7,cok_kisa,ollama:amplify
-Tuvalet odası kirlilik,temizlik_cevre,7,cok_kisa,ollama:amplify
-Döküntüler çıkışa,temizlik_cevre,7,devrik,ollama:amplify
-Duvar grafiti (kuzey giriş),temizlik_cevre,7,cok_kisa,ollama:amplify
-Tuvalet tuzlanmadı,temizlik_cevre,7,cok_kisa,ollama:amplify
-Şişli mezzaninin perondaki etiketlerle dolu çöp birikimi tespit edildi.,temizlik_cevre,7,standart,ollama:amplify
-Graffiti taşındı,temizlik_cevre,7,devrik,ollama:amplify
-Vezneciler istasyonu peronundaki dökülen içecek lekeyi ve kirliliği temizleme gerekliliği var.,temizlik_cevre,7,standart,ollama:amplify
-Alt kata yemiş döküntüsü,temizlik_cevre,7,cok_kisa,ollama:amplify
-Tuvalet banyo kağıdı yok,temizlik_cevre,7,cok_kisa,ollama:amplify
-Koridor çamur birikmesi,temizlik_cevre,7,cok_kisa,ollama:amplify
-Körkutucu kok yayan tuvalet,temizlik_cevre,7,devrik,ollama:amplify
-Ataköy mezzaninin girişinde dökülen içecek lekeyi ve etraftaki çöp birikimini temizleme gereklilikleri var.,temizlik_cevre,7,standart,ollama:amplify
-Kaygan zemin sakız,temizlik_cevre,7,devrik,ollama:amplify
-Peronda buzlanma,temizlik_cevre,7,cok_kisa,ollama:amplify
-1. perondaki tuvaletlerin temizlik zorunlu cok kirli,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Üsküdar mezzaninde dökülen içecek lekesi ve etrafın kayganlığı riski var.,temizlik_cevre,7,standart,ollama:amplify
-1. perondaki camlar parlatilmadi kirli,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-asansor kabinici cok kirli yazici tozu dagli,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-kaygan duvarlarla zemin durumları çöp dolap etrafında dikkatli incelenmelidir,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Koridor kapının etrafında çöp,temizlik_cevre,7,cok_kisa,ollama:amplify
-Kaygan zemin meydana,temizlik_cevre,7,devrik,ollama:amplify
-buzlanmis zemin durumu tuzuyla emele kalkmak gerekmektedir,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-cevresel kok birikti gişe holu acil temizlik yapilmali,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Koridor haşere böceği,temizlik_cevre,7,cok_kisa,ollama:amplify
-Döküntüler döşemeler,temizlik_cevre,7,devrik,ollama:amplify
-Çöp taşındı ana giriş,temizlik_cevre,7,devrik,ollama:amplify
-Tophane istasyonu mezzanin alt katındaki tuvaletlerinde kötü kokular ve temizlik eksikliği belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-cevrek su dolu durmakta acil temizleme yapilmali,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Tuvalet kıyafet kirliliği,temizlik_cevre,7,cok_kisa,ollama:amplify
-Mecidiyeköy istasyonu personel kapısı周边请忽略，以下是生成的第一条示例信息。我会继续根据给定的格式和要求生成剩余的39个清洁/环境类别下的地铁站或列车状况报告。确保每一条都紧扣“清洁/环境”这一主题，并符合所指示的语言风格、内容真实性和多样性：{,temizlik_cevre,7,standart,ollama:amplify
-Koridor kaygan zemin,temizlik_cevre,7,cok_kisa,ollama:amplify
-Koridor buzlanma,temizlik_cevre,7,cok_kisa,ollama:amplify
-Taksim B2 girişinde çöp birikimi ve tahta parçalarının tozları周边请忽略，下面将按照给定的格式和要求生成40份符合“清洁/环境”类别的地铁站或列车状况报告。每条信息都将严格按照指示中指定的主题、写作风格以及长度要求来编写，并确保内容的真实性和多样性。以下是第一条示例，其余将以相同方式继续生成直至完成全部任务需求：{,temizlik_cevre,7,standart,ollama:amplify
-Buzlanan merdiven,temizlik_cevre,7,cok_kisa,ollama:amplify
-cevrek yag lekeleri cikartilmali acil temizleme,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Çöpler turnike etrafı,temizlik_cevre,7,devrik,ollama:amplify
-Kadıköy mezzanindaki turnike bölgelerinde çöpler birikmiş ve etrafta tahta parçaları tozu var.,temizlik_cevre,7,standart,ollama:amplify
-Üsküdar mezzaninin asansör önündeki çöp birikimi ve tahta parçaları toz birikimini temizleme ihtiyacının olduğu bildirildi.,temizlik_cevre,7,standart,ollama:amplify
-guzel kokmuyor tuvaletlerin temizliği zorunlu,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Kırık çöp kutusu 1. peron,temizlik_cevre,7,devrik,ollama:amplify
-gokyuzu kirmizi plakalar etruba çöpler saklanmistir,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Graffiti çapulcu,temizlik_cevre,7,devrik,ollama:amplify
-"Maltepe güney girişinde kış şartlarında zemin kayganlıktır, tahta parçaları ve toz birikimi belirtilmiştir.",temizlik_cevre,7,standart,ollama:amplify
-Ümraniye istasyonu mezzanin güney çıkışında kaygan zemin ve çöp birikimi var.,temizlik_cevre,7,standart,ollama:amplify
-fare goruldu bilet holu kose basinda,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-2. peron döküntü,temizlik_cevre,7,cok_kisa,ollama:amplify
-sisli istasyonun güney çıkışında buzlanmis yapi var acil temizleme zorunlu,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Fare izleri ana bilet hali,temizlik_cevre,7,devrik,ollama:amplify
-cevre zemin kaygan dogal yapi suyundan nedenli,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Kaygan zemin kaplıçlar,temizlik_cevre,7,devrik,ollama:amplify
-Duvar grafiti (2. peron),temizlik_cevre,7,cok_kisa,ollama:amplify
-topkapi station duvarlarina grafiti yazisi gecmis acil temizleme gerekiyor,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Asansör kirli,temizlik_cevre,7,devrik,ollama:amplify
-2. peron döküntüler toz,temizlik_cevre,7,cok_kisa,ollama:amplify
-Maltepe istasyonunun peronunda dökülen içecek lekesi kayganlık riski belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-cevrek su dolu durmakta cok kirlidir temizleme zorunlu,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-asansor kabinici tuzla sarimis kirli olmayacak,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-peronda sakizler sarkiyon altta çöpler birikti,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-tuvalette kemirgen goruldu ayiklama ve dikkatli incelenmesi,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-1. peron çöp tahta,temizlik_cevre,7,cok_kisa,ollama:amplify
-Üsküdar istasyonunun peronunda haşere aktivitesi ve çöp birikimi belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-çöp dolabindan ayrilik cevrek ayiklamadi acil,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-buzlanma var kapilarin etruba kirmizi plakalar koymali,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Sultangazi mezzanin alt katındaki tuvaletlerde kilitli kapılardan çıkan kötü kokular.,temizlik_cevre,7,standart,ollama:amplify
-2. perondaki kartonlar cikartilmadi acil ayiklama,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Çöp birikmiş girişe,temizlik_cevre,7,devrik,ollama:amplify
-Üsküdar mezzaninin güney çıkışında kilitli tuvaletlerden çıkan kötü kokular belirtilmiştir.,temizlik_cevre,7,standart,ollama:amplify
-Graffiti merdivenleri,temizlik_cevre,7,devrik,ollama:amplify
-Topkapı istasyonu mezzanin güney çıkışında kilitli tuvaletlerden kötü kokular,temizlik_cevre,7,standart,ollama:amplify
-tuvalet kaplumbagasi acil temizlenmelidir guzel kok geliyor,temizlik_cevre,7,yazim_yanlisi,ollama:amplify
-Koku korkutucu gişe,temizlik_cevre,7,devrik,ollama:amplify
-Çöpler yere döküldü ana bilet,temizlik_cevre,7,devrik,ollama:amplify
-Kaygan zemin kapılar etrafında,temizlik_cevre,7,devrik,ollama:amplify
-Kadıköy peronunda etiketler ve tahta parçaları gibi atıklarla dolu,temizlik_cevre,7,standart,ollama:amplify
-"Topkapı mezzaninde kış şartlarında tuzlanma yapılmadı, zemin kayganlık riski belirtilmiştir.",temizlik_cevre,7,standart,ollama:amplify
-"Şişli istasyonu mezzaninin turnike önündeki zeminde kayganlık riski, dökülen içecek lekesi belirtilmiştir.",temizlik_cevre,7,standart,ollama:amplify
+levent peron zemin beton yuzey curumesi var,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+bagcilar peron zemin fayanslari dokuluyor tehlikeli,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+atakoy peron asansor kapi ondu zemin catlak,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Hacıosman M2 tünel segment aralarından sürekli su sızıntısı rapor edildi.,altyapi_insaat,5,standart,openrouter:amplify
+Kadıköy M4 viyadukt dilatasyon su izolasyonu bozuldu,altyapi_insaat,5,devrik,openrouter:amplify
+Bostancı viyadukt ray altı betonu çatlak,altyapi_insaat,5,devrik,openrouter:amplify
+atakoy tünel ic cati sizintisi ray uzerine,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+haznedar tunel sol tarafta beton armasi gorunuyor paslanmis,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+ayazaga peron tavan isotma borusu siziyor beton,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+mahmutbey peron korkuluk alt kismi curumus dusuyor,altyapi_insaat,5,yazim_yanlisi,openrouter:amplify
+Kozyatağı peron zemin döşeme yerleşme,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Bilet kontrol personeli yok Hacıosman,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Ümraniye istasyonunda bilet matbuatı bitmiş mobil bilet yönlendirmesi yapıldı.,yolcu_operasyon,6,standart,openrouter:amplify
+Yolcu yönlendirme tabelası eksik Maltepe,yolcu_operasyon,6,devrik,openrouter:amplify
+Engelli yolcu geçemez Esenler,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Yanlış anons yapıldı yolcular kaçıırdı Vezneciler,yolcu_operasyon,6,devrik,openrouter:amplify
+personel yok yonlendirme yapilamiyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Karaköy aktarma geçidinde yönlendirme personeli görevde akış sağlandı.,yolcu_operasyon,6,standart,openrouter:amplify
+Yengeç geçidi dolu Sanayi Mahallesi,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Yönlendirme personeli bulunmuyor koridor Esenler,yolcu_operasyon,6,devrik,openrouter:amplify
+Acil çıkış kapısı açık Küçükçekmece,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Sefer gecikmesi 15 dakika Üsküdar,yolcu_operasyon,6,devrik,openrouter:amplify
+Yolcu kavga müdahale Fulya,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Anons yanlış peron belirtti Şişli,yolcu_operasyon,6,devrik,openrouter:amplify
+servis sonu yaklasti son sefer duyuruldu,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Kayıp çocuk bildirimi peron Hacıosman,yolcu_operasyon,6,devrik,openrouter:amplify
+Yolcu indirme sıkıntısı peron Bostancı,yolcu_operasyon,6,devrik,openrouter:amplify
+Yenikapı aktarma noktasında kayıp eşya bildirimi alındı merkeze iletildi.,yolcu_operasyon,6,standart,openrouter:amplify
+personel eksigi koridor yonlendirme yapilamiyor,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+ses sistemi bozuk anons duyulmuyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Kadıköy istasyonunda peron yoğunluğu nedeniyle seferler gecikmiştir.,yolcu_operasyon,6,standart,openrouter:amplify
+İkitelli Sanayi istasyonunda peron yoğunluğu güvenlik sebebiyle kontrol altına alındı.,yolcu_operasyon,6,standart,openrouter:amplify
+Acil duruş butonu çekildi Vezneciler,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Mahmutbey aktarmasında yönlendirme tabelası eksik yolcular yanlış yöne girdi.,yolcu_operasyon,6,standart,openrouter:amplify
+Sefer aralığı uzadı yoğunluk Kartal,yolcu_operasyon,6,devrik,openrouter:amplify
+Kirazlı istasyonunda sefer aralığı normalleştirildi yolcular bilgilendirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+yenibosna aktarma yolcu cok gecikti,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Yolcu baskını peron boşaltılıyor Şişli,yolcu_operasyon,6,devrik,openrouter:amplify
+Bilet holü yoğun personel yetmiyor Levent,yolcu_operasyon,6,devrik,openrouter:amplify
+Yangın alarmı yanlış Cevizlibağ,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+gayrettepe yonunde sefer iptal acil durum,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Kayıp eşya bildirimi fazla Kartal,yolcu_operasyon,6,devrik,openrouter:amplify
+Aksaray istasyonunda asansör arızası engelli yolcu alternatif rota ile yönlendirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+4. Levent aktarmasında engelli yolcu personel eşliğinde yönlendirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Güvenlik kontrolü yoğunluk yaratıyor Gayrettepe,yolcu_operasyon,6,devrik,openrouter:amplify
+Olimpiyat Parkı yönlü ilk sefer gecikmeli olarak hareket ettirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Yolcu düşmesi gecikme oluştu Üsküdar,yolcu_operasyon,6,devrik,openrouter:amplify
+Yanlış yön anonsu Kirazlı,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+kayip esya bagcilar guvenliktesi teslim alindi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+yolcu hastaligi sefer 10 dk gecikti,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Sefer başlamadı Otogar,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+yanlis anons yapildi yolcu karsi perona atildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+tren kapilari arasi gecis kapali uyarildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Personel yönlendirme eksik Tavşantepe,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Bilet almada sorun yaşanıyor bilet holü,yolcu_operasyon,6,devrik,openrouter:amplify
+Peron boşalma yavaş Mahmutbey,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+kadikoy peronda yoklama yapildi sefer basladi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+kartal yolcu kavgasi mudur yardimcisi cagirildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Kocatepe istasyonunda sefer iptali anonsu yapılmamış şikayet geldi.,yolcu_operasyon,6,standart,openrouter:amplify
+Fındıklı istasyonunda sefer gecikmesi nedeni yolculara anons edildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Levent yönlü trenlerde yoğunluk nedeniyle sefer sayısı artırılmıştır.,yolcu_operasyon,6,standart,openrouter:amplify
+Sefer gecikti Aksaray,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Yolcu bagajı büyük Pendik,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Yönlendirme personeli eksik kuzey giriş,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+kapi acilmiyor yolcu cikamiyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Sefer iptal Hacıosman,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+engelli rampasi kapali yardim cagrildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Gayrettepe istasyonunda bilet ücreti hatalı yansımı giderildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Vezneciler istasyonunda bilet sorunu yaşayan yolcular manuel geçirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+kayip cocuk anonsla aileye kavusturuldu,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Sefer aralığı normalleşti teşekkürler Kadıköy,yolcu_operasyon,6,devrik,openrouter:amplify
+Sefer iptal nedeni açıklanmadı Topkapı,yolcu_operasyon,6,devrik,openrouter:amplify
+levent peron kenari sarkiti yolcu uyarildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Yolcu şikayeti klima Atatürk Havalimanı,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Bisiklet biniş engellendi Bahçelievler,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Mahmutbey aktarma noktasında yönlendirme personeli görevde akış sağlanmaktadır.,yolcu_operasyon,6,standart,openrouter:amplify
+Yolcu yönlendirme yok Taksim,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Üsküdar istasyonunda kayıp çocuk bildirimi alındı güvenlik birimlerine iletildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Personel eksikliği Kadıköy,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+bisikletli yolcu bindi engel oldu cikis,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Yolcu hastalığı sefer durdu Levent,yolcu_operasyon,6,devrik,openrouter:amplify
+Peron güvenlik çizgisi aşıldı Maltepe,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Mecidiyeköy istasyonunda personel eksliği nedeniyle bilet kontrolü yavaşlamıştır.,yolcu_operasyon,6,standart,openrouter:amplify
+Sefer seyreltildi Olimpiyat,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Çarşı istasyonunda gişe personeli eksikliği nedeniyle kuyruklar uzadı.,yolcu_operasyon,6,standart,openrouter:amplify
+Yolcu düşmesi Şişli,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Sefer iptal yolcular yönlendirildi Gayrettepe,yolcu_operasyon,6,devrik,openrouter:amplify
+Emniyet-Fatih istasyonunda anons yanlış yapıldı yolcular uyarıldı.,yolcu_operasyon,6,standart,openrouter:amplify
+Peron boşalma gecikiyor Şişli,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+bagcilar gidis sefer iptal neden anlasilmiyor,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+yangin alarmi yanlis calisti peron bosaltildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Anons yapılıyor ama duyulmuyor Gayrettepe,yolcu_operasyon,6,devrik,openrouter:amplify
+Esenler istasyonunda sefer iptali nedeniyle yolcular bir sonraki trene yönlendirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+turnike ucret almiyo serbest gecis,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Sefer iptal Üsküdar,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Esenler istasyonunda anons yapılmaması sonucu yolcular yanlış perona yönelmiştir.,yolcu_operasyon,6,standart,openrouter:amplify
+Su püskürtmesi peronda Yenibosna,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Göztepe istasyonunda gişe kuyruğu azaltmak için ek personel çağrıldı.,yolcu_operasyon,6,standart,openrouter:amplify
+Kayıp telefon bulundu Gayrettepe,yolcu_operasyon,6,devrik,openrouter:amplify
+Bostancı istasyonunda anons yapılmaması nedeniyle yolcular yanlış yönde bekledi.,yolcu_operasyon,6,standart,openrouter:amplify
+seferler seyreltildi yognluk onleniyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Personel nöbeti boş kalmış Yenikapı,yolcu_operasyon,6,devrik,openrouter:amplify
+Anons sesi gelmiyor Kartal,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Bilet makinesi para üstü vermiyor Yenikapı,yolcu_operasyon,6,devrik,openrouter:amplify
+sefer gecikti yolcular peronda bekliyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+cikis yolu belirsiz yolcu dongu icinde,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Sefer birleştirildi Huzurevi,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Levent istasyonunda tünel ağzında yolcu akışı güvenlik nedeniyle yavaşlatıldı.,yolcu_operasyon,6,standart,openrouter:amplify
+Anons yapılmadı Şişhane,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Pendik yönlü trenlerde yolcu şikayeti üzerine sefer durduruldu.,yolcu_operasyon,6,standart,openrouter:amplify
+Yolcu kavgası müdahale gerekiyor Kozyatağı,yolcu_operasyon,6,devrik,openrouter:amplify
+uzuncayir hattede sefer sayisi azaltti peron doldu,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Üsküdar yönlü sefer iptal edildi yolcular bir sonraki trene yönlendirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+canta unutuldu guvenlige teslim edildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Giše önünde kuyruk Bağcılar,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Hacıosman yönünde sefer gecikmesi yaşandı anons ile bildirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Üsküdar istasyonunda bilet matbuatı bitmiştir mobil bilet kullanımı önerildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Peron kapısı açılmıyor yoğunluk Esenler,yolcu_operasyon,6,devrik,openrouter:amplify
+uskudar guvenlik gorevlisi yok turnike basinda karga,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Yolcu inemez Şişli,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Kapı arası düşme riskli İTÜ Ayazağa,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+kartal bilet holu kasiyer yok nakit sorunu,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Anons yok sefer iptal Vezneciler,yolcu_operasyon,6,devrik,openrouter:amplify
+Yolcu rehberi bulunmuyor peron Vezneciler,yolcu_operasyon,6,devrik,openrouter:amplify
+uzuncayir asansor calismiyo engelli yolcu bekliyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Yenisahra istasyonunda sefer iptali sonrası yolcular bir sonraki trene alındı.,yolcu_operasyon,6,standart,openrouter:amplify
+Yanlış yön anonsu yolcular şaşırdı Bostancı,yolcu_operasyon,6,devrik,openrouter:amplify
+Peron temizliği gecikti Göztepe,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Kartal istasyonunda yolcu yönlendirme personeli eksik çıkışlarda karmaşa yaşandı.,yolcu_operasyon,6,standart,openrouter:amplify
+Yolcu kapıya sıkıştı Levent,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Maltepe istasyonunda seferler seyreltildi yolcular peronda bekletiliyor.,yolcu_operasyon,6,standart,openrouter:amplify
+turnikede bilet hata ucret alindi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Kadıköy istasyonunda peron yoğunluğu azaldı seferler normale dönmüştür.,yolcu_operasyon,6,standart,openrouter:amplify
+levent yolcu dusmesi kapida gecikme yasandi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Personel yetmiyor peron kontrolü Dudullu,yolcu_operasyon,6,devrik,openrouter:amplify
+Topkapı istasyonunda peron güvenliği nedeniyle yolcu alımı geçici durduruldu.,yolcu_operasyon,6,standart,openrouter:amplify
+peron cok kalabalik guvenlik cagirildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Biletmatik tarife hatası Levent,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Sefer gecikme yoğun saat,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Kayıp eşya bildirimi üst kat,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Şişli istasyonunda personel eksliği bilet kontrol süresini uzatmıştır.,yolcu_operasyon,6,standart,openrouter:amplify
+Turnike arıza geçiş engelli BSO-02 Levent,yolcu_operasyon,6,devrik,openrouter:amplify
+kartal sefer saatinde gelmedi takip ediliyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+haciosman peron dolu yolcu binemiyor,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+sisane kuzey giris yogunluk anons yok,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Peron dolu seferler seyreltildi Mecidiyeköy,yolcu_operasyon,6,devrik,openrouter:amplify
+Mecidiyeköy istasyonunda yanlış anons düzeltildi yolcular bilgilendirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+sefer iptal sonraki trene yonlendirme,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Tarife güncellemesi yapılmamış turnikeler Maltepe,yolcu_operasyon,6,devrik,openrouter:amplify
+Yolcu düşmesi peron Halkalı,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Seyrantepe istasyonunda maç sonrası yoğunlukta sefer sayısı artırıldı.,yolcu_operasyon,6,standart,openrouter:amplify
+Haliç istasyonunda peron yoğunluğu azaltmak için sefer sıklığı artırıldı.,yolcu_operasyon,6,standart,openrouter:amplify
+tren dolu bindirmiyo peron tikiyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Sanayi Mahallesi istasyonunda yolcu düşmesi nedeniyle seferler durdu.,yolcu_operasyon,6,standart,openrouter:amplify
+Kirazlı istasyonunda personel kapısı yanında bulunan eşya güvenliğe teslim edildi.,yolcu_operasyon,6,standart,openrouter:amplify
+Personel eksikliği seferler iptal Yenikapı,yolcu_operasyon,6,devrik,openrouter:amplify
+Yolcu biniş engellendi Gayrettepe,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Anons yapılmadı Kartal,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Gayrettepe istasyonunda seferler aralığı genişletildi yolcular bilgilendirildi.,yolcu_operasyon,6,standart,openrouter:amplify
+anons yanlis peron gosteriyo yolcu kaldi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Turnike geçişi engelli Halkalı giriş,yolcu_operasyon,6,devrik,openrouter:amplify
+anneler bebekli arabayla peronda zorlaniyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Peron yoğunluk kontrolü yapılıyor Mecidiyeköy,yolcu_operasyon,6,devrik,openrouter:amplify
+Sefer süre uzadı Osmanbey,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Yolcu şikayeti artış gösterdi Bostancı,yolcu_operasyon,6,devrik,openrouter:amplify
+bilet matik arizali nakit kasiyer yok,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+escort personeli gelmedi yolcular panikledi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+trende klima calismiyo yolcu sikinti cekti,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+Tarife cihazı hata güney çıkış,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Vagon içinde kalabalık Ataköy,yolcu_operasyon,6,cok_kisa,openrouter:amplify
+Aksaray yönlü trende yolcu hastalığı nedeniyle sefer durduruldu.,yolcu_operasyon,6,standart,openrouter:amplify
+yenikapi 2 peron sakiz lekeleri cikarilamadi kaygan,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+bostanci M4 giris merdivenleri kirli cop dagildi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Peron zemini kaygan,temizlik_cevre,7,cok_kisa,openrouter:amplify
+sanayi istasyon personel tuvaleti koku acil mudahale,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Buz erimi kayganlık riski,temizlik_cevre,7,devrik,openrouter:amplify
+"Üsküdar mezzanin katında dökülen kahve lekesi temizlenmedi, kayganlık riski oluştu.",temizlik_cevre,7,standart,openrouter:amplify
+Buzlanma var çıkış merdivenleri,temizlik_cevre,7,devrik,openrouter:amplify
+Tünel ağzı haşere,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Çöp toplama aracı arızalı,temizlik_cevre,7,devrik,openrouter:amplify
+"Sütlüce peronunda kenet doldurulduktan sonra kapak kapatılmamış, koku çıkıyor.",temizlik_cevre,7,standart,openrouter:amplify
+"Ataköy şehristi istasyonu tuvalet kapısı kilitli, içeri girilemiyor, kirli.",temizlik_cevre,7,standart,openrouter:amplify
+Haşere ilaçlama istendi peron,temizlik_cevre,7,devrik,openrouter:amplify
+acibadem peron 2 yaninda cop konteyneri doldu tasti,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Sivi sabun boş dolap,temizlik_cevre,7,devrik,openrouter:amplify
+Topkapı peronunda sabah servis başlangıcından beri dökülen içecek lekesi temizlenmedi.,temizlik_cevre,7,standart,openrouter:amplify
+Karton kutular yığıldı depo,temizlik_cevre,7,devrik,openrouter:amplify
+Peron tuzlama yapıldı,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Tuvalet kağıdı bitmiş 1 no,temizlik_cevre,7,devrik,openrouter:amplify
+Şişli-Mecidiyeköy M2 peron kenarında atık bilet kartları ve ambalajlar birikmiş.,temizlik_cevre,7,standart,openrouter:amplify
+Asansör kabini kirli,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Hacıosman son istasyon peronundaki çöp konteyneri kapaklı değil, rüzgârla çöp dağıldı.",temizlik_cevre,7,standart,openrouter:amplify
+gayrettepe kuzey cikis merdiven buzlandi tuz atilmadi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Buzlanma çıkış merdiveni Sanayi Mahallesi,temizlik_cevre,7,devrik,openrouter:amplify
+Peron kenarı atık yağ,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Kirli bezler zeminde kalmış,temizlik_cevre,7,devrik,openrouter:amplify
+Yenibosna aktarma geçidinde nem ve küflü koku havayı ağırlaştırıyor.,temizlik_cevre,7,standart,openrouter:amplify
+uzuncayir mezzanin tuvaleti koku veriyor sabun yok,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Kirli zemin temizlenmedi mezzanin Mecidiyeköy,temizlik_cevre,7,devrik,openrouter:amplify
+"Göztepe istasyonu asansör kabinleri içinde toz ve lekeler, haftalık derin temizlik atlandı.",temizlik_cevre,7,standart,openrouter:amplify
+uskudar bilet holu tavan kirli toz aglari,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Toz örtülü yerler temizlik,temizlik_cevre,7,devrik,openrouter:amplify
+Topkapı istasyonu alt geçit zeminine dökülmüş kahve temizlenmedi.,temizlik_cevre,7,standart,openrouter:amplify
+Gişe önü çöp birikimi,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Karaköy asansör kabin camları içten dıştan berbat kirli, görüş engelleniyor.",temizlik_cevre,7,standart,openrouter:amplify
+Çöp torbaları toplanmamış hol,temizlik_cevre,7,devrik,openrouter:amplify
+Çöp çantası devrildi peron,temizlik_cevre,7,devrik,openrouter:amplify
+Kum torbası eksik ramp,temizlik_cevre,7,devrik,openrouter:amplify
+Çöp konteyneri taşmış peron,temizlik_cevre,7,devrik,openrouter:amplify
+esenler peron 2 yaninda fare izi goruldu,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Merdiven çıkışı buzlanma,temizlik_cevre,7,cok_kisa,openrouter:amplify
+bostanci asansor kabinici cikolata leke cok kaygan,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Kirazlı asansörü kokuyor,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Peron döşemesi leke,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Haliç metrostu istasyon giriş catak altında kar yumuşak buz birikimi var.,temizlik_cevre,7,standart,openrouter:amplify
+kadikoy M4 peron 2 tuvalet girisi cop yigini,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+"Poligon istasyonu tuvaletinde sabun ve kağıt havluğu bitmiş, yenilenmedi.",temizlik_cevre,7,standart,openrouter:amplify
+uzuncayir peron bancosu uzerinde suyu cikarilmis,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Vagon bağlığı kirli,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Asansör kabini kokuyor,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Grafiti duvar peron yanı,temizlik_cevre,7,devrik,openrouter:amplify
+Bostancı istasyonu alt geçit kapısında çöp birikimi ve haşere görüldü.,temizlik_cevre,7,standart,openrouter:amplify
+Ayrılıkçeşme B2 giriş tuvaletlerinde temizlik eksikliği ve kötü koku var.,temizlik_cevre,7,standart,openrouter:amplify
+maltepe peron bancosu ustunde sikik cikolata lekeli,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Asansör düğmeleri yapışkan,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Kirli su birikinti asansör,temizlik_cevre,7,devrik,openrouter:amplify
+Topkapı peronu koku,temizlik_cevre,7,cok_kisa,openrouter:amplify
+yenikapi M1A peron cop konteyneri tasti doldu,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+kartal peron cop konteyneri tasti etraf dagildi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Yenikapı geçiş grafiti,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Osmanbey istasyonu peron duvarında grafiti çizimleri yer kaplıyor, görüntü bozuk.",temizlik_cevre,7,standart,openrouter:amplify
+itu ayazaga peron bancolari kirli toz duman,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Turnike bölgesi koku,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Kadıköy istasyonu peronunda çöp konteyneri taşmış, etraf dağıldı.",temizlik_cevre,7,standart,openrouter:amplify
+Cam kırık çöp kutusu,temizlik_cevre,7,devrik,openrouter:amplify
+Bağcılar istasyonu 1. peron tuvaletlerinde kağıt havlu ve sıvı sabun tükendi.,temizlik_cevre,7,standart,openrouter:amplify
+Tuvalet musluğu akıyor sürekli,temizlik_cevre,7,devrik,openrouter:amplify
+Parke zemin ıslak kaygan,temizlik_cevre,7,devrik,openrouter:amplify
+Sanayi Mahallesi asansör kabini içinde çöp ve toz birikimi belirgin.,temizlik_cevre,7,standart,openrouter:amplify
+esenler cikis merdiven basamaklari buzlandi tuz yok,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+"Sultanahmet istasyonu mezzanin zeminine dökülen çay temizlenmedi, lekeli.",temizlik_cevre,7,standart,openrouter:amplify
+Bağcılar peronu tuzlama,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Atık yağı kokusu fan,temizlik_cevre,7,devrik,openrouter:amplify
+huzurevi bilet makinesi etrafi cop posetleri doldu,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Kum dökülmesi merdiven basamak,temizlik_cevre,7,devrik,openrouter:amplify
+Gişe camı yağlı,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Gülhane peronunda fare kalıntıları ve tüyler görüldü, hijyen sorunu var.",temizlik_cevre,7,standart,openrouter:amplify
+"Darüşşafaka istasyonu tuvalet lavaboları tıkalı, kötü koku yayılıyor ortama.",temizlik_cevre,7,standart,openrouter:amplify
+taksim transfer koridoru cok kirli cop var,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+atakoy bilet holu tuvaletler kokuyor kagit yok,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Gayrettepe tuvaleti kokuyor,temizlik_cevre,7,cok_kisa,openrouter:amplify
+unalan gece temizlik yapilmamis peron kirli basladi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Üst kat döküntü,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Kökük kokusu mezzanin kat,temizlik_cevre,7,devrik,openrouter:amplify
+Tuvalet aynası lekeli,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Tuvalet banyo kağıtı yok,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Peron duvarı yazılı,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Banyo kapısı kapanmıyor tuvalet,temizlik_cevre,7,devrik,openrouter:amplify
+Üst geçitte çöp,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Fare görüldü tünel ağzı Yenikapı,temizlik_cevre,7,devrik,openrouter:amplify
+Şişli-Mecidiyeköy aktarma tünelinde çöp ve toz birikimi yoğun.,temizlik_cevre,7,standart,openrouter:amplify
+Ölü böcek ışık altı,temizlik_cevre,7,devrik,openrouter:amplify
+"Eminönü bağlantı geçidinde çöp konteyneri kapaklı değil, kokuyu yayılıyor.",temizlik_cevre,7,standart,openrouter:amplify
+Mecidiyeköy gişe kirli,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Yolcu bilgi ekranı parmak izi,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Kaygan zemin döküntü geçiş,temizlik_cevre,7,devrik,openrouter:amplify
+Tuzluk boş tuzlanmadı rampalar Otogar,temizlik_cevre,7,devrik,openrouter:amplify
+"Ayrılıkçeşme çıkış catak altında buzlanma var, tuzlama ekibi henüz ulaşmadı.",temizlik_cevre,7,standart,openrouter:amplify
+Tuvaletler kirli koku veriyor,temizlik_cevre,7,devrik,openrouter:amplify
+Topkapı tuvaleti pis,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Merdiven basamakları kırık cam,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Üsküdar üst kat geçit merdivenlerinde kırık cam parıltıları temizlenmemiş, yolcular şikayet etti.",temizlik_cevre,7,standart,openrouter:amplify
+Güvenlik kamerası camı kirli,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Merdiven eli kirli,temizlik_cevre,7,cok_kisa,openrouter:amplify
+yenikapi transfer koridoru duvarinda grafiti cizilmis,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Uzunçayır merdiveni buzlu,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Kene tespiti vagon içi,temizlik_cevre,7,devrik,openrouter:amplify
+Yangın musluğu etrafı kirli,temizlik_cevre,7,cok_kisa,openrouter:amplify
+uskudar asansor kabinici kirli cop dolu,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+kozyatagi peron kaygan buz yagisindan acil tuzlama,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Tuvalet kokusu şiddetli Kirazlı,temizlik_cevre,7,devrik,openrouter:amplify
+Dökülmüş kola yapışkan zemin Kadıköy,temizlik_cevre,7,devrik,openrouter:amplify
+"4. Levent çıkış catak altında su birikintisi donmuş, buzlanma tehlikesi var.",temizlik_cevre,7,standart,openrouter:amplify
+Tuvalet kağıt bitti,temizlik_cevre,7,cok_kisa,openrouter:amplify
+tavsantepe istasyon tuvaleti koku veriyor havalandirma yok,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+"Gayrettepe mezzaninde dökülen gazoz yapışkan zemin yarattı, yolcu şikayeti geldi.",temizlik_cevre,7,standart,openrouter:amplify
+hastane adliye asansor kabinici cop torbasi yirtilmis,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Tuvalet havası ağır,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Şişhane çıkış merdivenlerinde karargah çöpleri birikmiş, acil temizlenmesi gerekiyor.",temizlik_cevre,7,standart,openrouter:amplify
+Levent mezzanin buzlanma,temizlik_cevre,7,cok_kisa,openrouter:amplify
+ayrilik cesmesi asansor icerisi cirkin koku cop,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Yağ lekesi kaygan vagon,temizlik_cevre,7,devrik,openrouter:amplify
+"Aksaray aktarma merdivenleri üzerinde kırık cam parçaları temizlenmemiş, tehlikeli.",temizlik_cevre,7,standart,openrouter:amplify
+Gayrettepe geçişi çamurlu,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Yenikapı Marmaray geçiş koridorunda sıvı yıkama sabunu dökülmüş, zemin tehlikeli derecede kaygan.",temizlik_cevre,7,standart,openrouter:amplify
+Peron kenarı çöp dolu,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Buzlu merdiven tuz bekliyor,temizlik_cevre,7,devrik,openrouter:amplify
+"Mecidiyeköy istasyonu bilet holünde çöp kutuları taşmış, zemine dökülmüş durumda.",temizlik_cevre,7,standart,openrouter:amplify
+Üst kat çöp kutusu dolu,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Minder değişimi yapılmış tuvalet,temizlik_cevre,7,devrik,openrouter:amplify
+Seyrantepe stad yön peronunda et sarması ambalajları rüzgârla uçuşuyor.,temizlik_cevre,7,standart,openrouter:amplify
+sisli mecidiyekoy fare goruldu bilet makinesi yaninda,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Kirazlı peronu tuzlama bekliyor,temizlik_cevre,7,cok_kisa,openrouter:amplify
+bostanci giris merdivenleri kirli yapik birikmis,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Sıçan deliği tespit edildi,temizlik_cevre,7,devrik,openrouter:amplify
+aksaray gec vardiyasi temizlik ekibi gelmedi cop yikildi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Lavabo taşması banyo temizlik,temizlik_cevre,7,devrik,openrouter:amplify
+Koltuk altı çöp,temizlik_cevre,7,cok_kisa,openrouter:amplify
+yenikapi alt kat personel kapisi cop dagildi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Fare görüldü turnike bölgesi,temizlik_cevre,7,devrik,openrouter:amplify
+Gişe tornası tozlu,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"İTÜ-Ayazağa çıkışında tuzlama yapılmamış, yolcular kayarak ilerliyor şikayet etti.",temizlik_cevre,7,standart,openrouter:amplify
+mahmutbey tuvalet zemini kirli cop dagildi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Tuvalet kağıdı yok 2 numara Levent,temizlik_cevre,7,devrik,openrouter:amplify
+Duvar yazısı silinmedi hol,temizlik_cevre,7,devrik,openrouter:amplify
+Kabataş F1 peronunda rüzgârla gelen yaprak ve çöp yığılıyor.,temizlik_cevre,7,standart,openrouter:amplify
+Emniyet-Fatih peronunda yolcu öksürük sonrası bıraktığı maske kağıtları dağınık.,temizlik_cevre,7,standart,openrouter:amplify
+Klimasyon grili tozlu,temizlik_cevre,7,cok_kisa,openrouter:amplify
+yenisahra tuvalet sabunluk kirdi dolaplar bos,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+kadikoy M4 peron fare goruldu yolcular panik,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+"Mecidiyeköy M2 peronunda fare görüldü, deratizasyon talebi iletildi acilen.",temizlik_cevre,7,standart,openrouter:amplify
+gulcuyu tuvalet zemini kaygan sabun kalintisi cok,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+Tuvalet lavabo tıkanıklığı,temizlik_cevre,7,cok_kisa,openrouter:amplify
+kirazli bilet holu camlari cizik kirli gorus engellendi,temizlik_cevre,7,yazim_yanlisi,openrouter:amplify
+"Kirazlı M3 peronunda dondurma döküntüsü yapışkan lekeler yarattı, temizlenmedi.",temizlik_cevre,7,standart,openrouter:amplify
+Sirkeci Marmaray peronunda şarj aleti cutusu ve kablo atıklar yatıyor.,temizlik_cevre,7,standart,openrouter:amplify
+Personel kapısı çöp,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Peron duvarı graffiti,temizlik_cevre,7,cok_kisa,openrouter:amplify
+"Taksim istasyonu asansör kabininde yazıcı tozu dökülmüş, zemin kirli.",temizlik_cevre,7,standart,openrouter:amplify
+Tünel girişi grafiti,temizlik_cevre,7,cok_kisa,openrouter:amplify
+Çöp kutusu yanmış güney,temizlik_cevre,7,devrik,openrouter:amplify

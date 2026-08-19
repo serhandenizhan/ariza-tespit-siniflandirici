@@ -309,12 +309,37 @@ def is_near_dup(yeni_norm: str, mevcut_norms: list[str]) -> bool:
 # Ana akis
 # ---------------------------------------------------------------------------
 
-def amplify(mode: str, hedef: int, kategoriler: list[str], dry_run: bool) -> None:
+def amplify(mode: str, hedef: int, kategoriler: list[str], dry_run: bool,
+            replace_source: str | None = None) -> None:
     rng = random.Random(C.SEED)
     seed_by_key = load_seed_examples()
     caller = Caller(mode)
 
     records = load_existing()
+
+    if replace_source:
+        # Belirli bir saglayicidan gelen kayitlari atip yerine yenisini
+        # urettirmek icin. Kategoriyi tamamen sifirlayan bir secenege gore
+        # avantaji: karisik kategorilerde (orn. altyapi_insaat = 86 Nemotron +
+        # 100 Ollama) IYI kayitlar korunur, sadece hedeflenen kaynak degisir.
+        # Silinen kayitlar near-dup havuzundan da cikar, boylece yeni model
+        # ayni konulari serbestce yeniden yazabilir.
+        onceki = len(records)
+        silinenler = Counter(
+            r["kategori"] for r in records
+            if r["kategori"] in kategoriler
+            and r.get("kaynak", "").startswith(replace_source)
+        )
+        records = [
+            r for r in records
+            if not (r["kategori"] in kategoriler
+                    and r.get("kaynak", "").startswith(replace_source))
+        ]
+        print(f"--replace-source {replace_source}: {onceki - len(records)} kayit "
+              f"silindi, yerine yenisi uretilecek")
+        for k, n in silinenler.items():
+            print(f"    {C.DISPLAY_NAME[k]:<26} -{n}")
+        print()
     # (kategori, stil) -> o gruptaki metinler ve normalize hallleri
     by_key: dict[tuple[str, str], list[dict]] = defaultdict(list)
     norms_by_cat: dict[str, list[str]] = defaultdict(list)
@@ -446,6 +471,10 @@ def main() -> None:
                     metavar="KEY", help="sadece bu kategori(ler)")
     ap.add_argument("--dry-run", action="store_true",
                     help="LLM cagirmadan ilk prompt'u yazdirip cik")
+    ap.add_argument("--replace-source", choices=["ollama", "openrouter"],
+                    metavar="SAGLAYICI",
+                    help="bu saglayicidan gelen mevcut kayitlari silip yerine "
+                         "yenisini uret (kategori suzgeci varsa sadece onlarda)")
     args = ap.parse_args()
 
     amplify(
@@ -453,6 +482,7 @@ def main() -> None:
         hedef=args.target,
         kategoriler=args.category or list(C.CATEGORY_KEYS),
         dry_run=args.dry_run,
+        replace_source=args.replace_source,
     )
 
 

@@ -1084,517 +1084,503 @@
 {"metin": "Üsküdar istasyon kuzey çıkış merdiveni çatlaklı", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Uzunçayır peron tavan paneli sızıntı damlıyor", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Şişhane tünel drenaj borusu kırık su basıyor", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Şişli kuzey giriş tavan paneli sızıntı yapıyor", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Şişli peron duvar fayansları dökülmeye başladı", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Bostancı tünel ağzı drenaj poması arızalı", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Bostancı viyadukt ray altı betonu çatlak", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kartal 1 peron merdiven basamağı kırık", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kirazlı gişe önü zemin fayansı ayrıldı", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kirazlı tünel segment arası su geliyor", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yenikapı Marmaray aktarma koridoru tavan ıslak", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yenikapı M1 peron korkuluk bağı bağlantısı kopuk", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Gayrettepe M11 tünel duvarı betonarme kırışması", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Gayrettepe viyadukt dilatasyonluk kauçuk yıprandı", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar çıkış merdiveni betonarme çelikleri görünüyor", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar peron tavan sızıntı kaynaklı çürüme", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kağıthane M11 tünel drenaj kanalı tıkalı", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "sisli istasyon peron tavan sizintisi buyuyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sisli asansor ondu duvar catlasi genisliyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bagcilar peron zemin fayanslari dokuluyor tehlikeli", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bagcilar merdiven basamagi kirdi korkuluk salliyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uskudar alt kat kanalizasyon pompa havuzu tasan", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kadikoy metro a vm ust gecit korkuluk kopuk", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kadikoy peron duvar fayans parcalari yere dokuluyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "mecidiyekoy m7 tünel duvar nemlenme alg var", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "mecidiyekoy peron uc kismi tavan paneli sarkiyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sishane tünel sag duvar su damlasi surekli", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sishane peron zemin dilatasyon catlasi kirli su", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uzuncayir istasyon giris catlasi buyuyor acil", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uzuncayir tünel tavan segment sizintisi yavasladi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "ayazaga peron tavan isotma borusu siziyor beton", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "ayazaga merdiven basamak nezasi fayans cikmis", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "levent tünel duvar sivasi dokuluyor buyuk alan", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "levent peron zemin beton yuzey curumesi var", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "4. levend tünel sol duvar nem cemberi genisliyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "4. levend peron arkasi kanalizasyon kokusu sizintisi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "mahmutbey m3 tünel segment boltu sizintisi noktasi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "mahmutbey peron korkuluk alt kismi curumus dusuyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kirazli tünel agzi kazik duvari sizintisi var", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kirazli peron zemin dilatasyon kaucugu cikmis su", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi marmaray gecidi tavan sizintisi elektrik tehlikesi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi metro peron duvar fayans dokme buyuk", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "atakoy tünel ic cati sizintisi ray uzerine", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "atakoy peron asansor kapi ondu zemin catlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bakirkoy tünel duvar alg temizleme sonrasi tekrar", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bakirkoy merdiven basamagi cimenti ayrildi tehlikeli", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "haznedar tünel sag tarafta beton copurmesi goruldu", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "osmanbey peron tavan paneli sarkma riski var", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "esenler tünel duvar segment arasi sizintisi yeni", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "goztepe alt gecit drenaj pompa calismiyor su", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "gayrettepe asansor kulesi duvar catlasi buyudu", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "vezneciler merdiven korkuluk baglanti demiri kirdi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "altunizade tünel tavan beton copuk yuze dokuluyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "topkapi peron zemin fayans yukseldi yarali riski", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "ikitelli tünel sol duvar nemlenme buyuyor hizi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kozyatagi peron uc kismi tavan sizintisi elektrik", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "taksim guney cikis tavan sivasi cokuyor su damliyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kartal istasyon alt kat drenaj kanali tapasi bas bas", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "gayrettepe peron duvarinda buyuk catlak goruldu beton copurmesi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sisli ust gecit merdiven basamagi kirdi metal cikti", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi transfer tuneli zemin dilatasyon kaucugu cikti su giris", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kadikoy b cikis koridor tavan paneli sarki cimento dökuluyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "levent tunel sag duvar nem halkasi genisliyor alg var", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "mecidiyekoy peron uc kismi fayans yukseldi yarali riski", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uskudar giris merdiven korkuluk baglanti civatalari sarkiyor dusuyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "vezneciler metro peron zemin fayans dokuldu buyuk alan", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "haznedar tunel sol tarafta beton armasi gorunuyor paslanmis", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "Peron duvarı fayans dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Çıkış merdiveni basamak kırığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Koridor tavan paneli çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Drenaj pompa havuzu taşması", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Ray yatak drenaj tıkanıklığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet kasası koridoru su baskını", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Korkuluk bağlantı elemanı kırık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tünel duvar beton çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Asansör haznesi su birikintisi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron zemin fayans boşalması", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Geçiş merdiveni basamak yırtılması", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kanalizasyon revis kapak kayması", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar istasyon tavan sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Uzunçayır kuzey giriş çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Hacıosman peron korkuluk sallantısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kartal bilet holü su damlaması", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Merdiven basamak burnu kırık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron bordür taşı dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Koridor duvar fayans çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Drenaj kanalı çamur dolusu", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tünel betonarme gözenek açığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Çıkış merdiveni gebezi kırık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron sonu tavan damlaması", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet holü duvar nemlenme", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tünel drenaj boru kırığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Ray düzey bozulması belirgin", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Merdiven iniş koridor çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Asansör kapı çerçevesi kırık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron direk koruyucu hasarı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Koridor tavan ızgara dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tünel yan duvar sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Çıkış merdiveni çelik açığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kanalizasyon pompa istasyonu sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron zemin dilatasyon açığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet matik altı sızıntı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tünel tavan armatür dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Koridor zemin fayans kırığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Merdiven basamak altı boşluk", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Şirinevler kuzey giriş tavan sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bağcılar peron duvarı beton çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sanayi Mahallesi merdiven basamak fayans dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Vezneciler bilet holü drenaj kapak kırık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Aksaray transfer geçidi tavan sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Topkapı çıkış korkuluk bağlantı kopması", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Emniyet asansör şaftı duvar çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kozyatağı peron zemin döşeme yerleşme", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kadıköy giriş tavan cam kırığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar merdiven basamak altı çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kartal peron ray yapı koroziyon", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Pendik tünel drenaj boru tıkanıklığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kadıköy istasyonunda peron yoğunluğu nedeniyle seferler gecikmiştir.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar yönlü sefer iptal edildi yolcular bir sonraki trene yönlendirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Şişli-Mecidiyeköy aktarma geçidinde yolcu akışı yoğunluktan dolayı yavaşlamıştır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Esenler istasyonunda anons yapılmaması sonucu yolcular yanlış perona yönelmiştir.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Mecidiyeköy istasyonunda personel eksliği nedeniyle bilet kontrolü yavaşlamıştır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Gayrettepe istasyonunda seferler aralığı genişletildi yolcular bilgilendirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Levent yönlü trenlerde yoğunluk nedeniyle sefer sayısı artırılmıştır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Yenikapı aktarma noktasında kayıp eşya bildirimi alındı merkeze iletildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Aksaray istasyonunda tarife hatası nedeniyle gişe kuyrukları uzadı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kartal istasyonunda yolcu yönlendirme personeli eksik çıkışlarda karmaşa yaşandı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Tavşantepe son durağında sefer iptal edildi yoklama treni hazırlanıyor.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Hacıosman yönünde sefer gecikmesi yaşandı anons ile bildirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kağıthane istasyonunda yolcu alımı durduruldu sefer gecikti.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Bostancı istasyonunda anons yapılmaması nedeniyle yolcular yanlış yönde bekledi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Maltepe istasyonunda seferler seyreltildi yolcular peronda bekletiliyor.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Pendik yönlü trenlerde yolcu şikayeti üzerine sefer durduruldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Ümraniye istasyonunda bilet matbuatı bitmiş mobil bilet yönlendirmesi yapıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Çarşı istasyonunda gişe personeli eksikliği nedeniyle kuyruklar uzadı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Atatürk Havalimanı hattında sefer iptali yapıldı alternatif yönlendirme başladı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "İkitelli Sanayi istasyonunda peron yoğunluğu güvenlik sebebiyle kontrol altına alındı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Mahmutbey aktarmasında yönlendirme tabelası eksik yolcular yanlış yöne girdi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kirazlı istasyonunda sefer aralığı normalleştirildi yolcular bilgilendirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Olimpiyat Parkı yönlü ilk sefer gecikmeli olarak hareket ettirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Seyrantepe istasyonunda maç sonrası yoğunlukta sefer sayısı artırıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Sanayi Mahallesi istasyonunda yolcu düşmesi nedeniyle seferler durdu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "4. Levent aktarmasında engelli yolcu personel eşliğinde yönlendirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Gayrettepe istasyonunda bilet ücreti hatalı yansımı giderildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kozyatağı istasyonunda peron değişikliği anonsu geç yapıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Yenisahra istasyonunda sefer iptali sonrası yolcular bir sonraki trene alındı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Göztepe istasyonunda gişe kuyruğu azaltmak için ek personel çağrıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar istasyonunda kayıp çocuk bildirimi alındı güvenlik birimlerine iletildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Fındıklı istasyonunda sefer gecikmesi nedeni yolculara anons edildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Karaköy aktarma geçidinde yönlendirme personeli görevde akış sağlandı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Haliç istasyonunda peron yoğunluğu azaltmak için sefer sıklığı artırıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Vezneciler istasyonunda bilet sorunu yaşayan yolcular manuel geçirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Yenikapı Marmaray aktarmasında sefer uyumsuzluğu giderildi seferler normalize.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Aksaray yönlü trende yolcu hastalığı nedeniyle sefer durduruldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Topkapı istasyonunda peron güvenliği nedeniyle yolcu alımı geçici durduruldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Emniyet-Fatih istasyonunda anons yanlış yapıldı yolcular uyarıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kocatepe istasyonunda sefer iptali anonsu yapılmamış şikayet geldi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Ataköy istasyonunda kuzey girişte yoğunluktan dolayı yolcu alımı kısıtlandı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Esenler istasyonunda sefer iptali nedeniyle yolcular bir sonraki trene yönlendirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Şişli istasyonunda personel eksliği bilet kontrol süresini uzatmıştır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kadıköy istasyonunda peron yoğunluğu azaldı seferler normale dönmüştür.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Mecidiyeköy istasyonunda yanlış anons düzeltildi yolcular bilgilendirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Aksaray istasyonunda asansör arızası engelli yolcu alternatif rota ile yönlendirildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar istasyonunda bilet matbuatı bitmiştir mobil bilet kullanımı önerildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Levent istasyonunda tünel ağzında yolcu akışı güvenlik nedeniyle yavaşlatıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kirazlı istasyonunda personel kapısı yanında bulunan eşya güvenliğe teslim edildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Mahmutbey aktarma noktasında yönlendirme personeli görevde akış sağlanmaktadır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Anons yok yolcular şaşırdı Şişli", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Peron dolu seferler seyreltildi Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer iptal yolcular yönlendirildi Gayrettepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet holü yoğun personel yetmiyor Levent", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yanlış anons yapıldı yolcular kaçıırdı Vezneciler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kayıp eşya bildirimi fazla Kartal", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tarife hatası turnikelerden geçiş yok Kozyatağı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu düşmesi gecikme oluştu Üsküdar", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Personel eksikliği seferler iptal Yenikapı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Peron değişikliği anons yok Hacıosman", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer gecikmesi nedeni bilinmiyor Seyrantepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yönlendirme personeli bulunmuyor koridor Esenler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet almada sorun yaşanıyor bilet holü", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu hastalığı sefer durdu Levent", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kapı arası sıkışma yoğun peron Gayrettepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Anons sistemi bozuk yolcular habersiz Vezneciler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer aralığı uzadı yoğunluk Kartal", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kayıp çocuk bildirimi peron Hacıosman", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu kavgası müdahale gerekiyor Kozyatağı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Turnike arıza geçiş engelli BSO-02 Levent", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer iptali anonsu geç yapıldı Hacıosman", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Peron kapısı açılmıyor yoğunluk Esenler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu yönlendirme tabelası eksik Maltepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Acil durum freni çekilmiş sefer durdu Ayrılık Çeşmesi", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet makinesi para üstü vermiyor Yenikapı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer seyreltildi personel yetmiyor Atatürk Oto Sanayi", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu şikayeti artış gösterdi Bostancı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Peron yoğunluk kontrolü yapılıyor Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Anons yapılıyor ama duyulmuyor Gayrettepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kayıp çanta teslim alındı Seyrantepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer gecikmesi 15 dakika Üsküdar", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Personel nöbeti boş kalmış Yenikapı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu indirme sıkıntısı peron Bostancı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tarife güncellemesi yapılmamış turnikeler Maltepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Güvenlik kontrolü yoğunluk yaratıyor Gayrettepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer iptal nedeni açıklanmadı Topkapı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu rehberi bulunmuyor peron Vezneciler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Anons yanlış peron belirtti Şişli", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Peron boşaltılıyor güvenlik sebebi Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer aralığı normalleşti teşekkürler Kadıköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Peron yoğunluk giriş kapatıldı Kadıköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yönlendirme personeli eksik Esenler güney", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Anons yok sefer iptal Vezneciler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Biletmatik nakit vermiyor Şişli gişe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kayıp telefon bulundu Gayrettepe", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Personel yetmiyor peron kontrolü Dudullu", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yanlış yön anonsu yolcular şaşırdı Bostancı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Turnike geçişi engelli Halkalı giriş", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer gecikti neden anons yok Kirazlı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu baskını peron boşaltılıyor Şişli", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "sefer gecikti yolcular peronda bekliyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "anons yapilmiyor yolcu bilgisiz kaliyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "turnikede bilet hata ucret alindi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "peron cok kalabalik guvenlik cagirildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "personel yok yonlendirme yapilamiyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kapi acilmiyor yolcu cikamiyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sefer iptal sonraki trene yonlendirme", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yanlis anons yapildi yolcu karsi perona atildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kart okumuyor ucret odendi bilet yok", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "canta unutuldu guvenlige teslim edildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uzuncayir asansor calismiyo engelli yolcu bekliyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "levent yolcu dusmesi kapida gecikme yasandi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "tren dolu bindirmiyo peron tikiyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bilet matik arizali nakit kasiyer yok", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yangin alarmi yanlis calisti peron bosaltildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "seferler seyreltildi yognluk onleniyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yonlendirme tabelasi yanlis gosteriyo yolcu kayboldi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "indirimli kart tanimlamiyo ucret tam alindi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "peron kapisi kilitli acil cikis kullanildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "trende klima calismiyo yolcu sikinti cekti", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uskudar guvenlik gorevlisi yok turnike basinda karga", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yolcu hastaligi sefer 10 dk gecikti", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bisikletli yolcu bindi engel oldu cikis", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "anneler bebekli arabayla peronda zorlaniyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "engelli rampasi kapali yardim cagrildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "ses sistemi bozuk anons duyulmuyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "cikis yolu belirsiz yolcu dongu icinde", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kart basimi calismiyo bilet veremiyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kartal sefer saatinde gelmedi takip ediliyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "levent peron kenari sarkiti yolcu uyarildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenibosna aktarma yolcu cok gecikti", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kadikoy peronda yoklama yapildi sefer basladi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "gayrettepe yonunde sefer iptal acil durum", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uzuncayir hattede sefer sayisi azaltti peron doldu", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kartal yolcu kavgasi mudur yardimcisi cagirildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kayip cocuk anonsla aileye kavusturuldu", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "turnike ucret almiyo serbest gecis", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "tren kapilari arasi gecis kapali uyarildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "servis sonu yaklasti son sefer duyuruldu", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "escort personeli gelmedi yolcular panikledi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sisane kuzey giris yogunluk anons yok", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "haciosman peron dolu yolcu binemiyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bagcilar gidis sefer iptal neden anlasilmiyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kartal bilet holu kasiyer yok nakit sorunu", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yolcu dusmesi sebebiyle sefer gecikti yonlendirme", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "personel eksigi koridor yonlendirme yapilamiyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "turnike hata ucretsiz gecis yapiliyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "anons yanlis peron gosteriyo yolcu kaldi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kayip esya bagcilar guvenliktesi teslim alindi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sefer seyredildi bekleme suresi uzadi yolcu sikisiyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "Peron kalabalık Yenikapı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer gecikti Aksaray", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Anons yapılmadı Şişhane", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu yönlendirme yok Taksim", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Biletmatik tarife hatası Levent", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu biniş engellendi Gayrettepe", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Personel eksikliği Kadıköy", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer iptal Üsküdar", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron boşalma yavaş Mahmutbey", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yanlış yön anonsu Kirazlı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Giše önünde kuyruk Bağcılar", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer seyreltildi Olimpiyat", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu düşmesi peron Halkalı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Vagon içinde kalabalık Ataköy", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Acil duruş butonu çekildi Vezneciler", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yengeç geçidi dolu Sanayi Mahallesi", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Engelli yolcu geçemez Esenler", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bisiklet biniş engellendi Bahçelievler", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Su püskürtmesi peronda Yenibosna", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yangın alarmı yanlış Cevizlibağ", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Güvenlik kontrol gecikme Topkapı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer başlamadı Otogar", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kapı arası düşme riskli İTÜ Ayazağa", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Anons duyulmuyor Dağlar", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu kavga müdahale Fulya", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kayıp çocuk bildirimi Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer süre uzadı Osmanbey", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu inemez Şişli", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tarife güncelleme hatası Bostancı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron güvenlik çizgisi aşıldı Maltepe", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu bagajı büyük Pendik", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Personel yönlendirme eksik Tavşantepe", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer birleştirildi Huzurevi", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron temizliği gecikti Göztepe", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Acil çıkış kapısı açık Küçükçekmece", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu şikayeti klima Atatürk Havalimanı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer iptal Hacıosman", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron kalabalık Levent", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu düşmesi Şişli", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Anons yapılmadı Kartal", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer gecikme yoğun saat", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kayıp eşya bildirimi üst kat", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yönlendirme personeli eksik kuzey giriş", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tarife cihazı hata güney çıkış", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Sefer seyreltildi akşam yoğun saatte", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron boşalma gecikiyor Şişli", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu kapıya sıkıştı Levent", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet kontrol personeli yok Hacıosman", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Anons sesi gelmiyor Kartal", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu bayıldı peron Üsküdar", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kadıköy istasyonu peronunda çöp konteyneri taşmış, etraf dağıldı.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Ayrılıkçeşme B2 giriş tuvaletlerinde temizlik eksikliği ve kötü koku var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar mezzanin katında dökülen kahve lekesi temizlenmedi, kayganlık riski oluştu.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Taksim istasyonu asansör kabininde yazıcı tozu dökülmüş, zemin kirli.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Levent peronlarında sabah buzlanması tespit edildi, tuzlama yapılmadı.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Bostancı istasyonu alt geçit kapısında çöp birikimi ve haşere görüldü.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Hacıosman yön peronunda sakız lekeleri temizlenememiş, yolcular kayma riski altında.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Yenikapı Marmaray aktarma koridorunda tuvalet kabini içi pis, temizlik bekleniyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Şişhane çıkış merdivenlerinde karargah çöpleri birikmiş, acil temizlenmesi gerekiyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Osmanbey istasyonu peron duvarında grafiti çizimleri yer kaplıyor, görüntü bozuk.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Gayrettepe mezzaninde dökülen gazoz yapışkan zemin yarattı, yolcu şikayeti geldi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Mecidiyeköy M2 peronunda fare görüldü, deratizasyon talebi iletildi acilen.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "4. Levent çıkış catak altında su birikintisi donmuş, buzlanma tehlikesi var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Atatürk Oto Sanayi asansör önü zeminine sıvı sabun dökülmüş, çok kaygan.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Darüşşafaka istasyonu tuvalet lavaboları tıkalı, kötü koku yayılıyor ortama.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Esenler otogar yön peronunda çöp torbaları konteynerin yanında yığılmış.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Otogar M1A peron başında sıvı atık birikimi, temizlik ekibi yönlendirildi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Topkapı istasyonu alt geçit zeminine dökülmüş kahve temizlenmedi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Emniyet-Fatih peronunda yolcu öksürük sonrası bıraktığı maske kağıtları dağınık.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Aksaray aktarma merdivenleri üzerinde kırık cam parçaları temizlenmemiş, tehlikeli.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Vezneciler istasyonu tuvaletleri sabah servis başlangıcından beri temizlenmemiş durumda.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Haliç metrostu istasyon giriş catak altında kar yumuşak buz birikimi var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Sütlüce peronunda kenet doldurulduktan sonra kapak kapatılmamış, koku çıkıyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Sanayi Mahallesi asansör kabini içinde çöp ve toz birikimi belirgin.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Seyrantepe stad yön peronunda et sarması ambalajları rüzgârla uçuşuyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "İTÜ-Ayazağa çıkışında tuzlama yapılmamış, yolcular kayarak ilerliyor şikayet etti.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Poligon istasyonu tuvaletinde sabun ve kağıt havluğu bitmiş, yenilenmedi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Göktürk peron banklarında saman örtüsü kalıntıları ve çöp dağınık duruyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Hasdal giriş kontrol noktası önünde çamur ve çöp yığını oluştu.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kirazlı M3 peronunda dondurma döküntüsü yapışkan lekeler yarattı, temizlenmedi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Yenibosna aktarma geçidinde nem ve küflü koku havayı ağırlaştırıyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Ataköy şehristi istasyonu tuvalet kapısı kilitli, içeri girilemiyor, kirli.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Sirkeci Marmaray peronunda şarj aleti cutusu ve kablo atıklar yatıyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Cankurtaran çıkış merdivenlerinde taşkın su donmuş, buz örtüsü oluştu.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Sultanahmet istasyonu mezzanin zeminine dökülen çay temizlenmedi, lekeli.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Gülhane peronunda fare kalıntıları ve tüyler görüldü, hijyen sorunu var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Eminönü bağlantı geçidinde çöp konteyneri kapaklı değil, kokuyu yayılıyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kabataş F1 peronunda rüzgârla gelen yaprak ve çöp yığılıyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Karaköy asansör kabin camları içten dıştan berbat kirli, görüş engelleniyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Şişli-Mecidiyeköy aktarma tünelinde çöp ve toz birikimi yoğun.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Mecidiyeköy istasyonu bilet holünde çöp kutuları taşmış, zemine dökülmüş durumda.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Topkapı peronunda sabah servis başlangıcından beri dökülen içecek lekesi temizlenmedi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Üsküdar üst kat geçit merdivenlerinde kırık cam parıltıları temizlenmemiş, yolcular şikayet etti.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Bağcılar istasyonu 1. peron tuvaletlerinde kağıt havlu ve sıvı sabun tükendi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Kadıköy aktarma tünelinde kelepçe kokusu belirgin, havalandırma yetersiz kalıyor.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Ayrılıkçeşme çıkış catak altında buzlanma var, tuzlama ekibi henüz ulaşmadı.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Şişli-Mecidiyeköy M2 peron kenarında atık bilet kartları ve ambalajlar birikmiş.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Yenikapı Marmaray geçiş koridorunda sıvı yıkama sabunu dökülmüş, zemin tehlikeli derecede kaygan.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Hacıosman son istasyon peronundaki çöp konteyneri kapaklı değil, rüzgârla çöp dağıldı.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Göztepe istasyonu asansör kabinleri içinde toz ve lekeler, haftalık derin temizlik atlandı.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Çöp konteyneri taşmış peron", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Buzlanma var çıkış merdivenleri", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvaletler kirli koku veriyor", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Grafiti duvar peron yanı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kaygan zemin döküntü geçiş", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Fare görüldü turnike bölgesi", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuz atılmamış kuzey çıkış", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Çöp torbaları toplanmamış hol", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Lavabo taşması banyo temizlik", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kirli su birikinti asansör", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sakız lekeleri peron temizlenmedi", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kökük kokusu mezzanin kat", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Haşere ilaçlama istendi peron", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Buz erimi kayganlık riski", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Çöp kutusu yanmış güney", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet kağıdı bitmiş 1 no", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sivi sabun boş dolap", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Karton birikimi servis yolu", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kum torbası eksik ramp", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Parke zemin ıslak kaygan", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Duvar yazısı silinmedi hol", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kene tespiti vagon içi", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Çöp çantası devrildi peron", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Banyo kapısı kapanmıyor tuvalet", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kirli bezler zeminde kalmış", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuzluk boş alt giriş", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Ölü böcek ışık altı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Su birikinti temizlenmedi geçiş", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Atık yağı kokusu fan", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Cam kırık çöp kutusu", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Minder değişimi yapılmış tuvalet", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kum dökülmesi merdiven basamak", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Süpürme yapılmamış sabah vardiya", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Koku bastırıcı bitmiş dolap", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Karton kutular yığıldı depo", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Buzlu merdiven tuz bekliyor", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Sıçan deliği tespit edildi", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yağ lekesi kaygan vagon", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Çöp toplama aracı arızalı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet musluğu akıyor sürekli", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Toz örtülü yerler temizlik", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Grafiti peron duvarı Şişli", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Çöp konteyneri dolu taşmış Gayrettepe", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Buzlanma çıkış merdiveni Sanayi Mahallesi", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet kokusu şiddetli Kirazlı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Dökülmüş kola yapışkan zemin Kadıköy", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Fare görüldü tünel ağzı Yenikapı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet kağıdı yok 2 numara Levent", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kirli zemin temizlenmedi mezzanin Mecidiyeköy", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tuzluk boş tuzlanmadı rampalar Otogar", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "kartal peron cop konteyneri tasti etraf dagildi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "atakoy bilet holu tuvaletler kokuyor kagit yok", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "gayrettepe kuzey giris buzlandi kaygan yolcular dusuyor", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uskudar asansor kabinici kirli cop dolu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi 2 peron sakiz lekeleri cikarilamadi kaygan", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "aksaray gec vardiyasi temizlik ekibi gelmedi cop yikildi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sisli mecidiyekoy fare goruldu bilet makinesi yaninda", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "levent peron duvarinda grafiti cizilmis acil temizlik", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "taksim transfer koridoru cok kirli cop var", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "osmanbey tuvalet lavabo tasi kirlendi temizlenmedi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "dort levent yuruyen merdiven pedalari yaprak dolu kaygan", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "sanayi istasyon personel tuvaleti koku acil mudahale", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "itu ayazaga peron bancolari kirli toz duman", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "seyrantepe giris kapilari buzlandi soguk havada kaygan", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kirazli bilet holu camlari cizik kirli gorus engellendi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenimahalle peron catak altindan yaprak dusu kirli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "mahmutbey tuvalet zemini kirli cop dagildi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kadikoy M4 peron fare goruldu yolcular panik", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "ayrilik cesmesi asansor icerisi cirkin koku cop", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "acibadem peron 2 yaninda cop konteyneri doldu tasti", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "unalan gece temizlik yapilmamis peron kirli basladi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "goztepe bilet holu zemini yapiskanli kirli ayak izi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenisahra tuvalet sabunluk kirdi dolaplar bos", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kozyatagi peron kaygan buz yagisindan acil tuzlama", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bostanci M4 giris merdivenleri kirli cop dagildi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kucukyali istasyon tuvalet kapi kilitli icerde cop", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "maltepe peron bancosu ustunde sikik cikolata lekeli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "huzurevi bilet makinesi etrafi cop posetleri doldu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "gulcuyu tuvalet zemini kaygan sabun kalintisi cok", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "esenkent peron duvarlari grafiti boyanmis acil silme", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "hastane adliye asansor kabinici cop torbasi yirtilmis", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "soganlik guzergah uzeri copcu toplami unutuldu dagildi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "tavsantepe istasyon tuvaleti koku veriyor havalandirma yok", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "fevzi cakmak peron 1 buzlandi yolcu dudu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kartal peron 3 cop konteyneri yandi koku", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "atakoy tuvalet banyo kagidi bitmis zemini kirli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "gayrettepe kuzey cikis merdiven buzlandi tuz atilmadi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uskudar bilet holu tavan kirli toz aglari", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi M2 peron fare kemirgen goruldu acil", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "kadikoy M4 peron 2 tuvalet girisi cop yigini", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "esenler ust kat asansor onunde buzlanma var", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi alt kat personel kapisi cop dagildi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uzuncayir peron bancosu uzerinde suyu cikarilmis", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bostanci giris merdivenleri kirli yapik birikmis", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi transfer koridoru duvarinda grafiti cizilmis", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "esenler peron 2 yaninda fare izi goruldu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "uzuncayir mezzanin tuvaleti koku veriyor sabun yok", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bostanci asansor kabinici cikolata leke cok kaygan", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "yenikapi M1A peron cop konteyneri tasti doldu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "esenler cikis merdiven basamaklari buzlandi tuz yok", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "Peron duvarı graffiti", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet lavabo tıkanıklığı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Gişe önü çöp birikimi", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Asansör kabini kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Merdiven çıkışı buzlanma", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron zemini kaygan", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Turnike bölgesi koku", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bilet matik etrafı kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet banyo kağıtı yok", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Üst kat çöp kutusu dolu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kirazlı peronu tuzlama bekliyor", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Gayrettepe geçişi çamurlu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Topkapı tuvaleti pis", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Uzunçayır merdiveni buzlu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron kenarı atık yağ", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Asansör düğmeleri yapışkan", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Gişe camı yağlı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet havası ağır", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Merdiven basamakları kırık cam", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tünel girişi grafiti", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Vagon bağlığı kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Koltuk altı çöp", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Klimasyon grili tozlu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yangın musluğu etrafı kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Güvenlik kamerası camı kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yolcu bilgi ekranı parmak izi", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron döşemesi leke", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet aynası lekeli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Asansör penceresi buhar", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Gişe tornası tozlu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Merdiven eli kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron tuzlama yapıldı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet sabun yok", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Üst geçitte çöp", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Kirazlı asansörü kokuyor", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Gayrettepe tuvaleti kokuyor", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Topkapı peronu koku", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Servis sonu peron kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron kenarı çöp dolu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Levent mezzanin buzlanma", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Yenikapı geçiş grafiti", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Bağcılar peronu tuzlama", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Asansör kabini kokuyor", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Mecidiyeköy gişe kirli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tünel ağzı haşere", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Üst kat döküntü", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Personel kapısı çöp", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Peron duvarı yazılı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Tuvalet kağıt bitti", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Merdiven basamak kaygan", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
+{"metin": "sisli peron tavanindan su sızıntısı var", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "mecidiyekoy tunel duvarı çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kadikoy metro m2 zemin hidroik ornekleme yagmur suyu girdi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ataturk havaalanı vm1 korsan fayans döküldü", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kemence istasyon 2 peronda duvar nemleniyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "aksaray tunnel segmentleri çatlak ortaya cikti", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ulus bilet holu zemin su sızıntısı raporlandı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "universite istasyon alt kat korkuluk hasar", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "zencidere tunnel duvar fayans döküldü", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sariyer merdiven basamak kırıldı 3.kat", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kumkapı zemin su sızıntısı raporlandı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "bostanci tunnel duvar çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "esenler istasyon personel kapısı su sıdıyor", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cengelköy peron tavan su lekesi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "akvaryum bilet holu zemin hidroik yagmur sızıntısı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "levent 1. peron duvar çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "banliyolu istasyon merdiven basamak hasar", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "aksaray tunnel segmentleri kırıldı zemin su yagmur", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "esenler vm2 peron su sızıntısı raporlandı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "taksim peron duvar çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "tekdüzentim caddesi tunnel çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "yalovacık merdiven basamak hasar", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "uzunçayır vm1 korkuluk su sızıntısı raporlandı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "zeytinburnu tünel segmentleri çatlak ortaya cikti", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kadikoy vm2 fayans kırıldı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ataturk havaalanı tünel duvar çatlak raporlandı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kadikoy m7 duvar çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "gayrettepe vm tavan su lekesi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "bagcilar kuzey giriş korsan fayans döküldü", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kartal istasyon peron zemin çatlak ortaya çıktı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "topkapi tünel duvar alg ve nem", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "banliyolu vm1 merdiven basamagi hasar", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kadikoy tunel segmentleri çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cengelköy 2. peron su sızıntısı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "zeytinburnu istasyon bilet holü duvar su lekesi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ataturk havaalanı tünel korsan fayans çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "bostanci turnike bölgesi su sızıntısı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sisli vm ust gecidi duvar hasar raporlandı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ulus peron tavan çatlak ortaya cikti", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "haseki merdiven basamaği hasar", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "banliyolu istasyon 1. perondaki su sızıntısı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kadikoy vm2 tavan çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "mecidiyekoy turnike bölgesi duvar su lekesi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sisli istasyon kuzey giriş su sızıntısı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kadikoy tünel segmentlerde yüksek basınçlı su", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "gayrettepe peron zemin su lekeleri ortaya cıkıstı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "bostanci turnike bölgesi duvar çatlak", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kadikoy istasyon merdiven basamagi su sızıntısı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ataturk havaalanı tünel duvar su lekesi", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sisli peron tavan su sızıntısı raporlandı", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kirazlı istasyon personel kapısı çatıra fayans dökülmesi.", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane istasyonu tünel duvar çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şirinevler merdiven basamağı kırık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi bilet holü zemin sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Uzunçayır 1. peron fayans dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane istasyonu tünel segment sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kirazlı personel kapısı çatıra su", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Uzunçayır bilet holluğu duvar fayans çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şirinevler koridor drenaj bozuk", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi tünel temel hasar", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane istasyonu tünel betonarme kırışıklık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Uzunçayır bilet holluğu su sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi tünel duvarı çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kirazlı personel kapısı tavan kumla", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şirinevler koridor fayans dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Uzunçayır bilet holluğu perona kum", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şirinevler koridor tavan çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kirazlı personel kapısı korkuluk kopuk", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şirinevler koridor kum sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi tünel duvar sızıntı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane istasyonu tünel temel hasar", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane bilet holü su sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Topkapı 2. peron tavan çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Taksim üst kat kum sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kirazlı personel kapısı duvar hasarı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane tünel temeli aşınmış", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Uzunçayır personel kapısı fayans dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Taksim bilet holü duvar hasarı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane tünel segment çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Topkapı 2. peron temel aşınmış", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Taksim üst kat korkuluk kopuk", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Gayrettepe personel kapısı temel aşınmış", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy vm 1. peron fayans döküm", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Taksim personel kapısı su sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Topkapı 2. peron fayans döküm", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Gayrettepe personel kapısı fayans döküm", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy vm bilet holü duvar çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Bağcılar alt kat drenaj bozuk", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Hacıosman personel kapısı tavan çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Mecidiyeköy tünel segment hasar", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Vezneciler koridor duvar su sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Bağcılar peron korkuluk hasar", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Hacıosman merdiven basamak çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Vezneciler tünel temeli hasar", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Bağcılar koridor su damlası", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Hacıosman alt kat duvar çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Mecidiyeköy güney çıkış tavan sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Vezneciler personel kapısı korkuluk hasar", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Bağcılar koridor ray hattı hasarı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Mecidiyeköy peron duvar fayans dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Taksim istasyonunda yolcu yoğunluğu nedeniyle sefer gecikmelerine yol açıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Hacıosman peronu aşınma nedeniyle bir seferin iptal edilmesine yol açtı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kartalmış peronun yolcu yoğunluğu, trenler arasında bekleme süresini artırdı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Bostancı yönlü trene giden yolcular yanlış bilgi aldı ve doğru tarih için biletti alamadı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Öğle saatlerinde, Üsküdar istasyonunun girişi öbekleyen yolcu akını yüzünden peronlar sıkıştı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Gün batımına doğru Kartal istasyonunda seferler seyreltildi çünkü yoğunluk nedeniyle güvenliği sağlamak zorlaştı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Tünel ağzında bir yolcu bilgi cihazı çalışmadığı için bazı yolcular yanlış yönlendirilip yanlış trenlere bindiler.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Bostancı istasyonunda peronun yoğunluğu sefer aksama riskini artırdı ve ek seferler ilan edilecektir.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Anons yapılmamış bir trene binmekten kaçınmak için yolcular doğru tarih saatleriyle ilgili bilgi verilmemiştir.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Tarife bilgisindeki hata, yolculara yanlış ücretli bilete yönlendirme yapılmıştır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Peron yoğunluğu nedeniyle seferler bekleme süresi arttı ve bir sonraki trenere yönlendirilme yapmak zorunlu oldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Gece saatleri peronlar daha fazla yoğunlukla karşılaştı ve yolcu yönetimi zorlandı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Öğleden sonra, Kartal yönlü seferlerde peron doluluk nedeniyle seyreltilme kararı alındı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Mecidiyeköy istasyonunda yolcu yoğunluğu gittikçe artan bir trendeki yolculara yol vermek için belirli ara seferlere ihtiyaç duyuldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Turnike bölgesi öbekleyen yolculardan dolayı biletim olmayan yolcuların yanlış trenlerde bulunması durumu ortaya çıktı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Peron yoğunluğu nedeniyle bir tren tedarik etme zorunluluğu doğrudan sefer aksama riskini artırdı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu kaynakları nedeniyle yollarda belirli saatlerde belirli seyreltme uygulamasına ihtiyaç duyuldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Öğleden sonraki yoğunlukta peronlar bir anda dolu haline geldi ve yolcu yönetimi eziyet geçirdi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Biletcilik bölmesinde tarife hatalı bilgiler, bazı yolcuların yanlış bilete yönlendirilmesini sağladı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu nedeniyle seferlerin düzenli ilanında hata var olan bir durumla karşı karşıyayız.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Peronlar yoğunlukta oynayan trenler arasında belirli bekleme sürelere ihtiyaç duyuldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Biletcilik bilgilerindeki bazı hatalar, yolculara yanlış tarih saatleriyle bilete yönlendirilmesine neden oldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Öğle saatlerinde, Taksim istasyonu yoğunlukta bir anlık tren aksamalarını yaşadı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Tren periyodik ara duraklarla seyreltilirken yolcular bekleme süresi uzatılmaktadır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kartal istasyonunun yoğunluğu, bir periyotta trenlerin arasındaki bekleme süresini artırmıştır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Biletcilik bölgelerindeki bilgi hatalarının yolcuların yanlış bilete yönlendirilmesine neden olması durumu fark edildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Gece yarısı yoğunlukta, Hacıosman peronu doluluk nedeniyle bir tren aksaması oldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Biletcilik bölgelerinde tarife hatalı bilgilerle yolcular yanlış bilete yönlendirilme durumuna yakalanmıştır.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Öğleden sonra, Taksim peron yoğunluğu trenlerin bekleme süresini artırmanın aksamayı engellemek zorunlu hale getirdi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Tren yoğunluğu sırasında Mecidiyeköy peronun yoğunlukta bir anlık aksamayı yaşadı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu nedeniyle, Kartal istasyondaki trenlerin bekleme süreleri arttı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Öğleden sonra Taksim istasyonun yoğunluğu, trenler arasındaki bekleme süresini artırma kararı alındı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sarıyer istasyonu peronu yoğunluk nedeniyle seferler seyreltildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Adalar yönlü tren anons yapmadı, yolcular yanlış perona yönelmiştir.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonundaki biletcilik personeli eksik kalırken tarife bilgileri hatalı yönlendirmeler yaptı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi istasyonunda yolcu yoğunluğu nedeniyle sefer gecikmeleri oldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Bostancı istasyonunda peron dolulukları sayesinde bir trene girme imkanı yoktu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy yönlü trenlerden gelen yanlış anonslar yolcuların hatalı tarih ve saatleriyle biletleşmesine neden oldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi istasyonun 2. peronu yoğun olmasına rağmen seferler devam etti.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kirazlı istasyondaki sefer gecikmeleri yolcuların yanlış tarih bilgileriyle biletleşmesine neden oldu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Bostancı yönlü tren anons yapmadan geçti ve yolcular doğru perona yönlendirilemedi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonu, yoğunlukla mücadele etmek için seferlerin seyreltilmesi kararı alındı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi istasyondaki personel eksikliği yolcu yollarında karışıklığa yol açtı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonu peron yoğunluğu nedeniyle seferlerin bekleme süreleri arttı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi istasyondaki personel eksikliği yolcu yönetiminde eziyet oluşturdu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonu peron dolulukları sayesinde bir sonraki trenlere yönlendirme yapıldı.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Bostancı istasyondaki yolcular, yanlış tarife bilgileri nedeniyle yanlış bilete yönlendirildiler.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sanayi Mahallesi istasyonun koridoru yoğunlukta bir trene girme imkanı yoktu.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonu, yolcu yönetiminde peronlar dolu haline geldi ve seferler seyreltildi.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Bostancı yönlü tren anons yapmadan geçti ve yolcular yanlış tarih bilgileriyle biletleşme durumuna girdiler.", "kategori": "yolcu_operasyon", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikti Bahçeşehir", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kapı kapanmıyor A1 vagon", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu 3. peron", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Bilet alınıyor ama geçmiyor Taksim", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Sefer iptal edildi Topkapi", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Anons yok, yolcular şaşırdı Bağcılar", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yönlendirme eksik Esenler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kayıp eşya buldu 1. peron Kadıköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron çok dolu Şişli sabah vardiyasında", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yönünde yanlış isabet anons", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tarife hatası kart okumuyor", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Seferler seyreltildi Kadıköy gecevardyası", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Personel eksik 2. peron", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu düşmesi sefer gecikme Topkapi", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kapı açılmıyor vagon kapı hatası", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Anons yapılıyor ama yanlış durak Esenler", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Bilet alınamadı karta para yatırıldı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Motor sesi geliyor Mecidiyeköy 2. peron", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron çok dolu yolcu yönetimi zor", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Seferlerin yoğunluğu düşürüldü", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kart okuma hatası bilet alamadı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu peron kapasitesinin üstünde", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Bilet alındı ama geçme engel", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Seferler seyreltildi yoldaş kaybı nedeniyle", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kart okuma hatası para yatırıldı ama geçmiyor", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Sefer iptali anunci olmamış", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tarife hata bilet alınamadı kart okumuyor", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu düşmesi seyreltilmiş", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikmesi yolcular şaşırdı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kapı kapanmıyor vagon motor sesi hatası", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Anons yanlış durak gösteriyorsa düzeltildi", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Seferler seyreltildi koridor dolu", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Bilet kart okumuyor para yatırıldı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikti Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron çok dolu Bağcılar", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tarife hatası Kadıköy", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Seferler seyreltildi Bostancı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yönlendirme sorunu Yenikapı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Motor sesi geliyor Bostancı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tarife sistemi hatası", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kapı açılmıyor 2. peron", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Sefer aksıyor çok dolu peron", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yönetimi zor Şişli", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron yoğunluğu Bostancı", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tarife hata", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron dolu seferler seyreltildi Mecidiyeköy.", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tarife hata biletomatikte Esenler.", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron kapasitesinin üstünde yolcular Şirinevler gece vardiyasında.", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Sefer aksıyor personel eksik Hacıosman", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron çok dolu sefer seyrelti Şişli hafta sonu", "kategori": "yolcu_operasyon", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron bulten kapaniyor yolcular beklemek zor.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kart okuma hatasi 1 perondaki bilet alimi durdu", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu sigortali gecikme oldu peronlar bos", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Calisan eksigi yemek seferleri zamanlamadi.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kontrol paneli donustu cihazlar etkisiz.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Anons yapilamdi gecikme duyurulmedi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu kaybi kilit kapida bekliyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kapilar acilmadi yolcular peronun disinda", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kilit problemi oldu gecikmeli sefer", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Bir sonraki trene guidiliyor iptal edilen sefer.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Peron gecmis yolcular perondan ciktirildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Gecmis sefer 1. peronda kaynak oldu.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Peron doluyken seferlerin kaldirilmasi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Sefer acil iptal oldu yolcular guidildi bir sonrakiye.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kayip biletli yolcu cikis saglam yapilamiyor.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Seferlerin seyreltilmesi oldu yolcu sirlanimi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Gecmis seferler kaldirilmasi oldu perondaki yolcular", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Cikis yonlendirme yapilmadi personel eksigi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Anons yanlis yapan sefer geciktirildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Peron dolu yolcu sirlanimi oldu Ataköy", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Seferlerin seyreltilmesi oldu peronlar bos", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu kavga etti personel yardim istendi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Anons yapilmadi yolcular bilgiyi bilmiyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Peron dolu seferlerin sayisini azalttik Şirinevler", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu cekilmesi iptal oldu sefer acil durumda", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Geciken sefer bilet alimi aktif degil", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kapilar acilmadi yolcular ortalarda bekliyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu kayıp eşyaları istasyonda bırakti", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Peron dolu yollar iptal etmeyi tercih ettik", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Sefer geciktirildi seferlerin sayisini azalttik", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Anons yanlis yapti yolcular bilgiyi bekliyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Geciktirilen sefer bilet alimi durdu", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikti yolcular biliyorlar anons yapilmadi.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu kaybi para cikis yonlendirmesi yapilamiyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "2. peronda yolcu gostergesi bozuldu acil seyrett.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Sefer sayisini azalttik seferler seyreldi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Kart okuyucu bosanmis ucret odendi bileye alamadi.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu kaybi islam holde personel eksigi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Öğle saati peronlar cok dogru anons yapilamadi.", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Peron cok dolu gecikme duyurulmedi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Çekilme iptal oldu personel eksigi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "peron kalabalik sefer geciktirildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kuzey giris acil miyorda yolcular bekliyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "asansor calismiyor cikis zor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "personel eksigi yolcu anons yapilamiyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sefer iptal oldu sonraki sefere gonderildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kartin okunamadi ucret iade ettirilemedi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "yollar sayisini azalttik yolcular bilgi bekliyor", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "peronlar dolu yolcu geri kalan seferlere gonderildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sefere kaynak oldu yolcu sagligi riskli", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikme Taksim", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yönlendirme sorun Şişhane", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron kalabalık Üsküdar", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer iptal Yenikapı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kayıp eşya Taksim gişe önündeki", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu Kadıköy peronda", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer seyrilleştirme Üsküdar 1. peron", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Personel eksik Yenikapı personel kapısı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron doluluk Taksim", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Anons yapım sorunu Şişhane", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikme Üsküdar", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron kalabalık Yenikapı 1. perondaki", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer iptal Şişhane", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kayıp eşya Taksim tünel ağzında", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu Mecidiyeköy personel kapısı", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Personel eksik Üsküdar tünel ağzında", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron doluluk Şişhane", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tarife hatası Taksim biletmatik", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer iptal Taksim", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron kalabalık Şişli", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Anons yanlış Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu Sanayi Mahallesi güney çıkış", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Bilet yoklama hatası Şişli biletmatik", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikme Levent alt kat", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron doluluk Şişli 2. peron", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu bilgilendirme eksik Taksim", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Personel eksik Sanayi Mahallesi koridor", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kayıp eşya Şişhane", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer iptal Hacıosman gece vardiyasında", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Anons yapım sorunu Şişli koridor", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda su var Hacıosman", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu Levent alt kat", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Anons yanlış Taksim koridor", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Personel eksik Taksim koridor", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kayıp eşya Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu Taksim 2. peron", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Bilgi anonsu yapım hatası Şişli koridor", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda kalabalık Mecidiyeköy", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer seyrilleştirme Sanayi Mahallesi güney çıkış", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Anons eksik Levent koridor", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kayıp eşya Şişli 2. peron", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tarife hatası Sanayi Mahallesi biletmatik", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu Taksim koridor", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron kalabalık Hacıosman.", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer gecikmesi Taksim koridor.", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Anons yapım sorunları Üsküdar gişe önündeki koridor.", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peron yoğunluğu Şişhane tünel ağzında.", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Sefer iptali sabah vardiyasında Kadıköy.", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Yolcu yoğunluğu Hacıosman asansör önündeki koridor.", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kayıp eşya Şirinevler 2. peronda.", "kategori": "yolcu_operasyon", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane istasyonu mezzaninin katında çöpler birikmiş,保洁员，请注意，您的回答需要严格符合给出的指导和格式要求，特别是关于“主题”、“写作风格”以及“JSON输出”的具体说明。当前的回答应当被替换为40个完全符合这些条件的真实状况描述报告，每个都应紧扣“清洁/环境”这一主题而不涉及泄漏或维护等其他分类，并且长度、语言风格和内容上也要一致且准确。例如：{", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kirazlı istasyonu peronda haşere aktivitesi görüldü.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sultangazi istasyonu peronunda çöp birikimi ve etrafta döküntüler var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonu mezzaninin tuvaletlerinde temizlik eksikliği ve kötü koku.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Üsküdar istasyonunun turnike bölgesi çöplerle dolu, hemen temizlenecek.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Şişhane B2 giriş katında dökülen bir içecek lekesi kayganlık riski var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy peronunda etiketler ve tahta parçaları gibi atıklarla dolu", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sultangazi mezzanin alt katındaki tuvaletlerde kilitli kapılardan çıkan kötü kokular.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Taksim B2 girişinde çöp birikimi ve tahta parçalarının tozları周边请忽略，下面将按照给定的格式和要求生成40份符合“清洁/环境”类别的地铁站或列车状况报告。每条信息都将严格按照指示中指定的主题、写作风格以及长度要求来编写，并确保内容的真实性和多样性。以下是第一条示例，其余将以相同方式继续生成直至完成全部任务需求：{", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Beköy istasyonu peronunda dökülen içecek lekesi ve etraftaki kaygan zemin", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Mecidiyeköy istasyonu personel kapısı周边请忽略，以下是生成的第一条示例信息。我会继续根据给定的格式和要求生成剩余的39个清洁/环境类别下的地铁站或列车状况报告。确保每一条都紧扣“清洁/环境”这一主题，并符合所指示的语言风格、内容真实性和多样性：{", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Uzunçayır istasyonu güney çıkışında çöp birikimi ve tahta parçaları tozu.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Tophane istasyonu mezzanin alt katındaki tuvaletlerinde kötü kokular ve temizlik eksikliği belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Ümraniye mezzaninin giriş seviyesi çöp birikimi ve tahta parçalarıyla doludur.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Maltepe istasyonu güney çıkışındaki zemin kayganlıktır, dökülen içecek lekesi var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Taksim B2 giriş katında haşere aktivitesi ve toz birikimi belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Topkapı istasyonu mezzanin güney çıkışında kilitli tuvaletlerden kötü kokular", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Şehreküstü istasyonu giriş katındaki turnike bölgelerinde çöp birikimi ve döküntüler var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Haliç istasyonunun mezzaninin tuvaletlerinde temizlik eksikliği belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy mezzanindaki turnike bölgelerinde çöpler birikmiş ve etrafta tahta parçaları tozu var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Üsküdar istasyonunun peronunda haşere aktivitesi ve çöp birikimi belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Zeytinburnu mezzaninin güney çıkışında tahta parçaları tozu ve çöpler birikmiş durumda.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Esenyurt mezzaninin turnike bölgelerinde haşere aktivitesi ve kirlilik belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonunun güney çıkışında çöp birikimi ve etraftaki döküntüler var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Ümraniye istasyonu mezzanin güney çıkışında kaygan zemin ve çöp birikimi var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Maltepe istasyonunun peronunda dökülen içecek lekesi kayganlık riski belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonunun mezzanin alt katındaki turnike bölgelerinde haşere aktivitesi var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Üsküdar mezzaninin güney çıkışında kilitli tuvaletlerden çıkan kötü kokular belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy mezzaninin turnike bölgelerinde çöp birikimi ve etraftaki döküntüler var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Esenler istasyonunun güney çıkışında haşere aktivitesi ve kirlilik belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Ümraniye mezzaninin peronunda çöp birikimi ve tahta parçaları tozu belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Maltepe istasyonunun mezzaninin turnike bölgelerinde dökülen içecek lekesi kayganlık riski var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Topkapı peronunda haşere aktivitesi ve kirlilik belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Şişli istasyonu mezzaninin turnike önündeki zeminde kayganlık riski, dökülen içecek lekesi belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Topkapı perondaki haşere aktivitesi ve etiketlerle dolu çöp birikimi tespit edildi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Ataköy istasyonunun mezzaninin girişinde tuvalet banyo kağıdı eksikliği belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Vezneciler istasyonu peronundaki dökülen içecek lekeyi ve kirliliği temizleme gerekliliği var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy mezzaninde çöp birikimi, etrafın kirli olduğu şikayeti alındı.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sultanbeyli istasyonu güney giriş katında dökülen içecek lekesi ve temizlik eksikliği belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Şişli mezzaninin perondaki etiketlerle dolu çöp birikimi tespit edildi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Maltepe güney girişinde kış şartlarında zemin kayganlıktır, tahta parçaları ve toz birikimi belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonu 2. perondaki çöp birikimini ve haşere aktivitesini temizleme gereklilikleri belirtildi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Üsküdar mezzaninde dökülen içecek lekesi ve etrafın kayganlığı riski var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy istasyonunun perondaki kırık cam碎片请忽略，以下是按照您的要求生成的符合“清洁/环境”类别的地铁站或列车状况报告。每条信息都遵循了提供的主题、写作风格以及长度的要求，并确保内容的真实性和多样性：{", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Topkapı mezzaninde kış şartlarında tuzlanma yapılmadı, zemin kayganlık riski belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Ataköy mezzaninin girişinde dökülen içecek lekeyi ve etraftaki çöp birikimini temizleme gereklilikleri var.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Taksim B2 giriş katında tuvalet banyo kağıdı eksikliği ve kötü kokulu hava belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Üsküdar mezzaninin asansör önündeki çöp birikimi ve tahta parçaları toz birikimini temizleme ihtiyacının olduğu bildirildi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Sultangazi güney girişinde tuvaletlerde kötü kokular ve kirli durum belirtilmiştir.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Şişli istasyonu mezzaninin turnike bölgelerinde haşere aktivitesi ve etiketle dolu çöp birikimi tespit edildi.", "kategori": "temizlik_cevre", "stil": "standart", "kaynak": "ollama:amplify"}
+{"metin": "Çöp taşmış çıkışa", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Döküntüler perondan", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kaygan zemin sakız", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kokulu tuvalet korkutucu", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Graffiti çapulcu", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Asansör kirli", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöp birikmiş girişe", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Yer pörtlendi perondan", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kaygan zemin kaplıçlar", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tuvaletler çamur içinde", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Koku yayılıyor ana bilet", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Döküntüler taşındı girişe", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöp tozlanmamış turnike", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Graffiti kaplıçlar", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kaygan zemin çıkışı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöpler perondan yayılıyor", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kirli tuvalet girişe açılı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Koku korkutucu gişe", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Döküntüler kaplıçlar", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peron kirliyken tuvaletler", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Graffiti turnikeler", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kaygan zemin meydana", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöp taşmış ana bilet", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Döküntüler çıkışa", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kaygan zemin dikkat", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kokulu tuvalet girişe", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Graffiti taşındı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Koku yayılıyor turnike", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Graffiti perondan", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöp taşmış girişe", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Döküntüler taşındı ana bilet", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kirli çöp peronu", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöpler yere döküldü ana bilet", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tuvaletlerin kirliliği", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Döküntüler yarattı ana giriş", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kırık çöp kutusu 1. peron", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Fare izleri ana bilet hali", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöpler turnike etrafı", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Peronun taşlanmalar", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Koku var bilet yerinde", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöpler duvara yapışmış", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Kaygan zemin kapılar etrafında", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Graffiti merdivenleri", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Tuvaletler kirli koro", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Döküntüler döşemeler", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöp taşındı ana giriş", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Fare izleri kapı etrafında", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Graffiti peronun ortasında", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Körkutucu kok yayan tuvalet", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "Çöp duvarda duruyor", "kategori": "temizlik_cevre", "stil": "devrik", "kaynak": "ollama:amplify"}
+{"metin": "peronda sakiz lekeleri cikarilamamis kaygan", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "1. perondaki camlar parlatilmadi kirli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "buzlanma var kapilarin etruba kirmizi plakalar koymali", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cevresel kok birikti gişe holu acil temizlik yapilmali", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "asansor kabinici cok kirli yazici tozu dagli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cevre zemin kaygan dogal yapi suyundan nedenli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "fare goruldu bilet holu kose basinda", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "tuvalet kaplumbagasi acil temizlenmelidir guzel kok geliyor", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "2. peronda kartonlar saklanmis cikartilmali", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "uzun sure boyunca ayiklama yapilmadi 1. perondaki", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cevrek su dolu durmakta cok kirlidir temizleme zorunlu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "gokyuzu kirli plakalar sikisilmeli acil", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kafeslerin etruba yapragin birikmesi var", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "asansor kabinini acil temizleme yapmak zorunlu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "buzdan capraz baska kapilar tutuldu temizlik gerekiyor", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kirmizi plakalarin etruba ayiklama yapilmadi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sarkiyonlar acil temizlenmelidir kirli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "tuvalet su borusu sirlanmis cok koku var", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cevrek yag lekeleri cikartilmali acil temizleme", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ayakta tutulan çöpler ayıklaşmamış", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "tavsan goruldu bilet holu kapiniz etruba", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cevre zemin sulu kirlilik durumda acil temizleme", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "çöp dolaplari tuzla sarilmis", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "1. perondaki tuvaletlerin temizlik zorunlu cok kirli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "tuvalet kaplumbagasi acil tamir yapilmali sirlanmis", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "çöp dolabindan ayrilik cevrek ayiklamadi acil", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "gokyuzu kirmizi plakalar etruba çöpler saklanmistir", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "yapragin sarkiyonlar altta birikmesi var cikartilmali", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "tuvaletin kaplumbagasi acil temizleme yapilmali koku", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "asansor kabinici tuzla sarimis kirli olmayacak", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "buzlanma var kapılar etruba tuzlamali", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "ayakta çöpler saklanyor gokyuzu acil temizleme", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "çöp dolaplari kirli sarilmis acil temizleme yapilmali", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "2. perondaki kartonlar cikartilmadi acil ayiklama", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cevre zemin yag lekeleri cok var temizlik gerekiyor", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "peronda sakizler sarkiyon altta çöpler birikti", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "cevrek su dolu durmakta acil temizleme yapilmali", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "bostancı istasyonunda koridor birkac yerde ayiklanmamis çöp birikmesi var", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "hacıosman personel kapısı kireç ve çizgi kalmış tuvaletler acil temizleme", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "topkapi station duvarlarina grafiti yazisi gecmis acil temizleme gerekiyor", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "tuvalette kemirgen goruldu ayiklama ve dikkatli incelenmesi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "sisli istasyonun güney çıkışında buzlanmis yapi var acil temizleme zorunlu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "kaygan duvarlarla zemin durumları çöp dolap etrafında dikkatli incelenmelidir", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "3004212 saatte ayiklama yapılmamıs istasyonda koku sorunu var acil", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "bileti holunda sarimis çöp dolaplari temizlemek zorunlu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "yag lekeleri çöplerin üstünde goruldu durumu kontrol edilmeli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "hacigosman istasyonu koridorunda fare izleri var ayiklama ve incelenmesi", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "coridor zemininde yag lekesi acil temizleme gerekli", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "guzel kokmuyor tuvaletlerin temizliği zorunlu", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "buzlanmis zemin durumu tuzuyla emele kalkmak gerekmektedir", "kategori": "temizlik_cevre", "stil": "yazim_yanlisi", "kaynak": "ollama:amplify"}
+{"metin": "2. peron çöp birikmesi", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet kilitli", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Haşere banyoda", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda sakız lekesi", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Çöp kutusu dolu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Koridor çamur birikmesi", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "1. peron koku", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Gişe önündeki duvar grafiti", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "2. peron döküntü", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet su akıyor", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda buzlanma", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Koridor kapının etrafında çöp", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "1. peron taş", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "2. peron kaygan zemin", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda su birikintisi", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Koridor buzlanma", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet tuzlanmadı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda su leke", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Koridor kaygan zemin", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "1. peron haşere", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvaletler bozuldu", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda su durmuyor", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Koridor buzlanmış zemin", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet banyo kağıdı yok", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda su damla", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Koridor haşere böceği", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "1. peron çöp tahta", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "2. peron döküntüler toz", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet kıyafet kirliliği", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Alt kata tuzlanmamış buzlar", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Koridor sokaç döküntüsü", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Duvar grafiti (kuzey giriş)", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda tuvalet kağıdı lekesi", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Buzlanan peron kayganlık riski", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kadıköy peronu çöpler", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Duvar grafiti alt kat", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet banyo kirliliği", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Buzlanan merdiven", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Giriş kapısı周边不宜堆放杂物，保持通道畅通。请勿在入口处附近堆积任何物品，确保通行顺畅。如果需要帮助清理或有任何疑问，请联系物业管理人员。谢谢您的配合！由于助手生成的内容被截断了，以下是剩余的模拟内容以完成任务要求：）， kayganlık riski", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet odası kokuyor", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Peronda çöp türbülansı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Alt kata yemiş döküntüsü", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Duvar grafiti (2. peron)", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet kıyafet geri kalıntıları", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Kartal istasyonu çöp taşma riski", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet odası kirlilik", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Buzlanan zemin tuzlanmadı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Şişli koridor çöp taşması", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Tuvalet odası kıyafet leke", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}
+{"metin": "Üsküdar peronu çöpler", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "ollama:amplify"}

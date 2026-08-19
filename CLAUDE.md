@@ -40,12 +40,13 @@ ariza-tespit-siniflandirici/
 │   │   ├── gold_v3_groq_fixed_backup.jsonl
 │   │   └── gold_v4_pre_guvenlik_backup.jsonl  # guvenlik yeniden uretiminden once
 │   ├── raw/
-│   │   └── amplified.jsonl         # Adim 2b ciktisi, 1586 kayit
+│   │   ├── amplified.jsonl         # Adim 2b ciktisi, 1600 kayit (%100 Nemotron)
+│   │   └── amplified_ollama_backup.jsonl  # degisim oncesi 1586 kayit (arsiv/kiyas)
 │   └── processed/                  # Adim 3 ciktisi
-│       ├── clean.csv               # 1586 (bolunmemis, temizlenmis havuz)
-│       ├── train.csv               # 1269
-│       ├── val.csv                 #  159
-│       ├── test.csv                #  158
+│       ├── clean.csv               # 1600 (bolunmemis, temizlenmis havuz)
+│       ├── train.csv               # 1280
+│       ├── val.csv                 #  160
+│       ├── test.csv                #  160
 │       └── gold_test.csv           #   80  (gold.jsonl'den, egitime GIRMEZ)
 ├── model/                          # BOS -- egitilmis model buraya (Adim 4)
 ├── src/
@@ -83,7 +84,7 @@ kategori/stil/hiperparametre tanımı başka bir dosyada tekrarlanmaz.
 belirtir. Arızanın nesnesi değil, sorumlusu belirleyicidir.**
 
 | key | display | kapsam (özet) |
-|---|---|---|
+| --- | --- | --- |
 | `arac_tren` | Araç / Tren | Trenin üzerindeki her şey: vagon kapısı, fren, klima, çer/motor, kabin ekipmanı, tekerlek, koltuk, vagon içi aydınlatma/anons, makinist kabini |
 | `istasyon_mekanik` | İstasyon Mekanik | Yürüyen merdiven, asansör, peron kapısı (PSD), turnikenin **fiziksel** arızası (kol dönmüyor, kapak takılı, gövde hasarlı), otomatik giriş kapıları, bariyerler |
 | `elektrik_enerji` | Elektrik / Enerji | İstasyon aydınlatması, elektrik kesintisi, jeneratör, UPS, elektrik panosu, katener hattı, üçüncü ray, trafo, kablo arızası, sigorta |
@@ -95,6 +96,7 @@ belirtir. Arızanın nesnesi değil, sorumlusu belirleyicidir.**
 
 **Kritik sınır örneği (turnike):** aynı ekipman üç farklı kategoriye
 düşebilir, kural nettir:
+
 - Fiziksel arıza (kol dönmüyor, kapak kırık) → `istasyon_mekanik`
 - Kart okumama / yazılım hatası → `yazilim_sistem`
 - Atlama / yetkisiz geçiş → `guvenlik_emniyet`
@@ -108,7 +110,7 @@ Gerçek personel her zaman düzgün yazmaz. Her kategori için 4 stilde örnek
 üretiliyor:
 
 | stil | uzunluk | açıklama |
-|---|---|---|
+| --- | --- | --- |
 | `standart` | 8-18 kelime | Düzgün, kurallı tam cümle |
 | `devrik` | 4-9 kelime | Acele yazılmış, kısa, eksiltili (özne/yüklem sırası bozuk olabilir) |
 | `yazim_yanlisi` | 5-14 kelime | Türkçe karakter eksikliği, klavye hatası |
@@ -123,13 +125,14 @@ varyasyon olarak kabul edildi (bkz. review.py bölümü).
 ### Hedef Veri Hacmi — hedef vs GERÇEKLEŞEN
 
 | set | hedef | gerçekleşen | not |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | seed | 12/kat × 8 = 96 | **93** | elle triyajda 3 kayıt silindi |
 | gold | 10/kat × 8 = 80 | **80** | tam, 8 kategori × 10 |
-| çoğaltma | 200/kat × 8 = 1600 | **1586** | `altyapi_insaat` 186 (aşağıda) |
+| çoğaltma | 200/kat × 8 = 1600 | **1600** | tam; %100 Nemotron (19 Ağu değişimi) |
 
-Çoğaltma sonrası bölme (Adım 3): train **1269** / val **159** / test **158**
-(%80/%10/%10), ayrıca gold_test **80** (eğitime hiç girmez).
+Çoğaltma sonrası bölme (Adım 3): train **1280** / val **160** / test **160**
+(%80/%10/%10 — her kategori tam 160/20/20), ayrıca gold_test **80** (eğitime
+hiç girmez).
 
 (Not: orijinal PDF taslağında 70/kategori × 6 kategori = 420 yazıyordu.
 Kategori sayısı 6'dan 8'e, hedef hacim 70'ten 200'e çıkarıldı — rapor
@@ -171,7 +174,7 @@ Seed/gold üretimi için 4 farklı sağlayıcı denendi, sonuçlar `review.py` i
 ölçüldü. Bu, projenin metodoloji bölümüne güçlü bir katkı:
 
 | Deneme | Sağlayıcı/Model | Seed işaretli | Gold işaretli | Not |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | v1 | Gemini (çeşitli modeller) | %18 | %32 | Kota/model erişim sorunları yüzünden terk edildi |
 | v2 | Groq / llama-3.3-70b-versatile | %91 | %81 | Config'teki Türkçe metin ASCII'ydi (kök sebep) |
 | v3 | Groq / llama-3.3-70b-versatile (Türkçe düzeltildi) | %72 | %69 | Prompt dili düzelince iyileşti ama model hâlâ çok-kısıtlı talimatlara uyamadı |
@@ -206,7 +209,7 @@ scripti tam da bunun için yazıldı — tahmin etmek yerine anlık sorgula.
 prompt'la, aynı hedefle** (İstasyon Mekanik, 40 kayıt) ölçüldü:
 
 | | Ollama qwen2.5:14b | OpenRouter Nemotron 3 Ultra |
-|---|---|---|
+| --- | --- | --- |
 | gereken çağrı | 7 | **4** |
 | süre | 6:45 | **2:11** |
 | `review.py` işaretli | **%18** | **%5** |
@@ -217,7 +220,7 @@ prompt'la, aynı hedefle** (İstasyon Mekanik, 40 kayıt) ölçüldü:
 **Nihai 1586 kayıt üzerinde de aynı fark doğrulandı:**
 
 | kaynak | kayıt | işaretli |
-|---|---|---|
+| --- | --- | --- |
 | openrouter (Nemotron) | 1086 | **%4.5** |
 | ollama (qwen2.5:14b) | 500 | **%15.8** |
 
@@ -237,9 +240,49 @@ script otomatik Ollama'ya geçti ve durmadan devam etti. Ayrıca bir parti
 bozuk JSON döndürdüğünde tüm çalıştırmayı çökertmek yerine o partiyi atlayıp
 devam etti (kalıcı/geçici hata ayrımı — Genel İlke 5).
 
+### Ollama verisinin Nemotron'la değiştirilmesi (19 Ağu 2026)
+
+Kota bitince 500 kayıt (Yolcu/Operasyon ve Temizlik/Çevre'nin TAMAMI,
+Altyapı/İnşaat'ın yarısı) qwen2.5:14b'den gelmişti. Sorun oranın kendisi değil
+(%31), **dağılımın kategori bazında sistematik olması**: rastgele serpilse
+zararsızdı, ama iki sınıf tamamen zayıf modelden gelince o sınıfların F1'i
+gerçeği yansıtmaz ve confusion matrix yanıltır. Kota yenilenince değiştirildi.
+
+`generate_data.py --replace-source ollama` ile yapıldı (aşağıda). Kategoriyi
+tümden sıfırlamak yerine sadece hedef kaynağı silmek şart oldu: Altyapı/İnşaat
+karışıktı (86 Nemotron + 100 Ollama), `--force` olsaydı 86 iyi kayıt da giderdi.
+
+**`--provider openrouter` kullanıldı, hibrit DEĞİL.** Sebep: hibrit modda kota
+yarıda bitse script sessizce Ollama'ya düşer ve tam da temizlenen veriyi geri
+koyardı. Tek sağlayıcı denince kota bitiminde temiz şekilde durur.
+
+Sonuç — 22 çağrı, işaretli oran kategori bazında:
+
+| kategori | önce | sonra |
+| --- | --- | --- |
+| Altyapı / İnşaat | 186 kayıt, %6.5 | **200 kayıt, %0.5** |
+| Yolcu / Operasyon | 200 kayıt, %7.5 | **200 kayıt, %6.0** |
+| Temizlik / Çevre | 200 kayıt, %26.5 | **200 kayıt, %0.0** |
+| **TOPLAM** | 1586 kayıt, **%8.1** | 1600 kayıt, **%3.8** |
+
+Ollama'nın takıldığı `altyapi_insaat / devrik` grubu (36/50'de doyuma ulaşmıştı)
+Nemotron tarafından sorunsuz tamamlandı — yani doygunluk modelin çeşitlilik
+kapasitesiyle ilgiliydi, prompt'la değil.
+
+**Cümle bazında kıyas** (eski sürüm `amplified_ollama_backup.jsonl`'de duruyor):
+
+| | Ollama | Nemotron |
+| --- | --- | --- |
+| istasyon adı | `Beköy` (uydurma) | Topkapı, Esenler, Gayrettepe (gerçek) |
+| anlam | `Döküntüler çıkışa`, `cevre zemin kaygan dogal yapi suyundan nedenli` | `Yağ lekesi kaygan vagon` |
+| uydurma kelime | `anunci` (anons) | yok |
+| ses/kip | `Sefer sayisini azalttik` (birinci şahıs, bildirim diline aykırı) | `Sefer seyreltildi` (edilgen) |
+| detay | tekrarlı (`Döküntüler yarattı`, `Çöp birikmiş`) | somut (`asansör kabininde yazıcı tozu`) |
+
 ## review.py — Kalite Kontrol Sistemi
 
 Otomatik olarak şunları işaretler (elle bakılması gerekenler):
+
 - `DUP` — birebir tekrar
 - `BENZER` — yakın kopya (SequenceMatcher + Jaccard kelime-kümesi hibrit,
   1.0'da sınırlı)
@@ -259,7 +302,7 @@ otomatik çıkarılan bir sözlükle gerçek aksan-düşürme tespit edildi
 bilgi amaçlı raporlanmaya çevrildi — **artık işaretli sayıya dahil değil.**
 
 **`--file amplified` eklendi:** Adım 2b çıktısı da aynı araçla taranıyor.
-Varsayılan taramaya dahil değil (1586 kayıtlık rapor seed/gold raporunu
+Varsayılan taramaya dahil değil (1600 kayıtlık rapor seed/gold raporunu
 boğar), açıkça seçilmesi gerekiyor.
 
 **`similarity()` simetrik hâle getirildi (18 Ağu 2026, gerçek hata):**
@@ -276,9 +319,9 @@ girdiler artık kanonik sıraya sokuluyor (`sorted((a, b))`); 2000 rastgele
 YANLIŞ kategoride olduğunu tespit edemiyor; sadece tekrar/uzunluk/sızıntı
 bakıyor. Gold'da yanlış kategorili bir kayıt (peron kapısı PSD arızası
 `guvenlik_emniyet` etiketiyle) ancak şans eseri "uzunluk" bayrağıyla
-yakalandı. Ölçüm: çoğaltılmış 1586 kayıtta kategoriler arası çelişkili
-(neredeyse aynı metin, farklı etiket) **2 çift** var — %0.13, eğitim için
-ihmal edilebilir ama araç bunu görmüyor.
+yakalandı. Ölçüm: çoğaltılmış 1600 kayıtta kategoriler arası çelişkili
+(neredeyse aynı metin, farklı etiket) **4 çift** var — %0.25, eğitim için
+ihmal edilebilir ama araç bunu görmüyor (detay: Güncel Açık Noktalar #4).
 
 ## generate_seed.py — `--category` desteği (18 Ağu 2026 eklendi)
 
@@ -301,6 +344,7 @@ ve elle müdahale yolu da yoktu.
 v4 (Nemotron) verisi üzerinde elle triyaj yapıldı, onaylanan değişiklikler:
 
 **Seed:**
+
 - 3 kayıt silindi: anlamsız "fren manası" ifadesi, bir yakın-kopya, bir
   birebir kopya
 - 1 kayıt bilerek **silinmedi**: "Turnike 5 mekanik arıza" — kategori adını
@@ -311,18 +355,21 @@ v4 (Nemotron) verisi üzerinde elle triyaj yapıldı, onaylanan değişiklikler:
   **gecikmiştir**" (anlam ters dönmüştü)
 
 **Gold:**
+
 - 4 stil düzeltmesi: `elektrik_enerji` kategorisinde `devrik`/`cok_kisa`
   etiketli ama aslında tam resmi cümle olan 4 kayıt → `standart`
 
 ### İkinci tur (18 Ağu 2026)
 
 **Seed:**
+
 - `makinist kabini fren manasi tikaniyo` → `...fren manivelasi tikaniyo`.
   "Fren manası" diye bir parça yok; aynı ifadenin `standart` stildeki ikizi
   ilk turda silinmişti ama bu `yazim_yanlisi` varyantı gözden kaçmıştı.
   Few-shot yemi olduğu için hatalı terimi 1600 örneğe taşıma riski vardı.
 
 **Gold:**
+
 - `guvenlik_emniyet` kategorisi `--force` ile tamamen yeniden üretildi.
   Sebep: 9 kaydın 3'ü bozuktu — biri **Arapça harf** içeriyordu
   (`Peron kapısı arıza, güvenlik بوğu`), biri var olmayan bir kelime
@@ -364,42 +411,36 @@ muhasebe alanı, model `kategori` tahmin ediyor.
 
 ## ⚠️ Güncel Açık Noktalar
 
-1. **`altyapi_insaat` 186/200 (14 eksik).** `devrik` stili 36/50'de takıldı:
-   Ollama o grup için yeni örnek üretemez hâle geldi (üst üste near-dup),
-   script sonsuz döngüye girmemek için grubu bıraktı. Kota yenilenince
-   `python -m src.generate_data --category altyapi_insaat` ile tamamlanabilir.
-2. **Ollama'dan gelen 500 kayıt değiştirilecek (kullanıcı kararı).** Kota
-   bittiği için `yolcu_operasyon` ve `temizlik_cevre` kategorilerinin
-   TAMAMI, `altyapi_insaat`'ın da yarısı qwen2.5:14b'den geldi. Bu
-   sistematik: iki sınıf tamamen zayıf modelle eğitilmiş olur, F1'leri
-   düşebilir ve confusion matrix yanıltır. Plan: kota yenilenince bu
-   kayıtlar Nemotron'la değiştirilecek, iki sürüm cümle bazında
-   karşılaştırılacak.
-   - **Önce yedek al:** `amplified_ollama_backup.jsonl` — yoksa kıyaslanacak
-     eski cümle kalmaz.
-   - **Gerekli ek:** `generate_data.py` şu an sadece `--category` +
-     `--force` destekliyor, o da tüm kategoriyi siler. `altyapi_insaat`
-     karışık (86 Nemotron + 100 Ollama) olduğu için "sadece belirli
-     kaynaktan gelen kayıtları değiştir" seçeneği (`--replace-source
-     ollama` gibi) eklenmeli, yoksa 86 iyi kayıt da gider.
-   - **Değişimden sonra Adım 3 MUTLAKA yeniden çalıştırılmalı** — mevcut
-     train/val/test.csv geçersiz olur. Adım 4'e (eğitim) eski split'le
-     başlanmamalı.
-3. **Near-dup eşiği (0.85) henüz kalibre edilmedi.** Şu anki veriyle
-   kümeleme 1586 kayıtta sadece 1 küme buldu — çünkü `generate_data` zaten
-   üretim anında aynı fonksiyonla near-dup reddediyor (247 kayıt reddedildi),
-   iş yukarıda hallolmuş. Eşik Ollama verisine göre sabitlenmemeli; veri
-   Nemotron'la değişince yeniden bakılmalı.
-4. **`review.py` kategori sınırı denetlemiyor** (yukarıda detaylı). Ölçülen
-   etki şimdilik küçük (2 çelişkili çift / 1586), ama araç bu tür hatayı
-   göremiyor.
+1. ✅ **KAPANDI — `altyapi_insaat` 200/200.** Nemotron `devrik` grubunu
+   tamamladı (Ollama 36/50'de doyuma ulaşmıştı).
+2. ✅ **KAPANDI — Ollama'dan gelen 500 kayıt değiştirildi** (19 Ağu, yukarıda
+   detaylı). Veri artık %100 Nemotron. Yedek `amplified_ollama_backup.jsonl`
+   olarak duruyor, `preprocess.py` yeniden çalıştırıldı.
+3. **Near-dup eşiği (0.85) hâlâ kalibre edilmedi.** Yeni veriyle de kümeleme
+   1600 kayıtta sadece 1 küme buldu — çünkü `generate_data` üretim anında
+   aynı fonksiyonla near-dup reddediyor, iş yukarıda hallolmuş. Eşiğin
+   gerçekten doğru yerde olup olmadığı hâlâ ölçülmedi; Adım 4'te modelin
+   test/gold farkı buna dolaylı bir kanıt sağlayabilir.
+4. **`review.py` kategori sınırı denetlemiyor** (yukarıda detaylı). Yeni
+   veride kategoriler arası çelişkili çift **4** (1600 kayıtta %0.25;
+   önceki veride 2/1586 idi). Artış yenilenen 514 kayıttan geliyor. Dördü de
+   gerçek taksonomi belirsizliği, üretim hatası değil:
+   - `Makinist masası acil durdurma butonu takılı` (arac_tren) vs
+     `Acil durdurma butonu takılı` (guvenlik_emniyet)
+   - `Asansör kapı sensör kırık` (istasyon_mekanik) vs
+     `Asansör kapı çerçevesi kırık` (altyapi_insaat)
+   - PSD acil açma kolu: istasyon_mekanik vs guvenlik_emniyet
+   - Acil çıkış kapısı kilitli: guvenlik_emniyet vs yolcu_operasyon
+   Eğitim için ihmal edilebilir, ama confusion matrix'te bu kategori
+   çiftlerinin karışması beklenebilir — Adım 4'te bakılmalı.
 5. **`CONFIDENCE_THRESHOLD = 0.60` hâlâ kalibre edilmedi** — `evaluate.py`
    yazılıp gerçek güven dağılımı görülünce ayarlanacak (Adım 4 sonrası).
 
 ## Yol Haritası — Kalan Adımlar
 
 **✅ Adım 2b — Çoğaltma (TAMAMLANDI):** `src/generate_data.py` yazıldı ve
-çalıştırıldı, 1586 kayıt üretildi.
+çalıştırıldı, 1600 kayıt üretildi (19 Ağu değişimi sonrası %100 Nemotron).
+
 - Few-shot **yalnızca** `seed.jsonl`'den; `gold.jsonl` bu dosyada hiç okunmuyor.
 - Her çağrı **tek (kategori, stil)** ikilisi için. Sebep: Adım 2a'da en sık
   hata uzunluk kuralına uymamaktı; tek stil isteyince model aynı anda dört
@@ -411,10 +452,18 @@ muhasebe alanı, model `kategori` tahmin ediyor.
   enjeksiyonu, üretilmişlerden örneklem ile "bunları tekrarlama" listesi, ve
   eklemeden önce `review.similarity` ile near-dup reddi.
 - CLI: `--provider {hybrid,openrouter,ollama}`, `--category`, `--target`,
-  `--dry-run` (LLM çağırmadan prompt'u yazdırır — kota harcamadan test için).
+  `--dry-run` (LLM çağırmadan prompt'u yazdırır — kota harcamadan test için),
+  `--replace-source {ollama,openrouter}`.
+- **`--replace-source`** belirtilen sağlayıcıdan gelen mevcut kayıtları silip
+  yerine yenisini ürettirir. Kategoriyi tümden sıfırlamaya göre avantajı:
+  karışık kategorilerde iyi kayıtlar korunur. Silinen kayıtlar near-dup
+  havuzundan da çıkar, böylece yeni model aynı konuları serbestçe yazabilir.
+  `--dry-run` ile birlikte kullanılınca ne silineceğini dosyaya dokunmadan
+  gösterir.
 
 **✅ Adım 3 — Ön İşleme (TAMAMLANDI):** `src/preprocess.py` yazıldı ve
 çalıştırıldı (5.6 sn).
+
 - Near-duplicate **kümeleme split'ten önce** yapılıyor (union-find), bir
   kümenin tüm üyeleri hep aynı bölmede kalıyor — çoğaltılmış verinin
   train/test'e sızıp sahte yüksek doğruluk üretmesini engelleyen asıl
@@ -506,6 +555,7 @@ Bu proje adım adım (Adım 2b, 3, 4, 5, 6...) ilerliyor. Her adım için şu s�
 remote'a (GitHub vb.) push edeceğimizi netleştirelim.
 
 **Asla yapılmayacaklar:**
+
 - Test edilmemiş kodu commit/push etmek
 - Onay istemeden push etmek
 - Birden fazla adımı tek commit'te birleştirmek
