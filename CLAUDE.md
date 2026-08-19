@@ -53,7 +53,8 @@ ariza-tespit-siniflandirici/
 │   ├── adapter_config.json
 │   ├── tokenizer.json / tokenizer_config.json
 │   ├── egitim_ozeti.json           # hiperparametreler + epoch gecmisi
-│   └── degerlendirme.json          # test/gold metrikleri
+│   ├── degerlendirme.json          # test/gold metrikleri
+│   └── kalibrasyon.json            # k-fold OOF esik taramasi + reliability
 ├── src/
 │   ├── __init__.py
 │   ├── config.py                   # TEK dogruluk kaynagi, asagida detay
@@ -64,7 +65,8 @@ ariza-tespit-siniflandirici/
 │   ├── apply_review.py             # elle onaylanan duzeltmeleri uygular (idempotent)
 │   ├── check_openrouter_models.py  # OpenRouter canli model/fiyat listesi
 │   ├── train.py                    # Adim 4a -- BERTurk + LoRA egitimi
-│   └── evaluate.py                 # Adim 4b -- iki test seti + confusion matrix
+│   ├── evaluate.py                 # Adim 4b -- metrikler + confusion + hata analizi
+│   └── calibrate.py                # Adim 4c -- k-fold OOF esik kalibrasyonu
 ├── backend/
 │   ├── __init__.py
 │   └── main.py                     # Adim 5 -- FastAPI servisi
@@ -178,13 +180,14 @@ kesiliyordu. 8192'ye çıkarılınca aynı iş 5 çağrıda 8 kayıt yerine 7 ç
 
 ### Servis Ayarları (henüz kullanılmadı, Adım 5 için hazır)
 
-- `CONFIDENCE_THRESHOLD = 0.70` — **kalibre edildi** (19 Ağu). Bu eşiğin
-  altında `low_confidence: true` döner. Ölçüm: doğru tahminlerde ortalama
-  güven 0.95, yanlışlarda 0.71. 0.60 gold'da 8 hatanın 2'sini yakalıyordu,
-  0.70 ise 5'ini — aynı maliyetle (1 boşuna işaret).
-- `MARGIN_THRESHOLD = 0.40` — **yeni.** `top1 − top2` bu değerin altındaysa
-  `/predict` birincil + ikincil kategori döner. Taksonomi sınır sorunlarına
-  kural yazmak yerine getirilen genel çözüm (aşağıda detaylı).
+- `CONFIDENCE_THRESHOLD = 0.75` — **k-fold OOF ile kalibre edildi** (19 Ağu,
+  1280 kayıt / 102 hata). Altında `low_confidence: true` döner.
+- `MARGIN_THRESHOLD = 0.30` — `top1 − top2` bu değerin altındaysa `/predict`
+  birincil + ikincil kategori döner. Taksonomi sınır sorunlarına kural yazmak
+  yerine getirilen genel çözüm.
+- İkisinin de gerekçesi ve tarama tabloları "Kalibrasyon" bölümünde. Önceki
+  değerler (0.70 / 0.40) sırasıyla test+gold ve gold'un 8 hatasına bakılarak
+  seçilmişti; OOF tabanı ikisini de düzeltti.
 
 ## LLM Sağlayıcı Yolculuğu (önemli — rapora doğrudan girebilecek içerik)
 
@@ -514,11 +517,10 @@ ile seed eğitime katılırsa ortaya çıkar.
     Arayüz tarafı Adım 6'da yapılacak.
 12. **CORS şu an `allow_origins=["*"]`** — prototip için. Kuruma
     entegrasyonda daraltılmalı.
-13. **Temiz bir kalibrasyon seti yok.** `CONFIDENCE_THRESHOLD` validation
-    üzerinden ölçüldü ama val epoch seçiminde kullanıldığı için model orada
-    fazla emin (yanlış tahminlerde ort. güven 0.892 vs test 0.758). Doğrusu
-    train'den ayrı bir `calibration.csv` ayırmaktı. Eşik 0.70'te bırakıldı,
-    kısıt belgelendi.
+13. ✅ **KAPANDI — kalibrasyon k-fold OOF'a taşındı** (`src/calibrate.py`).
+    Val'in kirli olması ve 9 hatayla eşik seçmenin gürültülü olması sorunu
+    çözüldü: 1280 kayıt / 102 hata üzerinden temiz taban. Sonuç:
+    `CONFIDENCE_THRESHOLD` 0.70 → **0.75**, `MARGIN_THRESHOLD` 0.40 → **0.30**.
 14. **Yapısal çıkarım (line/station/equipment/symptom) YAPILMADI.** Sistem şu
     an sadece `category` döndürüyor. İstenen çıktı biçimi:
     `{category, line, station, equipment, symptom, confidence}`. Planlanan
@@ -783,45 +785,78 @@ kapsamlı yöntem. Dar ve kesin bir kural, geniş ve gürültülü bir kuraldan 
   cevabı tek tek hatalar değil, hangi sınıfın hangi sınıfla karıştığı. Grup
   içinde en düşük güvenli hata önce gelir — modelin zaten tereddüt ettikleri.
 
-### Kalibrasyon — ve validation setinin kör noktası
+### Kalibrasyon — k-fold out-of-fold (`src/calibrate.py`)
 
-`CONFIDENCE_THRESHOLD` başta 0.60'tı ve kalibre edilmemişti. `--kalibrasyon`
-bayrağı **validation seti üzerinden** eşik taraması + reliability diagram +
-ECE üretiyor.
+**Sorun:** eşiği hangi veri üzerinden seçmeli?
 
-**Neden validation:** eşiği test'e bakarak seçmek test setini karar sürecine
-sokar ve raporlanan skoru iyimser yapar. Metodolojik olarak doğru set val.
+| aday | neden olmaz |
+| --- | --- |
+| `test.csv` | eşiği test'e bakarak seçmek test setini karar sürecine sokar, skor iyimserleşir |
+| `gold_test.csv` | aynı sorun, üstelik gold nihai bağımsız ölçüt |
+| `val.csv` | epoch seçiminde kullanıldı → model orada **fazla emin**. Ölçüldü: yanlış tahminlerde ort. güven val **0.892**, test 0.758, OOF 0.773. Ayrıca sadece **9 hata** var |
 
-**Ama ölçüm beklenmedik bir şey gösterdi.** Validation'da güven sinyali çok
-daha zayıf:
+Train'den ayrı bir `calibration.csv` ayırmak da çözmüyor: 160 kayıt ayırsak yine
+~14 hata olurdu (aynı gürültü) ve eğitim verisi küçülürdü.
 
-| | yanlış tahminlerde ort. güven | eşik 0.70'te yakalanan |
+**Çözüm — k-fold OOF:** train 5 parçaya bölünür, her parça için o parçayı
+GÖRMEMİŞ bir model eğitilir ve sadece o parça üzerinde tahmin alınır. Sonuç:
+1280 kaydın tamamı için "modelin hiç görmediği" tahmin. Veri kaybı yok (nihai
+model yine tüm veriyle eğitiliyor), hata sayısı 9 → **102**.
+
+Fold modelleri nihai modelle **aynı tarifle** eğitilir (aynı LR, aynı ASCII
+çoğaltma, sabit 6 epoch = nihai modelin seçtiği epoch). Fold içinde ayrı bir
+val ile epoch seçmek, kaçmaya çalıştığımız seçim yanlılığını geri getirirdi.
+
+**Doğrulama — OOF temsil edici mi?**
+
+| | doğruluk | yanlışlarda ort. güven |
 | --- | --- | --- |
-| validation | **0.892** | 2/9 hata, 6 boşuna (precision 0.25) |
-| test | 0.758 | 8/17 hata, 7 boşuna |
-| gold | 0.709 | 5/8 hata, 1 boşuna |
+| OOF (1280 kayıt, 102 hata) | **0.9203** | **0.773** |
+| test (160 kayıt, 14 hata) | 0.9125 | 0.758 |
+| val (160 kayıt, 9 hata) | 0.9440 | 0.892 ← kirli |
 
-Sebep: **val, epoch seçimi için kullanıldı.** En iyi val macro-F1'i veren
-checkpoint seçildiği için model val üzerinde fazla emin — yani val "temiz" bir
-kalibrasyon seti değil. Eşiği val'e göre seçmek de hatalı olurdu.
+OOF test'e neredeyse birebir oturuyor; val'in ne kadar saptığı da görünüyor.
+(Bilinen yaklaşıklık: fold modelleri verinin 4/5'iyle eğitildiği için nihai
+modelden bir tık zayıf ve daha az emin — buradan çıkan eşik biraz temkinli
+tarafta kalır.)
 
-Reliability diagram (validation, ECE = **0.0427**):
+**`CONFIDENCE_THRESHOLD` 0.70 → 0.75** (OOF, 102 hata):
 
-| güven kovası | kayıt | ort. güven | gerçek doğruluk | sapma |
+| eşik | trafik | yakalanan | boşuna | precision | recall |
+| --- | --- | --- | --- | --- | --- |
+| 0.60 | 3.6% | 25/102 | 21 | 0.543 | 0.245 |
+| 0.70 | 5.9% | 37/102 | 38 | 0.493 | 0.363 |
+| **0.75** | **7.3%** | **47/102** | 47 | **0.500** | **0.461** |
+| 0.80 | 8.9% | 49/102 | 65 | 0.430 | 0.480 |
+
+0.75 eskisini **domine ediyor**: aynı precision, 10 hata daha. 0.80'de precision
+çöküyor — diz noktası 0.75.
+
+**Reliability diagram (OOF, ECE = 0.0340):**
+
+| kova | kayıt | ort. güven | gerçek doğruluk | sapma |
 | --- | --- | --- | --- | --- |
-| 0.50-0.60 | 5 | 0.570 | 0.800 | +0.230 |
-| 0.60-0.70 | 3 | 0.689 | 0.667 | −0.023 |
-| 0.80-0.90 | 3 | 0.852 | 0.667 | −0.185 |
-| 0.90-0.95 | 8 | 0.934 | 0.875 | −0.059 |
-| 0.95-1.00 | **141** | 0.997 | 0.965 | −0.032 |
+| 0.80-0.90 | 51 | 0.856 | **0.686** | **−0.169** |
+| 0.90-0.95 | 54 | 0.927 | 0.796 | −0.131 |
+| 0.95-1.00 | **1061** | 0.994 | 0.975 | −0.018 |
 
-Model hafif **fazla emin** (yüksek bantlarda sapma negatif) ama ECE 0.043 ile
-makul kalibre. Kayıtların %88'i en üst kovada — model çoğu zaman çok emin.
+Model verinin %83'ünde (0.95+) iyi kalibre, ama **0.80-0.95 bandında belirgin
+fazla emin**: 0.85 güvenle söylediklerinin sadece %69'u doğru. Eşiği
+yükseltmenin ikinci, bağımsız gerekçesi bu.
 
-**Açık nokta:** temiz bir kalibrasyon seti yok. Doğrusu train'den ayrı bir
-`calibration.csv` ayırmak olurdu; bu 1600 kayıtta veri maliyeti yaratır.
-Şimdilik eşik 0.70'te bırakıldı (test+gold davranışıyla destekleniyor) ve bu
-kısıt açıkça belgelendi.
+**`MARGIN_THRESHOLD` 0.40 → 0.30** (OOF):
+
+| marj | trafik | kurtarılan | boşuna | oran |
+| --- | --- | --- | --- | --- |
+| 0.20 | 2.5% | 12/102 | 17 | 0.71 |
+| **0.30** | **4.1%** | **20/102** | 25 | **0.80** ← tepe |
+| 0.40 | 5.2% | 24/102 | 34 | 0.71 |
+| 0.50 | 6.6% | 30/102 | 44 | 0.68 |
+
+**Önemli düzeltme:** 0.40 daha önce gold'un **8 hatasına** bakarak seçilmiş ve
+"kurtarma/boşuna oranı 4.0" diye kaydedilmişti. 102 hatalı OOF tabanında gerçek
+oran **0.80** — yani o ölçüm tamamen gürültüydü. Az örneklemle yapılan
+kalibrasyonun ne kadar yanıltabildiğine dair somut bir ders; rapora girmeli.
 
 ### İkincil kategori mekanizması — sınır sorunlarına genel çözüm
 

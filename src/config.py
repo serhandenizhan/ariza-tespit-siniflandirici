@@ -408,14 +408,29 @@ MIN_PER_CLASS_F1 = 0.75
 # Bu esigin altinda kategori kesin atanmaz, arayuzde manuel inceleme uyarisi
 # cikar.
 #
-# KALIBRE EDILDI (19 Agu 2026, evaluate.py guven dagilimindan). Onceki deger
-# 0.60 tahminiydi. Olcum: dogru tahminlerde ortalama guven 0.95, YANLIS
-# tahminlerde 0.71 -- yani guven skoru gercekten ayirt edici.
-#   esik 0.60 -> gold'da 8 hatanin 2'sini yakalar, 1 dogruyu bosuna isaretler
-#   esik 0.70 -> gold'da 8 hatanin 5'ini yakalar, 1 dogruyu bosuna isaretler
-#   esik 0.80 -> gold'da 8 hatanin 6'sini yakalar, 3 dogruyu bosuna isaretler
-# 0.70 secildi: yakalama oranini iki kattan fazla artiriyor, maliyeti ayni.
-CONFIDENCE_THRESHOLD = 0.70
+# KALIBRE EDILDI (19 Agu 2026) — k-fold OUT-OF-FOLD tahminlerle, 1280 kayit /
+# 102 hata uzerinden. Bkz. src/calibrate.py ve model/kalibrasyon.json.
+#
+# Neden OOF: esigi test'e bakarak secmek test setini karar surecine sokar;
+# val.csv ise epoch seciminde kullanildigi icin model orada FAZLA EMIN
+# (olculdu: yanlis tahminlerde ort. guven val 0.892 / test 0.758 / OOF 0.773)
+# ve zaten sadece 9 hata iceriyor -- o kadar az hatayla esik secmek gurultuyu
+# kalibrasyon sanmaktir. OOF ile hata sayisi 102'ye cikti.
+#
+# Tarama (OOF, 102 hata):
+#   esik  trafik  yakalanan  bosuna  precision  recall
+#   0.60   3.6%     25/102     21      0.543    0.245
+#   0.70   5.9%     37/102     38      0.493    0.363   <- eski deger
+#   0.75   7.3%     47/102     47      0.500    0.461   <- SECILEN
+#   0.80   8.9%     49/102     65      0.430    0.480
+# 0.75, 0.70'i domine ediyor: ayni precision ama 10 hata daha yakaliyor.
+# 0.80'de precision cokuyor -- diz noktasi 0.75.
+#
+# Ikinci gerekce reliability diagram'dan: model 0.80-0.95 bandinda belirgin
+# FAZLA EMIN (0.856 ortalama guven -> 0.686 gercek dogruluk). O bantta guven
+# degeri gorundugu kadar guvenilir degil, esigi yukseltmek bunu telafi ediyor.
+# (0.95+ bandinda -- verinin %83'u -- model iyi kalibre: 0.994 -> 0.975.)
+CONFIDENCE_THRESHOLD = 0.75
 LOW_CONFIDENCE_MESSAGE = "Düşük Güven: Manuel İnceleme Önerilir"
 
 # --- Ikincil kategori (taksonomi sinir sorunlarina genel cozum) --------------
@@ -426,21 +441,23 @@ LOW_CONFIDENCE_MESSAGE = "Düşük Güven: Manuel İnceleme Önerilir"
 #
 # Bunu taksonomiye sinir kurallari yazarak cozmek olceklenmiyor: 8 kategoride
 # 28 cift var ve gercek veriye gecince bugun bilmedigimiz yenileri cikacak.
-# Bunun yerine modelin ZATEN urettigi bilgiyi kullaniyoruz.
+# Bunun yerine modelin ZATEN urettigi bilgiyi kullaniyoruz: marj (top1-top2)
+# kucukse model iki kategori arasinda kararsiz demektir.
 #
-# Olcum (evaluate.py): top-1 dogruluk 0.894/0.900 iken TOP-2 dogruluk her iki
-# test setinde de 0.975; hatalarin ~%75'inde dogru cevap ikinci sirada ve
-# marj (top1-top2) cokuyor (dogrularda 0.90-0.93, yanlislarda 0.43-0.56).
-# Yani model belirsiz oldugunu biliyor; sorun sistemin onu tek cevaba
-# zorlamasiydi.
+# Olculdu: top-1 dogruluk 0.913/0.925 iken TOP-2 dogruluk 0.963/0.975.
 #
-# Marj bu esigin ALTINDAYSA /predict birincil + ikincil kategori doner.
-# Kalibrasyon (gold, 8 hata):
-#   0.30 -> 4 kayit cift etiketli, 3 hata kurtarilir, 1 bosuna  (oran 3.0)
-#   0.40 -> 6 kayit cift etiketli, 4 hata kurtarilir, 1 bosuna  (oran 4.0) <-
-#   0.50 -> 8 kayit cift etiketli, 4 hata kurtarilir, 3 bosuna  (oran 1.3)
-# 0.40'tan sonra kurtarma artmiyor ama maliyet artiyor -- tepe noktasi orada.
-MARGIN_THRESHOLD = 0.40
+# KALIBRE EDILDI (19 Agu 2026) — k-fold OOF, 102 hata:
+#   marj  trafik  kurtarilan  bosuna  oran
+#   0.20   2.5%     12/102      17    0.71
+#   0.30   4.1%     20/102      25    0.80   <- SECILEN (tepe)
+#   0.40   5.2%     24/102      34    0.71   <- eski deger
+#   0.50   6.6%     30/102      44    0.68
+#
+# DUZELTME NOTU: 0.40 daha once GOLD setinin 8 hatasina bakarak secilmis ve
+# "kurtarma/bosuna orani 4.0" diye kaydedilmisti. 102 hatali OOF tabaninda
+# gercek oran 0.80 cikti -- yani o olcum tamamen gurultuydu. Az orneklemle
+# yapilan kalibrasyonun ne kadar yanildigina dair somut bir ders.
+MARGIN_THRESHOLD = 0.30
 SECONDARY_CATEGORY_MESSAGE = "Sınırda Bildirim: İkinci Kategori de Değerlendirilmeli"
 
 API_HOST = "0.0.0.0"
