@@ -128,11 +128,12 @@ varyasyon olarak kabul edildi (bkz. review.py bölümü).
 | --- | --- | --- | --- |
 | seed | 12/kat × 8 = 96 | **93** | elle triyajda 3 kayıt silindi |
 | gold | 10/kat × 8 = 80 | **80** | tam, 8 kategori × 10 |
-| çoğaltma | 200/kat × 8 = 1600 | **1600** | tam; %100 Nemotron (19 Ağu değişimi) |
+| çoğaltma | 200/kat × 8 = 1600 | **1600** | tam; %100 Nemotron. SINIR düzeltmeleri sonrası kategori dengesi 202/200/199 (±2) |
 
 Çoğaltma sonrası bölme (Adım 3): train **1280** / val **160** / test **160**
-(%80/%10/%10 — her kategori tam 160/20/20), ayrıca gold_test **80** (eğitime
-hiç girmez).
+(%80/%10/%10). Kategori başına train 159-162 arası (SINIR düzeltmeleri
+dengeyi ±2 kaydırdı), val ve test her kategoride tam 20. Ayrıca gold_test
+**80** (eğitime hiç girmez).
 
 (Not: orijinal PDF taslağında 70/kategori × 6 kategori = 420 yazıyordu.
 Kategori sayısı 6'dan 8'e, hedef hacim 70'ten 200'e çıkarıldı — rapor
@@ -141,6 +142,8 @@ güncellenmeli.)
 ### Çoğaltma Ayarları (Adım 2b, config.py)
 
 - `AMPLIFY_PROVIDER = "hybrid"` — OpenRouter birincil, kalıcı hatada Ollama
+- `NEAR_DUP_THRESHOLD = 0.85` (üretimde red) / `CLUSTER_THRESHOLD = 0.80`
+  (bölmede kümeleme) — iki ayrı eşik, gerekçesi `config.py`'de
 - `AMPLIFY_BATCH_SIZE = 40` — çağrı başına örnek (gerekçesi aşağıda)
 - `AMPLIFY_FEWSHOT_N = 6`, `AMPLIFY_AVOID_N = 12`
 - `OLLAMA_MODEL = "qwen2.5:14b"`, `OLLAMA_NUM_CTX = 8192`,
@@ -175,10 +178,19 @@ Seed/gold üretimi için 4 farklı sağlayıcı denendi, sonuçlar `review.py` i
 
 | Deneme | Sağlayıcı/Model | Seed işaretli | Gold işaretli | Not |
 | --- | --- | --- | --- | --- |
-| v1 | Gemini (çeşitli modeller) | %18 | %32 | Kota/model erişim sorunları yüzünden terk edildi |
-| v2 | Groq / llama-3.3-70b-versatile | %91 | %81 | Config'teki Türkçe metin ASCII'ydi (kök sebep) |
-| v3 | Groq / llama-3.3-70b-versatile (Türkçe düzeltildi) | %72 | %69 | Prompt dili düzelince iyileşti ama model hâlâ çok-kısıtlı talimatlara uyamadı |
-| **v4** | **OpenRouter / nvidia/nemotron-3-ultra-550b-a55b:free** | **%17** | **%9** | **Kazanan.** Ücretsiz, kart istemiyor, v1'i bile geçti |
+| v1 | Gemini (çeşitli modeller) | %15 | %29 | Kota/model erişim sorunları yüzünden terk edildi |
+| v2 | Groq / llama-3.3-70b-versatile | %82 | %56 | Config'teki Türkçe metin ASCII'ydi (kök sebep) |
+| v3 | Groq / llama-3.3-70b-versatile (Türkçe düzeltildi) | %70 | %70 | Prompt dili düzelince iyileşti ama model hâlâ çok-kısıtlı talimatlara uyamadı |
+| **v4** | **OpenRouter / nvidia/nemotron-3-ultra-550b-a55b:free** | **%14** | **%4** | **Kazanan.** Ücretsiz, kart istemiyor, v1'i bile geçti |
+
+> **Bu sayılar 19 Ağu 2026'da bugünkü `review.py` ile YENİDEN ölçüldü.** Önceki
+> sürümde farklı rakamlar yazıyordu (v1 %18/%32, v2 %91/%81, v3 %72/%69,
+> v4 %17/%9) çünkü o ölçümlerden sonra araç iki kez değişti: aksan kontrolü
+> işaretli sayımından çıkarıldı ve `similarity()` simetrik hâle getirildi.
+> Sıralama ve sonuç değişmedi, ama rapordaki her sayının bugünkü araçla
+> üretilebilir olması için tablo tazelendi. Ölçüm şu komutla tekrarlanabilir:
+> `python -m src.review --file seed` (yedek dosyalar `data/seed/` altında
+> duruyor — bu yüzden silinmediler).
 
 **Ders 1 — kaynak kodun kendi Türkçesi önemli:** `config.py`'deki kategori
 açıklamaları, kurallar, istasyon adları başlangıçta ASCII yazılmıştı (bir
@@ -315,13 +327,27 @@ near-duplicate sayıyordu. Sızıntı savunmasının tamamı bu eşiğe dayandı
 girdiler artık kanonik sıraya sokuluyor (`sorted((a, b))`); 2000 rastgele
 çiftle simetri doğrulandı.
 
-**Bilinen boşluk — kategori sınırı denetlenmiyor:** `review.py` bir bildirimin
-YANLIŞ kategoride olduğunu tespit edemiyor; sadece tekrar/uzunluk/sızıntı
-bakıyor. Gold'da yanlış kategorili bir kayıt (peron kapısı PSD arızası
-`guvenlik_emniyet` etiketiyle) ancak şans eseri "uzunluk" bayrağıyla
-yakalandı. Ölçüm: çoğaltılmış 1600 kayıtta kategoriler arası çelişkili
-(neredeyse aynı metin, farklı etiket) **4 çift** var — %0.25, eğitim için
-ihmal edilebilir ama araç bunu görmüyor (detay: Güncel Açık Noktalar #4).
+**`SINIR` bayrağı eklendi (19 Ağu 2026) — kategori sınırı artık denetleniyor:**
+Önceki sürümde `review.py` bir bildirimin YANLIŞ kategoride olduğunu tespit
+edemiyordu; sadece tekrar/uzunluk/sızıntı bakıyordu. Gold'daki yanlış
+kategorili bir kayıt (peron kapısı PSD arızası `guvenlik_emniyet` etiketiyle)
+ancak şans eseri "uzunluk" bayrağıyla yakalanmıştı — bu, aracın kör noktasıydı.
+
+`SINIR`, **farklı kategorilerdeki** kayıtları birbiriyle karşılaştırır ve
+`CLUSTER_THRESHOLD` (0.80) üstünde benzeyen çiftleri işaretler. Mantığı
+`BENZER`'den ayrı: orada sorun tekrar, burada **etiket tutarsızlığı** —
+neredeyse aynı metnin iki farklı etikette olması modele çelişkili sinyal verir
+ve biri muhtemelen yanlış kategoridedir.
+
+İlk çalıştırmada 1600 kayıtta **5 çift** buldu. Elle değerlendirildi:
+- **3'ü gerçek etiket hatasıydı**, düzeltildi (aşağıda)
+- **2'si yanlış alarm**: ölçüt sözcüksel olduğu için gerçekten farklı arızalar
+  ortak kelimeler yüzünden yakalandı (`Asansör kabin titriyor` /
+  `Asansör kabini kirli`; `Makinist masası acil durdurma butonu takılı` /
+  `Acil durdurma butonu takılı`)
+
+Düzeltme sonrası kalan: 2 çift (4 kayıt), ikisi de bilinen yanlış alarm.
+Seed'de 1 yanlış alarm, **gold'da hiç yok**.
 
 ## generate_seed.py — `--category` desteği (18 Ağu 2026 eklendi)
 
@@ -390,6 +416,36 @@ bunu yazar mıydı?"* — evetse gerçekçi gürültüdür, gold'a aittir. Ayrı
 teknik olarak metriğe sadece `metin` + `kategori` giriyor; `stil` etiketi
 muhasebe alanı, model `kategori` tahmin ediyor.
 
+### Üçüncü tur — seed'in elle okunması (19 Ağu 2026)
+
+93 kaydın tamamı tek tek okundu. Bulunan 3 **var olmayan kelime** düzeltildi:
+
+| eski | yeni | neden |
+| --- | --- | --- |
+| `giriş tornası` | `giriş turnikesi` | "torna" tezgâh demek |
+| `merkeziyete sinyal` | `merkeze sinyal` | "merkeziyet" böyle kullanılmaz |
+| `betonarme kırışması` | `betonarme kırılması` | "kırışmak" buruşmak demek |
+
+**Karar ölçütü — gerçekçi yazım hatası ile stil sözleşmesi ihlali farklı
+şeylerdir.** Üçü de `standart`/`devrik` etiketliydi; config bu stiller için
+doğru Türkçe yazımı ZORUNLU tutuyor (`generate_seed.py` prompt kural 9:
+"SADECE `yazim_yanlisi` stilinde harf düşür, diğer üç stilde doğru yazım
+zorunludur"). "İnsan da böyle yazabilir" doğru bir itiraz, ama o insan
+`yazim_yanlisi` stilinde yazıyor demektir. Yani ölçüt "hata gerçekçi mi"
+değil, **"kaydın kendi stil etiketi hataya izin veriyor mu"**.
+
+**Bilinçli olarak DEĞİŞTİRİLMEYEN kategori (kullanıcı kararı):** seed #75
+`Kart okumuyor ucret odendi bilet alamadi.` → `yolcu_operasyon` kaldı.
+Config'in turnike kuralı "kart okumama → `yazilim_sistem`" diyor, ama
+kullanıcının gerekçesi: bildirimin öznesi okuyucu arızası değil, **ücret
+ödemiş yolcunun mağduriyeti**. Not: bu yorum config metniyle gerginlik
+taşıyor; ileride yeniden üretim yapılırsa LLM config'i takip edeceği için
+bu kayıt tek başına kalabilir.
+
+Not: çoğaltma zaten tamamlandığı için bu düzeltmeler mevcut 1600 kaydı
+DEĞİŞTİRMEZ. Değeri ileride yeniden üretim yapılırsa veya `--include-seed`
+ile seed eğitime katılırsa ortaya çıkar.
+
 ## ✅ Kapanan Açık Noktalar (18 Ağu 2026)
 
 Önceki sürümdeki 5 maddenin tamamı kapandı:
@@ -416,25 +472,34 @@ muhasebe alanı, model `kategori` tahmin ediyor.
 2. ✅ **KAPANDI — Ollama'dan gelen 500 kayıt değiştirildi** (19 Ağu, yukarıda
    detaylı). Veri artık %100 Nemotron. Yedek `amplified_ollama_backup.jsonl`
    olarak duruyor, `preprocess.py` yeniden çalıştırıldı.
-3. **Near-dup eşiği (0.85) hâlâ kalibre edilmedi.** Yeni veriyle de kümeleme
-   1600 kayıtta sadece 1 küme buldu — çünkü `generate_data` üretim anında
-   aynı fonksiyonla near-dup reddediyor, iş yukarıda hallolmuş. Eşiğin
-   gerçekten doğru yerde olup olmadığı hâlâ ölçülmedi; Adım 4'te modelin
-   test/gold farkı buna dolaylı bir kanıt sağlayabilir.
-4. **`review.py` kategori sınırı denetlemiyor** (yukarıda detaylı). Yeni
-   veride kategoriler arası çelişkili çift **4** (1600 kayıtta %0.25;
-   önceki veride 2/1586 idi). Artış yenilenen 514 kayıttan geliyor. Dördü de
-   gerçek taksonomi belirsizliği, üretim hatası değil:
+3. ✅ **KAPANDI — near-dup eşiği kalibre edildi (19 Ağu).** İki ayrı eşiğe
+   ayrıldı: `NEAR_DUP_THRESHOLD = 0.85` (üretim) ve `CLUSTER_THRESHOLD = 0.80`
+   (bölme). Gerekçe ve ölçüm `config.py`'de detaylı.
+4. ✅ **KAPANDI — kategori sınırı kontrolü eklendi (`SINIR` bayrağı).**
+   Bulduğu 3 gerçek etiket hatası düzeltildi.
+5. **Taksonomi belirsizliği — Adım 4'te confusion matrix'te GÖZDEN GEÇİRİLECEK
+   (kullanıcı isteği).** `SINIR` düzeltmelerinden sonra 2 çift kaldı ve ikisi
+   de gerçek belirsizlik, etiket hatası değil:
    - `Makinist masası acil durdurma butonu takılı` (arac_tren) vs
-     `Acil durdurma butonu takılı` (guvenlik_emniyet)
-   - `Asansör kapı sensör kırık` (istasyon_mekanik) vs
-     `Asansör kapı çerçevesi kırık` (altyapi_insaat)
-   - PSD acil açma kolu: istasyon_mekanik vs guvenlik_emniyet
-   - Acil çıkış kapısı kilitli: guvenlik_emniyet vs yolcu_operasyon
-   Eğitim için ihmal edilebilir, ama confusion matrix'te bu kategori
-   çiftlerinin karışması beklenebilir — Adım 4'te bakılmalı.
-5. **`CONFIDENCE_THRESHOLD = 0.60` hâlâ kalibre edilmedi** — `evaluate.py`
+     `Acil durdurma butonu takılı` (guvenlik_emniyet) — benzerlik 1.00.
+     Config'e göre İKİSİ DE doğru: makinist masası araç kapsamında, genel
+     acil buton güvenlik kapsamında. Sorun ikinci cümlenin tek başına
+     ayırt edilemez olması. **Üstelik biri train'de biri test'te** — model
+     test'te muhtemelen `arac_tren` diyip puan kaybedecek. Bu sızıntı değil,
+     dürüst zorluk; ama confusion matrix'te arac_tren↔guvenlik_emniyet
+     karışması görülürse sebebi burada.
+   - `Asansör kabin titriyor` (istasyon_mekanik) vs `Asansör kabini kirli`
+     (temizlik_cevre) — farklı arızalar, sözcüksel ölçütün yanlış alarmı.
+   Adım 4'te bakılacak sorular: bu iki kategori çifti confusion matrix'te
+   gerçekten karışıyor mu; karışıyorsa taksonomiye açıklayıcı bir kural mı
+   eklemeli (örn. "acil durdurma butonu nerede? tren içi → araç, istasyon →
+   güvenlik") yoksa veri mi düzeltmeli.
+6. **`CONFIDENCE_THRESHOLD = 0.60` hâlâ kalibre edilmedi** — `evaluate.py`
    yazılıp gerçek güven dağılımı görülünce ayarlanacak (Adım 4 sonrası).
+7. **Kategori dengesi artık tam eşit değil:** `SINIR` düzeltmeleri sonrası
+   istasyon_mekanik 202, altyapi_insaat ve yolcu_operasyon 199, diğerleri 200.
+   Sapma ±2, macro-F1 ve katmanlı bölme için önemsiz — ama raporda "her
+   kategoriden tam 200" denmemeli.
 
 ## Yol Haritası — Kalan Adımlar
 
@@ -464,8 +529,8 @@ muhasebe alanı, model `kategori` tahmin ediyor.
 **✅ Adım 3 — Ön İşleme (TAMAMLANDI):** `src/preprocess.py` yazıldı ve
 çalıştırıldı (5.6 sn).
 
-- Near-duplicate **kümeleme split'ten önce** yapılıyor (union-find), bir
-  kümenin tüm üyeleri hep aynı bölmede kalıyor — çoğaltılmış verinin
+- Near-duplicate **kümeleme split'ten önce** yapılıyor (union-find,
+  `CLUSTER_THRESHOLD`=0.80), bir kümenin tüm üyeleri hep aynı bölmede kalıyor — çoğaltılmış verinin
   train/test'e sızıp sahte yüksek doğruluk üretmesini engelleyen asıl
   mekanizma. `review.similarity` ile AYNI ölçüt kullanılıyor.
 - Katmanlı bölme: her kategori kendi içinde bölünüyor, sınıf dengesi üç
@@ -479,6 +544,46 @@ muhasebe alanı, model `kategori` tahmin ediyor.
   `--report-only` (dosya yazmadan rapor).
 - Doğrulandı: label↔kategori uyumsuzluğu 0, bölmeler arası birebir kesişim 0,
   gold ↔ train/test kesişim 0.
+
+### Near-dup eşiği kalibrasyonu (19 Ağu 2026)
+
+**Kalibrasyonun tuzağı:** veri zaten 0.85 eşiğiyle filtrelenmiş üretildi, yani
+0.85 üstü çift tanım gereği yok. Mevcut veriye bakarak "eşik doğru mu"
+sorusu cevaplanamaz — **eşiğin ALTINDAKİ banda** bakmak gerekiyor. Orada
+gerçek kopyalar varsa eşik fazla gevşek demektir.
+
+Aynı kategori içindeki 159.200 çiftin dağılımı:
+
+| bant | çift |
+| --- | --- |
+| 0.60-0.70 | 1487 |
+| 0.70-0.75 | 191 |
+| 0.75-0.80 | 118 |
+| 0.80-0.85 | 25 |
+| 0.85+ | 1 (simetri düzeltmesinden önce kaçan tek çift) |
+
+0.80-0.85 bandı elle okundu ve **gerçek anlamsal kopyalar bulundu**:
+`Taksim istasyonunda 4 numaralı vagondaki yolcu anons cihazı ses vermiyor.` /
+`Yolcu anons cihazı ses vermiyor 4. vagon` (0.843) — aynı arıza, aynı vagon.
+Ama aynı bantta **gerçekten farklı arızalar** da var: `makinist kabini sağ
+tarafı ayna kırık` / `makinist kabini saati durmuş` (0.804). Ölçüt sözcüksel,
+anlamsal değil; eşiği körü körüne düşürmek farklı arızaları birleştirir.
+
+**Çözüm: tek eşik yerine iki eşik**, çünkü eşiğin iki farklı işi var ve hata
+maliyetleri simetrik değil:
+
+| kullanım | yanlış birleştirme | kaçırma |
+| --- | --- | --- |
+| üretim (yeni kayıt reddi) | iyi cümle boşa gider, kota harcanır | veri biraz tekrarlı olur |
+| bölme (kümeleme) | iki kayıt aynı bölmeye düşer, küçük çeşitlilik kaybı | **metrik şişer, sahte başarı** |
+
+Bölmede kaçırmanın bedeli çok daha ağır → orada daha agresif olunmalı.
+
+Kümeleme etkisi: 0.85→1 çift, 0.82→8, **0.80→27 çift + 1 üçlü**, 0.78→39
+(kümeler 5'e zincirlenmeye başlıyor), 0.75→88 (fazla agresif). **0.80
+seçildi:** küme boyutu 2-3'te kalıyor, bedeli 1600 kayıtta 29 kayıt.
+Yakaladığı en büyük küme tam da gerçek kopya ailesi (üç ayrı "sefer iptali →
+yolcular bir sonraki trene yönlendirildi" cümlesi).
 
 **Adım 4 — Model Eğitimi:** `src/train.py` + `src/evaluate.py` yazılacak.
 

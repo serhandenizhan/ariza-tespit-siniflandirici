@@ -6,7 +6,9 @@ Uretilen bildirimleri otomatik tarar ve SUPHELI olanlari isaretler. Amac
 
 Kontroller:
   DUP     birebir tekrar
-  BENZER  baska bir bildirime cok benziyor (near-duplicate)
+  BENZER  baska bir bildirime cok benziyor (near-duplicate, AYNI kategoride)
+  SINIR   baska KATEGORIDEKI bir bildirime cok benziyor -- etiket tutarsizligi,
+          biri muhtemelen yanlis kategoride (taksonomi sinir sorunu)
   UZUNLUK stilin kelime araligi disinda
   KOD     ekipman kodu yogunlugu kategori genelinde fazla
   SIZINTI kategori adini acikca soyluyor
@@ -153,6 +155,24 @@ def analyze(records: list[dict]) -> tuple[list[dict], dict]:
                     if ratio > similar_to.get(j, (0, 0.0))[1]:
                         similar_to[j] = (i, ratio)
 
+    # SINIR: kategoriler ARASI near-duplicate. Neredeyse ayni metnin iki farkli
+    # etikette olmasi modele celiskili sinyal verir; biri muhtemelen yanlis
+    # kategoride. Bu kontrol olmadan araç bu hata turunu hic goremiyordu --
+    # gold'da yanlis kategorili bir kayit ancak sans eseri "uzunluk" bayragiyla
+    # yakalanmisti. Kategori ICI karsilastirmadan ayri tutuluyor cunku burada
+    # sorun tekrar degil, ETIKET TUTARSIZLIGI.
+    conflict_with: dict[int, tuple[int, float]] = {}
+    kategoriler = list(by_cat)
+    for a_pos, cat_a in enumerate(kategoriler):
+        for cat_b in kategoriler[a_pos + 1:]:
+            for i in by_cat[cat_a]:
+                for j in by_cat[cat_b]:
+                    ratio = similarity(norms[i], norms[j])
+                    if ratio >= C.CLUSTER_THRESHOLD:
+                        for x, y in ((i, j), (j, i)):
+                            if ratio > conflict_with.get(x, (0, 0.0))[1]:
+                                conflict_with[x] = (y, ratio)
+
     # kategori bazli kod ve istasyon istatistigi
     code_share: dict[str, float] = {}
     station_top: dict[str, tuple[str, int]] = {}
@@ -179,6 +199,10 @@ def analyze(records: list[dict]) -> tuple[list[dict], dict]:
         if i in similar_to:
             j, ratio = similar_to[i]
             flags.append(f"BENZER({ratio:.2f}->#{j})")
+
+        if i in conflict_with:
+            j, ratio = conflict_with[i]
+            flags.append(f"SINIR({ratio:.2f}->#{j} {records[j]['kategori']})")
 
         nwords = len(metin.split())
         lo, hi = STYLE_WORD_RANGE.get(stil, (3, 25))

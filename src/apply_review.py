@@ -53,6 +53,26 @@ SEED_TEXT_FIX = [
         "makinist kabini fren manasi tikaniyo",
         "makinist kabini fren manivelasi tikaniyo",
     ),
+    # Ucuncu tur (19 Agu 2026): elle okumada bulunan, VAR OLMAYAN kelimeler.
+    # Olcut stil sozlesmesi: bu uc kayit 'standart'/'devrik' etiketli, config
+    # bu stiller icin dogru Turkce yazimi ZORUNLU tutuyor (yazim hatasi sadece
+    # 'yazim_yanlisi' stiline ait). Gercekci klavye hatasi ile stil sozlesmesi
+    # ihlali farkli seyler.
+    (
+        "yazilim_sistem",           # "torna" tezgah demek, kastedilen "turnike"
+        "İstanbulkart okuyucu yanıt vermiyor, giriş tornası.",
+        "İstanbulkart okuyucu yanıt vermiyor, giriş turnikesi.",
+    ),
+    (
+        "guvenlik_emniyet",         # "merkeziyet" boyle bir kullanim yok
+        "Acil durum butonu basıldığında merkeziyete sinyal gitmiyor.",
+        "Acil durum butonu basıldığında merkeze sinyal gitmiyor.",
+    ),
+    (
+        "altyapi_insaat",           # "kirismak" burusmak demek; betonarme kirilir
+        "Taksim M2 viyadukt ray altı betonarme kırışması onarım bekliyor.",
+        "Taksim M2 viyadukt ray altı betonarme kırılması onarım bekliyor.",
+    ),
 ]
 
 GOLD_DELETE: list[tuple[str, str]] = [

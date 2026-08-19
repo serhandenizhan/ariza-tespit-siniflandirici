@@ -832,7 +832,7 @@ Acil durum aydınlatması Gayrettepe peronunda yanmıyor.,guvenlik_emniyet,4,sta
 Haliç istasyon güvenlik kamerası kayıtları silinmiş bulunuyor.,guvenlik_emniyet,4,standart,openrouter:amplify
 Kozyatağı peron 1 duman dedektörü temizlikten dolayı uyardı.,guvenlik_emniyet,4,standart,openrouter:amplify
 Zeytinburnu istasyon acil çıkış yönlendirme işaretleri yanmıyor.,guvenlik_emniyet,4,standart,openrouter:amplify
-Merter peron kapısı PSD acil açma kolu kırık.,guvenlik_emniyet,4,standart,openrouter:amplify
+Merter peron kapısı PSD acil açma kolu kırık.,istasyon_mekanik,1,standart,openrouter:amplify
 Maltepe istasyon yangın pompası otomatik devreye girmemektedir.,guvenlik_emniyet,4,standart,openrouter:amplify
 Acil müdahale ekibi Sanayi şüpheli paket için çağrıldı.,guvenlik_emniyet,4,standart,openrouter:amplify
 Vezneciler kontrol merkezi CCTV matris ekranı boş gözüküyor.,guvenlik_emniyet,4,standart,openrouter:amplify
@@ -1176,7 +1176,7 @@ Bilet holü duvar nemlenme,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Tünel drenaj boru kırığı,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Ray düzey bozulması belirgin,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Merdiven iniş koridor çatlak,altyapi_insaat,5,cok_kisa,openrouter:amplify
-Asansör kapı çerçevesi kırık,altyapi_insaat,5,cok_kisa,openrouter:amplify
+Asansör kapı çerçevesi kırık,istasyon_mekanik,1,cok_kisa,openrouter:amplify
 Peron direk koruyucu hasarı,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Koridor tavan ızgara dökülmesi,altyapi_insaat,5,cok_kisa,openrouter:amplify
 Tünel yan duvar sızıntısı,altyapi_insaat,5,cok_kisa,openrouter:amplify
@@ -1317,7 +1317,7 @@ yangin alarmi yanlis calisti peron bosaltildi,yolcu_operasyon,6,yazim_yanlisi,op
 seferler seyreltildi yognluk onleniyo,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
 yonlendirme tabelasi yanlis gosteriyo yolcu kayboldi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
 indirimli kart tanimlamiyo ucret tam alindi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
-peron kapisi kilitli acil cikis kullanildi,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
+peron kapisi kilitli acil cikis kullanildi,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
 trende klima calismiyo yolcu sikinti cekti,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
 uskudar guvenlik gorevlisi yok turnike basinda karga,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify
 yolcu hastaligi sefer 10 dk gecikti,yolcu_operasyon,6,yazim_yanlisi,openrouter:amplify

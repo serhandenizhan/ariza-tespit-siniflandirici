@@ -129,8 +129,10 @@ def kumele(kayitlar: list[dict]) -> list[list[int]]:
     birbirine baglar ve katmanli bolme imkansizlasir. (Birebir ayni metnin
     iki kategoride olmasi zaten temizle() asamasinda elenmis durumda.)
 
-    review.similarity ile AYNI olcut kullanilir -- uretim sirasinda near-dup
-    diye reddedilen bir kayitla burada kumelenen kayit ayni mantiga tabi olsun.
+    Olcut review.similarity (uretimle ayni fonksiyon) ama ESIK farkli:
+    C.CLUSTER_THRESHOLD (0.80), uretimdeki C.NEAR_DUP_THRESHOLD (0.85) degil.
+    Sebep config.py'de detayli: burada kacirmanin bedeli (metrigin sismesi)
+    yanlis birlestirmenin bedelinden (kucuk cesitlilik kaybi) cok daha agir.
     """
     uf = UnionFind(len(kayitlar))
 
@@ -142,7 +144,7 @@ def kumele(kayitlar: list[dict]) -> list[list[int]]:
         for a, i in enumerate(idxs):
             for j in idxs[a + 1:]:
                 if R.similarity(kayitlar[i]["_norm"], kayitlar[j]["_norm"]) \
-                        >= C.NEAR_DUP_THRESHOLD:
+                        >= C.CLUSTER_THRESHOLD:
                     uf.birlestir(i, j)
 
     kumeler: dict[int, list[int]] = defaultdict(list)

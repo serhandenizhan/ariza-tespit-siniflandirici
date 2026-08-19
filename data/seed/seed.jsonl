@@ -35,7 +35,7 @@
 {"metin": "Kadıköy bilet otomatında İstanbulkart bakiye hatası veriyor.", "kategori": "yazilim_sistem", "stil": "standart", "kaynak": "openrouter:seed"}
 {"metin": "Şişli-Mecidiyeköy PID ekranlarında sefer bilgileri güncellenmiyor.", "kategori": "yazilim_sistem", "stil": "standart", "kaynak": "openrouter:seed"}
 {"metin": "Üsküdar BSO-05 otomatı banknot kabul etmiyor, sistem kilitli.", "kategori": "yazilim_sistem", "stil": "standart", "kaynak": "openrouter:seed"}
-{"metin": "İstanbulkart okuyucu yanıt vermiyor, giriş tornası.", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:seed"}
+{"metin": "İstanbulkart okuyucu yanıt vermiyor, giriş turnikesi.", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:seed"}
 {"metin": "Ağ kesintisi, SCADA arayüzü erişilemiyor merkezi.", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:seed"}
 {"metin": "Mobil uygulama dondu, bilet alınamıyor.", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:seed"}
 {"metin": "bilet otomati kartin okumuyor hata kodu 404", "kategori": "yazilim_sistem", "stil": "yazim_yanlisi", "kaynak": "openrouter:seed"}
@@ -46,7 +46,7 @@
 {"metin": "Sunucu bağlantı hatası", "kategori": "yazilim_sistem", "stil": "cok_kisa", "kaynak": "openrouter:seed"}
 {"metin": "Kadıköy istasyonunda peron güvenlik kamerası görüntüsü bozuluyor.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:seed"}
 {"metin": "Şişli-Mecidiyeköy'de yangın algılama sensörü test sırasında uyarı verdi.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:seed"}
-{"metin": "Acil durum butonu basıldığında merkeziyete sinyal gitmiyor.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:seed"}
+{"metin": "Acil durum butonu basıldığında merkeze sinyal gitmiyor.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:seed"}
 {"metin": "Merkez CCTV kayıt cihazı dondu.", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:seed"}
 {"metin": "İstasyon yangın boru basıncı düşük.", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:seed"}
 {"metin": "Acil çıkış kilidi peron kapısı takılı.", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:seed"}
@@ -58,7 +58,7 @@
 {"metin": "Kadıköy istasyonu B çıkış koridorunda tavan panellerinden su damlaması devam ediyor.", "kategori": "altyapi_insaat", "stil": "standart", "kaynak": "openrouter:seed"}
 {"metin": "Ayrılıkçeşme tünel Segment aralarından yüksek basınçlı su sızıntısı raporlandı.", "kategori": "altyapi_insaat", "stil": "standart", "kaynak": "openrouter:seed"}
 {"metin": "Gayrettepe M2 peronu duvar fayanslarında çatlaklar ve dökülmeler tespit edildi.", "kategori": "altyapi_insaat", "stil": "standart", "kaynak": "openrouter:seed"}
-{"metin": "Taksim M2 viyadukt ray altı betonarme kırışması onarım bekliyor.", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:seed"}
+{"metin": "Taksim M2 viyadukt ray altı betonarme kırılması onarım bekliyor.", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:seed"}
 {"metin": "Yenikapı Marmaray transfer tüneli drenaj pompa havuzu taşması meydana geldi.", "kategori": "altyapi_insaat", "stil": "standart", "kaynak": "openrouter:seed"}
 {"metin": "Şişhane çıkış merdiveni son basamak betonu çatlak yüzünden kapatıldı.", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:seed"}
 {"metin": "kadikoy metro a vm ust gecidi korkuluk baglantisi kopuk", "kategori": "altyapi_insaat", "stil": "yazim_yanlisi", "kaynak": "openrouter:seed"}

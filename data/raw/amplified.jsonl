@@ -831,7 +831,7 @@
 {"metin": "Haliç istasyon güvenlik kamerası kayıtları silinmiş bulunuyor.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:amplify"}
 {"metin": "Kozyatağı peron 1 duman dedektörü temizlikten dolayı uyardı.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:amplify"}
 {"metin": "Zeytinburnu istasyon acil çıkış yönlendirme işaretleri yanmıyor.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:amplify"}
-{"metin": "Merter peron kapısı PSD acil açma kolu kırık.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:amplify"}
+{"metin": "Merter peron kapısı PSD acil açma kolu kırık.", "kategori": "istasyon_mekanik", "stil": "standart", "kaynak": "openrouter:amplify"}
 {"metin": "Maltepe istasyon yangın pompası otomatik devreye girmemektedir.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:amplify"}
 {"metin": "Acil müdahale ekibi Sanayi şüpheli paket için çağrıldı.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:amplify"}
 {"metin": "Vezneciler kontrol merkezi CCTV matris ekranı boş gözüküyor.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:amplify"}
@@ -1175,7 +1175,7 @@
 {"metin": "Tünel drenaj boru kırığı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Ray düzey bozulması belirgin", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Merdiven iniş koridor çatlak", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Asansör kapı çerçevesi kırık", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
+{"metin": "Asansör kapı çerçevesi kırık", "kategori": "istasyon_mekanik", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Peron direk koruyucu hasarı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Koridor tavan ızgara dökülmesi", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Tünel yan duvar sızıntısı", "kategori": "altyapi_insaat", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
@@ -1316,7 +1316,7 @@
 {"metin": "seferler seyreltildi yognluk onleniyo", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "yonlendirme tabelasi yanlis gosteriyo yolcu kayboldi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "indirimli kart tanimlamiyo ucret tam alindi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "peron kapisi kilitli acil cikis kullanildi", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
+{"metin": "peron kapisi kilitli acil cikis kullanildi", "kategori": "guvenlik_emniyet", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "trende klima calismiyo yolcu sikinti cekti", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "uskudar guvenlik gorevlisi yok turnike basinda karga", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "yolcu hastaligi sefer 10 dk gecikti", "kategori": "yolcu_operasyon", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}

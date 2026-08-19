@@ -175,7 +175,32 @@ TARGET_PER_CATEGORY = 200   # nihai egitim verisi (cogaltma sonrasi)
 
 MIN_CHARS = 8               # bundan kisa bildirimler atilir
 MAX_CHARS = 300             # bundan uzun bildirimler atilir
-NEAR_DUP_THRESHOLD = 0.85   # bu benzerligin ustundekiler ayni kumede sayilir
+# Benzerlik esikleri. IKI AYRI DEGER, cunku esik iki farkli isi goruyor ve
+# hata maliyetleri simetrik degil (19 Agu 2026 kalibrasyonu):
+#
+#   URETIM (generate_data/generate_seed -- yeni kaydi reddet):
+#     yanlis reddetme -> iyi bir cumle bosa gider, kota harcanir
+#     kacirma         -> veri biraz tekrarli olur
+#     Maliyetler dengeli, 0.85 uygun.
+#
+#   BOLME (preprocess -- kumeleme):
+#     yanlis birlestirme -> iki kayit ayni bolmeye duser, kucuk cesitlilik kaybi
+#     kacirma            -> ayni cumlenin varyasyonu hem train hem test'e duser,
+#                           METRIK SISER (sahte yuksek dogruluk)
+#     Kacirmanin bedeli cok daha agir, o yuzden daha agresif: 0.80.
+#
+# Kalibrasyon olcumu (1600 kayit, ayni kategori icinde):
+#   0.85 -> 1 cift birlesti | 0.82 -> 8 | 0.80 -> 23 | 0.78 -> 39 (kumeler 5'e
+#   zincirlenmeye basliyor) | 0.75 -> 88 (fazla agresif)
+# 0.80-0.85 bandinda gercek anlamsal kopyalar oldugu elle dogrulandi, orn:
+#   "Taksim istasyonunda 4 numarali vagondaki yolcu anons cihazi ses vermiyor."
+#   "Yolcu anons cihazi ses vermiyor 4. vagon"                        (0.843)
+# Ayni bantta gercekten FARKLI arizalar da var (olcut sozcuksel, anlamsal degil):
+#   "makinist kabini sag tarafi ayna kirik" / "makinist kabini saati durmus"
+#                                                                     (0.804)
+# 0.80'de kume boyutu 2'de kaliyor (zincirleme yok), bedel 23 kayit / 1600.
+NEAR_DUP_THRESHOLD = 0.85   # uretimde yeni kayit reddi
+CLUSTER_THRESHOLD = 0.80    # preprocess'te split oncesi kumeleme
 NEAR_DUP_JACCARD = 0.55     # kelime kumesi ortusme esigi (SequenceMatcher yaninda)
 
 # Bildirimlerin yazim stilleri. Gercek personel her zaman duzgun yazmaz.
