@@ -1599,3 +1599,78 @@ Personel kapısı çöp,temizlik_cevre,7,cok_kisa,openrouter:amplify
 Peron duvarı yazılı,temizlik_cevre,7,cok_kisa,openrouter:amplify
 Tuvalet kağıt bitti,temizlik_cevre,7,cok_kisa,openrouter:amplify
 Merdiven basamak kaygan,temizlik_cevre,7,cok_kisa,openrouter:amplify
+vagon ic aydinlatma calismiyo 3 nolu vagon,arac_tren,0,yazim_yanlisi,openrouter:seed
+makinist kabini fren manivelasi tikaniyo,arac_tren,0,yazim_yanlisi,openrouter:seed
+vagon kapi acilmiyo 1 numarali vagonda,arac_tren,0,yazim_yanlisi,openrouter:seed
+Vagon 3 kapı arızalı,arac_tren,0,cok_kisa,openrouter:seed
+Vagon 5 klima bozuk,arac_tren,0,cok_kisa,openrouter:seed
+Makinist kabini anons bozuk,arac_tren,0,cok_kisa,openrouter:seed
+Mecidiyeköy istasyonunda 2 numaralı yürüyen merdiven aniden durdu ve alarm verdi.,istasyon_mekanik,1,standart,openrouter:seed
+"Kadıköy istasyonu B çıkışı asansörü kapıları açılıyor kapanmıyor, yolcular içeride kaldı.",istasyon_mekanik,1,standart,openrouter:seed
+"Şişli-Mecidiyeköy hatta 4 numaralı peron kapısı (PSD) kilitlemiyor, sefer güvenliği riske giriyor.",istasyon_mekanik,1,standart,openrouter:seed
+Yürüyen merdiven durdu 3. peron,istasyon_mekanik,1,devrik,openrouter:seed
+Turnike kolu kırıldı giriş katı,istasyon_mekanik,1,devrik,openrouter:seed
+Asansör kapısı takıldı B1 kat,istasyon_mekanik,1,devrik,openrouter:seed
+asansor calismiyor kartal istasyon,istasyon_mekanik,1,yazim_yanlisi,openrouter:seed
+peron kapisi acilmiyor yenisahra,istasyon_mekanik,1,yazim_yanlisi,openrouter:seed
+turnike donmesi var haciosman,istasyon_mekanik,1,yazim_yanlisi,openrouter:seed
+Turnike 5 mekanik arıza,istasyon_mekanik,1,cok_kisa,openrouter:seed
+PSD kapı kilitlenmedi,istasyon_mekanik,1,cok_kisa,openrouter:seed
+Kadıköy istasyonunda peron aydınlatması tamamen söndü.,elektrik_enerji,2,standart,openrouter:seed
+Şişli-Mecidiyeköy istasyonunda acil aydınlatma üniteleri test sırasında yanmadı.,elektrik_enerji,2,standart,openrouter:seed
+Jeneratör test çalışması devreye girmedi peron.,elektrik_enerji,2,devrik,openrouter:seed
+Üçüncü ray voltaj düşüşü alarm verdi istasyon.,elektrik_enerji,2,devrik,openrouter:seed
+istasyon aydinlatmasi kesik electrik panosu arizali,elektrik_enerji,2,yazim_yanlisi,openrouter:seed
+ups bataryalari sarj tutmuyor yedek enerji yok,elektrik_enerji,2,yazim_yanlisi,openrouter:seed
+trafoda anormal ses ve yukselen sicaklik algilandi,elektrik_enerji,2,yazim_yanlisi,openrouter:seed
+Peron aydınlatması söndü.,elektrik_enerji,2,cok_kisa,openrouter:seed
+Katener voltajı düşük.,elektrik_enerji,2,cok_kisa,openrouter:seed
+Jeneratör çalışmıyor.,elektrik_enerji,2,cok_kisa,openrouter:seed
+Kadıköy bilet otomatında İstanbulkart bakiye hatası veriyor.,yazilim_sistem,3,standart,openrouter:seed
+Şişli-Mecidiyeköy PID ekranlarında sefer bilgileri güncellenmiyor.,yazilim_sistem,3,standart,openrouter:seed
+"Üsküdar BSO-05 otomatı banknot kabul etmiyor, sistem kilitli.",yazilim_sistem,3,standart,openrouter:seed
+"İstanbulkart okuyucu yanıt vermiyor, giriş turnikesi.",yazilim_sistem,3,devrik,openrouter:seed
+"Ağ kesintisi, SCADA arayüzü erişilemiyor merkezi.",yazilim_sistem,3,devrik,openrouter:seed
+bilet otomati kartin okumuyor hata kodu 404,yazilim_sistem,3,yazim_yanlisi,openrouter:seed
+pid ekranlari dondu sefer bilgisi gelmiyor,yazilim_sistem,3,yazim_yanlisi,openrouter:seed
+scada baglantisi kopmus veri yok merkezde,yazilim_sistem,3,yazim_yanlisi,openrouter:seed
+BSO-02 sistem hatası,yazilim_sistem,3,cok_kisa,openrouter:seed
+Turnike 3 okuma hatası,yazilim_sistem,3,cok_kisa,openrouter:seed
+Sunucu bağlantı hatası,yazilim_sistem,3,cok_kisa,openrouter:seed
+Kadıköy istasyonunda peron güvenlik kamerası görüntüsü bozuluyor.,guvenlik_emniyet,4,standart,openrouter:seed
+Şişli-Mecidiyeköy'de yangın algılama sensörü test sırasında uyarı verdi.,guvenlik_emniyet,4,standart,openrouter:seed
+Acil durum butonu basıldığında merkeze sinyal gitmiyor.,guvenlik_emniyet,4,standart,openrouter:seed
+Merkez CCTV kayıt cihazı dondu.,guvenlik_emniyet,4,devrik,openrouter:seed
+İstasyon yangın boru basıncı düşük.,guvenlik_emniyet,4,devrik,openrouter:seed
+Acil çıkış kilidi peron kapısı takılı.,guvenlik_emniyet,4,devrik,openrouter:seed
+guvenlik kamerasi goruntusu gelmiyo merkeze,guvenlik_emniyet,4,yazim_yanlisi,openrouter:seed
+acil buton calismiyo kartal istasyon,guvenlik_emniyet,4,yazim_yanlisi,openrouter:seed
+turnikeden atlayan var cikis kapisi,guvenlik_emniyet,4,yazim_yanlisi,openrouter:seed
+Yangın sensörü arızalı,guvenlik_emniyet,4,cok_kisa,openrouter:seed
+CCTV kamera bozuk,guvenlik_emniyet,4,cok_kisa,openrouter:seed
+Kadıköy istasyonu B çıkış koridorunda tavan panellerinden su damlaması devam ediyor.,altyapi_insaat,5,standart,openrouter:seed
+Ayrılıkçeşme tünel Segment aralarından yüksek basınçlı su sızıntısı raporlandı.,altyapi_insaat,5,standart,openrouter:seed
+Taksim M2 viyadukt ray altı betonarme kırılması onarım bekliyor.,altyapi_insaat,5,devrik,openrouter:seed
+Şişhane çıkış merdiveni son basamak betonu çatlak yüzünden kapatıldı.,altyapi_insaat,5,devrik,openrouter:seed
+kadikoy metro a vm ust gecidi korkuluk baglantisi kopuk,altyapi_insaat,5,yazim_yanlisi,openrouter:seed
+mecidiyekoy m7 tunel duvarinda nemlenme ve alg olusumu var,altyapi_insaat,5,yazim_yanlisi,openrouter:seed
+sisli istasyon peron zemin dilatasyon capraz catlasi buyuyor,altyapi_insaat,5,yazim_yanlisi,openrouter:seed
+Tünel segment sızıntısı.,altyapi_insaat,5,cok_kisa,openrouter:seed
+Merdiven basamak kırığı.,altyapi_insaat,5,cok_kisa,openrouter:seed
+"Yolcu bilgilendirme anonsu yapılmamış, yolcular yanlış perona yönelmiştir.",yolcu_operasyon,6,standart,openrouter:seed
+"Mecidiyeköy peronu dolu, seferler seyreltildi.",yolcu_operasyon,6,devrik,openrouter:seed
+Personel eksigi cikis yonlendirmesi yapilamiyor.,yolcu_operasyon,6,yazim_yanlisi,openrouter:seed
+Kart okumuyor ucret odendi bilet alamadi.,yolcu_operasyon,6,yazim_yanlisi,openrouter:seed
+Kapi acilmiyor yolcu saglam cikis.,yolcu_operasyon,6,yazim_yanlisi,openrouter:seed
+Sefer iptal Levent.,yolcu_operasyon,6,cok_kisa,openrouter:seed
+Peron kalabalik Gayrettepe.,yolcu_operasyon,6,cok_kisa,openrouter:seed
+Yolcu dusmesi gecikme.,yolcu_operasyon,6,cok_kisa,openrouter:seed
+Tarife hatasi biletmatik.,yolcu_operasyon,6,cok_kisa,openrouter:seed
+"Kadıköy istasyonu peronunda çöp konteyneri taşmış, etraf dağınık.",temizlik_cevre,7,standart,openrouter:seed
+Ayrılıkçeşme B2 giriş tuvaletlerinde temizlik eksikliği ve kötü koku şikayeti alındı.,temizlik_cevre,7,standart,openrouter:seed
+"Üsküdar istasyonu mezzanin katında dökülen kahve lekesi temizlenmedi, kayganlık riski var.",temizlik_cevre,7,standart,openrouter:seed
+asansor kabinici cok kirli yazici tozu dagli,temizlik_cevre,7,yazim_yanlisi,openrouter:seed
+peronda sakiz lekeleri cikarilamamis kaygan,temizlik_cevre,7,yazim_yanlisi,openrouter:seed
+fare goruldu bilet holu kose basinda,temizlik_cevre,7,yazim_yanlisi,openrouter:seed
+Peronda buzlanma tuzlanmadı,temizlik_cevre,7,cok_kisa,openrouter:seed
+Grafiti duvar peron duvarı,temizlik_cevre,7,cok_kisa,openrouter:seed

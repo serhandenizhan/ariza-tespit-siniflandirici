@@ -293,15 +293,21 @@ def rapor(kayitlar, kumeler, bolmeler, atilan, gold) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Adim 3 -- on isleme ve bolme")
-    ap.add_argument("--include-seed", action="store_true",
-                    help="seed.jsonl'i de egitim havuzuna kat (gold ASLA girmez)")
+    ap.add_argument("--include-seed", dest="include_seed", action="store_true",
+                    default=None,
+                    help="seed.jsonl'i egitim havuzuna kat "
+                         f"(varsayilan: config.INCLUDE_SEED_IN_TRAINING)")
+    ap.add_argument("--no-include-seed", dest="include_seed", action="store_false",
+                    help="seed.jsonl'i KATMA (kiyas icin)")
     ap.add_argument("--report-only", action="store_true",
                     help="dosya yazma, sadece raporu goster")
     args = ap.parse_args()
 
     rng = random.Random(C.SEED)
 
-    pool = load_pool(args.include_seed)
+    include_seed = (C.INCLUDE_SEED_IN_TRAINING if args.include_seed is None
+                    else args.include_seed)
+    pool = load_pool(include_seed)
     kayitlar, atilan = temizle(pool)
     print(f"temizlik sonrasi: {len(kayitlar)} kayit")
 

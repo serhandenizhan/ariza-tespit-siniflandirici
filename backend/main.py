@@ -30,6 +30,7 @@ Calistirma:
 from __future__ import annotations
 
 import json
+import os
 import random
 import threading
 import time
@@ -41,6 +42,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from src import config as C
+from src.extract import cikar as yapisal_cikar
 
 # ---------------------------------------------------------------------------
 # Model durumu
@@ -83,15 +85,22 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Arayuz (Adim 6) ayri bir gelistirme sunucusunda calisacak, tarayici
-# cross-origin istegi engellemesin diye. Prototip oldugu icin genis birakildi;
-# kuruma entegrasyonda daraltilmali.
+# Arayuz ayri portta calistigi icin CORS gerekiyor. Onceden allow_origins=["*"]
+# idi (herhangi bir site tarayici uzerinden bu API'yi cagirabilirdi); artik
+# yalnizca config.CORS_ORIGINS listesindeki kaynaklar. Uretimde CORS_ORIGINS
+# ortam degiskeniyle gercek alan adi verilir.
+_izinli = [
+    o.strip()
+    for o in os.environ.get("CORS_ORIGINS", ",".join(C.CORS_ORIGINS)).split(",")
+    if o.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_izinli,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
+print(f"[backend] CORS izinli kaynaklar: {_izinli}")
 
 
 # ---------------------------------------------------------------------------
@@ -113,6 +122,15 @@ class PredictResponse(BaseModel):
     probabilities: dict[str, float] = Field(
         ..., description="Tüm kategoriler için olasılık (kategori anahtarı -> olasılık)"
     )
+
+    # --- yapisal cikarim (Adim 7, kurallı) --------------------------------
+    # Bu dort alan MODELDEN gelmiyor, src/extract.py'deki sozluk/desen
+    # eslesmesinden geliyor. Bulunamayan alan None doner -- ozellikle `line`
+    # cogu zaman None, cunku bildirimlerin sadece ~%6'sinda hat kodu geciyor.
+    line: str | None = Field(None, description="Hat kodu, örn. M4")
+    station: str | None = Field(None, description="İstasyon adı")
+    equipment: str | None = Field(None, description="Arızalı ekipman")
+    symptom: str | None = Field(None, description="Belirti (kanonik tip)")
 
     low_confidence: bool = Field(..., description="confidence < CONFIDENCE_THRESHOLD")
     manual_review: bool = Field(
@@ -216,6 +234,10 @@ def run_prediction(text: str) -> dict:
         "secondary_confidence": None,
         "secondary_message": None,
         "margin": margin,
+        # Yapisal alanlar siniflandirmadan BAGIMSIZ uretiliyor; biri
+        # digerini beslemiyor. Kurallı katman modelden hizli oldugu icin
+        # yanit suresine anlamli bir yuk bindirmiyor.
+        **yapisal_cikar(text),
     }
 
     # Marj kucukse model iki kategori arasinda kararsiz demektir. Taksonomide

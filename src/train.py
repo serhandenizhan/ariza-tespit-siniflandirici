@@ -184,7 +184,7 @@ def degerlendir(model, yukleyici, cihaz) -> tuple[float, float, float]:
 
 
 def egit(args) -> None:
-    tohum_ek()
+    tohum_ek(args.seed if args.seed is not None else C.SEED)
     cihaz = cihaz_sec(args.device)
     print(f"cihaz: {cihaz}  |  model: {C.BASE_MODEL}  |  LoRA: {not args.no_lora}")
 
@@ -277,7 +277,7 @@ def egit(args) -> None:
         "batch_size": C.BATCH_SIZE,
         "learning_rate": args.lr or C.LEARNING_RATE,
         "max_length": C.MAX_LENGTH,
-        "seed": C.SEED,
+        "seed": args.seed if args.seed is not None else C.SEED,
         "cihaz": str(cihaz),
         "ascii_cogaltma": cogalt,
         "train_kayit": len(train_satir),
@@ -298,6 +298,9 @@ def main() -> None:
     ap.add_argument("--epochs", type=int, help=f"varsayilan {C.NUM_EPOCHS}")
     ap.add_argument("--lr", type=float, help=f"varsayilan {C.LEARNING_RATE}")
     ap.add_argument("--no-lora", action="store_true", help="tam fine-tuning yap")
+    ap.add_argument("--seed", type=int,
+                    help=f"tohum; varsayilan {C.SEED}. Varyans olcumu icin "
+                         f"farkli tohumlarla tekrar calistirilir.")
     ap.add_argument("--no-augment", action="store_true",
                     help="ASCII katlanmis kopyalari EKLEME (kiyas icin)")
     ap.add_argument("--device", choices=["mps", "cpu"], help="varsayilan: varsa mps")

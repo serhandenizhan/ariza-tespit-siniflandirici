@@ -38,7 +38,8 @@ ariza-tespit-siniflandirici/
 │   │   ├── gold_v2_groq_backup.jsonl
 │   │   ├── seed_v3_groq_fixed_backup.jsonl  # Groq/Llama3.3 duzeltilmis prompt
 │   │   ├── gold_v3_groq_fixed_backup.jsonl
-│   │   └── gold_v4_pre_guvenlik_backup.jsonl  # guvenlik yeniden uretiminden once
+│   │   ├── gold_v4_pre_guvenlik_backup.jsonl  # guvenlik yeniden uretiminden once
+│   │   └── extraction_gold.jsonl   # 40 elle etiketlenmis cikarim referansi
 │   ├── raw/
 │   │   ├── amplified.jsonl         # Adim 2b ciktisi, 1600 kayit (%100 Nemotron)
 │   │   └── amplified_ollama_backup.jsonl  # degisim oncesi 1586 kayit (arsiv/kiyas)
@@ -66,7 +67,8 @@ ariza-tespit-siniflandirici/
 │   ├── check_openrouter_models.py  # OpenRouter canli model/fiyat listesi
 │   ├── train.py                    # Adim 4a -- BERTurk + LoRA egitimi
 │   ├── evaluate.py                 # Adim 4b -- metrikler + confusion + hata analizi
-│   └── calibrate.py                # Adim 4c -- k-fold OOF esik kalibrasyonu
+│   ├── calibrate.py                # Adim 4c -- k-fold OOF esik kalibrasyonu
+│   └── extract.py                  # Adim 7 -- yapisal cikarim (kurallı)
 ├── backend/
 │   ├── __init__.py
 │   └── main.py                     # Adim 5 -- FastAPI servisi
@@ -150,11 +152,13 @@ varyasyon olarak kabul edildi (bkz. review.py bölümü).
 | seed | 12/kat × 8 = 96 | **93** | elle triyajda 3 kayıt silindi |
 | gold | 10/kat × 8 = 80 | **80** | tam, 8 kategori × 10 |
 | çoğaltma | 200/kat × 8 = 1600 | **1600** | tam; %100 Nemotron. SINIR düzeltmeleri sonrası kategori dengesi 202/200/199 (±2) |
+| **eğitim havuzu** | — | **1675** | 1600 çoğaltma + 93 seed, temizlik sonrası (`INCLUDE_SEED_IN_TRAINING`) |
 
-Çoğaltma sonrası bölme (Adım 3): train **1280** / val **160** / test **160**
-(%80/%10/%10). Kategori başına train 159-162 arası (SINIR düzeltmeleri
-dengeyi ±2 kaydırdı), val ve test her kategoride tam 20. Ayrıca gold_test
-**80** (eğitime hiç girmez).
+Bölme (Adım 3): train **1340** / val **168** / test **167** (%80/%10/%10).
+Ayrıca gold_test **80** — eğitime ve few-shot'a HİÇ girmez.
+
+(Seed eğitime katılmadan önceki bölme 1280/160/160 idi; eski ölçümler bu
+sayılarla yapıldı, karşılaştırmalarda buna dikkat.)
 
 (Not: orijinal PDF taslağında 70/kategori × 6 kategori = 420 yazıyordu.
 Kategori sayısı 6'dan 8'e, hedef hacim 70'ten 200'e çıkarıldı — rapor
@@ -184,7 +188,9 @@ kesiliyordu. 8192'ye çıkarılınca aynı iş 5 çağrıda 8 kayıt yerine 7 ç
 - MAX_LENGTH=64, NUM_EPOCHS=12, BATCH_SIZE=16, **LEARNING_RATE=5e-4**
   (2e-5 degildi -- bkz. Adim 4 bolumu, en onemli hata buydu)
 - `AUGMENT_ASCII_FOLD = True` — egitimde aksansiz kopyalar da eklenir
-  (train 1280 → 2219). Gerekcesi ve olcumu Adim 4 bolumunde.
+  (train 1340 → 2320). Gerekcesi ve olcumu Adim 4 bolumunde.
+- `INCLUDE_SEED_IN_TRAINING = True` — seed.jsonl egitime katilir (aşağıda
+  ölçümü var). Gold few-shot'ta da eğitimde de ASLA kullanılmaz.
 - Split: %80 train / %10 val / %10 test
 - Başarı kriteri: accuracy ≥ 0.85, macro F1 ≥ 0.82, hiçbir sınıf F1 < 0.75
 
@@ -525,22 +531,20 @@ ile seed eğitime katılırsa ortaya çıkar.
    kapsamlı olmadığı (dar ama kesin) açıkça belgelendi.
 10. ✅ **KAPANDI (backend tarafı) — ikincil kategori `/predict`'te çalışıyor.**
     Arayüz tarafı Adım 6'da yapılacak.
-12. **CORS şu an `allow_origins=["*"]`** — prototip için. Kuruma
-    entegrasyonda daraltılmalı.
+12. ✅ **KAPANDI — CORS daraltıldı.** `allow_origins=["*"]` yerine
+    `config.CORS_ORIGINS` (yerel geliştirme sunucuları). Üretimde
+    `CORS_ORIGINS` ortam değişkeniyle gerçek alan adı verilir. Metotlar da
+    `GET`/`POST` ile sınırlandı. Doğrulandı: izinli kaynak `Access-Control-
+    Allow-Origin` alıyor, yabancı site almıyor.
 13. ✅ **KAPANDI — kalibrasyon k-fold OOF'a taşındı** (`src/calibrate.py`).
     Val'in kirli olması ve 9 hatayla eşik seçmenin gürültülü olması sorunu
     çözüldü: 1280 kayıt / 102 hata üzerinden temiz taban. Sonuç:
     `CONFIDENCE_THRESHOLD` 0.70 → **0.75**, `MARGIN_THRESHOLD` 0.40 → **0.30**.
-14. **Yapısal çıkarım (line/station/equipment/symptom) YAPILMADI.** Sistem şu
-    an sadece `category` döndürüyor. İstenen çıktı biçimi:
-    `{category, line, station, equipment, symptom, confidence}`. Planlanan
-    sıra: (1) kurallı extraction — istasyon adları ve hat kodları zaten
-    `config.SLOT_VALUES`'ta var, (2) NER/token classification, (3) gerekirse
-    LLM fallback. Başarı kriteri alan bazlı precision/recall raporu.
-    Kullanıcı kararıyla Adım 6'dan sonraya bırakıldı.
-11. **`--include-seed` hâlâ kapalı.** 93 kayıtlık seed eğitime katılmıyor.
-    Katılırsa küçük bir kazanç olabilir; ölçülmedi. Seed'in few-shot yemi
-    olması eğitime girmesine engel değil (gold farklı, o asla girmez).
+14. ✅ **KAPANDI — yapısal çıkarım yapıldı** (`src/extract.py`, Adım 7).
+    Kurallı katman; alan bazlı precision/recall raporuyla birlikte aşağıda.
+11. ✅ **KAPANDI — `INCLUDE_SEED_IN_TRAINING = True`** (19 Ağu). Ölçüldü,
+    aşağıda "Tohum varyansı" bölümünde detaylı. Ortalama kazanç kanıtlanmadı
+    ama en kötü durum belirgin iyileşti.
 
 ## Yol Haritası — Kalan Adımlar
 
@@ -632,9 +636,9 @@ geçildi.**
 
 | metrik | test (160) | gold (80) | hedef |
 | --- | --- | --- | --- |
-| accuracy | 0.9125 | **0.9250** | 0.85 ✅ |
-| macro F1 | 0.9135 | **0.9247** | 0.82 ✅ |
-| en düşük sınıf F1 | 0.8293 | **0.8000** | 0.75 ✅ |
+| accuracy | 0.9102 | **0.9500** | 0.85 ✅ |
+| macro F1 | 0.9117 | **0.9497** | 0.82 ✅ |
+| en düşük sınıf F1 | 0.8333 | **0.8889** | 0.75 ✅ |
 
 (Bu değerler ASCII çoğaltmalı ikinci eğitimden. Çoğaltmasız ilk eğitim:
 test 0.8938/0.8935/0.7500, gold 0.9000/0.9014/0.8000 — o da tüm hedefleri
@@ -910,7 +914,7 @@ dokümante):
 
 | yol | ne yapar |
 | --- | --- |
-| `POST /predict` | `{"text": "..."}` → `category`, `label`, `color`, `confidence`, `probabilities` (kategori→olasılık sözlüğü), `low_confidence`, `manual_review`, `secondary_category`, `margin`, `response_time_ms` |
+| `POST /predict` | `{"text": "..."}` → `category`, `label`, `color`, `confidence`, `probabilities`, **`line`/`station`/`equipment`/`symptom`** (Adım 7, kurallı çıkarım), `low_confidence`, `manual_review`, `secondary_category`, `margin`, `response_time_ms` |
 | `GET /health` | servis ayakta mı, model yüklendi mi, hangi cihaz (izleme/yük dengeleyici için — hafif tutuldu) |
 | `GET /model-info` | taban model, LoRA, parametre sayıları, en iyi epoch/val F1, hiperparametreler, aktif eşikler. Bir tahminin hangi model sürümünden geldiği izlenebilsin diye |
 | `GET /categories` | 8 kategori: `label`, `color`, `scope`, `excludes` |
@@ -927,7 +931,7 @@ doğruluyor).
 - `manual_review` → **ikisinden biri** tetiklendiyse `true`. Operatöre
   "bu bildirime insan baksın" diyen tek alan; arayüz bunu kullanmalı.
 
-### Entegrasyon testleri (`tests/test_api.py`, 17 test, ~4 sn)
+### Entegrasyon testleri (`tests/test_api.py`, 21 test, ~4 sn)
 
 `TestClient` lifespan'i çalıştırdığı için **model gerçekten yükleniyor** — bunlar
 birim testi değil, uçtan uca entegrasyon testi. Kapsanan davranışlar:
@@ -945,14 +949,61 @@ birim testi değil, uçtan uca entegrasyon testi. Kapsanan davranışlar:
 - **Model istek başına yeniden yüklenmiyor** (nesne kimliği sabit)
 - OpenAPI: 5 uç noktanın da yanıt şeması dolu (Swagger'da `"string"`
   görünmesinin sebebi eksik `response_model`'di, bu test o gerilemeyi yakalar)
+- **Yapısal çıkarım:** spec'teki çıktı biçimi (`line`/`station`/`equipment`/
+  `symptom`), bulunamayan alanın `None` dönmesi (uydurmaması), aksan
+  dayanıklılığı, ve `T3 trensformatörü`ndeki `T3`'ün hat kodu sanılmaması
 
 **Doğrulama — servis, `evaluate.py` ile birebir aynı sonucu veriyor:**
 80 gold kaydı HTTP üzerinden geçirildi; doğruluk 74/80 = **0.9250**, ikincil
 kategori dönen 6 (%7.5) — ikisi de `evaluate.py` ile aynı. Çıkarım süresi
 ortalama **14.3 ms**.
 
-CORS şu an `allow_origins=["*"]` — Adım 6'daki React geliştirme sunucusu ayrı
-portta çalışacağı için. **Kuruma entegrasyonda daraltılmalı.**
+**CORS daraltıldı** (19 Ağu): `allow_origins=["*"]` yerine
+`config.CORS_ORIGINS` — yalnızca yerel geliştirme sunucuları
+(`localhost:5173`, `:4173` ve `127.0.0.1` karşılıkları). Üretimde ortam
+değişkeniyle verilir:
+
+```
+CORS_ORIGINS="https://ariza.metro.istanbul" uvicorn backend.main:app
+```
+
+Metotlar da `GET`/`POST`, başlıklar `Content-Type` ile sınırlandı. Doğrulandı:
+izinli kaynak `Access-Control-Allow-Origin` alıyor, yabancı site almıyor.
+
+### Tohum varyansı — projenin en önemli metodoloji dersi (19 Ağu 2026)
+
+`INCLUDE_SEED_IN_TRAINING` kararı için koşul başına **3 farklı tohumla** eğitim
+yapıldı. Karşılaştırma **gold üzerinden**, çünkü gold iki koşulda da aynı
+(test seti seed dahil edilince değişiyor, o yüzden test kıyası geçersiz).
+
+| koşul | gold macro F1 (3 tohum) | ortalama | **aralık** | en düşük sınıf F1 |
+| --- | --- | --- | --- | --- |
+| kapalı | 0.9247 · 0.9105 · 0.9624 | 0.9325 | **0.0519** | **0.7500** – 0.9000 |
+| açık | 0.9497 · 0.9384 · 0.9371 | 0.9417 | **0.0126** | 0.8182 – 0.8889 |
+
+**Bulgu 1 — tek koşu ölçüm değildir.** İlk denemede (tek tohum) seed eklemek
+gold'u 0.9247 → 0.9497 yapmıştı; "+0.025 kazanç" gibi görünüyordu. Üç tohumla
+bakınca ortalama fark sadece **+0.0092**, baseline'ın kendi salınımı ise
+**0.0519**. Yani o kazanç gürültüydü. Sadece eğitim tohumunu değiştirmek
+(veri sabitken) gold skorunu 0.911 ile 0.962 arasında oynatıyor.
+
+**Bulgu 2 — ortalama değil, taban iyileşti.** Seed kapalıyken en kötü koşuda
+en düşük sınıf F1 = **0.7500**, yani başarı kriterinin (0.75) tam sınırında —
+bir kayıt daha kaysa kriter düşerdi. Açıkken en kötü durum 0.8182. Varyans da
+4 kat daralıyor. Mekanizma makul: 93 temiz kayıt tavanı değil **tabanı**
+yükseltiyor, model başlatmaya daha az duyarlı hale geliyor.
+
+**Karar:** açık. Gerekçe ortalama kazanç değil, en kötü durumun iyileşmesi ve
+93 elle gözden geçirilmiş kaydın boşa gitmemesi.
+
+**Uyarı (rapora girmeli):** koşul başına 3 koşu var, varyans tahmininin kendisi
+de gürültülü. "4 kat daha kararlı" rakamına fazla yaslanmamak lazım.
+
+Bu ders bu projede **üçüncü kez** çıktı: (1) `MARGIN_THRESHOLD` gold'un 8
+hatasına bakılarak seçilmişti, OOF'ta gerçek oran 5 kat farklı çıktı;
+(2) `yazim_yanlisi` stilinin zayıflığı stil bazlı ölçümde gürültüye karışmıştı,
+nedensel test net gösterdi; (3) burada. Ortak payda: **az örneklem + tek ölçüm
+= ölçüm gibi görünen gürültü.**
 
 **✅ Adım 6 — Frontend (TAMAMLANDI):** `frontend/`, React + Vite. Çalıştırma:
 
@@ -1013,6 +1064,74 @@ karakter sınırı, mobil yerleşim (375px).
 **`.gitignore`:** `frontend/node_modules/` (58 MB, 425 dosya) ve
 `frontend/dist/` eklendi — ikisi de `package-lock.json`'dan yeniden
 üretilebilir ara ürün. `frontend/src` ve `package*.json` commit edilir.
+
+**✅ Adım 7 — Yapısal Çıkarım (TAMAMLANDI):** `src/extract.py`. Sınıflandırmayı
+"incident parsing" seviyesine çıkarır:
+
+```
+"M4 Ünalan'da yürüyen merdiven çok ses yapıyor"
+-> {category: istasyon_mekanik, line: M4, station: Ünalan,
+    equipment: yürüyen merdiven, symptom: anormal ses, confidence: 0.995}
+```
+
+**İlk sürüm KURALLI** (plandaki sıra: kurallı → NER → LLM fallback). Kurallıyla
+başlamanın sebebi: istasyon adları ve ekipman terimleri zaten `config.py`'de
+sayılı, yani tanıma probleminin büyük kısmı sözlük eşleşmesi. Kurallı katmanın
+nerede yetersiz kaldığını ÖLÇMEDEN NER/LLM'e geçmek, çözülüp çözülmediğini
+bilmediğimiz bir soruna model atmak olurdu.
+
+`config.py`'ye eklenenler: `LINE_PATTERN`, `STATIONS` (53 ad), `EQUIPMENT`
+(80 terim), `EQUIPMENT_ALIASES`, `SYMPTOMS` (43 desen).
+
+`STATIONS`, `SLOT_VALUES["istasyon"]`'dan **ayrıdır ve onu kapsar**: oradaki 21
+ad ÜRETİM için (çeşitlilik enjeksiyonu), buradaki liste TANIMA için. Üretilen
+veride config listesi dışında gerçek istasyon adları da çıktı (Kozyatağı,
+Aksaray, Söğütlüçeşme...), tanıma listesi bu yüzden daha geniş.
+
+### Alan bazlı precision/recall (40 elle etiketlenmiş bildirim)
+
+| alan | destek | precision | recall | F1 |
+| --- | --- | --- | --- | --- |
+| station | 23 | **1.000** | **1.000** | **1.000** |
+| equipment | 33 | **1.000** | 0.939 | **0.969** |
+| symptom | 40 | 0.846 | 0.825 | 0.835 |
+| line | 0 | — | — | referansta örnek yok |
+
+**Metodoloji:** referans etiketler **kurallar yazılmadan ÖNCE**, sadece cümleler
+okunarak oluşturuldu — tersi olsaydı kurallar kendi cevabına göre şekillenirdi.
+Tek etiketleyici, yani mutlak değil yön gösterici. Karşılaştırma ölçütü gevşek
+(normalize edilmiş hallerden biri diğerini içeriyorsa veya kelime örtüşmesi
+varsa doğru).
+
+**`line` neden ölçülemedi:** bildirimlerin sadece **%6.4'ünde** hat kodu
+geçiyor, katmanlı 40'lık örnekleme hiç düşmedi. Ayrıca ölçüldü: hat kodu içeren
+20 rastgele kayıtta **20/20 doğru** (Marmaray dahil). Bu bir eksiklik değil,
+verinin doğası — alan çoğu zaman `None` döner.
+
+### Bulunan üç gerçek hata (hepsi düzeltildi)
+
+| hata | etki |
+| --- | --- |
+| `durdu` deseni `acil DURDURma`ya takılıyordu | kelime sınırı yoktu |
+| `sondu` deseni `yangın SÖNDÜRme`ye takılıyordu | aynı sınıf hata |
+| `basıncı düşüşü` çekim eki yüzünden eşleşmiyordu | desen fazla katıydı |
+
+Düzeltmeler sonrası `symptom` F1 0.658 → **0.835**.
+
+### Kalan hataların yapısı — NER'e geçmeden önce bilinmesi gereken
+
+Kalan 8 `symptom` hatasının çoğu **sözlük eksiği değil**, tek-etiketli
+çıkarımın yapısal sınırı: `"banknot kabul etmiyor hata veriyor"` cümlesinde
+İKİ belirti birden var, sistem birini seçmek zorunda. Hangisinin "birincil"
+olduğu yorum meselesi.
+
+`equipment`'ın 2 hatası da farklı bir sınıf: `"3 numaralı vagonda kapı"` —
+ekipman `vagon kapısı` ama kelimeler araya giren tokenlarla bölünmüş; alt-dizi
+eşleşmesi bunu birleştiremez. **Bileşimsel ifadeler için NER gerekiyor.**
+
+Yani ölçüm, bir sonraki adımın ne olması gerektiğini de söylüyor: sözlük
+büyütmek değil, (a) çok-etiketli belirti, (b) bileşimsel ekipman için
+token classification.
 
 ## Genel İlkeler (her adımda geçerli)
 

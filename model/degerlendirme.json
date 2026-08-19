@@ -6,125 +6,125 @@
     "birebir_train_gold": 0,
     "birebir_test_gold": 0,
     "near_dup_train_test_AYNI_kategori": 0,
-    "near_dup_train_test_farkli_kategori": 2
+    "near_dup_train_test_farkli_kategori": 1
   },
   "setler": [
     {
       "ad": "TEST (cogaltilmis dagilim)",
-      "n": 160,
-      "accuracy": 0.9125,
-      "macro_f1": 0.913462292770701,
-      "weighted_f1": 0.913462292770701,
-      "macro_precision": 0.9189170843776107,
-      "macro_recall": 0.9125,
-      "weighted_precision": 0.9189170843776108,
-      "weighted_recall": 0.9125,
-      "min_sinif_f1": 0.8292682926829268,
+      "n": 167,
+      "accuracy": 0.9101796407185628,
+      "macro_f1": 0.9117104180561355,
+      "weighted_f1": 0.9111817379247353,
+      "macro_precision": 0.9189544252044252,
+      "macro_recall": 0.9107142857142857,
+      "weighted_precision": 0.9184691223613379,
+      "weighted_recall": 0.9101796407185628,
+      "min_sinif_f1": 0.8333333333333334,
       "sinif_metrikleri": {
         "arac_tren": {
           "precision": 1.0,
-          "recall": 0.95,
-          "f1": 0.9743589743589743,
+          "recall": 1.0,
+          "f1": 1.0,
           "destek": 20
         },
         "istasyon_mekanik": {
-          "precision": 0.8,
-          "recall": 1.0,
-          "f1": 0.8888888888888888,
-          "destek": 20
+          "precision": 0.95,
+          "recall": 0.9047619047619048,
+          "f1": 0.926829268292683,
+          "destek": 21
         },
         "elektrik_enerji": {
-          "precision": 1.0,
-          "recall": 0.9,
-          "f1": 0.9473684210526315,
-          "destek": 20
+          "precision": 0.9047619047619048,
+          "recall": 0.9047619047619048,
+          "f1": 0.9047619047619048,
+          "destek": 21
         },
         "yazilim_sistem": {
-          "precision": 0.9473684210526315,
-          "recall": 0.9,
-          "f1": 0.9230769230769231,
-          "destek": 20
+          "precision": 0.9444444444444444,
+          "recall": 0.8095238095238095,
+          "f1": 0.8717948717948718,
+          "destek": 21
         },
         "guvenlik_emniyet": {
-          "precision": 0.9444444444444444,
-          "recall": 0.85,
-          "f1": 0.8947368421052632,
-          "destek": 20
+          "precision": 0.7407407407407407,
+          "recall": 0.9523809523809523,
+          "f1": 0.8333333333333334,
+          "destek": 21
         },
         "altyapi_insaat": {
-          "precision": 0.95,
-          "recall": 0.95,
-          "f1": 0.95,
-          "destek": 20
+          "precision": 1.0,
+          "recall": 0.8571428571428571,
+          "f1": 0.9230769230769231,
+          "destek": 21
         },
         "yolcu_operasyon": {
-          "precision": 0.8095238095238095,
-          "recall": 0.85,
-          "f1": 0.8292682926829268,
-          "destek": 20
+          "precision": 0.8571428571428571,
+          "recall": 0.8571428571428571,
+          "f1": 0.8571428571428571,
+          "destek": 21
         },
         "temizlik_cevre": {
-          "precision": 0.9,
-          "recall": 0.9,
-          "f1": 0.9,
-          "destek": 20
+          "precision": 0.9545454545454546,
+          "recall": 1.0,
+          "f1": 0.9767441860465116,
+          "destek": 21
         }
       },
       "karisan_ciftler": [
         [
-          "guvenlik_emniyet",
-          "yolcu_operasyon",
-          3
-        ],
-        [
-          "elektrik_enerji",
           "istasyon_mekanik",
+          "guvenlik_emniyet",
           2
         ],
         [
           "yazilim_sistem",
-          "istasyon_mekanik",
+          "guvenlik_emniyet",
           2
         ],
         [
-          "arac_tren",
+          "yolcu_operasyon",
+          "guvenlik_emniyet",
+          2
+        ],
+        [
+          "elektrik_enerji",
           "yolcu_operasyon",
           1
         ],
         [
-          "altyapi_insaat",
+          "elektrik_enerji",
           "temizlik_cevre",
           1
         ],
         [
-          "yolcu_operasyon",
           "yazilim_sistem",
+          "elektrik_enerji",
           1
         ]
       ],
       "ikincil_kategori": {
-        "top1_accuracy": 0.9125,
-        "top2_accuracy": 0.9625,
-        "marj_dogru": 0.9617398396651269,
-        "marj_yanlis": 0.41356554201671053,
-        "cift_kategorili": 8,
-        "kurtarilan_hata": 5,
-        "toplam_hata": 14,
-        "bosuna_isaretlenen": 2
+        "top1_accuracy": 0.9101796407185628,
+        "top2_accuracy": 0.9700598802395209,
+        "marj_dogru": 0.9552167412706049,
+        "marj_yanlis": 0.7149685216951184,
+        "cift_kategorili": 6,
+        "kurtarilan_hata": 1,
+        "toplam_hata": 15,
+        "bosuna_isaretlenen": 5
       },
-      "manual_review_sayisi": 14
+      "manual_review_sayisi": 11
     },
     {
       "ad": "GOLD TEST (bagimsiz, elle gozden gecirilmis)",
       "n": 80,
-      "accuracy": 0.925,
-      "macro_f1": 0.9247161464266728,
-      "weighted_f1": 0.9247161464266729,
-      "macro_precision": 0.9303030303030304,
-      "macro_recall": 0.925,
-      "weighted_precision": 0.9303030303030304,
-      "weighted_recall": 0.925,
-      "min_sinif_f1": 0.8,
+      "accuracy": 0.95,
+      "macro_f1": 0.9497161464266728,
+      "weighted_f1": 0.9497161464266728,
+      "macro_precision": 0.9553030303030303,
+      "macro_recall": 0.95,
+      "weighted_precision": 0.9553030303030304,
+      "weighted_recall": 0.95,
+      "min_sinif_f1": 0.8888888888888888,
       "sinif_metrikleri": {
         "arac_tren": {
           "precision": 1.0,
@@ -140,8 +140,8 @@
         },
         "elektrik_enerji": {
           "precision": 1.0,
-          "recall": 0.8,
-          "f1": 0.8888888888888888,
+          "recall": 0.9,
+          "f1": 0.9473684210526315,
           "destek": 10
         },
         "yazilim_sistem": {
@@ -151,15 +151,15 @@
           "destek": 10
         },
         "guvenlik_emniyet": {
-          "precision": 0.8,
-          "recall": 0.8,
-          "f1": 0.8,
-          "destek": 10
-        },
-        "altyapi_insaat": {
           "precision": 0.9,
           "recall": 0.9,
           "f1": 0.9,
+          "destek": 10
+        },
+        "altyapi_insaat": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.8888888888888888,
           "destek": 10
         },
         "yolcu_operasyon": {
@@ -170,8 +170,8 @@
         },
         "temizlik_cevre": {
           "precision": 1.0,
-          "recall": 0.9,
-          "f1": 0.9473684210526315,
+          "recall": 1.0,
+          "f1": 1.0,
           "destek": 10
         }
       },
@@ -182,42 +182,32 @@
           1
         ],
         [
-          "elektrik_enerji",
-          "guvenlik_emniyet",
-          1
-        ],
-        [
-          "guvenlik_emniyet",
-          "istasyon_mekanik",
-          1
-        ],
-        [
           "guvenlik_emniyet",
           "yolcu_operasyon",
           1
         ],
         [
           "altyapi_insaat",
-          "guvenlik_emniyet",
+          "istasyon_mekanik",
           1
         ],
         [
-          "temizlik_cevre",
           "altyapi_insaat",
+          "guvenlik_emniyet",
           1
         ]
       ],
       "ikincil_kategori": {
-        "top1_accuracy": 0.925,
+        "top1_accuracy": 0.95,
         "top2_accuracy": 0.975,
-        "marj_dogru": 0.9524479424196486,
-        "marj_yanlis": 0.6407713250567516,
-        "cift_kategorili": 3,
-        "kurtarilan_hata": 1,
-        "toplam_hata": 6,
-        "bosuna_isaretlenen": 2
+        "marj_dogru": 0.9711351234449658,
+        "marj_yanlis": 0.8632128058816306,
+        "cift_kategorili": 0,
+        "kurtarilan_hata": 0,
+        "toplam_hata": 4,
+        "bosuna_isaretlenen": 0
       },
-      "manual_review_sayisi": 6
+      "manual_review_sayisi": 1
     }
   ],
   "kalibrasyon": null

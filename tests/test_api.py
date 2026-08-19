@@ -211,3 +211,47 @@ def test_openapi_tum_uc_noktalari_dokumante_ediyor(client):
                         ("/examples", "get")):
         icerik = sema["paths"][yol][yontem]["responses"]["200"]["content"]
         assert icerik["application/json"]["schema"], f"{yol} yanit semasi bos"
+
+
+# ---------------------------------------------------------------------------
+# Yapisal cikarim (Adim 7)
+# ---------------------------------------------------------------------------
+
+def test_predict_yapisal_alanlari_dondurur(client):
+    """Spec'teki cikti bicimi: category + line + station + equipment + symptom."""
+    veri = client.post(
+        "/predict", json={"text": "M4 Ünalan'da yürüyen merdiven çok ses yapıyor"}
+    ).json()
+    assert veri["category"] == "istasyon_mekanik"
+    assert veri["line"] == "M4"
+    assert veri["station"] == "Ünalan"
+    assert veri["equipment"] == "yürüyen merdiven"
+    assert veri["symptom"] == "anormal ses"
+
+
+def test_predict_bulunamayan_alan_none_doner(client):
+    """Hat kodu bildirimlerin ~%6'sinda geciyor; yoksa None donmeli, uydurmamali."""
+    veri = client.post("/predict", json={"text": "Turnike kolu kırık"}).json()
+    assert veri["line"] is None
+    assert veri["station"] is None
+    assert veri["equipment"] == "turnike kolu"
+
+
+def test_yapisal_cikarim_aksana_duyarsiz():
+    """Ayni ariza, aksanli ve aksansiz yazim -> ayni yapisal alanlar."""
+    from src.extract import cikar
+
+    a = cikar("Asansör çalışmıyor Kadıköy")
+    b = cikar("asansor calismiyor kadikoy")
+    assert a["equipment"] == b["equipment"] == "asansör"
+    assert a["station"] == b["station"] == "Kadıköy"
+    assert a["symptom"] == b["symptom"] == "çalışmıyor"
+
+
+def test_hat_kodu_ekipman_etiketiyle_karismiyor():
+    """'T3 trensformatörü'ndeki T3 hat kodu DEGIL, ekipman etiketi."""
+    from src.extract import cikar
+
+    veri = cikar("Üsküdar şubesinde T3 trensformatörü aşırı ısı uyarısı verdi.")
+    assert veri["line"] is None
+    assert veri["equipment"] == "trafo"

@@ -388,6 +388,27 @@ TEST_RATIO = 0.10
 # kopyasi test'teki bir kayitla eslesiyorsa o ikisi zaten ayni kumededir.
 AUGMENT_ASCII_FOLD = True
 
+# seed.jsonl (93 elle gozden gecirilmis kayit) egitim havuzuna katilsin mi?
+#
+# OLCULDU (19 Agu 2026, kosul basina 3 tohum, GOLD uzerinden -- gold iki
+# kosulda da ayni oldugu icin tek gecerli karsilastirma o):
+#   kosul          gold macro F1 (3 tohum)        ortalama  aralik  min sinif F1
+#   kapali         0.9247 0.9105 0.9624            0.9325   0.0519  0.750-0.900
+#   acik           0.9497 0.9384 0.9371            0.9417   0.0126  0.818-0.889
+#
+# ORTALAMA KAZANC KANITLANMADI: +0.0092, baseline'in kendi salinimi 0.0519.
+# Tek kosuyla olculdugunde "+0.025 kazanc" gibi gorunuyordu -- gurultuymus.
+#
+# Yine de ACIK secildi, sebebi ortalama degil TABAN: kapaliyken en kotu kosuda
+# en dusuk sinif F1 = 0.7500, yani basari kriterinin (0.75) tam sinirinda; bir
+# kayit daha kaysa kriter duserdi. Acikken en kotu durum 0.8182. Ayrica 93
+# temiz kayit bosa gitmiyor ve maliyeti sifir.
+#
+# Sizinti riski yok: cogaltma seed'den uretildigi icin seed kayitlari
+# cogaltilmislarla yakin kopya, ama preprocess'teki kumeleme bunlari ayni
+# bolmede tutuyor (olculdu: near_dup_train_test_AYNI_kategori = 0).
+INCLUDE_SEED_IN_TRAINING = True
+
 # PEFT / LoRA
 USE_LORA = True
 LORA_R = 16
@@ -406,30 +427,29 @@ MIN_PER_CLASS_F1 = 0.75
 # ---------------------------------------------------------------------------
 
 # Bu esigin altinda kategori kesin atanmaz, arayuzde manuel inceleme uyarisi
-# cikar.
-#
-# KALIBRE EDILDI (19 Agu 2026) — k-fold OUT-OF-FOLD tahminlerle, 1280 kayit /
-# 102 hata uzerinden. Bkz. src/calibrate.py ve model/kalibrasyon.json.
+# cikar. k-fold OUT-OF-FOLD ile kalibre edildi (bkz. src/calibrate.py).
 #
 # Neden OOF: esigi test'e bakarak secmek test setini karar surecine sokar;
-# val.csv ise epoch seciminde kullanildigi icin model orada FAZLA EMIN
-# (olculdu: yanlis tahminlerde ort. guven val 0.892 / test 0.758 / OOF 0.773)
-# ve zaten sadece 9 hata iceriyor -- o kadar az hatayla esik secmek gurultuyu
-# kalibrasyon sanmaktir. OOF ile hata sayisi 102'ye cikti.
+# val.csv ise epoch seciminde kullanildigi icin model orada fazla emin ve
+# sadece 9 hata iceriyor. OOF ile hata sayisi ~90-100.
 #
-# Tarama (OOF, 102 hata):
-#   esik  trafik  yakalanan  bosuna  precision  recall
-#   0.60   3.6%     25/102     21      0.543    0.245
-#   0.70   5.9%     37/102     38      0.493    0.363   <- eski deger
-#   0.75   7.3%     47/102     47      0.500    0.461   <- SECILEN
-#   0.80   8.9%     49/102     65      0.430    0.480
-# 0.75, 0.70'i domine ediyor: ayni precision ama 10 hata daha yakaliyor.
-# 0.80'de precision cokuyor -- diz noktasi 0.75.
+# IKI KALIBRASYON YAPILDI (ikincisi seed egitime katildiktan sonra):
+#   esik   1. kalibrasyon (1280 kayit, 102 hata)   2. kalibrasyon (1340, 92)
+#          precision / recall                       precision / recall
+#   0.60     0.543 / 0.245                            0.581 / 0.196
+#   0.70     0.493 / 0.363                            0.529 / 0.293
+#   0.75     0.500 / 0.461   <- secilen               0.478 / 0.359
+#   0.80     0.430 / 0.480                            0.429 / 0.391
 #
-# Ikinci gerekce reliability diagram'dan: model 0.80-0.95 bandinda belirgin
-# FAZLA EMIN (0.856 ortalama guven -> 0.686 gercek dogruluk). O bantta guven
-# degeri gorundugu kadar guvenilir degil, esigi yukseltmek bunu telafi ediyor.
-# (0.95+ bandinda -- verinin %83'u -- model iyi kalibre: 0.994 -> 0.975.)
+# DURUST NOT: 0.75 ilk kalibrasyonda 0.70'i DOMINE ediyordu (ayni precision,
+# daha yuksek recall). Ikinci kalibrasyonda bu gecerli DEGIL -- 0.70 daha
+# yuksek precision veriyor. Sebep: model iyilesti (OOF dogruluk 0.9203 ->
+# 0.9313) ama hatalarinda daha emin (yanlislarda ort. guven 0.773 -> 0.811),
+# yani guven sinyali zayifladi. Daha iyi model, daha zor ayirt edilen hatalar.
+#
+# 0.75'te birakildi: ~%5 trafik, hatalarin %36'si, kurtarma/bosuna orani ~1:1
+# -- yorumlanabilir bir calisma noktasi. Ama artik "domine ediyor" degil,
+# "makul bir denge" gerekcesiyle.
 CONFIDENCE_THRESHOLD = 0.75
 LOW_CONFIDENCE_MESSAGE = "Düşük Güven: Manuel İnceleme Önerilir"
 
@@ -446,19 +466,174 @@ LOW_CONFIDENCE_MESSAGE = "Düşük Güven: Manuel İnceleme Önerilir"
 #
 # Olculdu: top-1 dogruluk 0.913/0.925 iken TOP-2 dogruluk 0.963/0.975.
 #
-# KALIBRE EDILDI (19 Agu 2026) — k-fold OOF, 102 hata:
-#   marj  trafik  kurtarilan  bosuna  oran
-#   0.20   2.5%     12/102      17    0.71
-#   0.30   4.1%     20/102      25    0.80   <- SECILEN (tepe)
-#   0.40   5.2%     24/102      34    0.71   <- eski deger
-#   0.50   6.6%     30/102      44    0.68
+# KALIBRE EDILDI — k-fold OOF. Kurtarma/bosuna orani, iki kalibrasyon:
+#   marj   1. (102 hata)   2. (92 hata)
+#   0.20      0.71            1.44
+#   0.30      0.80  <- tepe   0.93   <- SECILEN
+#   0.40      0.71            1.11   <- tepe
+#   0.50      0.68            0.81
 #
-# DUZELTME NOTU: 0.40 daha once GOLD setinin 8 hatasina bakarak secilmis ve
-# "kurtarma/bosuna orani 4.0" diye kaydedilmisti. 102 hatali OOF tabaninda
-# gercek oran 0.80 cikti -- yani o olcum tamamen gurultuydu. Az orneklemle
-# yapilan kalibrasyonun ne kadar yanildigina dair somut bir ders.
+# DIKKAT -- TEPE NOKTASI YER DEGISTIRDI. Ilk kalibrasyonda 0.30, ikincisinde
+# 0.40 tepe veriyor. Yeni veriye bakip 0.40'a cekmek, gurultulu bir egrinin
+# tepesini kovalamak olurdu -- bu projede tam da bu hata uc kez yapildi
+# (bkz. CLAUDE.md "Tohum varyansi"). Iki kalibrasyonun ORTAK soyledigi:
+# 0.20-0.40 bandi iyi, 0.50'den sonra bozuluyor. Bundan fazlasi bu veri
+# hacmiyle sabitlenemiyor.
+#
+# 0.30'da birakildi. Onceki deger 0.40 idi ve GOLD'un 8 hatasina bakilarak
+# "oran 4.0" diye kaydedilmisti; OOF tabaninda gercek oran ~0.8-1.1 cikti.
 MARGIN_THRESHOLD = 0.30
 SECONDARY_CATEGORY_MESSAGE = "Sınırda Bildirim: İkinci Kategori de Değerlendirilmeli"
 
 API_HOST = "0.0.0.0"
 API_PORT = 8000
+
+# CORS izinli kaynaklar. Prototipte allow_origins=["*"] idi; bu, herhangi bir
+# web sitesinin tarayici uzerinden bu API'ye istek atabilmesi demek. Ic agda
+# calisan bir prototipte kabul edilebilir ama kuruma entegrasyonda acik kapi.
+#
+# Varsayilan artik SADECE yerel gelistirme sunuculari. Uretimde ortam
+# degiskeniyle daraltilir/genisletilir:
+#     CORS_ORIGINS="https://ariza.metro.istanbul" uvicorn backend.main:app
+CORS_ORIGINS = [
+    "http://localhost:5173",      # Vite gelistirme sunucusu
+    "http://127.0.0.1:5173",
+    "http://localhost:4173",      # Vite onizleme (npm run preview)
+    "http://127.0.0.1:4173",
+]
+
+
+# ---------------------------------------------------------------------------
+# Yapisal cikarim (Adim 7) -- kurallı extraction sozlukleri
+#
+# Amac: siniflandirmayi "incident parsing" seviyesine cikarmak.
+#   "M4 Unalan'da yuruyen merdiven cok ses yapiyor"
+#   -> {category, line, station, equipment, symptom, confidence}
+#
+# Sozlukler burada, cunku config tek dogruluk kaynagi. Kategori kapsamlari
+# (scope) zaten ekipman adlarini sayiyor; asagidaki EQUIPMENT listesi buyuk
+# olcude oradan turetildi, sadece ekipman OLMAYANLAR (olay/belirti ifadeleri)
+# ayiklandi.
+# ---------------------------------------------------------------------------
+
+# Hat kodu. Olculdu: bildirimlerin sadece ~%6'sinda hat kodu geciyor, yani bu
+# alan pratikte cogu zaman None doner -- bu bir eksiklik degil, verinin dogasi.
+LINE_PATTERN = r"\b(M\d{1,2}[AB]?|T\d|F\d|Marmaray)\b"
+
+# Istasyon TANIMA listesi. SLOT_VALUES["istasyon"]'dan AYRIDIR ve onu kapsar:
+# oradaki 21 ad URETIM icin (cesitlilik enjeksiyonu), buradaki liste TANIMA
+# icin. Uretilen veride config listesi disinda gercek istasyon adlari da
+# ciktigi icin (Kozyatagi, Aksaray, Sogutlucesme...) tanima listesi daha genis.
+STATIONS = [
+    # SLOT_VALUES ile ortak olanlar
+    "Yenikapı", "Taksim", "Şişhane", "Levent", "Kadıköy", "Mecidiyeköy",
+    "Vezneciler", "Kartal", "Ataköy", "Bağcılar", "Gayrettepe", "Hacıosman",
+    "Uzunçayır", "Bostancı", "Kirazlı", "Esenler", "Sanayi Mahallesi",
+    "Şişli", "Üsküdar", "Topkapı", "Şirinevler",
+    # Uretilen veride gecen diger gercek istasyonlar
+    "Kozyatağı", "Aksaray", "Mahmutbey", "Maltepe", "Göztepe", "Seyrantepe",
+    "Ataşehir", "Kağıthane", "Pendik", "Dudullu", "Tavşantepe", "Ümraniye",
+    "Haliç", "Merter", "Söğütlüçeşme", "Ayrılıkçeşmesi", "Ayrılık Çeşmesi",
+    "Olimpiyat", "Huzurevi", "Yenisahra", "Bakırköy", "Zeytinburnu",
+    "Atatürk Havalimanı", "Otogar", "Ünalan", "Acıbadem", "Yenibosna",
+    "Çekmeköy", "Sancaktepe", "Osmanbey", "Beşiktaş", "Boğaziçi Üniversitesi",
+]
+
+# Ekipman sozlugu. Uzun ifadeler once gelmeli (acgozlu eslesme): "peron kapısı"
+# "kapı"dan once denenmeli, yoksa yanlis kisa eslesme olur.
+EQUIPMENT = [
+    # arac / tren
+    "makinist kabini camı", "makinist kabini", "vagon kapısı", "vagon içi anons",
+    "vagon aydınlatması", "fren sistemi", "fren", "klima", "tekerlek", "koltuk",
+    "pantograf", "acil durdurma kolu",
+    # istasyon mekanik
+    "yürüyen merdiven", "asansör kapısı", "asansör kabini", "asansör",
+    "peron kapısı", "psd", "turnike kolu", "turnike kapağı", "turnike",
+    "bariyer", "otomatik giriş kapısı", "otomatik kapı",
+    # elektrik
+    "peron aydınlatması", "istasyon aydınlatması", "aydınlatma", "jeneratör",
+    "ups", "elektrik panosu", "dağıtım panosu", "pano", "katener", "üçüncü ray",
+    "trafo", "kablo", "sigorta",
+    "acil durdurma butonu",
+    # yazilim / bilet
+    "bilet satış otomatı", "bilet otomatı", "biletmatik", "istanbulkart okuyucu",
+    "istanbulkart", "pid ekranı", "pid ekranları", "pid", "sunucu", "veritabanı",
+    "scada", "mobil uygulama", "hoparlör",
+    # guvenlik
+    "cctv", "kamera", "yangın söndürme tüpü", "yangın algılama", "yangın sensörü",
+    "yangın dedektörü", "acil durum butonu", "acil çıkış", "kapı kilidi",
+    # altyapi
+    "tavan paneli", "tavan", "tünel duvarı", "duvar",
+    "zemin", "fayans",
+    "merdiven basamağı", "korkuluk", "drenaj", "kanalizasyon", "ray",
+    "dilatasyon", "kapı kolu",
+    # yolcu / temizlik
+    "anons sistemi", "anons", "yolcu yönlendirme", "tuvalet", "çöp konteyneri",
+    "çöp kutusu",
+]
+
+# Belirti sozlugu: (aranan_desen, kanonik_ad). Desen normalize edilmis metinde
+# aranir (kucuk harf + aksansiz), bu yuzden desenler de aksansiz yazilmistir.
+SYMPTOMS = [
+    (r"calismiyor|calismiyo|calsmiyor", "çalışmıyor"),
+    (r"acilmiyor|acilmiyo", "açılmıyor"),
+    (r"kapanmiyor|kapatilmiyor", "kapanmıyor"),
+    (r"kilitlenmiyor|kilitlemiyor", "kilitlenmiyor"),
+    (r"\bdurdu\b|\bdurmus\b|\bdurduruldu\b|\bdurmis\b", "durdu"),
+    (r"takil", "takılı"),
+    (r"kirik|kirdi|kirildi|kirilmasi", "kırık"),
+    (r"bozuk|bozuldu", "bozuk"),
+    (r"ariza|arizali", "arıza"),
+    (r"anormal ses|ses yapiyor|ses cikar|sesli", "anormal ses"),
+    (r"titre", "titreşim"),
+    (r"sizinti|sizma|damliyor|su birik", "sızıntı"),
+    (r"catlak|catla", "çatlak"),
+    (r"kesildi|kesinti", "kesinti"),
+    (r"dondu|donmus", "dondu"),
+    (r"hata veriyor|hata kodu|hatasi|hata", "hata"),
+    (r"asiri isi|isinma|asiri sicaklik", "aşırı ısınma"),
+    (r"basinc\w* dus|gerilim\w* dus|voltaj\w* dus|direnc\w* dusuk", "basınç/gerilim düşüşü"),
+    (r"enerjisiz|enerji yok", "enerjisiz"),
+    (r"\bsondu\b|\bsonuk\b|\byanmiyor\b|\bsonmus\b", "sönük"),
+    (r"sigorta atma", "sigorta atması"),
+    (r"kirli|kir birikimi|tozlu", "kirli"),
+    (r"koku", "kötü koku"),
+    (r"buzlanma|kaygan", "buzlanma/kayganlık"),
+    (r"grafiti|grafit", "grafiti"),
+    (r"cop|tasmis|tasti|doldu", "çöp birikmesi"),
+    (r"dokul|dokunt|leke", "döküntü"),
+    (r"supheli paket|supheli kutu|supheli esya", "şüpheli paket"),
+    (r"yetkisiz|atlama|atladi", "yetkisiz giriş"),
+    (r"kayip esya", "kayıp eşya"),
+    (r"gecik", "sefer gecikmesi"),
+    (r"iptal", "sefer iptali"),
+    (r"seyrelt", "sefer seyreltme"),
+    (r"personel eksik|personel yetmiyor", "personel eksikliği"),
+    (r"yanlis anons|anons yapilmadi|anons yok", "anons sorunu"),
+    (r"yogunluk|kalabalik", "yoğunluk"),
+    (r"tuzlama", "tuzlama talebi"),
+    (r"goruntu gelmiyor|goruntu yok|kor nokta|goruntusu bozul", "görüntü yok"),
+    (r"\beksik\b|\beksigi\b", "eksik"),
+    (r"dusme tehlikesi|duser tehlike|sarkit", "düşme tehlikesi"),
+    (r"yirtik", "yırtık"),
+    (r"yere dus|dustu", "yere düşmüş"),
+    (r"kabul etmiyor|iade yapmiyor|vermiyor", "işlem yapmıyor"),
+]
+
+
+EQUIPMENT_ALIASES = {
+    "trensformatör": "trafo",
+    "transformatör": "trafo",
+    "acil durdurma kutusu": "acil durdurma butonu",
+    "acil durum butonu": "acil durum butonu",
+    "tavan panel": "tavan paneli",
+    "tavan sarkıtı": "tavan",
+    "bariyer kapağı": "bariyer",
+    "bariyer kolu": "bariyer",
+    "yürüyen merdivan": "yürüyen merdiven",
+    "biletmatik": "bilet satış otomatı",
+    "bilet otomatı": "bilet satış otomatı",
+    "istanbulkart yazılımı": "İstanbulkart okuyucu",
+    "pid ekranları": "PID ekranı",
+    "kamera sistemi": "kamera",
+}
