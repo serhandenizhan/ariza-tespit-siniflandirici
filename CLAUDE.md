@@ -66,10 +66,11 @@ ariza-tespit-siniflandirici/
 │   ├── train.py                    # Adim 4a -- BERTurk + LoRA egitimi
 │   └── evaluate.py                 # Adim 4b -- iki test seti + confusion matrix
 ├── backend/
-│   └── main.py                      # YOK -- Adim 5'te yazilacak (FastAPI)
+│   ├── __init__.py
+│   └── main.py                     # Adim 5 -- FastAPI servisi
 ├── frontend/                        # YOK -- Adim 6'da yazilacak (React)
 ├── venv/
-├── requirements.txt                 # pip freeze ile donduruldu (35 paket)
+├── requirements.txt                 # pip freeze ile donduruldu
 └── .env                             # GEMINI_API_KEY, GROQ_API_KEY,
                                       # OPENROUTER_API_KEY var; ANTHROPIC_API_KEY yok
 ```
@@ -506,9 +507,10 @@ ile seed eğitime katılırsa ortaya çıkar.
    Detay Adım 4 bölümünde.
 9. ✅ **KAPANDI — `YABANCI` bayrağı eklendi + 9 kayıt düzeltildi.** Kuralın
    kapsamlı olmadığı (dar ama kesin) açıkça belgelendi.
-10. **İkincil kategori mekanizması Adım 5/6'da hayata geçirilecek** —
-    `MARGIN_THRESHOLD` config'te hazır, backend `/predict` ve arayüz bunu
-    kullanacak.
+10. ✅ **KAPANDI (backend tarafı) — ikincil kategori `/predict`'te çalışıyor.**
+    Arayüz tarafı Adım 6'da yapılacak.
+12. **CORS şu an `allow_origins=["*"]`** — prototip için. Kuruma
+    entegrasyonda daraltılmalı.
 11. **`--include-seed` hâlâ kapalı.** 93 kayıtlık seed eğitime katılmıyor.
     Katılırsa küçük bir kazanç olabilir; ölçülmedi. Seed'in few-shot yemi
     olması eğitime girmesine engel değil (gold farklı, o asla girmez).
@@ -762,25 +764,64 @@ Bunun kural yazmaya üstünlüğü: bugün bilmediğimiz sınır sorunlarını d
 gerçeği daha doğru modelliyor (bazı bildirimler gerçekten iki kategoriye girer),
 ve mevcut `low_confidence` mekanizmasını kapsıyor.
 
-**Adım 5 — Backend:** `backend/main.py`, FastAPI. `/predict` endpoint.
-Model Python tarafında yüklü tutulacak, REST API olarak servis edilecek.
-Dönecek alanlar:
-- `kategori` + `guven` (birincil tahmin)
-- `low_confidence: true` — güven `CONFIDENCE_THRESHOLD` (0.70) altındaysa
-- `ikincil_kategori` — marj `MARGIN_THRESHOLD` (0.40) altındaysa; sınırda
-  bildirimlerde ikinci ekip de bilgilendirilsin diye
-- tüm kategorilerin olasılık dağılımı (arayüzdeki bar chart için)
-- yanıt süresi
+**✅ Adım 5 — Backend (TAMAMLANDI):** `backend/main.py`, FastAPI. Çalıştırma:
 
-Model yüklemesi PEFT gerektiriyor: `adapter_config.json`'daki taban modelden
-BERTurk indirilip üstüne LoRA adaptörü bindiriliyor (bkz. `evaluate.model_yukle`,
-aynı desen kullanılabilir).
+```
+./venv/bin/uvicorn backend.main:app --reload --port 8000
+```
 
-**Adım 6 — Frontend:** `frontend/`, React. Metin giriş, "Analiz Et" butonu,
-kategori çıktısı (renk etiketiyle — `CATEGORY_COLOR` config'te hazır), güven
-skoru progress bar, tüm kategorilerin olasılık dağılımı yatay bar chart,
-örnek cümle listesi (tek tıkla doldurma), yanıt süresi göstergesi, düşük
-güven uyarısı (`LOW_CONFIDENCE_MESSAGE` config'te hazır).
+**Model bir kez yükleniyor** (lifespan içinde) ve bellekte tutuluyor; her
+istekte yeniden yüklemek 2-3 saniye sürerdi. PyTorch çıkarımı bloklayıcı,
+FastAPI ise async — eş zamanlı isteklerde aynı model nesnesine dokunulmasın
+diye `threading.Lock` kullanılıyor. (Prototip için yeterli; gerçek yükte
+birden fazla worker/kuyruk gerekir.)
+
+Uç noktalar:
+
+| yol | ne yapar |
+| --- | --- |
+| `POST /predict` | `{"metin": "..."}` → kategori, güven, düşük güven uyarısı, ikincil kategori, tüm olasılık dağılımı, yanıt süresi |
+| `GET /health` | model yüklü mü, hangi cihaz, hangi eğitim (epoch/val F1), aktif eşikler |
+| `GET /kategoriler` | 8 kategori: ad, renk (`CATEGORY_COLOR`), kapsam metni — arayüz için |
+| `GET /ornekler` | "tek tıkla doldur" listesi; **gold.jsonl'den**, her kategoriden en fazla bir örnek |
+
+`/ornekler` bilerek gold'dan besleniyor: eğitim verisinden örnek göstermek
+demoyu olduğundan iyi gösterirdi. Gold eğitime hiç girmedi.
+
+**İki mekanizma birbirinden ayrı çalışıyor** — aynı anda tetiklenebilir veya
+sadece biri:
+- `low_confidence` → "model emin değil" (güven < 0.70)
+- `ikincil_kategori` → "model HANGİ İKİ seçenek arasında kararsız" (marj < 0.40)
+
+**Doğrulama — servis, `evaluate.py` ile birebir aynı sonucu veriyor:**
+80 gold kaydı HTTP üzerinden geçirildi.
+
+| | API | evaluate.py |
+| --- | --- | --- |
+| doğruluk | 74/80 = **0.9250** | 0.9250 ✅ |
+| ikincil kategori dönen | 6 (%7.5) | 6 (%7.5) ✅ |
+
+Çıkarım süresi ortalama **14.3 ms** (min 12.8, maks 48.5 — ilk çağrı ısınma).
+80 istek + HTTP toplam 1.2 sn.
+
+Hata durumları test edildi: boş metin → 400, `MAX_CHARS` (300) aşımı → 400,
+eksik alan → 422 (Pydantic).
+
+CORS şu an `allow_origins=["*"]` — Adım 6'daki React geliştirme sunucusu ayrı
+portta çalışacağı için. **Kuruma entegrasyonda daraltılmalı.**
+
+**Adım 6 — Frontend:** `frontend/`, React. Backend hazır ve tüm veriyi
+sağlıyor; arayüzün yapması gerekenler:
+- Metin giriş alanı + "Analiz Et" butonu
+- Kategori çıktısı renk etiketiyle (`/kategoriler`'den gelen `renk`)
+- Güven skoru progress bar
+- Tüm kategorilerin olasılık dağılımı — yatay bar chart (`dagilim` alanı
+  zaten olasılığa göre sıralı geliyor)
+- **Düşük güven uyarısı** (`low_confidence` + `low_confidence_mesaji`)
+- **İkincil kategori rozeti** (`ikincil_kategori` doluysa) — sınırda
+  bildirimlerde ikinci ekibin de görünmesi
+- Örnek cümle listesi (`/ornekler`, tek tıkla doldurma)
+- Yanıt süresi göstergesi (`yanit_suresi_ms`)
 
 ## Genel İlkeler (her adımda geçerli)
 
