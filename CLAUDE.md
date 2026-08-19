@@ -73,7 +73,17 @@ ariza-tespit-siniflandirici/
 ├── tests/
 │   ├── __init__.py
 │   └── test_api.py                 # 17 entegrasyon testi (pytest)
-├── frontend/                        # YOK -- Adim 6'da yazilacak (React)
+├── frontend/                       # Adim 6 -- React (Vite)
+│   ├── index.html
+│   ├── package.json / package-lock.json
+│   ├── .claude/launch.json         # preview icin (proje kokunde)
+│   └── src/
+│       ├── main.jsx
+│       ├── App.jsx                 # ana bilesen
+│       ├── App.css                 # tum stiller
+│       ├── index.css               # Vite varsayilan temasi KALDIRILDI
+│       ├── api.js                  # backend istemcisi
+│       └── components/SonucKarti.jsx
 ├── venv/
 ├── requirements.txt                 # pip freeze ile donduruldu
 └── .env                             # GEMINI_API_KEY, GROQ_API_KEY,
@@ -944,18 +954,65 @@ ortalama **14.3 ms**.
 CORS şu an `allow_origins=["*"]` — Adım 6'daki React geliştirme sunucusu ayrı
 portta çalışacağı için. **Kuruma entegrasyonda daraltılmalı.**
 
-**Adım 6 — Frontend:** `frontend/`, React. Backend hazır ve tüm veriyi
-sağlıyor; arayüzün yapması gerekenler:
-- Metin giriş alanı + "Analiz Et" butonu
-- Kategori çıktısı renk etiketiyle (`/kategoriler`'den gelen `renk`)
-- Güven skoru progress bar
-- Tüm kategorilerin olasılık dağılımı — yatay bar chart (`dagilim` alanı
-  zaten olasılığa göre sıralı geliyor)
-- **Düşük güven uyarısı** (`low_confidence` + `low_confidence_mesaji`)
-- **İkincil kategori rozeti** (`ikincil_kategori` doluysa) — sınırda
-  bildirimlerde ikinci ekibin de görünmesi
-- Örnek cümle listesi (`/ornekler`, tek tıkla doldurma)
-- Yanıt süresi göstergesi (`yanit_suresi_ms`)
+**✅ Adım 6 — Frontend (TAMAMLANDI):** `frontend/`, React + Vite. Çalıştırma:
+
+```
+npm run dev --prefix frontend      # http://localhost:5173
+```
+
+Backend'in ayrı portta (8000) çalışıyor olması gerekiyor. Taban adres
+`VITE_API_URL` ile değiştirilebilir; varsayılan `http://127.0.0.1:8000`.
+
+Ekranda olanlar:
+- Metin girişi (Ctrl/Cmd+Enter ile de gönderilir), 300 karakter sayacı —
+  aşınca sayaç kırmızıya döner ve buton kilitlenir (backend'in `MAX_CHARS`
+  kontrolüyle aynı sınır, istemcide önden yakalanıyor)
+- Kategori rozeti, kategori renginde (`/categories`'ten gelen `color`)
+- **İkincil kategori rozeti** kesikli çerçeveyle, birincilin yanında
+- Güven progress bar
+- **`manual_review` uyarı kutusu** — ve içinde **hangi sebeple** tetiklendiği
+  ayrı ayrı yazıyor: düşük güven mi, iki kategori arasında kararsızlık mı,
+  yoksa ikisi birden mi
+- Tüm kategorilerin olasılık dağılımı, yatay barlar
+- Örnek bildirimler (`/examples`, tek tıkla doldurur) — "bu örnekler eğitimde
+  hiç kullanılmamış gold setinden geliyor" notuyla
+- Açılır taksonomi paneli (8 kategori + kapsam metinleri)
+- Yanıt süresi
+- Backend kapalıysa: "Servise ulaşılamıyor… Başlatmak için: uvicorn …" —
+  kullanıcıya ne yapacağını söyleyen hata mesajı
+
+**Tasarım — karanlık tema.** Tek tema var, açık/koyu geçişi yok; arayüz
+baştan koyu tasarlandı.
+
+- Zemin `#0a0c11`, katmanlı yüzeyler `rgba(255,255,255,0.03-0.05)` +
+  `backdrop-filter: blur()` ile cam hissi
+- **Ortam ışığı:** sayfanın üstünde sabit (`position: fixed`) yumuşak bir hale.
+  Sonuç geldiğinde `--vurgu` o kategorinin rengine dönüyor ve hale de onunla
+  renkleniyor — ekran sonuca göre renk değiştiriyor
+- **Kategori renkleri `config.py`'den geliyor ama koyu zemine uyarlanıyor.**
+  Renkler açık zemin için seçilmişti; bazıları koyu (örn. temizlik `#65a30d`)
+  ve doğrudan seyreltilince siyaha karışıp kayboluyordu. CSS `color-mix` ile
+  **önce beyazla açılıp sonra seyreltiliyor** — böylece config tek doğruluk
+  kaynağı olarak kalıyor, arayüz kendi zeminine göre uyarlıyor
+- Sonuç kartı aşağıdan yukarı animasyonla giriyor; olasılık barları
+  **kademeli gecikmeyle** (45 ms aralıklarla) sırayla doluyor
+- `prefers-reduced-motion` desteği var
+
+**Vite şablonunun varsayılan `index.css`'i kaldırıldı.** Şablon `:root`'a
+`color-scheme: light dark` ve `@media (prefers-color-scheme: dark)` blokları
+koyuyor; başlık rengini `#f3f4f6`'ya çevirip zeminde görünmez yapıyordu.
+Ayrıca `#root`'a sabit genişlik + `text-align: center` veriyordu.
+Kullanılmayan şablon dosyaları da silindi (hero.png, vite.svg, favicon.svg,
+icons.svg, README.md) — hiçbiri referans edilmiyordu.
+
+Tarayıcıda uçtan uca doğrulandı: yüksek güvenli tahmin (Araç/Tren %100, mavi
+hale, uyarı yok), sınırda bildirim (Temizlik/Çevre %50.6 + ikincil
+Altyapı/İnşaat, yeşil hale, çift gerekçeli uyarı), taksonomi paneli,
+karakter sınırı, mobil yerleşim (375px).
+
+**`.gitignore`:** `frontend/node_modules/` (58 MB, 425 dosya) ve
+`frontend/dist/` eklendi — ikisi de `package-lock.json`'dan yeniden
+üretilebilir ara ürün. `frontend/src` ve `package*.json` commit edilir.
 
 ## Genel İlkeler (her adımda geçerli)
 

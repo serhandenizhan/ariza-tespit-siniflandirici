@@ -1,0 +1,3 @@
+/* Vite sablonunun varsayilan temasi bilerek kaldirildi -- tum stiller
+   App.css'te, tek karanlik tema olarak tanimli. Sablonun
+   @media (prefers-color-scheme) bloklari App.css ile cakisiyordu. */
