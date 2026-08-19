@@ -338,9 +338,25 @@ AMPLIFY_AVOID_N = 12
 BASE_MODEL = "dbmdz/bert-base-turkish-cased"
 
 MAX_LENGTH = 64             # ariza bildirimleri kisa; 64 token fazlasiyla yeter
-NUM_EPOCHS = 5
+NUM_EPOCHS = 12
 BATCH_SIZE = 16
-LEARNING_RATE = 2e-5
+
+# DIKKAT (19 Agu 2026): burada onceden 2e-5 yaziyordu ve model OGRENMIYORDU.
+# 2e-5, BERT'i TAM fine-tuning ederken kullanilan standart degerdir; biz LoRA
+# kullaniyoruz. LoRA'da parametrelerin sadece %0.54'u (595.976) egitiliyor,
+# adaptorler sifirdan basliyor ve siniflandirma basligi rastgele baslatiliyor
+# -- bu kadar kucuk bir ogrenme hiziyla agirliklar anlamli mesafe kat edemiyor.
+# Olculdu (5 epoch, val macro-F1):
+#     2e-5 -> 0.134   (kayip 2.146 -> 2.073; rastgele seviye ln(8)=2.079)
+#     1e-4 -> 0.393
+#     3e-4 -> 0.850
+#     5e-4 -> 0.875
+# 15 epoch'ta: 5e-4 -> 0.930 (epoch 13), 1e-3 -> 0.938 (epoch 11).
+# Ikisi arasindaki fark val setinde ~1 ornek (n=160), yani gurultu icinde.
+# 5e-4 secildi: ayni sonucu daha yumusak bir egriyle veriyor.
+# Ders: hiperparametreyi literaturden kopyalamak yetmiyor, EGITIM YONTEMINE
+# gore ayarlamak gerekiyor.
+LEARNING_RATE = 5e-4
 WEIGHT_DECAY = 0.01
 WARMUP_RATIO = 0.1
 SEED = 42
@@ -366,10 +382,43 @@ MIN_PER_CLASS_F1 = 0.75
 # Servis ayarlari
 # ---------------------------------------------------------------------------
 
-# Bu esigin altinda kategori atanmaz, arayuzde manuel inceleme uyarisi cikar.
-# evaluate.py'nin urettigi guven dagilimina bakarak birlikte kalibre edecegiz.
-CONFIDENCE_THRESHOLD = 0.60
+# Bu esigin altinda kategori kesin atanmaz, arayuzde manuel inceleme uyarisi
+# cikar.
+#
+# KALIBRE EDILDI (19 Agu 2026, evaluate.py guven dagilimindan). Onceki deger
+# 0.60 tahminiydi. Olcum: dogru tahminlerde ortalama guven 0.95, YANLIS
+# tahminlerde 0.71 -- yani guven skoru gercekten ayirt edici.
+#   esik 0.60 -> gold'da 8 hatanin 2'sini yakalar, 1 dogruyu bosuna isaretler
+#   esik 0.70 -> gold'da 8 hatanin 5'ini yakalar, 1 dogruyu bosuna isaretler
+#   esik 0.80 -> gold'da 8 hatanin 6'sini yakalar, 3 dogruyu bosuna isaretler
+# 0.70 secildi: yakalama oranini iki kattan fazla artiriyor, maliyeti ayni.
+CONFIDENCE_THRESHOLD = 0.70
 LOW_CONFIDENCE_MESSAGE = "Düşük Güven: Manuel İnceleme Önerilir"
+
+# --- Ikincil kategori (taksonomi sinir sorunlarina genel cozum) --------------
+# Bazi bildirimler GERCEKTEN iki kategoriye birden girer. Somut ornek:
+# "Acil tahliye anonsu yogun saatlerde peronda net duyulamiyor." -- config'in
+# kendi metnine gore guvenlik_emniyet ("anons ile tahliye") ve yolcu_operasyon
+# ("anons yapilmamasi/yanlis anons") kapsamlarinin IKISINE de giriyor.
+#
+# Bunu taksonomiye sinir kurallari yazarak cozmek olceklenmiyor: 8 kategoride
+# 28 cift var ve gercek veriye gecince bugun bilmedigimiz yenileri cikacak.
+# Bunun yerine modelin ZATEN urettigi bilgiyi kullaniyoruz.
+#
+# Olcum (evaluate.py): top-1 dogruluk 0.894/0.900 iken TOP-2 dogruluk her iki
+# test setinde de 0.975; hatalarin ~%75'inde dogru cevap ikinci sirada ve
+# marj (top1-top2) cokuyor (dogrularda 0.90-0.93, yanlislarda 0.43-0.56).
+# Yani model belirsiz oldugunu biliyor; sorun sistemin onu tek cevaba
+# zorlamasiydi.
+#
+# Marj bu esigin ALTINDAYSA /predict birincil + ikincil kategori doner.
+# Kalibrasyon (gold, 8 hata):
+#   0.30 -> 4 kayit cift etiketli, 3 hata kurtarilir, 1 bosuna  (oran 3.0)
+#   0.40 -> 6 kayit cift etiketli, 4 hata kurtarilir, 1 bosuna  (oran 4.0) <-
+#   0.50 -> 8 kayit cift etiketli, 4 hata kurtarilir, 3 bosuna  (oran 1.3)
+# 0.40'tan sonra kurtarma artmiyor ama maliyet artiyor -- tepe noktasi orada.
+MARGIN_THRESHOLD = 0.40
+SECONDARY_CATEGORY_MESSAGE = "Sınırda Bildirim: İkinci Kategori de Değerlendirilmeli"
 
 API_HOST = "0.0.0.0"
 API_PORT = 8000

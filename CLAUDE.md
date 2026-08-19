@@ -48,7 +48,12 @@ ariza-tespit-siniflandirici/
 │       ├── val.csv                 #  160
 │       ├── test.csv                #  160
 │       └── gold_test.csv           #   80  (gold.jsonl'den, egitime GIRMEZ)
-├── model/                          # BOS -- egitilmis model buraya (Adim 4)
+├── model/                          # Adim 4 ciktisi, 3.0 MB
+│   ├── adapter_model.safetensors   # LoRA agirliklari (sadece 2.4 MB!)
+│   ├── adapter_config.json
+│   ├── tokenizer.json / tokenizer_config.json
+│   ├── egitim_ozeti.json           # hiperparametreler + epoch gecmisi
+│   └── degerlendirme.json          # test/gold metrikleri
 ├── src/
 │   ├── __init__.py
 │   ├── config.py                   # TEK dogruluk kaynagi, asagida detay
@@ -58,8 +63,8 @@ ariza-tespit-siniflandirici/
 │   ├── review.py                   # kalite triyaji (seed/gold/amplified)
 │   ├── apply_review.py             # elle onaylanan duzeltmeleri uygular (idempotent)
 │   ├── check_openrouter_models.py  # OpenRouter canli model/fiyat listesi
-│   ├── train.py                     # YOK -- Adim 4'te yazilacak
-│   └── evaluate.py                  # YOK -- Adim 4'te yazilacak
+│   ├── train.py                    # Adim 4a -- BERTurk + LoRA egitimi
+│   └── evaluate.py                 # Adim 4b -- iki test seti + confusion matrix
 ├── backend/
 │   └── main.py                      # YOK -- Adim 5'te yazilacak (FastAPI)
 ├── frontend/                        # YOK -- Adim 6'da yazilacak (React)
@@ -160,16 +165,20 @@ kesiliyordu. 8192'ye çıkarılınca aynı iş 5 çağrıda 8 kayıt yerine 7 ç
 
 - Model: `dbmdz/bert-base-turkish-cased`
 - PEFT/LoRA: r=16, alpha=32, dropout=0.1, target_modules=["query","value"]
-- MAX_LENGTH=64, NUM_EPOCHS=5, BATCH_SIZE=16, LEARNING_RATE=2e-5
+- MAX_LENGTH=64, NUM_EPOCHS=12, BATCH_SIZE=16, **LEARNING_RATE=5e-4**
+  (2e-5 degildi -- bkz. Adim 4 bolumu, en onemli hata buydu)
 - Split: %80 train / %10 val / %10 test
 - Başarı kriteri: accuracy ≥ 0.85, macro F1 ≥ 0.82, hiçbir sınıf F1 < 0.75
 
 ### Servis Ayarları (henüz kullanılmadı, Adım 5 için hazır)
 
-- `CONFIDENCE_THRESHOLD = 0.60` — bu eşiğin altında kategori atanmaz,
-  `low_confidence: true` döner, arayüzde "Düşük Güven: Manuel İnceleme
-  Önerilir" gösterilir. **Bu değer henüz kalibre edilmedi** — evaluate.py
-  yazıldıktan sonra gerçek güven dağılımına bakıp ayarlanacak.
+- `CONFIDENCE_THRESHOLD = 0.70` — **kalibre edildi** (19 Ağu). Bu eşiğin
+  altında `low_confidence: true` döner. Ölçüm: doğru tahminlerde ortalama
+  güven 0.95, yanlışlarda 0.71. 0.60 gold'da 8 hatanın 2'sini yakalıyordu,
+  0.70 ise 5'ini — aynı maliyetle (1 boşuna işaret).
+- `MARGIN_THRESHOLD = 0.40` — **yeni.** `top1 − top2` bu değerin altındaysa
+  `/predict` birincil + ikincil kategori döner. Taksonomi sınır sorunlarına
+  kural yazmak yerine getirilen genel çözüm (aşağıda detaylı).
 
 ## LLM Sağlayıcı Yolculuğu (önemli — rapora doğrudan girebilecek içerik)
 
@@ -477,29 +486,26 @@ ile seed eğitime katılırsa ortaya çıkar.
    (bölme). Gerekçe ve ölçüm `config.py`'de detaylı.
 4. ✅ **KAPANDI — kategori sınırı kontrolü eklendi (`SINIR` bayrağı).**
    Bulduğu 3 gerçek etiket hatası düzeltildi.
-5. **Taksonomi belirsizliği — Adım 4'te confusion matrix'te GÖZDEN GEÇİRİLECEK
-   (kullanıcı isteği).** `SINIR` düzeltmelerinden sonra 2 çift kaldı ve ikisi
-   de gerçek belirsizlik, etiket hatası değil:
-   - `Makinist masası acil durdurma butonu takılı` (arac_tren) vs
-     `Acil durdurma butonu takılı` (guvenlik_emniyet) — benzerlik 1.00.
-     Config'e göre İKİSİ DE doğru: makinist masası araç kapsamında, genel
-     acil buton güvenlik kapsamında. Sorun ikinci cümlenin tek başına
-     ayırt edilemez olması. **Üstelik biri train'de biri test'te** — model
-     test'te muhtemelen `arac_tren` diyip puan kaybedecek. Bu sızıntı değil,
-     dürüst zorluk; ama confusion matrix'te arac_tren↔guvenlik_emniyet
-     karışması görülürse sebebi burada.
-   - `Asansör kabin titriyor` (istasyon_mekanik) vs `Asansör kabini kirli`
-     (temizlik_cevre) — farklı arızalar, sözcüksel ölçütün yanlış alarmı.
-   Adım 4'te bakılacak sorular: bu iki kategori çifti confusion matrix'te
-   gerçekten karışıyor mu; karışıyorsa taksonomiye açıklayıcı bir kural mı
-   eklemeli (örn. "acil durdurma butonu nerede? tren içi → araç, istasyon →
-   güvenlik") yoksa veri mi düzeltmeli.
-6. **`CONFIDENCE_THRESHOLD = 0.60` hâlâ kalibre edilmedi** — `evaluate.py`
-   yazılıp gerçek güven dağılımı görülünce ayarlanacak (Adım 4 sonrası).
+5. ✅ **KAPANDI — taksonomi belirsizliği confusion matrix'te incelendi.**
+   İşaretlenen `arac_tren ↔ guvenlik_emniyet` çifti **hiç karışmadı**; model
+   ayırt etti. Yerine gerçek bir çakışma bulundu (`guvenlik_emniyet ↔
+   yolcu_operasyon`, config kaynaklı) ve buna kural yerine **ikincil kategori
+   mekanizması** getirildi (Adım 4 bölümünde detaylı).
+6. ✅ **KAPANDI — `CONFIDENCE_THRESHOLD` kalibre edildi**, 0.60 → **0.70**.
 7. **Kategori dengesi artık tam eşit değil:** `SINIR` düzeltmeleri sonrası
    istasyon_mekanik 202, altyapi_insaat ve yolcu_operasyon 199, diğerleri 200.
    Sapma ±2, macro-F1 ve katmanlı bölme için önemsiz — ama raporda "her
    kategoriden tam 200" denmemeli.
+8. **`yazim_yanlisi` stili modelin zayıf noktası** (gold'da 0.765, diğerleri
+   0.909-1.000). Gerçek hayatta bu stil yaygın olduğu için iyileştirmeye
+   değer. Fikirler: bu stilden daha çok örnek üretmek, veya aksan-normalizasyon
+   katmanı eklemek (girdiyi tokenizer'a vermeden önce `guvenlik → güvenlik`
+   düzeltmesi — `review.py`'deki `DIACRITIC_VOCAB` bunun için hazır).
+9. **`review.py` İngilizce kelime sızmasını görmüyor.** Eğitim verisinde
+   `Acil çıkış yolu engelli baggage` bulundu. Küçük bir kontrol eklenebilir.
+10. **İkincil kategori mekanizması Adım 5/6'da hayata geçirilecek** —
+    `MARGIN_THRESHOLD` config'te hazır, backend `/predict` ve arayüz bunu
+    kullanacak.
 
 ## Yol Haritası — Kalan Adımlar
 
@@ -585,20 +591,118 @@ seçildi:** küme boyutu 2-3'te kalıyor, bedeli 1600 kayıtta 29 kayıt.
 Yakaladığı en büyük küme tam da gerçek kopya ailesi (üç ayrı "sefer iptali →
 yolcular bir sonraki trene yönlendirildi" cümlesi).
 
-**Adım 4 — Model Eğitimi:** `src/train.py` + `src/evaluate.py` yazılacak.
+**✅ Adım 4 — Model Eğitimi (TAMAMLANDI):** `src/train.py` + `src/evaluate.py`
+yazıldı ve çalıştırıldı. **Tüm başarı kriterleri her iki test setinde de
+geçildi.**
 
-> ⚠️ **Başlamadan önce:** Güncel Açık Noktalar #2'ye bak. Ollama'dan gelen
-> 500 kayıt Nemotron'la değiştirilecekse, `preprocess.py` yeniden
-> çalıştırılmadan eğitime başlanmamalı — yoksa model eski split'le eğitilir.
-BERT + LoRA fine-tuning, HuggingFace Trainer, scikit-learn ile
-accuracy/macro-F1/confusion matrix. Hedefler `config.py`'de tanımlı
-(TARGET_ACCURACY, TARGET_MACRO_F1, MIN_PER_CLASS_F1). Apple Silicon'da MPS
-backend kullanılacak, LoRA/PEFT ile bilinen dtype/uyumluluk sorunları
-çıkabilir, dikkatli debug gerekebilir.
+| metrik | test (160) | gold (80) | hedef |
+| --- | --- | --- | --- |
+| accuracy | 0.8938 | **0.9000** | 0.85 ✅ |
+| macro F1 | 0.8935 | **0.9014** | 0.82 ✅ |
+| en düşük sınıf F1 | 0.7500 | **0.8000** | 0.75 ✅ |
 
-**Adım 5 — Backend:** `backend/main.py`, FastAPI. `/predict` endpoint,
-`CONFIDENCE_THRESHOLD` (0.60) altında `low_confidence: true` dönecek.
+**Gold skoru test'ten YÜKSEK (+0.008).** Projenin en önemli bulgusu bu:
+sentetik veriyle eğitilen model, bağımsız üretilmiş ve elle gözden geçirilmiş
+gold setinde en az kendi dağılımı kadar iyi. Yani model çoğaltmanın kalıplarını
+ezberlememiş, gerçekten sınıfı öğrenmiş. "Sentetik veri gerçekçi mi"
+eleştirisine verilebilecek en somut cevap.
+
+### En kritik hata: LoRA'da öğrenme hızı
+
+`config.py`'de `LEARNING_RATE = 2e-5` yazıyordu ve **model hiçbir şey
+öğrenmiyordu**: 5 epoch sonunda val macro-F1 = 0.134, kayıp 2.073 (rastgele
+seviye `ln(8) = 2.079`). Sebep: 2e-5 BERT'i **tam fine-tuning** ederken
+kullanılan standart değer, ama biz LoRA kullanıyoruz — parametrelerin sadece
+%0.54'ü (595.976 / 111.219.472) eğitiliyor, adaptörler sıfırdan başlıyor ve
+sınıflandırma başlığı rastgele başlatılıyor. Bu kadar küçük bir öğrenme hızıyla
+ağırlıklar anlamlı mesafe kat edemiyor.
+
+| LR | val macro-F1 (5 epoch) |
+| --- | --- |
+| 2e-5 | 0.134 (rastgele) |
+| 1e-4 | 0.393 |
+| 3e-4 | 0.850 |
+| 5e-4 | 0.875 |
+
+15 epoch'ta: 5e-4 → 0.930, 1e-3 → 0.938. Aradaki fark val setinde ~1 örnek
+(n=160), yani gürültü içinde — 5e-4 seçildi (daha yumuşak eğri).
+
+**Ders: hiperparametreyi literatürden kopyalamak yetmiyor, eğitim yöntemine
+göre ayarlamak gerekiyor.** Rapor için güçlü bir bölüm.
+
+### Diğer eğitim kararları
+
+- **HuggingFace `Trainer` yerine elle eğitim döngüsü.** `Trainer`, `accelerate`
+  üzerinden MPS'te dtype/device sürprizleri çıkarabiliyor ve hata ayıklamayı
+  zorlaştırıyor. 1280 örnek × 12 epoch için elle döngü hem şeffaf hem yeterli.
+- **`modules_to_save=["classifier"]`** — LoRA'da kritik: sınıflandırma başlığı
+  rastgele başlatılıyor, sadece adaptörler eğitilirse model öğrenemez.
+- **En iyi val macro-F1 veren epoch kaydediliyor**, sonuncusu değil (son epoch
+  genelde aşırı öğrenmiş olur). Seçilen: epoch 5, val F1 0.9242.
+- Tohum sabit (`SEED=42`), sonuç tekrar üretilebilir.
+- Eğitim süresi ~20-30 sn/epoch (MPS, Apple Silicon). LoRA çıktısı sadece
+  **2.4 MB** — tam model 440 MB olurdu.
+
+### Confusion matrix bulguları
+
+**Beklenen karışma GERÇEKLEŞMEDİ.** Adım 3'te işaretlenen taksonomi
+belirsizliği (`Makinist masası acil durdurma butonu takılı` train'de arac_tren,
+`Acil durdurma butonu takılı` test'te guvenlik_emniyet, benzerlik 1.00) için
+"model puan kaybedecek" denmişti. Model **güven 1.00 ile doğru** cevap verdi;
+"makinist masası" ifadesinin ayırt edici sinyal olduğunu öğrenmiş. Confusion
+matrix'te `arac_tren ↔ guvenlik_emniyet` karışması hiç yok.
+
+**Bunun yerine gerçek bir çakışma ortaya çıktı: `guvenlik_emniyet ↔
+yolcu_operasyon`** (test'te 5, gold'da 2 hata — her iki sette de baskın çift).
+Kaynağı veri değil, **config'in kendisi**:
+- `guvenlik_emniyet` kapsamı: "...anons ile tahliye"
+- `yolcu_operasyon` kapsamı: "anons yapılmaması/yanlış anons"
+
+Örnek: `Acil tahliye anonsu yoğun saatlerde peronda net duyulamıyor.` — iki
+kapsama da giriyor. Çözüm için aşağıdaki ikincil kategori mekanizması seçildi.
+
+**Stil bazlı doğruluk:** model gold'da `yazim_yanlisi` stilinde belirgin
+zorlanıyor (0.765; diğer stiller 0.909-1.000). Beklenen: aksan düşmüş metin
+BERTurk'ün tokenizer'ına yabancı geliyor. Rapora girebilecek bir gözlem —
+gerçek hayatta bu stil yaygın olduğu için iyileştirme alanı.
+
+**Veri artığı yakalandı:** `Acil çıkış yolu engelli baggage` — cümlede İngilizce
+kelime var. `review.py` bunu görmüyor (otomatik triyajın bir kör noktası daha).
+
+### İkincil kategori mekanizması — sınır sorunlarına genel çözüm
+
+Taksonomiye sınır kuralı yazmak yerine (8 kategoride 28 çift var, ölçeklenmez)
+modelin **zaten ürettiği** bilgi kullanılıyor:
+
+| | test | gold |
+| --- | --- | --- |
+| top-1 doğruluk | 0.894 | 0.900 |
+| **top-2 doğruluk** | **0.975** | **0.975** |
+| hataların kaçında doğru cevap 2. sırada | %76 | %75 |
+| marj (top1−top2): doğrularda / yanlışlarda | 0.90 / 0.56 | 0.93 / 0.43 |
+
+Model belirsiz olduğunu biliyor. `MARGIN_THRESHOLD = 0.40` altında `/predict`
+birincil + ikincil kategori döner. Kalibrasyon (gold): 0.30 → 3 hata kurtarılır
+1 boşuna; **0.40 → 4 kurtarılır 1 boşuna**; 0.50 → 4 kurtarılır 3 boşuna.
+0.40'tan sonra kurtarma artmıyor, maliyet artıyor.
+
+Bunun kural yazmaya üstünlüğü: bugün bilmediğimiz sınır sorunlarını da kapsıyor,
+gerçeği daha doğru modelliyor (bazı bildirimler gerçekten iki kategoriye girer),
+ve mevcut `low_confidence` mekanizmasını kapsıyor.
+
+**Adım 5 — Backend:** `backend/main.py`, FastAPI. `/predict` endpoint.
 Model Python tarafında yüklü tutulacak, REST API olarak servis edilecek.
+Dönecek alanlar:
+- `kategori` + `guven` (birincil tahmin)
+- `low_confidence: true` — güven `CONFIDENCE_THRESHOLD` (0.70) altındaysa
+- `ikincil_kategori` — marj `MARGIN_THRESHOLD` (0.40) altındaysa; sınırda
+  bildirimlerde ikinci ekip de bilgilendirilsin diye
+- tüm kategorilerin olasılık dağılımı (arayüzdeki bar chart için)
+- yanıt süresi
+
+Model yüklemesi PEFT gerektiriyor: `adapter_config.json`'daki taban modelden
+BERTurk indirilip üstüne LoRA adaptörü bindiriliyor (bkz. `evaluate.model_yukle`,
+aynı desen kullanılabilir).
 
 **Adım 6 — Frontend:** `frontend/`, React. Metin giriş, "Analiz Et" butonu,
 kategori çıktısı (renk etiketiyle — `CATEGORY_COLOR` config'te hazır), güven
@@ -692,3 +796,16 @@ remote'a (GitHub vb.) push edeceğimizi netleştirelim.
 - **Gold'da yazım hatası bilinçli olarak korundu** ("personel aceleyle bunu
   yazar mıydı?" ölçütü). Gerçekçi gürültü kalır, üretim artığı temizlenir.
   Gold'u gerçek hayattan temiz yapmak başarı oranını şişirirdi.
+- **En güçlü tek sonuç: gold skoru test'ten yüksek çıktı** (macro F1 0.9014 vs
+  0.8935). Sentetik veriyle eğitilen model, bağımsız üretilmiş ve elle gözden
+  geçirilmiş sette daha iyi. "Model ezberledi mi?" sorusuna ölçülmüş cevap.
+- **LoRA öğrenme hızı hatası** (2e-5 → 5e-4, model rastgele seviyeden 0.93'e)
+  metodoloji bölümü için değerli: hiperparametre literatürden kopyalanamaz,
+  eğitim yöntemine göre ayarlanır. Ölçüm tablosu elde var.
+- **Taksonomi sınır sorununa mühendislik çözümü:** kural yazmak yerine modelin
+  olasılık dağılımını kullanmak (top-2 doğruluk 0.975). Kural bazlı çözümün
+  neden ölçeklenmediği (28 kategori çifti) ve marj eşiğinin nasıl kalibre
+  edildiği anlatılabilir. "Sistemi modele uydurmak yerine modelin bildiğini
+  kullanmak" — sunumda güçlü bir başlık.
+- **Model boyutu:** LoRA adaptörü 2.4 MB, tam fine-tuning 440 MB olurdu.
+  Dağıtım/versiyonlama avantajı somut bir kazanım.

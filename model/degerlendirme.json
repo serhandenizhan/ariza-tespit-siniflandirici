@@ -1,0 +1,120 @@
+[
+  {
+    "ad": "TEST (cogaltilmis dagilim)",
+    "n": 160,
+    "accuracy": 0.89375,
+    "macro_f1": 0.8935109334322323,
+    "min_sinif_f1": 0.75,
+    "sinif_f1": {
+      "arac_tren": 0.9743589743589743,
+      "istasyon_mekanik": 0.9,
+      "elektrik_enerji": 0.926829268292683,
+      "yazilim_sistem": 0.8717948717948718,
+      "guvenlik_emniyet": 0.8717948717948718,
+      "altyapi_insaat": 0.9230769230769231,
+      "yolcu_operasyon": 0.75,
+      "temizlik_cevre": 0.9302325581395349
+    },
+    "karisan_ciftler": [
+      [
+        "guvenlik_emniyet",
+        "yolcu_operasyon",
+        3
+      ],
+      [
+        "yolcu_operasyon",
+        "yazilim_sistem",
+        2
+      ],
+      [
+        "yolcu_operasyon",
+        "guvenlik_emniyet",
+        2
+      ],
+      [
+        "arac_tren",
+        "yolcu_operasyon",
+        1
+      ],
+      [
+        "istasyon_mekanik",
+        "altyapi_insaat",
+        1
+      ],
+      [
+        "istasyon_mekanik",
+        "temizlik_cevre",
+        1
+      ]
+    ],
+    "ikincil_kategori": {
+      "top1_accuracy": 0.89375,
+      "top2_accuracy": 0.975,
+      "marj_dogru": 0.9012015216130685,
+      "marj_yanlis": 0.5564580894458819,
+      "cift_kategorili": 13,
+      "kurtarilan_hata": 6,
+      "toplam_hata": 17,
+      "bosuna_isaretlenen": 6
+    }
+  },
+  {
+    "ad": "GOLD TEST (bagimsiz, elle gozden gecirilmis)",
+    "n": 80,
+    "accuracy": 0.9,
+    "macro_f1": 0.9013623072833599,
+    "min_sinif_f1": 0.8,
+    "sinif_f1": {
+      "arac_tren": 0.9473684210526315,
+      "istasyon_mekanik": 0.9,
+      "elektrik_enerji": 0.9473684210526315,
+      "yazilim_sistem": 1.0,
+      "guvenlik_emniyet": 0.8,
+      "altyapi_insaat": 0.8888888888888888,
+      "yolcu_operasyon": 0.8181818181818182,
+      "temizlik_cevre": 0.9090909090909091
+    },
+    "karisan_ciftler": [
+      [
+        "guvenlik_emniyet",
+        "yolcu_operasyon",
+        2
+      ],
+      [
+        "arac_tren",
+        "yolcu_operasyon",
+        1
+      ],
+      [
+        "istasyon_mekanik",
+        "guvenlik_emniyet",
+        1
+      ],
+      [
+        "elektrik_enerji",
+        "istasyon_mekanik",
+        1
+      ],
+      [
+        "altyapi_insaat",
+        "guvenlik_emniyet",
+        1
+      ],
+      [
+        "altyapi_insaat",
+        "temizlik_cevre",
+        1
+      ]
+    ],
+    "ikincil_kategori": {
+      "top1_accuracy": 0.9,
+      "top2_accuracy": 0.975,
+      "marj_dogru": 0.929308892808169,
+      "marj_yanlis": 0.4332690939772874,
+      "cift_kategorili": 6,
+      "kurtarilan_hata": 4,
+      "toplam_hata": 8,
+      "bosuna_isaretlenen": 1
+    }
+  }
+]
