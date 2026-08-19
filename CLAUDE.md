@@ -68,6 +68,9 @@ ariza-tespit-siniflandirici/
 ├── backend/
 │   ├── __init__.py
 │   └── main.py                     # Adim 5 -- FastAPI servisi
+├── tests/
+│   ├── __init__.py
+│   └── test_api.py                 # 17 entegrasyon testi (pytest)
 ├── frontend/                        # YOK -- Adim 6'da yazilacak (React)
 ├── venv/
 ├── requirements.txt                 # pip freeze ile donduruldu
@@ -511,6 +514,18 @@ ile seed eğitime katılırsa ortaya çıkar.
     Arayüz tarafı Adım 6'da yapılacak.
 12. **CORS şu an `allow_origins=["*"]`** — prototip için. Kuruma
     entegrasyonda daraltılmalı.
+13. **Temiz bir kalibrasyon seti yok.** `CONFIDENCE_THRESHOLD` validation
+    üzerinden ölçüldü ama val epoch seçiminde kullanıldığı için model orada
+    fazla emin (yanlış tahminlerde ort. güven 0.892 vs test 0.758). Doğrusu
+    train'den ayrı bir `calibration.csv` ayırmaktı. Eşik 0.70'te bırakıldı,
+    kısıt belgelendi.
+14. **Yapısal çıkarım (line/station/equipment/symptom) YAPILMADI.** Sistem şu
+    an sadece `category` döndürüyor. İstenen çıktı biçimi:
+    `{category, line, station, equipment, symptom, confidence}`. Planlanan
+    sıra: (1) kurallı extraction — istasyon adları ve hat kodları zaten
+    `config.SLOT_VALUES`'ta var, (2) NER/token classification, (3) gerekirse
+    LLM fallback. Başarı kriteri alan bazlı precision/recall raporu.
+    Kullanıcı kararıyla Adım 6'dan sonraya bırakıldı.
 11. **`--include-seed` hâlâ kapalı.** 93 kayıtlık seed eğitime katılmıyor.
     Katılırsa küçük bir kazanç olabilir; ölçülmedi. Seed'in few-shot yemi
     olması eğitime girmesine engel değil (gold farklı, o asla girmez).
@@ -744,6 +759,70 @@ ağ, `baggage`→bagajla, `duraqta`→durakta, `kapaq`→kapak (×2).
 "bu kelime Türkçe mi" sorusu güvenilir cevaplanamıyor; elle okuma hâlâ tek
 kapsamlı yöntem. Dar ve kesin bir kural, geniş ve gürültülü bir kuraldan iyidir.
 
+### evaluate.py — rapor kapsamı (19 Ağu genişletildi)
+
+`python -m src.evaluate --kalibrasyon --hatalari-goster` şunları basar:
+
+- **Contamination kontrolü (raporun EN BAŞINDA)** — birebir kesişim: train↔test,
+  train↔val, val↔test, train↔gold, test↔gold. Ayrıca near-duplicate kontrolü
+  **kategori ayrımıyla**: aynı kategoride benzer çift = gerçek sızıntı (model
+  ezberleyip skoru şişirebilir); farklı kategoride = sızıntı DEĞİL, taksonomi
+  belirsizliği (etiketler farklı olduğu için ezber işe yaramaz). Bu ayrım
+  yapılmazsa araç "skorlar iyimser" diye yanlış uyarı üretiyor — nitekim ilk
+  sürümde öyle oldu.
+  Güncel durum: birebir 0, aynı-kategori near-dup **0**, farklı-kategori 2.
+- **Genel metrikler:** accuracy, macro F1, **weighted F1**, macro/weighted
+  **precision** ve **recall**, en düşük sınıf F1
+- **Sınıf bazlı metrikler:** her kategori için precision / recall / F1 / destek
+- **Confusion matrix** + en çok karışan çiftler
+- **Stil bazlı doğruluk** (model hangi yazım stilinde zorlanıyor)
+- **İkincil kategori analizi** (top-2 doğruluk, marj)
+- **`manual_review` sayısı** (aktif eşikle kaç bildirim insana gider)
+- **Hata örnekleri — sınıf bazında gruplu** (`--hatalari-goster`, en fazla 20).
+  Düz liste yerine gruplanıyor çünkü "model nerede hata yapıyor" sorusunun
+  cevabı tek tek hatalar değil, hangi sınıfın hangi sınıfla karıştığı. Grup
+  içinde en düşük güvenli hata önce gelir — modelin zaten tereddüt ettikleri.
+
+### Kalibrasyon — ve validation setinin kör noktası
+
+`CONFIDENCE_THRESHOLD` başta 0.60'tı ve kalibre edilmemişti. `--kalibrasyon`
+bayrağı **validation seti üzerinden** eşik taraması + reliability diagram +
+ECE üretiyor.
+
+**Neden validation:** eşiği test'e bakarak seçmek test setini karar sürecine
+sokar ve raporlanan skoru iyimser yapar. Metodolojik olarak doğru set val.
+
+**Ama ölçüm beklenmedik bir şey gösterdi.** Validation'da güven sinyali çok
+daha zayıf:
+
+| | yanlış tahminlerde ort. güven | eşik 0.70'te yakalanan |
+| --- | --- | --- |
+| validation | **0.892** | 2/9 hata, 6 boşuna (precision 0.25) |
+| test | 0.758 | 8/17 hata, 7 boşuna |
+| gold | 0.709 | 5/8 hata, 1 boşuna |
+
+Sebep: **val, epoch seçimi için kullanıldı.** En iyi val macro-F1'i veren
+checkpoint seçildiği için model val üzerinde fazla emin — yani val "temiz" bir
+kalibrasyon seti değil. Eşiği val'e göre seçmek de hatalı olurdu.
+
+Reliability diagram (validation, ECE = **0.0427**):
+
+| güven kovası | kayıt | ort. güven | gerçek doğruluk | sapma |
+| --- | --- | --- | --- | --- |
+| 0.50-0.60 | 5 | 0.570 | 0.800 | +0.230 |
+| 0.60-0.70 | 3 | 0.689 | 0.667 | −0.023 |
+| 0.80-0.90 | 3 | 0.852 | 0.667 | −0.185 |
+| 0.90-0.95 | 8 | 0.934 | 0.875 | −0.059 |
+| 0.95-1.00 | **141** | 0.997 | 0.965 | −0.032 |
+
+Model hafif **fazla emin** (yüksek bantlarda sapma negatif) ama ECE 0.043 ile
+makul kalibre. Kayıtların %88'i en üst kovada — model çoğu zaman çok emin.
+
+**Açık nokta:** temiz bir kalibrasyon seti yok. Doğrusu train'den ayrı bir
+`calibration.csv` ayırmak olurdu; bu 1600 kayıtta veri maliyeti yaratır.
+Şimdilik eşik 0.70'te bırakıldı (test+gold davranışıyla destekleniyor) ve bu
+kısıt açıkça belgelendi.
+
 ### İkincil kategori mekanizması — sınır sorunlarına genel çözüm
 
 Taksonomiye sınır kuralı yazmak yerine (8 kategoride 28 çift var, ölçeklenmez)
@@ -776,36 +855,56 @@ FastAPI ise async — eş zamanlı isteklerde aynı model nesnesine dokunulması
 diye `threading.Lock` kullanılıyor. (Prototip için yeterli; gerçek yükte
 birden fazla worker/kuyruk gerekir.)
 
-Uç noktalar:
+**API alan adları İNGİLİZCE.** Projenin geri kalanı (config, değişken adları,
+bu doküman) Türkçe ama dışa açılan sözleşme REST konvansiyonuna uyuyor.
+Kategori anahtarları (`arac_tren`...) zaten ASCII, aynen korunuyor; her yanıtta
+insan-okunur `label` ve arayüz için `color` da var.
+
+Uç noktalar (hepsi Pydantic `response_model` ile şemalı — Swagger'da tam
+dokümante):
 
 | yol | ne yapar |
 | --- | --- |
-| `POST /predict` | `{"metin": "..."}` → kategori, güven, düşük güven uyarısı, ikincil kategori, tüm olasılık dağılımı, yanıt süresi |
-| `GET /health` | model yüklü mü, hangi cihaz, hangi eğitim (epoch/val F1), aktif eşikler |
-| `GET /kategoriler` | 8 kategori: ad, renk (`CATEGORY_COLOR`), kapsam metni — arayüz için |
-| `GET /ornekler` | "tek tıkla doldur" listesi; **gold.jsonl'den**, her kategoriden en fazla bir örnek |
+| `POST /predict` | `{"text": "..."}` → `category`, `label`, `color`, `confidence`, `probabilities` (kategori→olasılık sözlüğü), `low_confidence`, `manual_review`, `secondary_category`, `margin`, `response_time_ms` |
+| `GET /health` | servis ayakta mı, model yüklendi mi, hangi cihaz (izleme/yük dengeleyici için — hafif tutuldu) |
+| `GET /model-info` | taban model, LoRA, parametre sayıları, en iyi epoch/val F1, hiperparametreler, aktif eşikler. Bir tahminin hangi model sürümünden geldiği izlenebilsin diye |
+| `GET /categories` | 8 kategori: `label`, `color`, `scope`, `excludes` |
+| `GET /examples` | "tek tıkla doldur" listesi; **gold.jsonl'den**, her kategoriden en fazla bir örnek |
 
-`/ornekler` bilerek gold'dan besleniyor: eğitim verisinden örnek göstermek
-demoyu olduğundan iyi gösterirdi. Gold eğitime hiç girmedi.
+`/examples` bilerek gold'dan besleniyor: eğitim verisinden örnek göstermek
+demoyu olduğundan iyi gösterirdi. Gold eğitime hiç girmedi (test bunu
+doğruluyor).
 
-**İki mekanizma birbirinden ayrı çalışıyor** — aynı anda tetiklenebilir veya
-sadece biri:
-- `low_confidence` → "model emin değil" (güven < 0.70)
-- `ikincil_kategori` → "model HANGİ İKİ seçenek arasında kararsız" (marj < 0.40)
+**Üç sinyal, ayrı anlamlar:**
+- `low_confidence` → "model emin değil" (güven < `CONFIDENCE_THRESHOLD` 0.70)
+- `secondary_category` → "model HANGİ İKİ seçenek arasında kararsız"
+  (marj < `MARGIN_THRESHOLD` 0.40)
+- `manual_review` → **ikisinden biri** tetiklendiyse `true`. Operatöre
+  "bu bildirime insan baksın" diyen tek alan; arayüz bunu kullanmalı.
+
+### Entegrasyon testleri (`tests/test_api.py`, 17 test, ~4 sn)
+
+`TestClient` lifespan'i çalıştırdığı için **model gerçekten yükleniyor** — bunlar
+birim testi değil, uçtan uca entegrasyon testi. Kapsanan davranışlar:
+
+- `/health`, `/model-info`, `/categories`, `/examples` sözleşmeleri
+- `/predict`: olasılıklar toplamı 1, en yüksek olasılık = dönen kategori
+- **Eşik tutarlılığı:** `low_confidence`, `secondary_category` ve
+  `manual_review` birbiriyle ve config eşikleriyle tutarlı mı
+- **Regresyon:** bilinen bir mekanik arıza `istasyon_mekanik` çıkmalı
+  (yanlış checkpoint / bozuk adaptör bu testi düşürür)
+- **Aksan regresyonu:** aksanlı ve aksansız aynı cümle aynı kategoriye gitmeli
+  (Adım 4'teki ASCII çoğaltmasının bekçisi)
+- **Örnek sızıntısı:** `/examples` çıktısı gold'da olmalı, train'de OLMAMALI
+- Hatalı girdi: boş/uzun metin → 400, eksik alan/yanlış tip → 422
+- **Model istek başına yeniden yüklenmiyor** (nesne kimliği sabit)
+- OpenAPI: 5 uç noktanın da yanıt şeması dolu (Swagger'da `"string"`
+  görünmesinin sebebi eksik `response_model`'di, bu test o gerilemeyi yakalar)
 
 **Doğrulama — servis, `evaluate.py` ile birebir aynı sonucu veriyor:**
-80 gold kaydı HTTP üzerinden geçirildi.
-
-| | API | evaluate.py |
-| --- | --- | --- |
-| doğruluk | 74/80 = **0.9250** | 0.9250 ✅ |
-| ikincil kategori dönen | 6 (%7.5) | 6 (%7.5) ✅ |
-
-Çıkarım süresi ortalama **14.3 ms** (min 12.8, maks 48.5 — ilk çağrı ısınma).
-80 istek + HTTP toplam 1.2 sn.
-
-Hata durumları test edildi: boş metin → 400, `MAX_CHARS` (300) aşımı → 400,
-eksik alan → 422 (Pydantic).
+80 gold kaydı HTTP üzerinden geçirildi; doğruluk 74/80 = **0.9250**, ikincil
+kategori dönen 6 (%7.5) — ikisi de `evaluate.py` ile aynı. Çıkarım süresi
+ortalama **14.3 ms**.
 
 CORS şu an `allow_origins=["*"]` — Adım 6'daki React geliştirme sunucusu ayrı
 portta çalışacağı için. **Kuruma entegrasyonda daraltılmalı.**

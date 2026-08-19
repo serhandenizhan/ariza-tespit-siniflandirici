@@ -159,18 +159,28 @@ def model_kur(use_lora: bool):
 # seffaf hem yeterli.
 # ---------------------------------------------------------------------------
 
-def degerlendir(model, yukleyici, cihaz) -> tuple[float, float, list[int], list[int]]:
+def degerlendir(model, yukleyici, cihaz) -> tuple[float, float, float]:
+    """(kayip, accuracy, macro_f1) doner.
+
+    Validation KAYBI da olculuyor: accuracy/F1 plato yaparken kayip yukselmeye
+    baslarsa model asiri ogrenmeye gecmis demektir. Bu, sadece F1'e bakarak
+    goremeyecegimiz bir sinyal.
+    """
     model.eval()
     tahminler, gercekler = [], []
+    kayip_top = 0.0
     with torch.no_grad():
         for parti in yukleyici:
-            girdi = {k: v.to(cihaz) for k, v in parti.items() if k != "labels"}
-            cikti = model(**girdi)
+            parti = {k: v.to(cihaz) for k, v in parti.items()}
+            cikti = model(**parti)
+            kayip_top += cikti.loss.item()
             tahminler.extend(cikti.logits.argmax(dim=-1).cpu().tolist())
-            gercekler.extend(parti["labels"].tolist())
-    acc = accuracy_score(gercekler, tahminler)
-    f1 = f1_score(gercekler, tahminler, average="macro", zero_division=0)
-    return acc, f1, tahminler, gercekler
+            gercekler.extend(parti["labels"].cpu().tolist())
+    return (
+        kayip_top / len(yukleyici),
+        accuracy_score(gercekler, tahminler),
+        f1_score(gercekler, tahminler, average="macro", zero_division=0),
+    )
 
 
 def egit(args) -> None:
@@ -218,7 +228,8 @@ def egit(args) -> None:
         anneal_strategy="linear",
     )
 
-    print(f"\n{'epoch':>5} {'train kayip':>12} {'val acc':>9} {'val f1':>8} {'sure':>7}")
+    print(f"\n{'epoch':>5} {'train kayip':>12} {'val kayip':>10} {'val acc':>9} "
+          f"{'val f1':>8} {'sure':>7}")
     en_iyi_f1, en_iyi_epoch = -1.0, -1
     gecmis = []
 
@@ -237,10 +248,13 @@ def egit(args) -> None:
             optim.zero_grad()
             kayip_top += cikti.loss.item()
 
-        kayip = kayip_top / len(train_dl)
-        acc, f1, _, _ = degerlendir(model, val_dl, cihaz)
+        train_kayip = kayip_top / len(train_dl)
+        val_kayip, acc, f1 = degerlendir(model, val_dl, cihaz)
         sure = time.time() - t0
-        gecmis.append({"epoch": epoch, "kayip": kayip, "val_acc": acc, "val_f1": f1})
+        gecmis.append({
+            "epoch": epoch, "train_kayip": train_kayip, "val_kayip": val_kayip,
+            "val_acc": acc, "val_f1": f1,
+        })
 
         isaret = ""
         if f1 > en_iyi_f1:
@@ -248,7 +262,8 @@ def egit(args) -> None:
             model.save_pretrained(C.MODEL_DIR)
             tokenizer.save_pretrained(C.MODEL_DIR)
             isaret = "  <- kaydedildi"
-        print(f"{epoch:>5} {kayip:>12.4f} {acc:>9.4f} {f1:>8.4f} {sure:>6.1f}s{isaret}")
+        print(f"{epoch:>5} {train_kayip:>12.4f} {val_kayip:>10.4f} {acc:>9.4f} "
+              f"{f1:>8.4f} {sure:>6.1f}s{isaret}")
 
     # En iyi val F1'i veren epoch kaydedilir, sonuncusu degil: son epoch
     # genelde asiri ogrenmis olur ve test skoru dusuk cikar.
