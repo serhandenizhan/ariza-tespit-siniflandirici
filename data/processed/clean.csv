@@ -110,9 +110,9 @@ Klima fanı dönmüyor 2. vagon sıcak,arac_tren,0,devrik,openrouter:amplify
 Fren patini aşınma uyarısı ekranda,arac_tren,0,devrik,openrouter:amplify
 Vagon içi acil hat mikrofonu bozuk,arac_tren,0,devrik,openrouter:amplify
 Kapı kilitleme mekanizması çalışmıyor 5. vagon,arac_tren,0,devrik,openrouter:amplify
-Tekerlek dizel bearing ısınıyor 1. vagon,arac_tren,0,devrik,openrouter:amplify
+Tekerlek dizel rulmanı ısınıyor 1. vagon,arac_tren,0,devrik,openrouter:amplify
 Vagon Yemenici Jak yağ sızıntısı var,arac_tren,0,devrik,openrouter:amplify
-Kabin WiFi donanımı yanıp sönüyor,arac_tren,0,devrik,openrouter:amplify
+Kabin kablosuz ağ donanımı yanıp sönüyor,arac_tren,0,devrik,openrouter:amplify
 Vagon kapısı manuel açılmıyor acil çekme,arac_tren,0,devrik,openrouter:amplify
 Motor sürücü ünitesi hata kodu veriyor,arac_tren,0,devrik,openrouter:amplify
 Vagon ışığu tamamen söndü 3. vagon,arac_tren,0,devrik,openrouter:amplify
@@ -156,7 +156,7 @@ tekerdlekten duman cikiyo fren kokusu geliyo,arac_tren,0,yazim_yanlisi,openroute
 vagon ic yollar aydinlatmasi yarim yanik,arac_tren,0,yazim_yanlisi,openrouter:amplify
 sos butonu basili kalmis anons kesilmiyo,arac_tren,0,yazim_yanlisi,openrouter:amplify
 vagon kapi lastigi sökülmüş ruzgar giriyo iceri,arac_tren,0,yazim_yanlisi,openrouter:amplify
-tren pantograf arka duraqta hasar almis,arac_tren,0,yazim_yanlisi,openrouter:amplify
+tren pantograf arka durakta hasar almis,arac_tren,0,yazim_yanlisi,openrouter:amplify
 vagon ic goruntu kamera kayit yapmiyo,arac_tren,0,yazim_yanlisi,openrouter:amplify
 yolcu alarm cekmesi cekilmis tren durdu,arac_tren,0,yazim_yanlisi,openrouter:amplify
 makinist kabini klpaneli yandi isiklar yanik,arac_tren,0,yazim_yanlisi,openrouter:amplify
@@ -216,7 +216,7 @@ Makinist masası ekran dondu,arac_tren,0,cok_kisa,openrouter:amplify
 Vagon 3 koltuk altı vida sallanıyor,arac_tren,0,cok_kisa,openrouter:amplify
 Tren 115 vagon sallantısı fazla,arac_tren,0,cok_kisa,openrouter:amplify
 Vagon 2 kapı acil açma kolu kopuk,arac_tren,0,cok_kisa,openrouter:amplify
-Makinist kabini wiper motoru bozuk,arac_tren,0,cok_kisa,openrouter:amplify
+Makinist kabini silecek motoru bozuk,arac_tren,0,cok_kisa,openrouter:amplify
 Vagon 5 yolcu sayaç ekranı karanlık,arac_tren,0,cok_kisa,openrouter:amplify
 Tren 402 fren basıncı düşük,arac_tren,0,cok_kisa,openrouter:amplify
 Vagon 1 kapı lastiği yırtık,arac_tren,0,cok_kisa,openrouter:amplify
@@ -306,7 +306,7 @@ Turnike fren yapmıyor Levent giriş tornası,istasyon_mekanik,1,devrik,openrout
 Yürüyen merdiven yavaşladı Mahmutbey koridor,istasyon_mekanik,1,devrik,openrouter:amplify
 Asansör kapı contası yırtıldı Yenikapı B2,istasyon_mekanik,1,devrik,openrouter:amplify
 Otomatik kapı takılı kalıyor Şişhane kuzey,istasyon_mekanik,1,devrik,openrouter:amplify
-Bariyer limit switch bozuldu Vezneciler çıkış,istasyon_mekanik,1,devrik,openrouter:amplify
+Bariyer limit anahtarı bozuldu Vezneciler çıkış,istasyon_mekanik,1,devrik,openrouter:amplify
 Yürüyen merdiven acil durdur basıldı Kadıköy,istasyon_mekanik,1,devrik,openrouter:amplify
 Asansör kabin ışığı sönük Hacıosman son,istasyon_mekanik,1,devrik,openrouter:amplify
 PSD kapı lastiği soyuldu Mecidiyeköy peron,istasyon_mekanik,1,devrik,openrouter:amplify
@@ -323,7 +323,7 @@ yuruyen merdiven durdu sishli guncel,istasyon_mekanik,1,yazim_yanlisi,openrouter
 peron kapisi kilitlenmiyor bostanci 2 peron,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 turnike kolu donmuyor haciosman cikis taraf,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 otomat kapi yarim kaldi yenikapi kuzey,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
-bariyer kapaq takildi levent ust gecit,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
+bariyer kapak takildi levent ust gecit,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 yuruyen merdiven tirtladi kartal asagi yon,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 asansor ses cikiyor uskudar b1 kat,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 peron kapisi acilmiyor umraniye 1 nolu,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
@@ -335,7 +335,7 @@ bariyer kolu kalkmis sultanbeyli cikis kapisi,istasyon_mekanik,1,yazim_yanlisi,o
 yuruyen merdiven fren cekmiyor taksim ust,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 asansor kapi acilmiyor sishli b2 kat,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 peron kapisi cam cizik kadikoy peron ici,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
-turnike kapaq donmuyor bostanci giris tornikesi,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
+turnike kapak donmuyor bostanci giris tornikesi,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 yuruyen merdiven adim sallaniyor haciosman orta,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 asansor kapi contasi kirdi levent giris,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 bariyer kolu sallaniyor umraniye ana giris,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
@@ -690,7 +690,7 @@ Kadıköy BSO parayı yuttu iade yok,yazilim_sistem,3,devrik,openrouter:amplify
 Şişhane PID yer istasyonu adı yazmıyor,yazilim_sistem,3,devrik,openrouter:amplify
 Taksim bilet otomatı dil menüsü dönmüyor,yazilim_sistem,3,devrik,openrouter:amplify
 Merkezden sefer iptal komutu iletilmedi,yazilim_sistem,3,devrik,openrouter:amplify
-Yazılım watchdog reset attı sistem aydınlandı,yazilim_sistem,3,devrik,openrouter:amplify
+Yazılım izleme servisi yeniden başladı sistem aydınlandı,yazilim_sistem,3,devrik,openrouter:amplify
 BSO-05 banknot tanımıyor hata kodu 12,yazilim_sistem,3,devrik,openrouter:amplify
 PID merkeziye bağlanmıyor veri akışı kesik,yazilim_sistem,3,devrik,openrouter:amplify
 Turnike İstanbulkart okumuyor ses çıkıyor,yazilim_sistem,3,devrik,openrouter:amplify
@@ -871,7 +871,7 @@ Acil anons sistemi ses yok,guvenlik_emniyet,4,devrik,openrouter:amplify
 Peron ucunda şüpheli paket var,guvenlik_emniyet,4,devrik,openrouter:amplify
 Yangın musluğu kapak açılmıyor,guvenlik_emniyet,4,devrik,openrouter:amplify
 CCTV hard disk dolu uyarı,guvenlik_emniyet,4,devrik,openrouter:amplify
-Acil çıkış yolu engelli baggage,guvenlik_emniyet,4,devrik,openrouter:amplify
+Acil çıkış yolu bagajla engelli,guvenlik_emniyet,4,devrik,openrouter:amplify
 Turnike alarm sensörü sürekli çalıyor,guvenlik_emniyet,4,devrik,openrouter:amplify
 Yangın pompa kontrol paneli arıza,guvenlik_emniyet,4,devrik,openrouter:amplify
 Kamera görüş alanı kapalı afiş,guvenlik_emniyet,4,devrik,openrouter:amplify

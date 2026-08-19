@@ -167,6 +167,8 @@ kesiliyordu. 8192'ye çıkarılınca aynı iş 5 çağrıda 8 kayıt yerine 7 ç
 - PEFT/LoRA: r=16, alpha=32, dropout=0.1, target_modules=["query","value"]
 - MAX_LENGTH=64, NUM_EPOCHS=12, BATCH_SIZE=16, **LEARNING_RATE=5e-4**
   (2e-5 degildi -- bkz. Adim 4 bolumu, en onemli hata buydu)
+- `AUGMENT_ASCII_FOLD = True` — egitimde aksansiz kopyalar da eklenir
+  (train 1280 → 2219). Gerekcesi ve olcumu Adim 4 bolumunde.
 - Split: %80 train / %10 val / %10 test
 - Başarı kriteri: accuracy ≥ 0.85, macro F1 ≥ 0.82, hiçbir sınıf F1 < 0.75
 
@@ -310,6 +312,9 @@ Otomatik olarak şunları işaretler (elle bakılması gerekenler):
 - `UZUNLUK` — stilin beklediği kelime aralığı dışında
 - `SIZINTI` — kategori adını çağrıştıran kelime, kategori başına %25 payını
   aşıyor
+- `SINIR` — başka KATEGORİDEKİ bir bildirime çok benziyor (etiket tutarsızlığı)
+- `YABANCI` — Türkçe olmayan kelime şüphesi (`q/w/x` harfi veya Türkçe'de
+  geçmeyen digraf). Bilgi amaçlı; dar ama kesin bir kural, kapsamlı değil.
 
 **ASCII/aksan kontrolü bilgi amaçlıdır, işaretlenmez:** İlk sürümde "hiç
 Türkçe karakter yok" tespit edilince işaretleniyordu, ama bu yanlış alarm
@@ -496,16 +501,17 @@ ile seed eğitime katılırsa ortaya çıkar.
    istasyon_mekanik 202, altyapi_insaat ve yolcu_operasyon 199, diğerleri 200.
    Sapma ±2, macro-F1 ve katmanlı bölme için önemsiz — ama raporda "her
    kategoriden tam 200" denmemeli.
-8. **`yazim_yanlisi` stili modelin zayıf noktası** (gold'da 0.765, diğerleri
-   0.909-1.000). Gerçek hayatta bu stil yaygın olduğu için iyileştirmeye
-   değer. Fikirler: bu stilden daha çok örnek üretmek, veya aksan-normalizasyon
-   katmanı eklemek (girdiyi tokenizer'a vermeden önce `guvenlik → güvenlik`
-   düzeltmesi — `review.py`'deki `DIACRITIC_VOCAB` bunun için hazır).
-9. **`review.py` İngilizce kelime sızmasını görmüyor.** Eğitim verisinde
-   `Acil çıkış yolu engelli baggage` bulundu. Küçük bir kontrol eklenebilir.
+8. ✅ **KAPANDI — aksan dayanıklılığı çözüldü** (19 Ağu). ASCII çoğaltmayla
+   aksan kaybı −6.36 puandan **−1.16 puana** indi; genel doğruluk da arttı.
+   Detay Adım 4 bölümünde.
+9. ✅ **KAPANDI — `YABANCI` bayrağı eklendi + 9 kayıt düzeltildi.** Kuralın
+   kapsamlı olmadığı (dar ama kesin) açıkça belgelendi.
 10. **İkincil kategori mekanizması Adım 5/6'da hayata geçirilecek** —
     `MARGIN_THRESHOLD` config'te hazır, backend `/predict` ve arayüz bunu
     kullanacak.
+11. **`--include-seed` hâlâ kapalı.** 93 kayıtlık seed eğitime katılmıyor.
+    Katılırsa küçük bir kazanç olabilir; ölçülmedi. Seed'in few-shot yemi
+    olması eğitime girmesine engel değil (gold farklı, o asla girmez).
 
 ## Yol Haritası — Kalan Adımlar
 
@@ -597,11 +603,15 @@ geçildi.**
 
 | metrik | test (160) | gold (80) | hedef |
 | --- | --- | --- | --- |
-| accuracy | 0.8938 | **0.9000** | 0.85 ✅ |
-| macro F1 | 0.8935 | **0.9014** | 0.82 ✅ |
-| en düşük sınıf F1 | 0.7500 | **0.8000** | 0.75 ✅ |
+| accuracy | 0.9125 | **0.9250** | 0.85 ✅ |
+| macro F1 | 0.9135 | **0.9247** | 0.82 ✅ |
+| en düşük sınıf F1 | 0.8293 | **0.8000** | 0.75 ✅ |
 
-**Gold skoru test'ten YÜKSEK (+0.008).** Projenin en önemli bulgusu bu:
+(Bu değerler ASCII çoğaltmalı ikinci eğitimden. Çoğaltmasız ilk eğitim:
+test 0.8938/0.8935/0.7500, gold 0.9000/0.9014/0.8000 — o da tüm hedefleri
+geçiyordu, çoğaltma hepsini yukarı taşıdı.)
+
+**Gold skoru test'ten YÜKSEK (+0.011).** Projenin en önemli bulgusu bu:
 sentetik veriyle eğitilen model, bağımsız üretilmiş ve elle gözden geçirilmiş
 gold setinde en az kendi dağılımı kadar iyi. Yani model çoğaltmanın kalıplarını
 ezberlememiş, gerçekten sınıfı öğrenmiş. "Sentetik veri gerçekçi mi"
@@ -640,8 +650,9 @@ göre ayarlamak gerekiyor.** Rapor için güçlü bir bölüm.
 - **En iyi val macro-F1 veren epoch kaydediliyor**, sonuncusu değil (son epoch
   genelde aşırı öğrenmiş olur). Seçilen: epoch 5, val F1 0.9242.
 - Tohum sabit (`SEED=42`), sonuç tekrar üretilebilir.
-- Eğitim süresi ~20-30 sn/epoch (MPS, Apple Silicon). LoRA çıktısı sadece
-  **2.4 MB** — tam model 440 MB olurdu.
+- Eğitim süresi ~35-45 sn/epoch (MPS, Apple Silicon; çoğaltmayla train 2219
+  kayda çıktı). LoRA çıktısı sadece **2.4 MB** — tam model 440 MB olurdu.
+- Seçilen: epoch 6, val macro-F1 **0.9429**.
 
 ### Confusion matrix bulguları
 
@@ -661,13 +672,75 @@ Kaynağı veri değil, **config'in kendisi**:
 Örnek: `Acil tahliye anonsu yoğun saatlerde peronda net duyulamıyor.` — iki
 kapsama da giriyor. Çözüm için aşağıdaki ikincil kategori mekanizması seçildi.
 
-**Stil bazlı doğruluk:** model gold'da `yazim_yanlisi` stilinde belirgin
-zorlanıyor (0.765; diğer stiller 0.909-1.000). Beklenen: aksan düşmüş metin
-BERTurk'ün tokenizer'ına yabancı geliyor. Rapora girebilecek bir gözlem —
-gerçek hayatta bu stil yaygın olduğu için iyileştirme alanı.
+### Aksan dayanıklılığı — ölçüm, teşhis, çözüm, doğrulama
 
-**Veri artığı yakalandı:** `Acil çıkış yolu engelli baggage` — cümlede İngilizce
-kelime var. `review.py` bunu görmüyor (otomatik triyajın bir kör noktası daha).
+İlk eğitimden sonra `yazim_yanlisi` stilinin zayıf göründüğü fark edildi
+(gold 0.765). Ama bu tek başına yanıltıcıydı: test+gold birleşik ölçümde
+0.852 ve %95 güven aralığı diğer stillerle **fazlasıyla örtüşüyordu**
+([0.763-0.941] vs [0.858-0.988]) — n=61 ile istatistiksel anlamlılık yok.
+
+Bu yüzden **nedensel test** yapıldı: test+gold'daki aksan içeren 173 kaydın
+aksanları kaldırılıp yeniden tahmin edildi. İçerik aynı, sadece ç/ğ/ı/ö/ş/ü
+düşürüldü:
+
+| | doğruluk |
+| --- | --- |
+| orijinal (aksanlı) | 157/173 = **0.9075** |
+| ASCII katlanmış | 146/173 = **0.8439** |
+
+**6.4 puanlık kayıp, tek değişken aksan.** Stil etiketine bakmak gürültülüydü,
+müdahaleli test net cevap verdi.
+
+**Teşhis — BERTurk tokenizer'ında görünüyor:**
+```
+asansör  -> 1 parça  ['asansör']
+asansor  -> 3 parça  ['asa', '##ns', '##or']
+```
+Aksan düşünce kelime anlamsız alt-parçalara bölünüyor.
+
+**Çözüm: eğitim verisi çoğaltma.** `train.csv`'deki aksan içeren kayıtların
+ASCII'ye katlanmış kopyaları eğitime eklendi (1280 → **2219**, +939 kopya).
+API gerektirmez. Sızıntı riski yok: `preprocess`'teki kümeleme zaten
+aksan-duyarsız (`review.normalize` aksanı kaldırıyor), yani bir train kaydının
+ASCII kopyası test'teki bir kayıtla eşleşiyorsa o ikisi zaten aynı kümededir.
+
+**Doğrulama — aynı nedensel test tekrarlandı:**
+
+| | çoğaltmasız | çoğaltmalı |
+| --- | --- | --- |
+| orijinal (aksanlı) | 0.9075 | **0.9191** |
+| ASCII katlanmış | 0.8439 | **0.9075** |
+| **aksan kaybı** | **−6.36 puan** | **−1.16 puan** |
+
+Dayanıklılık 5.2 puan iyileşti. Ayrıca **genel doğruluk da arttı** (test macro
+F1 0.8935 → 0.9135, gold 0.9014 → 0.9247) — çoğaltma sadece aksan sorununu
+çözmedi, model genelinde fayda sağladı. `config.AUGMENT_ASCII_FOLD` ile
+kapatılabilir (`--no-augment`), kıyas yapmak için.
+
+### Yabancı kelime tespiti — üç yöntem denendi, ikisi başarısız
+
+Eğitim verisinde `Acil çıkış yolu engelli baggage` bulundu (İngilizce kelime).
+Otomatik tespit için denenenler:
+
+| yaklaşım | sonuç |
+| --- | --- |
+| Projenin kendi metninden bigram sözlüğü | ❌ 1600 kayıtta **355 yanlış alarm** — referans korpus (247 cümle) Türkçe'nin bigram uzayını kapsayamıyor; `nesne`, `açma`, `sessiz` işaretlendi |
+| Geniş digraf listesi (`sh`, `th`, `ph`, `ay`...) | ❌ `şüpheli`, `Kağıthane`, `aydınlatma` gibi Türkçe kelimeleri yakalıyor |
+| BERTurk tokenizer parça sayısı | ❌ ayırt edemiyor: `baggage` 3 parça, `asansor` da 3 parça |
+| **Dar kural: `q/w/x` + `ck,gh,ea,oo`** | ✅ 8 gerçek bulgu, **0 yanlış alarm** — ama kapsamlı değil, `baggage`'ı kaçırıyor |
+
+Türk alfabesinde q, w, x **yok** — bu kısım kesin. Dar kural `YABANCI` bayrağı
+olarak `review.py`'ye eklendi ama **bilgi amaçlı**: `switch`, `wifi` gibi
+kelimeler Türkçe teknik jargonda da kullanılıyor, bayrak "sil" değil "bak"
+demek.
+
+Bulunan 9 kayıt (8 otomatik + `baggage` elle) düzeltildi: `bearing`→rulmanı,
+`wiper`→silecek, `switch`→anahtarı, `watchdog`→izleme servisi, `WiFi`→kablosuz
+ağ, `baggage`→bagajla, `duraqta`→durakta, `kapaq`→kapak (×2).
+
+**Ders:** otomatik tespit her sorun için mümkün değil. Türkçe sözlük olmadan
+"bu kelime Türkçe mi" sorusu güvenilir cevaplanamıyor; elle okuma hâlâ tek
+kapsamlı yöntem. Dar ve kesin bir kural, geniş ve gürültülü bir kuraldan iyidir.
 
 ### İkincil kategori mekanizması — sınır sorunlarına genel çözüm
 
@@ -676,10 +749,9 @@ modelin **zaten ürettiği** bilgi kullanılıyor:
 
 | | test | gold |
 | --- | --- | --- |
-| top-1 doğruluk | 0.894 | 0.900 |
-| **top-2 doğruluk** | **0.975** | **0.975** |
-| hataların kaçında doğru cevap 2. sırada | %76 | %75 |
-| marj (top1−top2): doğrularda / yanlışlarda | 0.90 / 0.56 | 0.93 / 0.43 |
+| top-1 doğruluk | 0.913 | 0.925 |
+| **top-2 doğruluk** | **0.963** | **0.975** |
+| marj eşiği 0.40'ta çift kategorili dönen | %6.2 | %7.5 |
 
 Model belirsiz olduğunu biliyor. `MARGIN_THRESHOLD = 0.40` altında `/predict`
 birincil + ikincil kategori döner. Kalibrasyon (gold): 0.30 → 3 hata kurtarılır
@@ -725,6 +797,26 @@ güven uyarısı (`LOW_CONFIDENCE_MESSAGE` config'te hazır).
    seferlik) ayrımı önemli** — `generate_seed.py`'deki `call_llm` bu ayrımı
    yapıyor, yeni script'lerde de aynı desen izlenmeli (tek kategori/parça
    hatası tüm çalıştırmayı çökertmemeli).
+6. **`.gitignore`'a bir şey eklemeden ÖNCE gerçek boyutuna ve rolüne bak.**
+   Bu projede aynı hata iki kez yapıldı: önce `data/raw/` + `data/processed/`,
+   sonra `model/*.safetensors` refleks olarak gitignore'a eklendi ve ikisi de
+   geri alınmak zorunda kaldı. İkisi de **adımların asıl çıktısıydı**, üstelik
+   küçüktü (veri 580 KB, LoRA adaptörü 2.3 MB).
+
+   Ölçüt — gitignore'a sadece şunlar girer:
+   - yeniden üretilebilen ara ürünler (`__pycache__`, `*.pyc`)
+   - gizli bilgi (`.env`)
+   - makineye özel yerel ayarlar (`.claude/settings.local.json`, `.DS_Store`)
+   - **gerçekten** büyük dosyalar (yüzlerce MB+)
+
+   Bir adımın teslim ettiği ürün (üretilen veri, eğitilmiş model, bölünmüş
+   veri seti) küçükse **commit edilir**. Sebep: bu proje adım adım ilerliyor ve
+   her commit'in o adımın çalıştığını kanıtlaması gerekiyor; depoyu klonlayan
+   birinin modeli yeniden eğitmek zorunda kalmaması lazım. Ayrıca LoRA
+   adaptörünün 2.3 MB olması raporda öne çıkarılan bir bulgu — onu gizlemek
+   kendi iddiamızın kanıtını silmek olurdu.
+
+   **Dosya uzantısına bakıp varsayma, `du -h` ile bak.**
 
 ## Git İş Akışı Kuralı (Claude Code bunu her adımda uygulasın)
 
@@ -796,9 +888,11 @@ remote'a (GitHub vb.) push edeceğimizi netleştirelim.
 - **Gold'da yazım hatası bilinçli olarak korundu** ("personel aceleyle bunu
   yazar mıydı?" ölçütü). Gerçekçi gürültü kalır, üretim artığı temizlenir.
   Gold'u gerçek hayattan temiz yapmak başarı oranını şişirirdi.
-- **En güçlü tek sonuç: gold skoru test'ten yüksek çıktı** (macro F1 0.9014 vs
-  0.8935). Sentetik veriyle eğitilen model, bağımsız üretilmiş ve elle gözden
+- **En güçlü tek sonuç: gold skoru test'ten yüksek çıktı** (macro F1 **0.9247**
+  vs 0.9135). Sentetik veriyle eğitilen model, bağımsız üretilmiş ve elle gözden
   geçirilmiş sette daha iyi. "Model ezberledi mi?" sorusuna ölçülmüş cevap.
+  Üstelik bu iki bağımsız eğitimde de tekrarlandı (çoğaltmasız: 0.9014 vs
+  0.8935), yani tesadüf değil.
 - **LoRA öğrenme hızı hatası** (2e-5 → 5e-4, model rastgele seviyeden 0.93'e)
   metodoloji bölümü için değerli: hiperparametre literatürden kopyalanamaz,
   eğitim yöntemine göre ayarlanır. Ölçüm tablosu elde var.
@@ -809,3 +903,15 @@ remote'a (GitHub vb.) push edeceğimizi netleştirelim.
   kullanmak" — sunumda güçlü bir başlık.
 - **Model boyutu:** LoRA adaptörü 2.4 MB, tam fine-tuning 440 MB olurdu.
   Dağıtım/versiyonlama avantajı somut bir kazanım.
+- **Aksan dayanıklılığı — "ölç, teşhis et, çöz, doğrula" döngüsünün tam örneği:**
+  stil bazlı ölçüm gürültülüydü (güven aralıkları örtüşüyordu), müdahaleli
+  nedensel test net cevap verdi (−6.4 puan), tokenizer mekanizmayı gösterdi
+  (`asansör` 1 parça / `asansor` 3 parça), veri çoğaltma çözdü (−1.16 puan),
+  aynı test doğruladı. Sunumda tek slaytta anlatılabilecek eksiksiz bir
+  mühendislik hikâyesi.
+- **"Otomatik tespit her zaman mümkün değil" dersi:** yabancı kelime tespiti
+  için üç yöntem denendi, ikisi başarısız oldu (bigram sözlüğü 355 yanlış
+  alarm; tokenizer parça sayısı yabancı kelimeyi ASCII Türkçe'den ayıramadı).
+  Dar ve kesin bir kural, geniş ve gürültülü olandan iyidir — ve elle okuma
+  hâlâ tek kapsamlı yöntem. Otomatik araçların sınırını gösteren dürüst bir
+  bölüm, rapora olgunluk katar.

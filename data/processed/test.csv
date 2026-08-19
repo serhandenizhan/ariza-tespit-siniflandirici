@@ -15,7 +15,7 @@ tekerlekten anormal ses geliyo 3 vagon,arac_tren,0,yazim_yanlisi,openrouter:ampl
 makinist ayak pedali geri donmuyo fren gec,arac_tren,0,yazim_yanlisi,openrouter:amplify
 Kozyatağı istasyonunda 1 numaralı vagondaki yolcu alarm butonu yanıp sönüyor.,arac_tren,0,standart,openrouter:amplify
 Vagon 2 koltuk döşeme yırtık,arac_tren,0,cok_kisa,openrouter:amplify
-Makinist kabini wiper motoru bozuk,arac_tren,0,cok_kisa,openrouter:amplify
+Makinist kabini silecek motoru bozuk,arac_tren,0,cok_kisa,openrouter:amplify
 Kabin camı çatlak Şişhane yönünde,arac_tren,0,devrik,openrouter:amplify
 Vagon 1 dinamik fren arızalı,arac_tren,0,cok_kisa,openrouter:amplify
 Tren 210 sıkıştırıcı devir düşük,arac_tren,0,cok_kisa,openrouter:amplify
@@ -93,7 +93,7 @@ turnikeden gecis izinsiz algilandi levent,guvenlik_emniyet,4,yazim_yanlisi,openr
 guvenlik kamerasi kayit cihazi arizali levent,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
 Acil tahliye anonsu yoğun saatlerde peronda net duyulamıyor.,guvenlik_emniyet,4,standart,openrouter:amplify
 acil buton calismiyo kadikoy 2 peron,guvenlik_emniyet,4,yazim_yanlisi,openrouter:amplify
-Acil çıkış yolu engelli baggage,guvenlik_emniyet,4,devrik,openrouter:amplify
+Acil çıkış yolu bagajla engelli,guvenlik_emniyet,4,devrik,openrouter:amplify
 Yetkisiz giriş uyarısı peron sonu,guvenlik_emniyet,4,devrik,openrouter:amplify
 Acil durdurma iptal butonu bozuk,guvenlik_emniyet,4,devrik,openrouter:amplify
 CCTV kamera iri bilgisayar virüs,guvenlik_emniyet,4,devrik,openrouter:amplify

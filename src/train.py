@@ -93,6 +93,30 @@ def csv_oku(path) -> list[dict]:
         return list(csv.DictReader(f))
 
 
+TR_HARFLER = set("çğıöşüÇĞİÖŞÜ")
+
+
+def ascii_cogalt(satirlar: list[dict]) -> list[dict]:
+    """Aksan iceren kayitlarin ASCII'ye katlanmis kopyalarini ekler.
+
+    Gerekcesi config.AUGMENT_ASCII_FOLD'da olculmus haliyle duruyor: aksan
+    kaybolunca dogruluk 6.4 puan dusuyor cunku BERTurk tokenizer'i kelimeyi
+    parcaliyor ("asansör" 1 parca, "asansor" 3 parca). Modele iki yazimin da
+    ayni sinifa ait oldugunu ogretiyoruz.
+
+    Sadece aksan ICEREN kayitlar cogaltilir; digerlerinin ASCII hali zaten
+    kendisiyle ayni olurdu ve birebir tekrar eklemek ogrenmeye katki yapmaz.
+    """
+    from src.review import _strip_diacritics
+
+    ek = [
+        {**r, "metin": _strip_diacritics(r["metin"]), "kaynak": "ascii_fold"}
+        for r in satirlar
+        if set(r["metin"]) & TR_HARFLER
+    ]
+    return satirlar + ek
+
+
 # ---------------------------------------------------------------------------
 # Model
 # ---------------------------------------------------------------------------
@@ -157,7 +181,16 @@ def egit(args) -> None:
     tokenizer = AutoTokenizer.from_pretrained(C.BASE_MODEL)
     train_satir = csv_oku(C.TRAIN_FILE)
     val_satir = csv_oku(C.VAL_FILE)
-    print(f"train {len(train_satir)} | val {len(val_satir)}")
+
+    cogalt = C.AUGMENT_ASCII_FOLD and not args.no_augment
+    if cogalt:
+        onceki = len(train_satir)
+        train_satir = ascii_cogalt(train_satir)
+        print(f"train {onceki} -> {len(train_satir)} "
+              f"(+{len(train_satir) - onceki} ASCII katlanmis kopya) | "
+              f"val {len(val_satir)}")
+    else:
+        print(f"train {len(train_satir)} | val {len(val_satir)}  (cogaltma KAPALI)")
 
     train_ds = BildirimVeriseti(train_satir, tokenizer, C.MAX_LENGTH)
     val_ds = BildirimVeriseti(val_satir, tokenizer, C.MAX_LENGTH)
@@ -231,6 +264,8 @@ def egit(args) -> None:
         "max_length": C.MAX_LENGTH,
         "seed": C.SEED,
         "cihaz": str(cihaz),
+        "ascii_cogaltma": cogalt,
+        "train_kayit": len(train_satir),
         "egitilebilir_parametre": egitilen,
         "toplam_parametre": toplam,
         "en_iyi_epoch": en_iyi_epoch,
@@ -248,6 +283,8 @@ def main() -> None:
     ap.add_argument("--epochs", type=int, help=f"varsayilan {C.NUM_EPOCHS}")
     ap.add_argument("--lr", type=float, help=f"varsayilan {C.LEARNING_RATE}")
     ap.add_argument("--no-lora", action="store_true", help="tam fine-tuning yap")
+    ap.add_argument("--no-augment", action="store_true",
+                    help="ASCII katlanmis kopyalari EKLEME (kiyas icin)")
     ap.add_argument("--device", choices=["mps", "cpu"], help="varsayilan: varsa mps")
     egit(ap.parse_args())
 

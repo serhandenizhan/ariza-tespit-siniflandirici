@@ -17,7 +17,7 @@ Tekerlekten duman çıkıyor 6. vagon acil,arac_tren,0,devrik,openrouter:amplify
 vagon kapi sensörü calismiyo acik kapi uyarisi,arac_tren,0,yazim_yanlisi,openrouter:amplify
 vagon kapi kapanmiyo 3 nolu vagonda,arac_tren,0,yazim_yanlisi,openrouter:amplify
 Taksim istasyonunda 5 numaralı vagondaki kapı engel algılama ışığı yanıksı.,arac_tren,0,standart,openrouter:amplify
-Kabin WiFi donanımı yanıp sönüyor,arac_tren,0,devrik,openrouter:amplify
+Kabin kablosuz ağ donanımı yanıp sönüyor,arac_tren,0,devrik,openrouter:amplify
 Bostancı yönlü trende 5 numaralı vagon çernden yağ sızıntısı var.,arac_tren,0,standart,openrouter:amplify
 yuruyen merdiven durdu sishli guncel,istasyon_mekanik,1,yazim_yanlisi,openrouter:amplify
 Otomatik cam kapı rayından çıktı Kartal koridor,istasyon_mekanik,1,devrik,openrouter:amplify

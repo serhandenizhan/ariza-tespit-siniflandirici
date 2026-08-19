@@ -12,6 +12,8 @@ Kontroller:
   UZUNLUK stilin kelime araligi disinda
   KOD     ekipman kodu yogunlugu kategori genelinde fazla
   SIZINTI kategori adini acikca soyluyor
+  YABANCI Turkce olmayan kelime supheli (q/w/x harfi veya Turkce'de gecmeyen
+          digraf). Dar bir kural -- kapsamli degil, bkz. koddaki not.
   (aksan-dusuk oranı artik isaretli SAYILMIYOR, sadece kategori ozetinde
    bilgi amacli raporlanir — klavye aliskanligi gercek hayatta normaldir)
   ISTASYON  ayni istasyon adi kategoride cok tekrar ediyor
@@ -57,6 +59,37 @@ LEAK_WORDS = {
 }
 
 EQUIP_CODE = re.compile(r"\b[A-ZĞÜŞİÖÇ]{2,4}[-\s]?\d{1,3}\b")
+
+# --- YABANCI kelime tespiti ---------------------------------------------------
+# Turk alfabesinde q, w, x YOKTUR -- bu harfleri iceren kelime ya yabanci ya da
+# yazim artigi. Ek olarak Turkce yaziminda pratikte gecmeyen birkac digraf.
+#
+# NOT (19 Agu 2026): bu DAR kural bilincli bir tercih. Once daha genel iki
+# yontem denendi ve ikisi de basarisiz oldu:
+#   - Projenin kendi metninden bigram sozlugu cikarmak: 1600 kayitta 355 yanlis
+#     alarm (referans korpus Turkce'nin bigram uzayini kapsayamiyor; "nesne",
+#     "açma", "sessiz" gibi dogru kelimeler isaretlendi).
+#   - Genis digraf listesi (sh, th, ph, ay...): "şüpheli", "Kağıthane",
+#     "aydınlatma" gibi Turkce kelimeleri yakaliyor.
+#   - BERTurk tokenizer parca sayisi: yabanci kelimeyi ASCII'ye katlanmis
+#     Turkce'den ayirt edemiyor ("baggage" 3 parca, "asansor" da 3 parca).
+# Dar kural 1600 kayitta 0 yanlis alarm veriyor ama KAPSAMLI DEGIL -- orn.
+# "baggage" bu kurala takilmaz, elle okumayla bulundu. Bayrak "sil" degil
+# "bak" anlamindadir: "switch", "wifi" gibi kelimeler Turkce teknik jargonda
+# da kullanilabiliyor.
+TR_DISI_HARF = set("qwxQWX")
+YABANCI_DIGRAF = ("ck", "gh", "ea", "oo")
+
+
+def yabanci_kelimeler(metin: str) -> list[str]:
+    bulunan = []
+    for kelime in re.findall(r"[A-Za-zçğıöşüÇĞİÖŞÜ]+", metin):
+        if len(kelime) < 4:
+            continue
+        low = kelime.lower()
+        if set(kelime) & TR_DISI_HARF or any(d in low for d in YABANCI_DIGRAF):
+            bulunan.append(kelime)
+    return bulunan
 
 TR_CHARS = set("çğıöşüÇĞİÖŞÜ")
 
@@ -214,6 +247,10 @@ def analyze(records: list[dict]) -> tuple[list[dict], dict]:
             if normalize(w) in low_norm:
                 flags.append("SIZINTI")
                 break
+
+        yabanci = yabanci_kelimeler(metin)
+        if yabanci:
+            flags.append(f"YABANCI({','.join(yabanci)})")
 
         # NOT: Aksan dusurme (guvenlik->guvenlik, Sisli->Sisli) gercek hayatta
         # cok yaygin bir klavye/yazim aliskanligidir, sadece "yazim_yanlisi"

@@ -365,6 +365,29 @@ TRAIN_RATIO = 0.80
 VAL_RATIO = 0.10
 TEST_RATIO = 0.10
 
+# Egitimde aksansiz (ASCII'ye katlanmis) kopyalar da eklensin mi?
+#
+# NEDEN (19 Agu 2026, nedensel olarak olculdu): test+gold'daki aksan iceren
+# 173 kaydin aksanlari kaldirilip yeniden tahmin edildi -- ICERIK AYNI, sadece
+# ç/ğ/ı/ö/ş/ü duruyor:
+#     orijinal      157/173 = 0.9075
+#     ASCII katlanmis 146/173 = 0.8439      -> 6.4 puan dusus
+# Mekanizma BERTurk tokenizer'inda gorunuyor:
+#     "asansör" -> 1 parca  ['asansör']
+#     "asansor" -> 3 parca  ['asa', '##ns', '##or']
+# Aksan dusunce kelime anlamsiz alt-parcalara boluuyor.
+#
+# Gercek hayatta personel Ingilizce klavyeyle yazip aksan dusurebiliyor
+# (config'in kendi "Onemli tasarim karari" notu da bunu soyluyor), yani bu
+# dayaniklilik sus degil gereklilik.
+#
+# Cozum: train'deki aksanli kayitlarin ASCII kopyalari egitime eklenir. Model
+# "güvenlik" ile "guvenlik"in ayni sey oldugunu ogrenir. Bedava (API yok).
+# SIZINTI RISKI YOK: preprocess'teki kumeleme zaten aksan-duyarsiz calisiyor
+# (review.normalize aksanlari kaldiriyor), yani bir train kaydinin ASCII
+# kopyasi test'teki bir kayitla eslesiyorsa o ikisi zaten ayni kumededir.
+AUGMENT_ASCII_FOLD = True
+
 # PEFT / LoRA
 USE_LORA = True
 LORA_R = 16

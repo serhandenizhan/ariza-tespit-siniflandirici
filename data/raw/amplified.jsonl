@@ -109,9 +109,9 @@
 {"metin": "Fren patini aşınma uyarısı ekranda", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Vagon içi acil hat mikrofonu bozuk", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Kapı kilitleme mekanizması çalışmıyor 5. vagon", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Tekerlek dizel bearing ısınıyor 1. vagon", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
+{"metin": "Tekerlek dizel rulmanı ısınıyor 1. vagon", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Vagon Yemenici Jak yağ sızıntısı var", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Kabin WiFi donanımı yanıp sönüyor", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
+{"metin": "Kabin kablosuz ağ donanımı yanıp sönüyor", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Vagon kapısı manuel açılmıyor acil çekme", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Motor sürücü ünitesi hata kodu veriyor", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Vagon ışığu tamamen söndü 3. vagon", "kategori": "arac_tren", "stil": "devrik", "kaynak": "openrouter:amplify"}
@@ -155,7 +155,7 @@
 {"metin": "vagon ic yollar aydinlatmasi yarim yanik", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "sos butonu basili kalmis anons kesilmiyo", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "vagon kapi lastigi sökülmüş ruzgar giriyo iceri", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "tren pantograf arka duraqta hasar almis", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
+{"metin": "tren pantograf arka durakta hasar almis", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "vagon ic goruntu kamera kayit yapmiyo", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "yolcu alarm cekmesi cekilmis tren durdu", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "makinist kabini klpaneli yandi isiklar yanik", "kategori": "arac_tren", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
@@ -215,7 +215,7 @@
 {"metin": "Vagon 3 koltuk altı vida sallanıyor", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Tren 115 vagon sallantısı fazla", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Vagon 2 kapı acil açma kolu kopuk", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
-{"metin": "Makinist kabini wiper motoru bozuk", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
+{"metin": "Makinist kabini silecek motoru bozuk", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Vagon 5 yolcu sayaç ekranı karanlık", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Tren 402 fren basıncı düşük", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
 {"metin": "Vagon 1 kapı lastiği yırtık", "kategori": "arac_tren", "stil": "cok_kisa", "kaynak": "openrouter:amplify"}
@@ -305,7 +305,7 @@
 {"metin": "Yürüyen merdiven yavaşladı Mahmutbey koridor", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Asansör kapı contası yırtıldı Yenikapı B2", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Otomatik kapı takılı kalıyor Şişhane kuzey", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Bariyer limit switch bozuldu Vezneciler çıkış", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
+{"metin": "Bariyer limit anahtarı bozuldu Vezneciler çıkış", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Yürüyen merdiven acil durdur basıldı Kadıköy", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Asansör kabin ışığı sönük Hacıosman son", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "PSD kapı lastiği soyuldu Mecidiyeköy peron", "kategori": "istasyon_mekanik", "stil": "devrik", "kaynak": "openrouter:amplify"}
@@ -322,7 +322,7 @@
 {"metin": "peron kapisi kilitlenmiyor bostanci 2 peron", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "turnike kolu donmuyor haciosman cikis taraf", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "otomat kapi yarim kaldi yenikapi kuzey", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "bariyer kapaq takildi levent ust gecit", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
+{"metin": "bariyer kapak takildi levent ust gecit", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "yuruyen merdiven tirtladi kartal asagi yon", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "asansor ses cikiyor uskudar b1 kat", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "peron kapisi acilmiyor umraniye 1 nolu", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
@@ -334,7 +334,7 @@
 {"metin": "yuruyen merdiven fren cekmiyor taksim ust", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "asansor kapi acilmiyor sishli b2 kat", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "peron kapisi cam cizik kadikoy peron ici", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
-{"metin": "turnike kapaq donmuyor bostanci giris tornikesi", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
+{"metin": "turnike kapak donmuyor bostanci giris tornikesi", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "yuruyen merdiven adim sallaniyor haciosman orta", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "asansor kapi contasi kirdi levent giris", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
 {"metin": "bariyer kolu sallaniyor umraniye ana giris", "kategori": "istasyon_mekanik", "stil": "yazim_yanlisi", "kaynak": "openrouter:amplify"}
@@ -689,7 +689,7 @@
 {"metin": "Şişhane PID yer istasyonu adı yazmıyor", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Taksim bilet otomatı dil menüsü dönmüyor", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Merkezden sefer iptal komutu iletilmedi", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Yazılım watchdog reset attı sistem aydınlandı", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
+{"metin": "Yazılım izleme servisi yeniden başladı sistem aydınlandı", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "BSO-05 banknot tanımıyor hata kodu 12", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "PID merkeziye bağlanmıyor veri akışı kesik", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Turnike İstanbulkart okumuyor ses çıkıyor", "kategori": "yazilim_sistem", "stil": "devrik", "kaynak": "openrouter:amplify"}
@@ -870,7 +870,7 @@
 {"metin": "Peron ucunda şüpheli paket var", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Yangın musluğu kapak açılmıyor", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "CCTV hard disk dolu uyarı", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
-{"metin": "Acil çıkış yolu engelli baggage", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
+{"metin": "Acil çıkış yolu bagajla engelli", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Turnike alarm sensörü sürekli çalıyor", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Yangın pompa kontrol paneli arıza", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
 {"metin": "Kamera görüş alanı kapalı afiş", "kategori": "guvenlik_emniyet", "stil": "devrik", "kaynak": "openrouter:amplify"}
