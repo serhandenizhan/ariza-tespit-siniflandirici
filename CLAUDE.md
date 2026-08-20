@@ -1017,7 +1017,7 @@ Backend'in ayrı portta (8000) çalışıyor olması gerekiyor. Taban adres
 `VITE_API_URL` ile değiştirilebilir; varsayılan `http://127.0.0.1:8000`.
 
 Ekranda olanlar:
-- Metin girişi (Ctrl/Cmd+Enter ile de gönderilir), 300 karakter sayacı —
+- Metin girişi (Enter ile gönderilir, Shift+Enter alt satıra geçer), 300 karakter sayacı —
   aşınca sayaç kırmızıya döner ve buton kilitlenir (backend'in `MAX_CHARS`
   kontrolüyle aynı sınır, istemcide önden yakalanıyor)
 - Kategori rozeti, kategori renginde (`/categories`'ten gelen `color`)

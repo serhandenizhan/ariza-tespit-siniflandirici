@@ -68,9 +68,12 @@ export default function App() {
     }
   }
 
-  // Ctrl/Cmd+Enter ile gonder
+  // Enter = gonder, Shift+Enter = alt satir
   function tusaBas(e) {
-    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") analizEt();
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      analizEt();
+    }
   }
 
   const cokUzun = metin.length > MAKS_KARAKTER;
@@ -109,7 +112,7 @@ export default function App() {
             <span className={cokUzun ? "sayac asim" : "sayac"}>
               {metin.length} / {MAKS_KARAKTER}
             </span>
-            <span className="kisayol">⌘↵</span>
+            <span className="kisayol">↵</span>
           </span>
           <button
             type="submit"
