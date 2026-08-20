@@ -1225,6 +1225,33 @@ ile onaylamak için) ve `similar` (benzerlik dağılımı).
 (`esik`, `dagilim`...) dönüyordu, API şeması İngilizce bekliyordu —
 `ResponseValidationError` ile yakalandı, backend'de çeviri katmanı eklendi.
 
+### `src/resolve_logs.py` — kategorisiz "Yanlış" kayıtlarının çözümü (20 Ağu 2026)
+
+**Bulunan gerçek sorun:** Arayüzde "✕ Yanlış" deyip dropdown'dan kategori
+seçmeden "atla"ya basılırsa kayıt `dogrulandi=0` + `dogru_kategori=NULL`
+olarak kalıyordu. `onayli_kayitlari_disa_aktar()` bu kaydı yine de dışa
+aktarıyordu — `kategori: None` ile, yani egzersiz verisini bozacak şekilde.
+
+**Çözüm — iki parça:**
+
+1. `db.onayli_kayitlari_disa_aktar()` artık `dogrulandi=0 AND dogru_kategori
+   IS NULL` olan (henüz çözülmemiş) kayıtları **dışlıyor**. `db.py`'ye ayrıca
+   `kategorisiz_yanlislari_getir()` eklendi.
+2. `python -m src.resolve_logs` — eğitim öncesi çalıştırılan interaktif bir
+   script. Her kategorisiz kayıt için: metni **güncel modelle yeniden
+   tahmin eder**, kullanıcının zaten reddettiği kategoriyi olasılık
+   sıralamasından **çıkarır** (aynı yanlış cevabı tekrar önermemek için),
+   kalan en olası kategoriyi öneri olarak gösterir. Kullanıcı Enter ile
+   öneriyi kabul edebilir, kategori anahtarını yazıp elle düzeltebilir, veya
+   `s` ile atlayabilir (kayıt kategorisiz kalır, sonra tekrar denenebilir).
+   Kabul/düzeltme `dogru_kategori` alanına yazılır — `dogrulandi` hâlâ `0`
+   kalır (orijinal tahmin yanlıştı bilgisi korunur), ama artık `/logs/export`
+   bu kaydı normal şekilde (düzeltilmiş kategoriyle) dışarı alabiliyor.
+
+Uçtan uca test edildi: kabul, elle düzeltme ve atlama yolları ayrı ayrı
+doğrulandı; export hem çözülmüş kaydı doğru kategoriyle içeriyor hem de
+hâlâ kategorisiz kalan kaydı dışlıyor.
+
 ### Frontend — onay butonları + canlı kategori grafiği
 
 `SonucKarti.jsx`: "✓ Doğru" / "✕ Yanlış" butonları, yanlışta kategori

@@ -107,6 +107,7 @@ Sırayla çalıştırılması gereken script'ler `src/` altında. Her biri
 | 4b — değerlendirme | `python -m src.evaluate --kalibrasyon --hatalari-goster` | `model/degerlendirme.json` |
 | 4c — eşik kalibrasyonu | `python -m src.calibrate` | `model/kalibrasyon.json` |
 | 7 — yapısal çıkarım değerlendirmesi | `python -m src.extract --degerlendir` | `model/extraction_degerlendirme.json` |
+| 8 — kategorisiz log kayıtlarını çöz (yeniden eğitimden önce) | `python -m src.resolve_logs` | `data/logs.db` güncellenir |
 
 Testler:
 

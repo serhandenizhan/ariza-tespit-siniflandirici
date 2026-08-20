@@ -138,16 +138,36 @@ def toplam_kayit() -> dict:
     return dict(r)
 
 
+def kategorisiz_yanlislari_getir() -> list[dict]:
+    """dogrulandi=0 ama dogru_kategori hala bos olan kayitlar.
+
+    Kullanici arayuzde "Yanlis" deyip kategori secmeden "atla"yi tikladiginda
+    boyle bir kayit olusur. `src/resolve_logs.py` ile egitimden once
+    kategorize edilmeleri gerekir -- yoksa `onayli_kayitlari_disa_aktar()`
+    bunlari dislar (asagida)."""
+    with _baglanti() as conn:
+        satirlar = conn.execute(
+            "SELECT * FROM bildirimler WHERE dogrulandi = 0 AND dogru_kategori IS NULL "
+            "ORDER BY zaman"
+        ).fetchall()
+    return [dict(r) for r in satirlar]
+
+
 def onayli_kayitlari_disa_aktar() -> list[dict]:
     """dogrulandi IS NOT NULL olan (kullanici tarafindan incelenmis) kayitlar.
 
     generate_data.py'nin urettigi jsonl semasiyla uyumlu alanlar dondurur ki
     elle data/raw'a katilabilsin: metin + kategori (dogru_kategori varsa o,
     yoksa orijinal tahmin) + kaynak izi.
+
+    "Yanlis" + kategorisiz (dogru_kategori NULL) kayitlar DISLANIR -- kategori
+    alani None ile disari cikip egitim verisini bozmasin diye. Bunlari
+    kapatmak icin once `python -m src.resolve_logs` calistirilmali.
     """
     with _baglanti() as conn:
         satirlar = conn.execute(
             "SELECT * FROM bildirimler WHERE dogrulandi IS NOT NULL "
+            "AND NOT (dogrulandi = 0 AND dogru_kategori IS NULL) "
             "ORDER BY zaman"
         ).fetchall()
     cikti = []
