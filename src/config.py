@@ -637,3 +637,35 @@ EQUIPMENT_ALIASES = {
     "pid ekranları": "PID ekranı",
     "kamera sistemi": "kamera",
 }
+
+
+# ---------------------------------------------------------------------------
+# Log veritabani + benzerlik / istatistik (Adim 8)
+#
+# Amac: kullanicinin yazdigi her cumleyi (ve mevcut egitim havuzunu) KAYIT
+# ALTINA almak, ama otomatik olarak egitime SOKMAMAK. Bkz. CLAUDE.md
+# "Loglama ve manuel onay" bolumu -- neden otomatik egitim yapilmadigi orada
+# tartisiliyor (etiketsiz veri + confirmation bias riski).
+# ---------------------------------------------------------------------------
+
+LOG_DB_FILE = DATA_DIR / "logs.db"   # calisirken buyur, git'e girmez (.gitignore)
+
+# Benzerlik tespiti: modelin kendi pooler ciktisi (768 boyutlu) + cosine
+# similarity. Ayri bir embedding modeli kurmuyoruz -- zaten yuklu olan
+# BERTurk+LoRA'nin ic temsili siniflandirma icin egitildigi icin kategoriye
+# gore kumelenmis olmasi beklenir.
+#
+# ESIK OLCULDU (20 Agu 2026, test setinden 150 kayit, 1334 ayni-kategori /
+# 9841 farkli-kategori cift):
+#   esik   ayni-kategori yakalanan   farkli-kategori YANLIS ALARM
+#   0.50        %83.7                      %5.1
+#   0.60        %76.0                      %2.4   <- SECILEN
+#   0.65        %71.9                      %1.5
+#   0.70        %67.1                      %0.9
+#   0.80        %51.6                      %0.3
+# Ilk tahmin 0.85'ti (SequenceMatcher esiklerinden esinlenerek), ama BERT
+# pooler ciktisi farkli bir uzayda -- olcmeden tahmin etmek yanilticiydi:
+# 0.85'te ayni-kategori kayitlarin coguKACIRILIRDI. 0.60 iyi bir denge:
+# yuksek recall, dusuk yanlis alarm.
+SIMILARITY_THRESHOLD = 0.60
+SIMILARITY_MAX_SONUC = 30    # rapor kalabalik olmasin diye ust sinir

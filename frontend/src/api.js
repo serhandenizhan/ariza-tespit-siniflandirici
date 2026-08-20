@@ -48,3 +48,17 @@ export const tahminEt = (text) =>
 export const kategorileriGetir = () => istek("/categories");
 export const ornekleriGetir = (count = 8) => istek(`/examples?count=${count}`);
 export const modelBilgisiGetir = () => istek("/model-info");
+
+// Adim 8: loglama + benzerlik + istatistik
+export const tahminiDogrula = (logId, correct, correctedCategory = null) =>
+  istek("/logs/verify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      log_id: logId,
+      correct,
+      corrected_category: correctedCategory,
+    }),
+  });
+
+export const kategoriIstatistikGetir = () => istek("/stats/categories");

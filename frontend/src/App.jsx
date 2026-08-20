@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import {
+  kategoriIstatistikGetir,
   kategorileriGetir,
   modelBilgisiGetir,
   ornekleriGetir,
   tahminEt,
 } from "./api";
 import SonucKarti from "./components/SonucKarti";
+import KategoriGrafik from "./components/KategoriGrafik";
 import "./App.css";
 
 const MAKS_KARAKTER = 300; // backend'deki C.MAX_CHARS ile ayni
@@ -20,6 +22,10 @@ export default function App() {
   const [ornekler, setOrnekler] = useState([]);
   const [modelBilgi, setModelBilgi] = useState(null);
   const [taksonomiAcik, setTaksonomiAcik] = useState(false);
+  const [kategoriIstatistik, setKategoriIstatistik] = useState([]);
+
+  const istatistigiTazele = () =>
+    kategoriIstatistikGetir().then(setKategoriIstatistik).catch(() => {});
 
   // Acilista sabit verileri cek. Backend kapaliysa hata gosterilir ama
   // uygulama cokmez -- kullanici ne yapmasi gerektigini gorur.
@@ -31,6 +37,7 @@ export default function App() {
         setModelBilgi(bilgi);
       })
       .catch((e) => setHata(e.message));
+    istatistigiTazele();
   }, []);
 
   // Ortam isigi sonucun kategorisiyle renkleniyor (bkz. App.css body::before)
@@ -50,6 +57,9 @@ export default function App() {
     setHata(null);
     try {
       setSonuc(await tahminEt(temiz));
+      // Bu bildirim de loglandigi icin grafik hemen guncellensin -- "cumleler
+      // eklendikce surekli guncellenen tablo" istegi budur.
+      istatistigiTazele();
     } catch (e) {
       setHata(e.message);
       setSonuc(null);
@@ -118,7 +128,19 @@ export default function App() {
         </div>
       )}
 
-      {sonuc && <SonucKarti sonuc={sonuc} kategoriler={kategoriler} />}
+      {sonuc && (
+        <SonucKarti
+          // key: her yeni tahminde bilesen YENIDEN kurulsun -- yoksa React
+          // ayni orneği koruyup icerideki onayDurumu state'ini bir onceki
+          // tahminden tasir (gercek bulunan hata, elle test ederken cikti).
+          key={sonuc.log_id + sonuc.response_time_ms}
+          sonuc={sonuc}
+          kategoriler={kategoriler}
+          onDogrulandi={istatistigiTazele}
+        />
+      )}
+
+      {kategoriIstatistik.length > 0 && <KategoriGrafik veri={kategoriIstatistik} />}
 
       {ornekler.length > 0 && (
         <section className="ornekler">

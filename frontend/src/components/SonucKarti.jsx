@@ -1,10 +1,15 @@
-// Tahmin sonucu: birincil kategori, guven, uyarilar ve olasilik dagilimi.
+import { useState } from "react";
+import { tahminiDogrula } from "../api";
+
+// Tahmin sonucu: birincil kategori, guven, uyarilar, benzerlik ve olasilik dagilimi.
 
 const yuzde = (x) => `${(x * 100).toFixed(1)}%`;
 
-export default function SonucKarti({ sonuc, kategoriler }) {
-  // Backend olasiliklari sozluk olarak donduruyor; gorunum icin siralayip
-  // her satira kendi kategori rengini (--k) tasiyoruz.
+export default function SonucKarti({ sonuc, kategoriler, onDogrulandi }) {
+  const [onayDurumu, setOnayDurumu] = useState(null); // null | "dogru" | "yanlis" | "duzeltiliyor"
+  const [gonderiliyor, setGonderiliyor] = useState(false);
+
+  // Dagilimi olasiliga gore sirala; backend sozluk donduruyor.
   const dagilim = Object.entries(sonuc.probabilities)
     .map(([anahtar, olasilik]) => ({
       anahtar,
@@ -13,6 +18,21 @@ export default function SonucKarti({ sonuc, kategoriler }) {
       renk: kategoriler[anahtar]?.color ?? "#7a828f",
     }))
     .sort((a, b) => b.olasilik - a.olasilik);
+
+  const dogrulanabilir = sonuc.log_id > 0 && onayDurumu === null;
+
+  async function gonder(dogru, duzeltilmisKategori = null) {
+    setGonderiliyor(true);
+    try {
+      await tahminiDogrula(sonuc.log_id, dogru, duzeltilmisKategori);
+      setOnayDurumu(dogru ? "dogru" : "yanlis");
+      onDogrulandi?.();
+    } catch {
+      /* sessizce yut -- onay ikincil bir eylem, akisi kesmemeli */
+    } finally {
+      setGonderiliyor(false);
+    }
+  }
 
   return (
     <section className="sonuc" style={{ "--vurgu": sonuc.color }} aria-live="polite">
@@ -49,9 +69,6 @@ export default function SonucKarti({ sonuc, kategoriler }) {
         </div>
       </div>
 
-      {/* manual_review tek bir operasyonel sinyal ama iki farkli sebepten
-          tetiklenebiliyor. Operatore "neden bakmam gerekiyor" sorusunun
-          cevabini vermek icin sebepleri ayri ayri yaziyoruz. */}
       {sonuc.manual_review && (
         <div className="uyari">
           <div className="uyari-baslik">
@@ -75,6 +92,91 @@ export default function SonucKarti({ sonuc, kategoriler }) {
         </div>
       )}
 
+      {/* Onay: kullanicinin isaretledigi kayitlar SADECE bunlar /logs/export
+          ile disari alinip elle egitime katilabilir -- bkz. backend/src/db.py */}
+      <div className="onay">
+        {onayDurumu === null && (
+          <>
+            <span className="onay-soru">Bu tahmin doğru mu?</span>
+            <button
+              className="onay-btn onay-dogru"
+              disabled={!dogrulanabilir || gonderiliyor}
+              onClick={() => gonder(true)}
+            >
+              ✓ Doğru
+            </button>
+            <button
+              className="onay-btn onay-yanlis"
+              disabled={!dogrulanabilir || gonderiliyor}
+              onClick={() => setOnayDurumu("duzeltiliyor")}
+            >
+              ✕ Yanlış
+            </button>
+          </>
+        )}
+        {onayDurumu === "duzeltiliyor" && (
+          <>
+            <span className="onay-soru">Doğrusu:</span>
+            <select
+              className="onay-secim"
+              disabled={gonderiliyor}
+              defaultValue=""
+              onChange={(e) => e.target.value && gonder(false, e.target.value)}
+            >
+              <option value="" disabled>seçin…</option>
+              {Object.values(kategoriler)
+                .filter((k) => k.category !== sonuc.category)
+                .map((k) => (
+                  <option key={k.category} value={k.category}>{k.label}</option>
+                ))}
+            </select>
+            <button
+              className="onay-btn onay-vazgec"
+              onClick={() => gonder(false)}
+              disabled={gonderiliyor}
+              title="Kategori belirtmeden sadece 'yanlış' olarak işaretle"
+            >
+              atla
+            </button>
+          </>
+        )}
+        {onayDurumu === "dogru" && <span className="onay-tesekkur">✓ Teşekkürler, kaydedildi.</span>}
+        {onayDurumu === "yanlis" && <span className="onay-tesekkur">✓ Düzeltme kaydedildi.</span>}
+        {sonuc.log_id <= 0 && onayDurumu === null && (
+          <span className="onay-soru onay-devre-disi">
+            (bu istek tekrar olduğu için loglanmadı)
+          </span>
+        )}
+      </div>
+
+      {sonuc.similar.total_found > 0 && (
+        <div className="benzer">
+          <h3 className="bolum-baslik">
+            Benzer Kayıtlar
+            <span className="benzer-sayi">
+              {" "}
+              — {sonuc.similar.total_found} kayıt bulundu
+              {sonuc.similar.shown < sonuc.similar.total_found &&
+                ` (ilk ${sonuc.similar.shown} gösteriliyor)`}
+            </span>
+          </h3>
+          {sonuc.similar.distribution.map((d) => (
+            <div className="dagilim-satir" key={d.category}>
+              <span className="dagilim-ad">{d.label}</span>
+              <div className="ray ince">
+                <div
+                  className="dolgu"
+                  style={{ width: yuzde(d.ratio), "--k": d.color }}
+                />
+              </div>
+              <span className="dagilim-deger">
+                {d.count} · {yuzde(d.ratio)}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="dagilim">
         <h3 className="bolum-baslik">Tüm kategoriler</h3>
         {dagilim.map((d, i) => (
@@ -89,8 +191,6 @@ export default function SonucKarti({ sonuc, kategoriler }) {
                 style={{
                   width: yuzde(d.olasilik),
                   "--k": d.renk,
-                  // Kademeli gecikme: barlar sirayla dolar, tek seferde
-                  // hepsinin firlamasi yerine akici bir his veriyor
                   animationDelay: `${60 + i * 45}ms`,
                 }}
               />

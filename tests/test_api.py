@@ -22,6 +22,14 @@ from backend.main import app
 from src import config as C
 
 
+@pytest.fixture(scope="module", autouse=True)
+def _izole_log_db(tmp_path_factory):
+    """Testler gercek data/logs.db'yi kirletmesin -- gecici bir dosyaya
+    yonlendirir. client fixture'i olusmadan (lifespan calismadan) once
+    ayarlanmis olmasi sart, cunku db.init() bu dosyaya yazar."""
+    C.LOG_DB_FILE = tmp_path_factory.mktemp("db") / "test_logs.db"
+
+
 @pytest.fixture(scope="module")
 def client():
     # 'with' sart: lifespan (model yukleme) ancak boyle calisir.
@@ -255,3 +263,107 @@ def test_hat_kodu_ekipman_etiketiyle_karismiyor():
     veri = cikar("Üsküdar şubesinde T3 trensformatörü aşırı ısı uyarısı verdi.")
     assert veri["line"] is None
     assert veri["equipment"] == "trafo"
+
+
+# ---------------------------------------------------------------------------
+# Loglama, dogrulama, benzerlik, istatistik (Adim 8)
+# ---------------------------------------------------------------------------
+
+def test_predict_log_id_ve_similar_alanlarini_dondurur(client):
+    r = client.post("/predict", json={"text": "Turnike kolu kırıldı Kadıköy"})
+    veri = r.json()
+    assert veri["log_id"] > 0
+
+    benzer = veri["similar"]
+    assert benzer["threshold"] == C.SIMILARITY_THRESHOLD
+    assert benzer["total_found"] >= benzer["shown"]
+    assert sum(d["count"] for d in benzer["distribution"]) == benzer["total_found"]
+    # dagilim oranlari toplami 1 olmali (bos degilse)
+    if benzer["distribution"]:
+        assert abs(sum(d["ratio"] for d in benzer["distribution"]) - 1.0) < 1e-6
+
+
+def test_benzer_kayitlar_ayni_kategoriye_agirlikli_cikiyor(client):
+    """Acik bir mekanik ariza icin en cok benzeyen kayitlarin coğunluğu da
+    mekanik olmali -- benzerlik motorunun anlamli calistigini dogrular."""
+    veri = client.post(
+        "/predict", json={"text": "Yürüyen merdiven durdu 2. peron"}
+    ).json()
+    dagilim = {d["category"]: d["ratio"] for d in veri["similar"]["distribution"]}
+    assert dagilim.get("istasyon_mekanik", 0) > 0.5
+
+
+def test_ayni_metin_tekrar_gonderilince_loglanmiyor(client):
+    """Dene-yanila spam korumasi: kisa surede ayni metin tekrar gelirse
+    log_id -1 doner (loglanmadi)."""
+    metin = "Spam korumasi testi icin benzersiz cumle 123"
+    ilk = client.post("/predict", json={"text": metin}).json()
+    ikinci = client.post("/predict", json={"text": metin}).json()
+    assert ilk["log_id"] > 0
+    assert ikinci["log_id"] == -1
+
+
+def test_logs_verify_dogru_ve_yanlis(client):
+    veri = client.post(
+        "/predict", json={"text": "doğrulama testi için benzersiz cümle qwe"}
+    ).json()
+    log_id = veri["log_id"]
+
+    r = client.post("/logs/verify", json={"log_id": log_id, "correct": True})
+    assert r.status_code == 200
+    assert r.json()["ok"] is True
+
+
+def test_logs_verify_yanlis_kategori_duzeltmesiyle(client):
+    veri = client.post("/predict", json={"text": "benzersiz test cumlesi xyzabc"}).json()
+    r = client.post("/logs/verify", json={
+        "log_id": veri["log_id"], "correct": False,
+        "corrected_category": "guvenlik_emniyet",
+    })
+    assert r.status_code == 200
+
+    disa = client.get("/logs/export").text
+    assert '"kategori": "guvenlik_emniyet"' in disa
+    assert '"kaynak": "api_onayli:duzeltildi"' in disa
+
+
+def test_logs_verify_gecersiz_kategori_400(client):
+    veri = client.post("/predict", json={"text": "baska bir benzersiz cumle"}).json()
+    r = client.post("/logs/verify", json={
+        "log_id": veri["log_id"], "correct": False,
+        "corrected_category": "olmayan_kategori",
+    })
+    assert r.status_code == 400
+
+
+def test_logs_verify_bilinmeyen_id_404(client):
+    r = client.post("/logs/verify", json={"log_id": 999_999_999, "correct": True})
+    assert r.status_code == 404
+
+
+def test_logs_stats_canli_sayaci_artiyor(client):
+    once = client.get("/logs/stats").json()["live"]
+    client.post("/predict", json={"text": "istatistik sayaci testi benzersiz"})
+    sonra = client.get("/logs/stats").json()["live"]
+    assert sonra == once + 1
+
+
+def test_stats_categories_tum_kategorileri_iceriyor(client):
+    r = client.get("/stats/categories")
+    assert r.status_code == 200
+    veri = r.json()
+    assert {d["category"] for d in veri} == set(C.CATEGORY_KEYS)
+    assert abs(sum(d["ratio"] for d in veri) - 1.0) < 1e-6
+    # gecmis havuz seed'lendigi icin toplam kayit sayisi bos olamaz
+    assert sum(d["count"] for d in veri) > 1000
+
+
+def test_logs_export_ndjson_donuyor(client):
+    r = client.get("/logs/export")
+    assert r.status_code == 200
+    assert "ndjson" in r.headers["content-type"]
+    for satir in r.text.strip().split("\n"):
+        if satir:
+            import json as _json
+            kayit = _json.loads(satir)
+            assert kayit["kategori"] in C.CATEGORY_KEYS

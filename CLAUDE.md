@@ -68,7 +68,9 @@ ariza-tespit-siniflandirici/
 │   ├── train.py                    # Adim 4a -- BERTurk + LoRA egitimi
 │   ├── evaluate.py                 # Adim 4b -- metrikler + confusion + hata analizi
 │   ├── calibrate.py                # Adim 4c -- k-fold OOF esik kalibrasyonu
-│   └── extract.py                  # Adim 7 -- yapisal cikarim (kurallı)
+│   ├── extract.py                  # Adim 7 -- yapisal cikarim (kurallı)
+│   ├── db.py                       # Adim 8 -- log veritabani (SQLite)
+│   └── similarity.py               # Adim 8 -- embedding tabanli yakinlik
 ├── backend/
 │   ├── __init__.py
 │   └── main.py                     # Adim 5 -- FastAPI servisi
@@ -1132,6 +1134,125 @@ eşleşmesi bunu birleştiremez. **Bileşimsel ifadeler için NER gerekiyor.**
 Yani ölçüm, bir sonraki adımın ne olması gerektiğini de söylüyor: sözlük
 büyütmek değil, (a) çok-etiketli belirti, (b) bileşimsel ekipman için
 token classification.
+
+**✅ Adım 8 — Loglama, Benzerlik, Onay, Canlı Grafik (TAMAMLANDI):**
+`src/db.py`, `src/similarity.py`, backend'e 4 yeni uç nokta, frontend'e
+onay butonları + kategori grafiği.
+
+### Neden otomatik eğitim yok — bilinçli tasarım kararı
+
+Kullanıcı fikri: kullanıcının yazdığı her cümle veritabanına eklensin ve
+buna göre **her çalıştırmada** model yeniden eğitilsin. Bu fikir **kısmen**
+uygulandı — loglama evet, otomatik eğitim hayır. Gerekçe:
+
+Kullanıcının yazdığı bir cümle için sistemin **kendi tahmini** tek etiket
+adayıdır ve bu tahmin **yanlış olabilir**. Etiketsiz/doğrulanmamış veriyle
+otomatik eğitmek, modelin kendi hatalarını doğru sanıp pekiştirmesi riski
+taşır (confirmation bias). Bu proje boyunca veri kalitesine verilen önem
+— elle triyaj, `SINIR`/`YABANCI` bayrakları, gold'un bağımsızlığı, near-dup
+kümeleme — hep aynı gerekçeyle **denetimsiz veri girişine karşı**dır.
+Kullanıcı girdisini süzgeçsiz eğitime sokmak bunların hepsini atlar olurdu.
+
+**Uygulanan orta yol:** her tahmin SQLite'a loglanır ama `dogrulandi` alanı
+`NULL` olarak başlar — yani "tahmin", "etiket" değil. Kullanıcı arayüzde
+"✓ Doğru" / "✕ Yanlış" ile onaylarsa bu alan dolar. **Sadece onaylanan**
+kayıtlar `/logs/export` ile dışarı alınabilir ve kullanıcının kendi
+inisiyatifiyle (elle) `data/raw/amplified.jsonl`'e katılıp `preprocess.py`
++ `train.py` yeniden çalıştırılabilir. Backend bunu **otomatik yapmaz**.
+
+### `src/db.py` — log veritabanı (SQLite)
+
+Tablo `bildirimler`: metin, kategori, güven, kaynak (`gecmis`|`canli`),
+`dogrulandi` (NULL|1|0), `dogru_kategori`, zaman.
+
+- **`init()`** tabloyu oluşturur ve **boşsa** `data/processed/clean.csv`'yi
+  (1675 kayıt, gold DAHİL DEĞİL) `kaynak='gecmis'` olarak bir kez seed'ler.
+  İdempotent — ikinci çağrıda hiçbir şey yapmaz.
+- **Dene-yanıla spam koruması:** aynı metin son 30 saniyede zaten loglandıysa
+  tekrar loglanmaz (`son_kayit_tekrar_mi`). `/predict` bu durumda `log_id: -1`
+  döner, arayüz onay butonlarını göstermez.
+- **`data/logs.db` `.gitignore`'da** — çalışırken büyüyen, `clean.csv`'den
+  yeniden üretilebilir bir dosya (Genel İlke 6'daki "yeniden üretilebilir
+  ara ürün" tanımına birebir uyuyor).
+
+### `src/similarity.py` — embedding tabanlı yakınlık tespiti
+
+Kullanıcı isteği: *"bir cümle yazıldığında yakınlık tespiti yapıp buna benzer
+XX arıza kaydı bulundu, bunların şu kadarı bu kategori..."*
+
+**Ayrı bir embedding modeli KURULMADI.** Zaten yüklü olan BERTurk+LoRA
+sınıflandırma modelinin kendi iç temsili (`.bert` alt-modülünün
+`pooler_output`'u, 768 boyut) + cosine similarity kullanılıyor. Bu model
+sınıflandırma için fine-tune edildiği için iç temsilinin kategoriye göre
+kümelenmiş olması **beklenir** — ama bu varsayım kör kör kabul edilmedi,
+ölçüldü:
+
+**Eşik kalibrasyonu (test setinden 150 kayıt, 1334 aynı-kategori / 9841
+farklı-kategori çift):**
+
+| eşik | aynı-kategori yakalanan | farklı-kategori YANLIŞ ALARM |
+| --- | --- | --- |
+| 0.50 | %83.7 | %5.1 |
+| **0.60** | **%76.0** | **%2.4** ← seçilen |
+| 0.65 | %71.9 | %1.5 |
+| 0.80 | %51.6 | %0.3 |
+
+İlk tahmin 0.85'ti (SequenceMatcher eşiklerinden esinlenerek — Adım 3'teki
+`NEAR_DUP_THRESHOLD`), ama BERT pooler çıktısı farklı bir uzayda: ölçmeden
+tahmin etmek yanıltıcıydı, 0.85'te aynı-kategori kayıtların **çoğu**
+kaçırılırdı. 0.60 iyi bir denge.
+
+Corpus embedding'leri **lifespan sırasında bir kez** hesaplanır (1675 kayıt,
+~3.5 sn), diske önbelleklenmez — ekstra bir önbellek geçerliliği sorunu
+yönetmekten daha basit.
+
+**Canlı doğrulama:** "Yürüyen merdiven durdu 2. peron" → 209 benzer kayıt,
+**%97.6 İstasyon Mekanik** — benzerlik motorunun anlamlı çalıştığının kanıtı.
+
+### Backend — 4 yeni uç nokta
+
+| yol | ne yapar |
+| --- | --- |
+| `POST /logs/verify` | kullanıcı tahmini onaylar/düzeltir; `dogrulandi` alanını doldurur |
+| `GET /logs/stats` | toplam/canlı/onaylı sayıları |
+| `GET /logs/export` | **sadece onaylanmış** kayıtları JSONL olarak döndürür |
+| `GET /stats/categories` | kategori bazında toplam + canlı sayım (grafik veri kaynağı) |
+
+`/predict` yanıtına iki alan eklendi: `log_id` (bu tahmini `/logs/verify`
+ile onaylamak için) ve `similar` (benzerlik dağılımı).
+
+**Bulunan gerçek hata:** `similarity.benzer_bul()` Türkçe anahtarlarla
+(`esik`, `dagilim`...) dönüyordu, API şeması İngilizce bekliyordu —
+`ResponseValidationError` ile yakalandı, backend'de çeviri katmanı eklendi.
+
+### Frontend — onay butonları + canlı kategori grafiği
+
+`SonucKarti.jsx`: "✓ Doğru" / "✕ Yanlış" butonları, yanlışta kategori
+seçim dropdown'ı, "Benzer Kayıtlar" bölümü (mevcut `.dagilim-satir` diliyle
+tutarlı, yeni bir görsel dil eklenmedi).
+
+**Bulunan gerçek hata:** `SonucKarti`'nin `onayDurumu` state'i yeni bir
+tahminde sıfırlanmıyordu — React aynı bileşen örneğini koruyup önceki
+tahminin onay durumunu taşıyordu. `key={sonuc.log_id + ...}` ile bileşen
+her tahminde yeniden kuruluyor.
+
+`KategoriGrafik.jsx`: yatay bar grafiği, her bar iki segment (soluk =
+geçmiş havuz, parlak = canlı eklenen). Her tahminden ve her onaydan sonra
+otomatik yenileniyor ("cümleler eklendikçe güncellenen tablo" isteği).
+Renkler `config.py`'den geliyor, ayrı bir palet seçilmedi (Adım 6'daki
+kategori renkleriyle tutarlılık için).
+
+### Docker — kullanıcı kararıyla ERTELENDİ
+
+Docker Desktop bu makinede kurulu ama daemon çalışmıyordu (GUI uygulaması,
+elle başlatılması gerekiyor). Kullanıcıya soruldu, **"docker yapmayalım"**
+kararı verildi. Yazılan `Dockerfile.backend`, `frontend/Dockerfile`,
+`docker-compose.yml` **test edilmeden repodan silindi** — CLAUDE.md'nin
+"test edilmemiş kodu commit etme" kuralı gereği. İleride gerekirse yeniden
+yazılabilir; tasarım notu: backend + frontend ayrı imaj, `data/` tek bir
+named volume'a mount edilir (Docker ilk çalıştırmada imajdaki içeriği boş
+volume'a otomatik kopyalar), `VITE_API_URL` build-time ARG (tarayıcı
+container ağını değil host portunu görür).
 
 ## Genel İlkeler (her adımda geçerli)
 

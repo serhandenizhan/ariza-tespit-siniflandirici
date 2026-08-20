@@ -42,6 +42,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from src import config as C
+from src import db
+from src import similarity
 from src.extract import cikar as yapisal_cikar
 
 # ---------------------------------------------------------------------------
@@ -53,7 +55,8 @@ from src.extract import cikar as yapisal_cikar
 # (Prototip icin yeterli; gercek yukte birden fazla worker/kuyruk gerekir.)
 # ---------------------------------------------------------------------------
 
-STATE: dict = {"model": None, "tokenizer": None, "device": None, "meta": None}
+STATE: dict = {"model": None, "tokenizer": None, "device": None, "meta": None,
+              "corpus": None}
 LOCK = threading.Lock()
 
 
@@ -65,8 +68,18 @@ async def lifespan(app: FastAPI):
     t0 = time.perf_counter()
     device = cihaz_sec()
     model, tokenizer, meta = model_yukle(device)
+
+    db.init()   # tablo yoksa olustur, bossa gecmis havuzu (clean.csv) seed'le
+
+    # Benzerlik corpus'u: egitim havuzunun tamami icin embedding, bir kez.
+    # Diske onbelleklenmiyor (bkz. src/similarity.py modul notu).
+    tc0 = time.perf_counter()
+    corpus = similarity.corpus_hazirla(model, tokenizer, device)
+    print(f"[backend] benzerlik corpus'u hazir: {len(corpus.metinler)} kayit "
+          f"({time.perf_counter() - tc0:.1f} sn)")
+
     STATE.update(model=model, tokenizer=tokenizer, device=device, meta=meta,
-                 load_seconds=time.perf_counter() - t0)
+                 corpus=corpus, load_seconds=time.perf_counter() - t0)
     print(f"[backend] model yuklendi ({STATE['load_seconds']:.1f} sn) "
           f"| device={device} | LoRA={meta.get('lora')} "
           f"| best epoch={meta.get('en_iyi_epoch')}")
@@ -113,6 +126,28 @@ class PredictRequest(BaseModel):
                       examples=["Yürüyen merdiven durdu 2. peron"])
 
 
+class SimilarCategoryShare(BaseModel):
+    category: str
+    label: str
+    color: str
+    count: int
+    ratio: float
+
+
+class SimilarExample(BaseModel):
+    text: str
+    category: str
+    similarity: float
+
+
+class SimilarResult(BaseModel):
+    threshold: float
+    total_found: int
+    shown: int
+    distribution: list[SimilarCategoryShare]
+    examples: list[SimilarExample]
+
+
 class PredictResponse(BaseModel):
     category: str = Field(..., description="Kategori anahtarı, örn. istasyon_mekanik")
     label: str = Field(..., description="İnsan okunur ad, örn. İstasyon Mekanik")
@@ -145,6 +180,42 @@ class PredictResponse(BaseModel):
 
     margin: float = Field(..., description="top1 - top2 olasılık farkı")
     response_time_ms: float
+
+    # --- log + benzerlik (Adim 8) ------------------------------------------
+    log_id: int = Field(..., description="Bu tahminin log veritabanındaki "
+                        "kaydı — /logs/verify ile doğrulamak için kullanılır")
+    similar: SimilarResult = Field(
+        ..., description="Embedding tabanlı yakınlık: eğitim havuzunda "
+        "benzer bulunan kayıtların kategori dağılımı"
+    )
+
+
+class VerifyRequest(BaseModel):
+    log_id: int
+    correct: bool
+    corrected_category: str | None = Field(
+        None, description="correct=false ise doğru kategori (opsiyonel)"
+    )
+
+
+class VerifyResponse(BaseModel):
+    ok: bool
+
+
+class LogStats(BaseModel):
+    total: int
+    live: int
+    confirmed_correct: int
+    confirmed_incorrect: int
+
+
+class CategoryCount(BaseModel):
+    category: str
+    label: str
+    color: str
+    count: int
+    live_count: int
+    ratio: float
 
 
 class CategoryInfo(BaseModel):
@@ -253,6 +324,36 @@ def run_prediction(text: str) -> dict:
             secondary_message=C.SECONDARY_CATEGORY_MESSAGE,
         )
 
+    # Benzerlik: modelin ic temsiliyle egitim havuzunda anlamsal olarak yakin
+    # kayitlari bulur, kategori dagilimlarini raporlar (bkz. src/similarity.py).
+    # similarity.py Turkce anahtarlarla doner (proje ici modul), API sozlesmesi
+    # Ingilizce -- burada ceviriyoruz.
+    corpus = STATE["corpus"]
+    benzer = similarity.benzer_bul(text, model, tokenizer, device, corpus)
+    result["similar"] = {
+        "threshold": benzer["esik"],
+        "total_found": benzer["toplam_bulunan"],
+        "shown": benzer["gosterilen"],
+        "distribution": [
+            {"category": d["kategori"], "label": d["ad"], "color": d["renk"],
+             "count": d["sayi"], "ratio": d["oran"]}
+            for d in benzer["dagilim"]
+        ],
+        "examples": [
+            {"text": e["metin"], "category": e["kategori"],
+             "similarity": e["benzerlik"]}
+            for e in benzer["ornekler"]
+        ],
+    }
+
+    # Loglama: her istek DB'ye yazilir ama ETIKET OLARAK KULLANILMAZ -- bkz.
+    # src/db.py modul notu. Ayni metin kisa surede tekrar gelirse (dene-yanila)
+    # loglamayi atla, grafik/log tablosu tek kisinin denemesiyle sismesin.
+    if not db.son_kayit_tekrar_mi(text):
+        result["log_id"] = db.logla(text, primary, confidence, kaynak="canli")
+    else:
+        result["log_id"] = -1
+
     return result
 
 
@@ -352,6 +453,79 @@ def predict(request: PredictRequest):
     result = run_prediction(text)
     result["response_time_ms"] = (time.perf_counter() - t0) * 1000
     return result
+
+
+@app.post("/logs/verify", response_model=VerifyResponse, tags=["logs"])
+def logs_verify(req: VerifyRequest):
+    """Kullanici arayuzde 'Doğru'/'Yanlış' ile tahmini onaylar.
+
+    SADECE bu uc noktadan gecen kayitlar `dogrulandi` alani doluyor ve
+    /logs/export ile disari alinabiliyor -- yani egitime aday olabiliyor.
+    Onaylanmayan tahminler veritabaninda kalir ama sonsuza kadar "tahmin"
+    olarak isaretli durur, asla otomatik egitime girmez (bkz. src/db.py).
+    """
+    if req.log_id < 0:
+        raise HTTPException(400, "Geçersiz log_id (bu istek tekrar olduğu "
+                            "için loglanmamıştı).")
+    if not req.correct and not req.corrected_category:
+        pass  # duzeltme opsiyonel; bos birakilabilir, sadece "yanlis" isaretlenir
+    if req.corrected_category and req.corrected_category not in C.CATEGORY_KEYS:
+        raise HTTPException(400, f"Bilinmeyen kategori: {req.corrected_category}")
+
+    bulundu = db.dogrula(req.log_id, req.correct, req.corrected_category)
+    if not bulundu:
+        raise HTTPException(404, "log_id bulunamadı.")
+    return {"ok": True}
+
+
+@app.get("/logs/stats", response_model=LogStats, tags=["logs"])
+def logs_stats():
+    """Log veritabaninin ozeti: kac kayit, kaci canli, kaci onaylandi."""
+    t = db.toplam_kayit()
+    return {
+        "total": t["toplam"] or 0,
+        "live": t["canli"] or 0,
+        "confirmed_correct": t["onayli_dogru"] or 0,
+        "confirmed_incorrect": t["onayli_yanlis"] or 0,
+    }
+
+
+@app.get("/logs/export", tags=["logs"])
+def logs_export():
+    """Kullanici tarafindan ONAYLANMIS kayitlari JSONL olarak dondurur.
+
+    Bu, CLAUDE.md'deki 'orta yol'un somut adimi: sadece elle dogrulanan
+    kayitlar buradan alinip data/raw/amplified.jsonl'e KATILABILIR (elle,
+    kullanicinin kendi inisiyatifiyle) ve preprocess+train yeniden
+    calistirilabilir. Backend bunu OTOMATIK yapmaz.
+    """
+    from fastapi.responses import PlainTextResponse
+
+    satirlar = db.onayli_kayitlari_disa_aktar()
+    icerik = "\n".join(json.dumps(r, ensure_ascii=False) for r in satirlar)
+    return PlainTextResponse(
+        icerik, media_type="application/x-ndjson",
+        headers={"Content-Disposition": "attachment; filename=onayli_kayitlar.jsonl"},
+    )
+
+
+@app.get("/stats/categories", response_model=list[CategoryCount], tags=["logs"])
+def stats_categories():
+    """Kategori bazinda TOPLAM kayit sayisi (gecmis havuz + canli istekler
+    birlesik) -- arayuzdeki canli guncellenen grafigin veri kaynagi."""
+    dagilim = {d["kategori"]: d for d in db.kategori_dagilimi()}
+    toplam = sum(d["sayi"] for d in dagilim.values()) or 1
+    return [
+        {
+            "category": k,
+            "label": C.DISPLAY_NAME[k],
+            "color": C.CATEGORY_COLOR[k],
+            "count": dagilim.get(k, {}).get("sayi", 0),
+            "live_count": dagilim.get(k, {}).get("yeni_sayi", 0),
+            "ratio": dagilim.get(k, {}).get("sayi", 0) / toplam,
+        }
+        for k in C.CATEGORY_KEYS
+    ]
 
 
 def main() -> None:
