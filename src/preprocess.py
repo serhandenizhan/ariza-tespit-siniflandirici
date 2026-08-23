@@ -44,13 +44,21 @@ def load_jsonl(path) -> list[dict]:
 
 def load_pool(include_seed: bool) -> list[dict]:
     """Egitim havuzunu toplar. gold.jsonl BURAYA ASLA GIRMEZ."""
-    pool = load_jsonl(C.RAW_FILE)
+    # Uc boyutlu (kategori + intent + oncelik) havuz varsa o kullanilir.
+    # relabeled.jsonl `src/relabel.py` ciktisidir ve yeni taksonomiyi tasir;
+    # amplified.jsonl eski tek boyutlu uretimin ciktisidir ve geriye donuk
+    # uyumluluk icin duruyor.
+    relabel_yolu = C.RAW_DIR / "relabeled.jsonl"
+    pool = load_jsonl(relabel_yolu)
+    kaynak = "relabeled"
+    if not pool:
+        pool = load_jsonl(C.RAW_FILE)
+        kaynak = "amplified"
     if not pool:
         raise SystemExit(
-            f"HATA: cogaltma ciktisi yok ({C.RAW_FILE}).\n"
-            f"Once calistir: python -m src.generate_data"
+            f"HATA: egitim havuzu yok ({relabel_yolu} veya {C.RAW_FILE}).\n"
+            f"Once calistir: python -m src.generate_data && python -m src.relabel"
         )
-    kaynak = "amplified"
     if include_seed:
         # seed few-shot yemi olarak kullanildi, yani cogaltilmis kayitlar
         # onun turevleri olabilir. Kumeleme bu ortusmeyi zaten yakalayip ayni
@@ -198,7 +206,12 @@ def bol(kayitlar: list[dict], kumeler: list[list[int]],
 # Yazma
 # ---------------------------------------------------------------------------
 
-SUTUNLAR = ["metin", "kategori", "label", "stil", "kaynak"]
+# label/intent_label/oncelik_label: egitimde kullanilan sayisal karsiliklar.
+# Metin karsiliklari da yaziliyor cunku rapor ve hata analizi okunabilir
+# olmali; ikisini birlikte tutmak dosyayi biraz buyutuyor ama her okuyan
+# tarafta yeniden esleme yapma ihtiyacini kaldiriyor.
+SUTUNLAR = ["metin", "kategori", "label", "intent", "intent_label",
+            "oncelik", "oncelik_label", "stil", "kaynak"]
 
 
 def csv_yaz(path, kayitlar: list[dict]) -> None:
@@ -206,10 +219,16 @@ def csv_yaz(path, kayitlar: list[dict]) -> None:
         w = csv.DictWriter(f, fieldnames=SUTUNLAR)
         w.writeheader()
         for r in kayitlar:
+            intent = r.get("intent") or C.INTENT_KEYS[0]
+            oncelik = r.get("oncelik") or "P3"
             w.writerow({
                 "metin": r["metin"],
                 "kategori": r["kategori"],
                 "label": C.LABEL2ID[r["kategori"]],
+                "intent": intent,
+                "intent_label": C.INTENT2ID[intent],
+                "oncelik": oncelik,
+                "oncelik_label": C.PRIORITY2ID[oncelik],
                 "stil": r.get("stil", ""),
                 "kaynak": r.get("kaynak", ""),
             })

@@ -48,6 +48,16 @@
 {"metin": "Mecidiyeköyde yetkisiz kişi tünel içine girdi, seferler durduruldu.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:gold"}
 {"metin": "Yangın söndürme tüpü manometresi sıfır gösteriyor, değiştirim gerekiyor.", "kategori": "guvenlik_emniyet", "stil": "standart", "kaynak": "openrouter:gold"}
 {"metin": "Peron kapısı zorlandı alarm aktif", "kategori": "guvenlik_emniyet", "stil": "cok_kisa", "kaynak": "openrouter:gold"}
+{"metin": "Kadıköy istasyonunda peron kenarında yolcuyu rahatsız eden sarkıntılık şüphelisi güvenlik tarafından tespit edildi.", "kategori": "asayis_suc", "stil": "standart", "kaynak": "openrouter:gold"}
+{"metin": "Şişli-Mecidiyeköy transfer katında cebeci yakalanıp polis ekiplerine teslim edildi.", "kategori": "asayis_suc", "stil": "devrik", "kaynak": "openrouter:gold"}
+{"metin": "asansorde sigara icen yolcu uyarilmasina kufur edip kapi acilinca kacti", "kategori": "asayis_suc", "stil": "yazim_yanlisi", "kaynak": "openrouter:gold"}
+{"metin": "Kavga vagon 3", "kategori": "asayis_suc", "stil": "cok_kisa", "kaynak": "openrouter:gold"}
+{"metin": "Hırsızlık turnike giriş", "kategori": "asayis_suc", "stil": "cok_kisa", "kaynak": "openrouter:gold"}
+{"metin": "peronda esrar sigarasi yakip diger yolculari rahatsiz eden kisi ihbar edildi", "kategori": "asayis_suc", "stil": "yazim_yanlisi", "kaynak": "openrouter:gold"}
+{"metin": "Yenikapı Marmaray bağlantısında kız çocuğu taciz eden şüpheli kamerayla takip edilip durduruldu.", "kategori": "asayis_suc", "stil": "standart", "kaynak": "openrouter:gold"}
+{"metin": "Üsküdar güzergahında vagon içinde açıkça uzaktan kumar oynayan grup müdahale sonrası indirildi.", "kategori": "asayis_suc", "stil": "standart", "kaynak": "openrouter:gold"}
+{"metin": "Gayrettepe istasyonunda kimlik kontrolüne itiraz eden ve görevlilere sataşan şahıs polisle alındı.", "kategori": "asayis_suc", "stil": "standart", "kaynak": "openrouter:gold"}
+{"metin": "Aksaray yönlü trende kadın yolcunun çantasını çalarak perona atlayan şüpheli kovalandı.", "kategori": "asayis_suc", "stil": "standart", "kaynak": "openrouter:gold"}
 {"metin": "Kadıköy istasyonu B çıkışı tünel bağlantısında tavan sarkıtı su damlıyor.", "kategori": "altyapi_insaat", "stil": "standart", "kaynak": "openrouter:gold"}
 {"metin": "Üniversite peronu 4. direk civarında ray ALTI drenaj tıkanıklığı nedeniyle su birikti.", "kategori": "altyapi_insaat", "stil": "standart", "kaynak": "openrouter:gold"}
 {"metin": "Tünel duvarı çatlak genişledi acil etüt gerekli", "kategori": "altyapi_insaat", "stil": "devrik", "kaynak": "openrouter:gold"}

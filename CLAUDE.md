@@ -1,5 +1,25 @@
 # Metro İstanbul Arıza Tespit Sınıflandırıcı — Proje Bağlamı
 
+> ### ⚠️ TAKSONOMİ v2 (21 Ağu 2026) — bu dosyayı okurken dikkat
+>
+> Sistem 8 → 9 → **11 kategoriye** ve tek boyuttan **üç boyuta** (intent +
+> kategori + öncelik) geçti. Aşağıdaki bölümlerin bir kısmı v1 dönemine ait
+> ve **tarihsel kayıt** olarak duruyor — metodoloji dersleri (LoRA öğrenme
+> hızı, tohum varyansı, LLM sağlayıcı karşılaştırması, aksan dayanıklılığı)
+> hâlâ geçerli, ama **kategori adları ve sayıları güncel değil**.
+>
+> Güncel taksonomi ve mimari için: **"Adım 9 — Taksonomi v2"** bölümü
+> (dosyanın sonuna yakın) ve `yeni-eklemeler.md`.
+>
+> Eski kategori adlarının yeni karşılıkları:
+> `istasyon_mekanik`→`mekanik_istasyon`, `yazilim_sistem`→`elektronik_sistemler`
+> (+`sinyalizasyon_haberlesme`), `guvenlik_emniyet`→üçe bölündü
+> (`sinyalizasyon_haberlesme` / `istasyon_guvenlik` / `guvenlik_asayis_olay`),
+> `asayis_suc`→`guvenlik_asayis_olay`, `yolcu_operasyon`→`yolcu_hizmetleri`,
+> `temizlik_cevre`→`temizlik`, `altyapi_insaat` ikiye ayrıldı
+> (`altyapi_insaat` bina/tünel + `yol_yapisal` ray hattı).
+
+
 Bu dosya, projenin claude.ai sohbetinde geçen tüm geçmişini özetler. Buradaki
 her karar, sayı ve gerekçe önceki bir konuşmadan gelir — tahmin veya varsayım
 yok. Staj sunumunda kullanılacağı için doğruluğu kritik.
@@ -49,9 +69,10 @@ ariza-tespit-siniflandirici/
 │       ├── val.csv                 #  160
 │       ├── test.csv                #  160
 │       └── gold_test.csv           #   80  (gold.jsonl'den, egitime GIRMEZ)
-├── model/                          # Adim 4 ciktisi, 3.0 MB
-│   ├── adapter_model.safetensors   # LoRA agirliklari (sadece 2.4 MB!)
-│   ├── adapter_config.json
+├── model/                          # Adim 4 ciktisi
+│   ├── govde/                      # LoRA adaptoru (Adim 9: cok baslikli)
+│   ├── basliklar.pt                # uc siniflandirma basligi
+│   ├── model_yapisi.json           # taban model + gorev boyutlari
 │   ├── tokenizer.json / tokenizer_config.json
 │   ├── egitim_ozeti.json           # hiperparametreler + epoch gecmisi
 │   ├── degerlendirme.json          # test/gold metrikleri
@@ -70,7 +91,14 @@ ariza-tespit-siniflandirici/
 │   ├── calibrate.py                # Adim 4c -- k-fold OOF esik kalibrasyonu
 │   ├── extract.py                  # Adim 7 -- yapisal cikarim (kurallı)
 │   ├── db.py                       # Adim 8 -- log veritabani (SQLite)
-│   └── similarity.py               # Adim 8 -- embedding tabanli yakinlik
+│   ├── similarity.py               # Adim 8 -- embedding tabanli yakinlik
+│   ├── model.py                    # Adim 9 -- cok baslikli model (3 gorev)
+│   ├── relabel.py                  # Adim 9 -- uc boyutlu toplu etiketleme
+│   ├── generate_missing.py         # Adim 9 -- eksik kategori/intent uretimi
+│   ├── evidence.py                 # Adim 9 -- gradient x input aciklanabilirlik
+│   ├── oncelik_tutarlilik.py       # Adim 9 -- etiket tutarliligi olcumu
+│   ├── toplu_test.py               # bagimsiz set uzerinde toplu olcum
+│   └── resolve_logs.py             # kategorisiz log kayitlarini coz
 ├── backend/
 │   ├── __init__.py
 │   └── main.py                     # Adim 5 -- FastAPI servisi
@@ -504,49 +532,40 @@ ile seed eğitime katılırsa ortaya çıkar.
    kazandıracağı bir şey yok.
 5. **Adım 2b model kararı verildi:** hibrit (aşağıda).
 
-## ⚠️ Güncel Açık Noktalar
+## ⚠️ Güncel Açık Noktalar (21 Ağu 2026, Taksonomi v2 sonrası)
 
-1. ✅ **KAPANDI — `altyapi_insaat` 200/200.** Nemotron `devrik` grubunu
-   tamamladı (Ollama 36/50'de doyuma ulaşmıştı).
-2. ✅ **KAPANDI — Ollama'dan gelen 500 kayıt değiştirildi** (19 Ağu, yukarıda
-   detaylı). Veri artık %100 Nemotron. Yedek `amplified_ollama_backup.jsonl`
-   olarak duruyor, `preprocess.py` yeniden çalıştırıldı.
-3. ✅ **KAPANDI — near-dup eşiği kalibre edildi (19 Ağu).** İki ayrı eşiğe
-   ayrıldı: `NEAR_DUP_THRESHOLD = 0.85` (üretim) ve `CLUSTER_THRESHOLD = 0.80`
-   (bölme). Gerekçe ve ölçüm `config.py`'de detaylı.
-4. ✅ **KAPANDI — kategori sınırı kontrolü eklendi (`SINIR` bayrağı).**
-   Bulduğu 3 gerçek etiket hatası düzeltildi.
-5. ✅ **KAPANDI — taksonomi belirsizliği confusion matrix'te incelendi.**
-   İşaretlenen `arac_tren ↔ guvenlik_emniyet` çifti **hiç karışmadı**; model
-   ayırt etti. Yerine gerçek bir çakışma bulundu (`guvenlik_emniyet ↔
-   yolcu_operasyon`, config kaynaklı) ve buna kural yerine **ikincil kategori
-   mekanizması** getirildi (Adım 4 bölümünde detaylı).
-6. ✅ **KAPANDI — `CONFIDENCE_THRESHOLD` kalibre edildi**, 0.60 → **0.70**.
-7. **Kategori dengesi artık tam eşit değil:** `SINIR` düzeltmeleri sonrası
-   istasyon_mekanik 202, altyapi_insaat ve yolcu_operasyon 199, diğerleri 200.
-   Sapma ±2, macro-F1 ve katmanlı bölme için önemsiz — ama raporda "her
-   kategoriden tam 200" denmemeli.
-8. ✅ **KAPANDI — aksan dayanıklılığı çözüldü** (19 Ağu). ASCII çoğaltmayla
-   aksan kaybı −6.36 puandan **−1.16 puana** indi; genel doğruluk da arttı.
-   Detay Adım 4 bölümünde.
-9. ✅ **KAPANDI — `YABANCI` bayrağı eklendi + 9 kayıt düzeltildi.** Kuralın
-   kapsamlı olmadığı (dar ama kesin) açıkça belgelendi.
-10. ✅ **KAPANDI (backend tarafı) — ikincil kategori `/predict`'te çalışıyor.**
-    Arayüz tarafı Adım 6'da yapılacak.
-12. ✅ **KAPANDI — CORS daraltıldı.** `allow_origins=["*"]` yerine
-    `config.CORS_ORIGINS` (yerel geliştirme sunucuları). Üretimde
-    `CORS_ORIGINS` ortam değişkeniyle gerçek alan adı verilir. Metotlar da
-    `GET`/`POST` ile sınırlandı. Doğrulandı: izinli kaynak `Access-Control-
-    Allow-Origin` alıyor, yabancı site almıyor.
-13. ✅ **KAPANDI — kalibrasyon k-fold OOF'a taşındı** (`src/calibrate.py`).
-    Val'in kirli olması ve 9 hatayla eşik seçmenin gürültülü olması sorunu
-    çözüldü: 1280 kayıt / 102 hata üzerinden temiz taban. Sonuç:
-    `CONFIDENCE_THRESHOLD` 0.70 → **0.75**, `MARGIN_THRESHOLD` 0.40 → **0.30**.
-14. ✅ **KAPANDI — yapısal çıkarım yapıldı** (`src/extract.py`, Adım 7).
-    Kurallı katman; alan bazlı precision/recall raporuyla birlikte aşağıda.
-11. ✅ **KAPANDI — `INCLUDE_SEED_IN_TRAINING = True`** (19 Ağu). Ölçüldü,
-    aşağıda "Tohum varyansı" bölümünde detaylı. Ortalama kazanç kanıtlanmadı
-    ama en kötü durum belirgin iyileşti.
+1. **`Metro_Istanbul_Ariza_Tespit_Raporu.docx` GÜNCELLENMELİ.** Rapor v1
+   taksonomisine (8 kategori, tek boyut) göre yazıldı ve artık geçerli değil.
+   Proje bitince yeniden üretilmeli: 11 kategori, üç boyutlu mimari, yeni
+   metrikler, öncelik tutarlılık ölçümü, evidence yöntemi, kaldırılan
+   `personel_bilgi` kategorisi. **Bu maddeyi kapatmadan projeyi bitmiş sayma.**
+
+2. **`İstasyon Güvenliği` kategorisi veri açısından zayıf** — 95 kayıt
+   (diğerleri 172–269), test F1 **0.6154** (başarı kriteri 0.75). Precision
+   1.00 / recall 0.44: model kategoriyi tanıyor ama tahmin etmekten çekiniyor.
+   Kota yenilenince `generate_missing.py` ile ~100 kayıt daha üretilmeli.
+
+3. **Öncelik başlığı etiket tavanına yakın** (model 0.62, tavan ~0.70).
+   Buradan fazlası ancak etiketler daha tutarlı hale gelirse mümkün. Yapılacak:
+   yeni P2/P3 tanımıyla TÜM veriyi yeniden etiketlemek (bu turda kota
+   yetmediği için sadece 567 kayıt yeni tanımla etiketlendi) ve tutarlılığı
+   yeniden ölçmek.
+
+4. **Gold test seti YOK.** v1 gold'u eski taksonomiye ait olduğu için devre
+   dışı bırakıldı (`data/seed/gold_eski_taksonomi_backup.jsonl`). Kullanıcı
+   yeni gold'u **farklı bir kaynaktan** üretip getirecek — bu bilinçli bir
+   karar: eğitim verisini üreten modelden gelen test seti iyimser metrik verir
+   (ölçüldü: aynı model gold'da %91, bağımsız sette %71).
+
+5. **Frontend güncellenmedi.** Backend üç boyut + yeni alanlar döndürüyor ama
+   arayüz hâlâ v1 sözleşmesini bekliyor. Yapılacak: intent/öncelik rozetleri,
+   evidence gösterimi, eksik bilgi sorusu, tekrar uyarısı.
+
+6. **Testler güncellenmedi.** `tests/test_api.py` v1 alanlarını doğruluyor.
+
+7. **`calibrate.py` güncellenmedi** — tek başlıklı modele göre yazılmış, çok
+   başlıklı modelle çalışması için `model_yukle`/`tahmin_et` çağrılarının
+   gözden geçirilmesi gerekiyor.
 
 ## Yol Haritası — Kalan Adımlar
 
@@ -1280,6 +1299,219 @@ yazılabilir; tasarım notu: backend + frontend ayrı imaj, `data/` tek bir
 named volume'a mount edilir (Docker ilk çalıştırmada imajdaki içeriği boş
 volume'a otomatik kopyalar), `VITE_API_URL` build-time ARG (tarayıcı
 container ağını değil host portunu görür).
+
+
+## Adım 9 — Taksonomi v2 ve üç boyutlu mimari (21 Ağu 2026)
+
+Sistem tek boyutlu (sadece kategori) bir sınıflandırıcıdan **üç boyutlu** bir
+bildirim ayrıştırıcısına dönüştü. Kategori taksonomisi de sıfırdan yeniden
+tasarlandı.
+
+### Neden yeniden tasarım
+
+v1 taksonomisi organik büyümüştü (6 → 8 → 9 kategori) ve iki ciddi sorun
+üretiyordu:
+
+1. **Kelime dünyaları çakışıyordu.** `altyapi_insaat` ile `temizlik_cevre`
+   arasında "su/sızıntı/döküntü" ortak kelimeleri vardı ve model ayıramıyordu:
+   bağımsız test setinde `altyapi_insaat` **%5 doğruluk** verdi, 19 kaydın
+   19'u `temizlik_cevre`'ye gitti (çoğu %95+ güvenle — yani model emin şekilde
+   yanılıyordu).
+2. **Sınır kuralları yamalıydı.** Her düzeltme başka bir yeri bozuyordu:
+   `guvenlik_emniyet`'i düzeltince Yolcu/Operasyon %68'den %32'ye düştü.
+
+### Yeni taksonomi — 11 kategori
+
+Tam liste ve kapsam/hariç metinleri `yeni-eklemeler.md`'de ve `config.py`'de.
+Ayrım ilkesi değişmedi (kategori = hangi bakım ekibi), ama sınırlar
+**kelime dünyası ayrışacak şekilde** çizildi:
+
+| eski | yeni |
+| --- | --- |
+| `istasyon_mekanik` | `mekanik_istasyon` |
+| `yazilim_sistem` | `elektronik_sistemler` + `sinyalizasyon_haberlesme` |
+| `guvenlik_emniyet` | üçe bölündü: `sinyalizasyon_haberlesme` (ekipman teknik arızası) / `istasyon_guvenlik` (önlem) / `guvenlik_asayis_olay` (olay) |
+| `asayis_suc` | `guvenlik_asayis_olay` |
+| `yolcu_operasyon` | `yolcu_hizmetleri` |
+| `temizlik_cevre` | `temizlik` |
+| `altyapi_insaat` | ikiye bölündü: `altyapi_insaat` (bina/tünel/su) + `yol_yapisal` (ray hattı) |
+
+**Kaldırılan kategori — `personel_bilgi`.** Taslakta vardı; verideki 183 kaydın
+tamamı gerçek İK konusuydu (yaka kartı, bordro, izin formu) ve hiçbiri arıza
+bildirimi değildi. Bu bir arıza sistemi; personel özlük işlemleri başka bir
+sistemin konusu. Kayıtlar silindi — relabel denemek anlamsızdı, başka hiçbir
+kategoriye uymuyorlardı.
+
+### Hariç metinlerinin sadeleştirilmesi
+
+Taslakta her kategorinin hariç listesinde neredeyse aynı metin vardı:
+*"elektrik, sinyalizasyon, haberleşme, yol, yapısal, vagon içi, yolcu
+bilgilendirme, temizlik/güvenlik, personel/yönetim bunlar girmez."*
+
+Bunlar kaldırıldı. Gerekçe: LLM'e hiçbir bilgi vermiyorlar (bir kategorinin
+diğerlerini kapsamadığı zaten örtük) ama prompt'u şişiriyorlar — 11
+kategorinin her birine aynı liste eklenince asıl kapsam metinleri gürültüye
+gömülüyor. Yerine sadece **gerçekten karışan sınırlar** yazıldı. Prompt ~%40
+kısaldı, kategori F1 düşmedi.
+
+**Bir hata kaydı (dürüstlük için):** ilk incelemede "6 kategorinin hariç
+listesinde kendi adı geçiyor" dedim. Kullanıcı sorunca tek tek kontrol ettim —
+**sadece 1'i doğruydu** (`personel_bilgi`). Hariç listeleri birbirine çok
+benzediği için kalıbı görüp genellemiş, doğrulamamıştım. Ders: dosya
+içeriğine dair iddia yapmadan önce her maddeyi ayrı ayrı doğrula.
+
+### Üç boyut ve akış
+
+```
+KULLANICI METNİ → INTENT → CATEGORY → ENTITIES → PRIORITY → ROUTING
+```
+
+| boyut | sınıf | nasıl |
+| --- | --- | --- |
+| Intent | 5 | model başlığı |
+| Kategori | 11 | model başlığı |
+| Öncelik | 4 | **kural katmanı + model başlığı** |
+| Entities | — | kurallı çıkarım (`extract.py`) |
+| Routing | — | kategoriden eşleme |
+
+Üç sınıflandırma başlığı **tek BERTurk gövdesi** üzerinde eğitiliyor
+(`src/model.py`). Gerekçe: bir bildirimin kategorisini belirleyen kelimeler
+genellikle niyetini ve önceliğini de belirler; üç ayrı model bu ortak sinyali
+üç kez sıfırdan öğrenirdi ve serviste 3 × 440 MB taban model tutulurdu.
+Eğitilebilir parametre 605K (%0.54), adaptör **2.3 MB**.
+
+### Veriyi yeniden üretmek yerine YENİDEN ETİKETLEMEK
+
+Taksonomi değişince 1800 cümlenin etiketleri geçersiz kaldı. İki seçenek vardı:
+
+| yol | maliyet | kayıp |
+| --- | --- | --- |
+| Sıfırdan üretim | ~75 LLM çağrısı | Birikmiş dil çeşitliliği (stil varyantları, yazım hataları, gerçek istasyon adları) |
+| **Yeniden etiketleme** | ~45 çağrı | Yok — cümleler aynı kalır |
+
+İkincisi seçildi (`src/relabel.py`). Cümleler korunur, LLM sadece üç boyutun
+etiketini yeniden belirler. Eksik kalan kategoriler ve intent'ler için
+`src/generate_missing.py` ile hedefli üretim yapıldı.
+
+**Bir kalite ölçümü buradan çıktı:** üretimde hedeflenen kategori ile bağımsız
+etiketlemenin uyumu **%88.9** (intent %93.1). Uyuşmayan 72 kayıt okundu ve
+**bağımsız etiketleyici haklıydı** — örneğin *"rayların üzerine bir yolcunun
+atladığı"* cümlesi `yol_yapisal` hedefiyle üretilmişti ama gerçekte
+`guvenlik_asayis_olay`. Üretim hedefi cümleyi zorlarken LLM konudan sapmış.
+Bağımsız etiket esas alındı.
+
+### Öncelik — üç adımlı müdahale
+
+İlk eğitimde öncelik başlığı **macro-F1 0.60** verdi, P2 sınıfı **0.38**.
+Üç adım uygulandı:
+
+**(c) Önce etiket tutarlılığı ölçüldü** (`src/oncelik_tutarlilik.py`). Aynı
+cümleler ikinci kez etiketlendi:
+
+| sınıf | iki tur uyumu |
+| --- | --- |
+| P4 Düşük | **%100** |
+| P1 Kritik | %75 |
+| P3 Orta | %57 |
+| **P2 Yüksek** | **%38** |
+
+Ham uyum **%69.8**, Cohen's kappa **0.584**. Yani model %62 ile zaten
+**tavana yakındı** — sorun modelde değil, etiket tanımının belirsizliğindeydi.
+Bu ölçüm yapılmasaydı model mimarisiyle uğraşıp boşa emek harcanacaktı.
+
+**(a) Sonra P2/P3 sınırı yeniden tanımlandı.** Eski ölçüt sayıya dayanıyordu
+("birden fazla merdiven" P2) ve bu bilgi cümlelerde çoğu zaman **hiç
+geçmiyordu**. Yeni ölçüt operasyonel etki:
+
+- P1: can güvenliği tehdidi var mı?
+- P2: sefer veya yolcu akışı aksıyor mu?
+- P3: arıza var ama yolculuk normal mi?
+- P4: işleyişi hiç etkilemiyor mu?
+
+**(b) Son olarak P1 için kural katmanı eklendi** (`config.PRIORITY_RULES`).
+P1'i kaçırmanın bedeli asimetriktir: yangın bildirimini P3 sanmak kabul
+edilemez, tersi sadece gereksiz aciliyet yaratır. 11 dar desen (yangın, yoğun
+duman, elektrik çarpması, raylara kişi, intihar, şüpheli paket, aktif saldırı,
+sağlık acili, yapısal çökme, su baskını, acil çıkış engeli) modelin tahminini
+**ezer** ve koşulsuz P1 verir. `/predict` yanıtındaki `priority_rule` alanı
+doluysa öncelik modelden değil kuraldan gelmiştir.
+
+### evidence — gradient × input
+
+Modelin kararına hangi kelimelerin katkıda bulunduğunu gösterir
+(`src/evidence.py`). Üç yöntem karşılaştırıldı:
+
+| yöntem | ek maliyet | ne gösterir |
+| --- | --- | --- |
+| Sözlük eşleşmesi | ~0 ms | Hangi anahtar kelimeler var — modelin kararı **değil** |
+| Integrated Gradients | ~280 ms (20 ileri geçiş) | Gerçek model sinyali |
+| **Gradient × input** ✅ | **~15 ms** (1 geri yayılım) | Gerçek model sinyali |
+
+Değerini gösteren somut örnek: *"tavandan su damlıyor kova koydular"*
+cümlesinde sözlük yöntemi "su" kelimesini bulup doğru karar verildiğini
+sanırdı; gradient yöntemi modelin aslında **"koydular"** kelimesine
+takıldığını gösterdi — yani model o cümlede anlamlı sinyal bulamamış.
+
+**Sınırı (rapora yazılmalı):** gradient tabanlı açıklamalar yerel doğrusal bir
+yaklaşıklıktır. "Model bu token'a duyarlı" der, "model bu yüzden karar verdi"
+demez.
+
+### Yeni yapısal alanlar
+
+`extract.py` genişletildi:
+
+- **`location`** — istasyon İÇİNDEKİ konum ("2 numaralı giriş", "turnike
+  bölgesi"). Ayrı bir alan çünkü bir istasyonda aynı ekipmandan birden fazla
+  var; iş emrine "Kadıköy'de merdiven bozuk" yazmak yetmez.
+  Konum ifadesi ekipman aramasından **maskeleniyor**: *"turnikelerin oradaki
+  merdiven"* cümlesinde ekipman merdivendir, turnike konum belirtir.
+- **`root_cause`** — sadece bildirimde AÇIKÇA belirtilmişse dolar.
+  *"Elektrik kesildiği için merdiven çalışmıyor"* → dolu.
+  *"Merdiven bozuk, **galiba** motoru yanmış"* → `null`. "galiba/sanırım/
+  herhalde" gibi ifadeler kullanıcının emin olmadığını gösterir; sistem bunu
+  teknik teşhis olarak kaydetmez. **Halüsinasyon engelleyici kural budur.**
+- **`missing_information`** — iş emri için gereken ama bulunamayan alanlar.
+  Hangi alanın gerekli olduğu kategoriye göre değişir (tren arızasında istasyon
+  zorunlu değil, hat önemli; istasyon ekipmanında konum şart).
+
+### duplicate_report
+
+`db.olasi_tekrar()`: aynı kategori + aynı istasyon + aynı ekipman + son
+**15 dakika** → `possible_duplicate: true`. İstasyon veya ekipman bilinmiyorsa
+karar **verilmez** — eksik bilgiyle birleştirme yanlış iş emri kapatmaya yol
+açar. Log tablosuna `istasyon`, `ekipman`, `intent`, `oncelik` sütunları
+eklendi.
+
+### Sonuçlar (test seti, 232 kayıt)
+
+| görev | accuracy | macro F1 | hedef |
+| --- | --- | --- | --- |
+| **Kategori** (11 sınıf) | **0.8966** | **0.8765** | 0.85 / 0.82 ✅ |
+| **Intent** (5 sınıf) | **0.9267** | **0.8462** | — |
+| **Öncelik** (4 sınıf) | 0.6207 | 0.6053 | etiket tavanı ~0.70 |
+
+Sınıf bazında en güçlüler: Araç ve Tren 0.958, Elektrik 0.955, Yolcu
+Hizmetleri 0.955, Güvenlik ve Asayiş 0.947.
+
+**En düşük sınıf F1 = 0.6154 (İstasyon Güvenliği) — başarı kriterinin
+altında.** Sebep veri azlığı: bu kategoride sadece 95 kayıt var (diğerleri
+172–269) çünkü `istasyon_guvenlik_temizlik` bölündüğünde payına düşen az oldu.
+Precision 1.00 ama recall 0.44 — model bu kategoriyi tahmin etmekten
+çekiniyor. Çözüm hedefli veri üretimi; kota yenilendiğinde yapılacak.
+
+### Bu turda öğrenilen: LLM kota yönetimi bir kısıt olarak tasarıma girmeli
+
+Bir günde OpenRouter (50 istek) ve dört ayrı Gemini modeli (20 istek/gün/model)
+tüketildi. 2268 kaydın tamamını yeniden etiketlemek ~57 çağrı gerektiriyordu ve
+tek sağlayıcıyla mümkün olmadı. Uygulanan strateji:
+
+1. **Zorunlu olanı ayır.** Sadece geçersiz kategorili 327 kayıt relabel edildi
+   (9 çağrı), diğerlerinin kategorisi zaten geçerliydi.
+2. **Modeller arasında geç.** Gemini kotası model başına ayrı; 3.6 → 3.5 →
+   3-flash-preview → flash-latest → 3.1-flash-lite sırasıyla kullanıldı.
+3. **Devam edilebilirlik şart.** `relabel.py` çıktı dosyasını her partide
+   yazıyor ve yeniden çalıştırıldığında kaldığı yerden devam ediyor.
+
 
 ## Genel İlkeler (her adımda geçerli)
 

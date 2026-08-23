@@ -49,112 +49,365 @@ for _d in (SEED_DIR, RAW_DIR, PROCESSED_DIR, MODEL_DIR):
 # belirtir. Arizanin nesnesi degil, sorumlusu belirleyicidir.
 # ---------------------------------------------------------------------------
 
+# HARIC METINLERI HAKKINDA: burada "diger tum kategoriler girmez" gibi genel
+# ifadeler BILEREK yok. Onlar LLM'e hicbir bilgi vermiyor (zaten ortuk) ama
+# prompt'u sisiriyor -- 11 kategorinin her birine 10 satirlik ayni liste
+# eklenince kapsam metinleri gurultuye gomuluyor. Bunun yerine sadece
+# GERCEKTEN KARISAN sinirlar yaziliyor: hangi kavram nereye gider ve neden.
+# Olcum: sadelestirilmis metinlerle prompt ~%40 kisaldi ve kategori F1 dusmedi.
+
 CATEGORIES = {
-    "arac_tren": {
-        "display": "Araç / Tren",
-        "color": "#2563eb",
-        "scope": (
-            "Trenin üzerindeki her şey: vagon kapısı, fren sistemi, klima, "
-            "çer/motor, kabin ekipmanı, tekerlek, koltuk, vagon içi aydınlatma, "
-            "vagon içi anons cihazı, makinist kabini"
-        ),
-        "exclude": (
-            "Perondaki peron kapısı (PSD) 'istasyon_mekanik' kategorisine girer. "
-            "Trenin gecikmesi 'yolcu_operasyon' kategorisine girer."
-        ),
-    },
-    "istasyon_mekanik": {
-        "display": "İstasyon Mekanik",
+    "mekanik_istasyon": {
+        "display": "Mekanik ve İstasyon",
         "color": "#0891b2",
         "scope": (
-            "İstasyondaki hareketli/mekanik ekipman: yürüyen merdiven, asansör, "
-            "peron kapısı (PSD), turnikenin FİZİKSEL arızası (kol dönmüyor, "
-            "kapak takılı, gövde hasarlı), otomatik giriş kapıları, bariyerler"
+            "İstasyondaki hareketli MEKANİK ekipman: yürüyen merdiven, "
+            "yürüyen yol, asansör (kabin, kapı, çağrı düğmesi, mahsur kalma), "
+            "turnikenin fiziksel/mekanik arızası (kol dönmüyor, kapak takılı, "
+            "gövde hasarlı), istasyon kayar kapıları, otomatik giriş kapıları, "
+            "bariyerler"
         ),
         "exclude": (
-            "Turnikenin kart okumaması 'yazilim_sistem' kategorisine girer. "
-            "Ekipmanın elektriksiz kalması 'elektrik_enerji' kategorisine girer."
+            "Turnikede sorun MEKANİK mi (kol, kapak, gövde) yoksa ELEKTRONİK mi "
+            "(kart okumama, ekran, okuyucu)? Elektronikse 'elektronik_sistemler'. "
+            "Ekipmanın elektriksiz kalması veya sigorta atması 'elektrik_enerji'. "
+            "Peron ayırıcı kapı (PAKS/PSD) 'sinyalizasyon_haberlesme' -- tren "
+            "hareketiyle senkron çalıştığı için."
         ),
     },
     "elektrik_enerji": {
-        "display": "Elektrik / Enerji",
+        "display": "Elektrik ve Enerji",
         "color": "#f59e0b",
         "scope": (
-            "Enerji besleme ve aydınlatma: istasyon aydınlatması, elektrik "
-            "kesintisi, jeneratör, UPS, elektrik panosu, katener hattı, üçüncü "
-            "ray, trafo, kablo arızası, sigorta atması"
+            "Enerji besleme ve aydınlatma: elektrik kesintisi, elektrik "
+            "çarpması ve çarpma riski, aydınlatma armatürlerinin yanmaması, "
+            "katener teli, üçüncü ray, trafo ısınması ve arızası, jeneratör, "
+            "UPS, elektrik panosu, elektrik kablosu, sigorta atması, kıvılcım "
+            "ve elektrik kaynaklı yanık kokusu"
         ),
         "exclude": (
-            "Cihazın enerjisi varken yazılımsal hata vermesi 'yazilim_sistem' "
-            "kategorisine girer."
+            "Cihazın enerjisi yerindeyken yazılımsal hata vermesi "
+            "'elektronik_sistemler'. Sinyal sisteminin kendi arızası, ray "
+            "teması ve ray voltajı sorunları 'sinyalizasyon_haberlesme'."
         ),
     },
-    "yazilim_sistem": {
-        "display": "Yazılım / Sistem / Bilet",
+    "arac_tren": {
+        "display": "Araç ve Tren",
+        "color": "#2563eb",
+        "scope": (
+            "SADECE trenin/vagonun üzerindeki ekipman -- bildirimde tren, "
+            "vagon, sefer veya makinist açıkça geçmelidir: tren kapısı arızası, "
+            "araç içi iklimlendirme (HVAC, vagon çok sıcak veya soğuk), araç "
+            "içi ekran ve anons cihazı, fren ve cer sistemi, vagon camı ve "
+            "koltuğunun hasarı, tren içindeki yangın, duman ve koku"
+        ),
+        "exclude": (
+            "İSTASYONDA bulunan hiçbir ekipman buraya girmez -- peron kapısı, "
+            "yürüyen merdiven, asansör, turnike, istasyon aydınlatması kendi "
+            "kategorilerine gider. Trenin gecikmesi, arıza belirtilmeden "
+            "bildirilmişse 'yolcu_hizmetleri'; sinyal kaynaklı olduğu "
+            "belirtilmişse 'sinyalizasyon_haberlesme'."
+        ),
+    },
+    "sinyalizasyon_haberlesme": {
+        "display": "Sinyalizasyon ve Haberleşme",
+        "color": "#6366f1",
+        "scope": (
+            "Sinyal, tren kontrolü ve haberleşme DONANIMI: sinyalizasyon "
+            "arızası, sinyal kaynaklı tren hareketi aksaklığı ve sefer "
+            "gecikmesi, ray üzerindeki sinyalizasyon ekipmanı, ray teması ve "
+            "ray voltajı sorunları, peron ayırıcı kapı (PAKS/PSD) arızası, "
+            "telsiz ve anons sisteminin teknik arızası, acil durum anons "
+            "ekipmanının fiziksel durumu, kamera (CCTV) sisteminin teknik ve "
+            "fiziksel durumu, yangın ve duman algılama sensörlerinin teknik "
+            "arızası, çevresel sensörler (hava kalitesi, nem, sıcaklık)"
+        ),
+        "exclude": (
+            "Anonsun İÇERİĞİ -- yanlış bilgi, ses seviyesi, anonsların "
+            "karışması, anons yapılmaması -- 'yolcu_hizmetleri'. Ayrım net: "
+            "cihaz BOZUKSA burası, cihaz çalışıyor ama SÖYLEDİĞİ ŞEY "
+            "yanlış/eksikse yolcu_hizmetleri. Kameranın önünün afiş veya "
+            "eşyayla kapatılması (ekipman sağlam, görüş engelli) "
+            "'istasyon_guvenlik'."
+        ),
+    },
+    "elektronik_sistemler": {
+        "display": "Elektronik Sistemler",
         "color": "#7c3aed",
         "scope": (
-            "Yazılım, ağ ve biletleme: bilet satış otomatı, İstanbulkart "
-            "okuyucu YAZILIMI, yolcu bilgilendirme ekranları (PID), sunucu, "
-            "ağ/internet kesintisi, uygulama donması, hata mesajı, veritabanı, "
-            "SCADA arayüzü"
+            "Biletleme ve ödeme elektroniği: biletmatik, İstanbulkart yükleme "
+            "ve dolum cihazı, kart okuyucu, QR okuma hatası, para sıkışması "
+            "veya iade edilmemesi, turnikenin kart okuyucusu, turnikenin "
+            "ekranı ve elektroniği, geçiş kaydının alınmaması"
         ),
         "exclude": (
-            "Ekranın fiziksel kırılması 'istasyon_mekanik', ekranın sönmesi/"
-            "enerjisiz kalması 'elektrik_enerji' kategorisine girer."
+            "Turnikenin kolu dönmüyorsa, kapağı takılıysa veya gövdesi "
+            "hasarlıysa bu mekanik arızadır: 'mekanik_istasyon'. Cihazın "
+            "tamamen elektriksiz kalması 'elektrik_enerji'."
         ),
     },
-    "guvenlik_emniyet": {
-        "display": "Güvenlik / Emniyet",
-        "color": "#dc2626",
+    "yol_yapisal": {
+        "display": "Yol ve Hat",
+        "color": "#a16207",
         "scope": (
-            "Güvenlik ve can emniyeti: CCTV/kamera sistemi, yangın algılama ve "
-            "söndürme, acil durum butonu, acil çıkış, yetkisiz giriş, turnikeden "
-            "atlama, şüpheli paket, güvenlik ihlali, anons ile tahliye"
+            "SADECE ray hattının kendisi: ray kırılması, ray deformasyonu, "
+            "makas problemleri, travers hasarı, balast sorunu, hat üzerinde "
+            "yabancı cisim veya engel, ray bağlantı elemanları, ray ve hat "
+            "drenajı"
         ),
         "exclude": (
-            "Kameranın elektriğinin gitmesi 'elektrik_enerji' kategorisine girer."
+            "Tünelin yapısal hasarı, istasyon drenajı, su sızıntısı ve istasyon "
+            "binasına ait her yapı elemanı 'altyapi_insaat' -- burası sadece "
+            "rayın ve hattın kendisiyle ilgilidir. Ray üzerindeki sinyal "
+            "ekipmanı ve ray voltajı 'sinyalizasyon_haberlesme'."
+        ),
+    },
+    "istasyon_guvenlik": {
+        "display": "İstasyon Güvenliği",
+        "color": "#ea580c",
+        "scope": (
+            "İstasyonun güvenlik OPERASYONU ve önlem durumu: güvenlik "
+            "personelinin bulunmaması veya devriye gezmemesi, güvenlik "
+            "personelinin telsiz ve iletişim cihazının fiziksel/operasyonel "
+            "sorunları, güvenlik kamerasının görüş açısının engellenmesi, "
+            "yangın söndürme ekipmanına erişimin engellenmesi, yangın ve duman "
+            "algılama (olayın kendisi), istasyonda çıkan yangın veya yanık "
+            "kokusu, seyyar satıcı ve dilenciye müdahale"
+        ),
+        "exclude": (
+            "Kamera, sensör ve anons cihazının TEKNİK arızası "
+            "'sinyalizasyon_haberlesme' -- burada ekipman değil güvenlik "
+            "HİZMETİ söz konusudur. Saldırı, kavga, taciz, hırsızlık, kayıp "
+            "eşya, hasta yolcu gibi gerçekleşmiş olaylar "
+            "'guvenlik_asayis_olay'. Temizlik ve hijyen 'temizlik'."
+        ),
+    },
+    "temizlik": {
+        "display": "Temizlik",
+        "color": "#65a30d",
+        "scope": (
+            "Temizlik ve hijyen: temizlik yapılmaması, çöp birikmesi, çöp "
+            "kovasının taşması, tuvalet temizliği ve malzeme eksikliği, "
+            "dökülen sıvı ve yiyecek lekesi, kirli zemin, kusmuk ve idrar, "
+            "sakız, kötü koku, haşere ve kemirgen, grafiti temizliği, temizlik "
+            "ekipmanı ve personeli ile ilgili operasyonel durumlar"
+        ),
+        "exclude": (
+            "Su sızıntısı, tavandan damlama ve yapısal kaynaklı ıslaklık "
+            "'altyapi_insaat' -- kirlilik SONUÇSA değil KAYNAK yapısalsa oraya "
+            "gider. Yangın, duman ve yanık kokusu 'istasyon_guvenlik'. "
+            "Güvenlik personeli ve ekipmanı 'istasyon_guvenlik'."
+        ),
+    },
+    "yolcu_hizmetleri": {
+        "display": "Yolcu Hizmetleri",
+        "color": "#059669",
+        "scope": (
+            "Yolcuya verilen BİLGİNİN kendisi ve sefer hizmeti: peron bilgi "
+            "ekranlarındaki yanlış veya eksik bilgi, anons içeriğinin yanlış "
+            "olması, anons yapılmaması, ses seviyesinin yetersizliği, "
+            "anonsların karışması, acil durum duyurularının içeriği, hat "
+            "durumu ve sefer bilgisinin verilmemesi, sefer gecikmesi ve "
+            "iptali, yönlendirme tabelalarının eksik veya yanıltıcı olması, "
+            "peron yoğunluğu, personelin yolcuya karşı ilgisizliği"
+        ),
+        "exclude": (
+            "Anons ve ekran sisteminin TEKNİK arızası "
+            "'sinyalizasyon_haberlesme'. Ayrım: sistem bozuksa oraya, sistem "
+            "çalışıyor ama verdiği bilgi yanlış veya eksikse buraya."
+        ),
+    },
+    "guvenlik_asayis_olay": {
+        "display": "Güvenlik ve Asayiş Olayı",
+        "color": "#dc2626",
+        "scope": (
+            "GERÇEKLEŞMİŞ asayiş ve acil sağlık olayları: saldırı, kavga, "
+            "darp, fiziksel müdahale, taciz, hırsızlık ve yankesicilik, kayıp "
+            "eşya, şüpheli şahıs, şüpheli paket, hasta yolcu, bayılma, acil "
+            "sağlık durumu, kendine zarar verme riski ve intihar girişimi, "
+            "toplu olay ve izdiham"
+        ),
+        "exclude": (
+            "Güvenlik personelinin bulunmaması, devriye gezmemesi gibi ÖNLEM "
+            "eksiklikleri 'istasyon_guvenlik' -- burası bir OLAYIN "
+            "gerçekleştiği bildirimler içindir. Kamera ve güvenlik ekipmanının "
+            "teknik arızası 'sinyalizasyon_haberlesme'."
         ),
     },
     "altyapi_insaat": {
-        "display": "Altyapı / İnşaat",
+        "display": "Altyapı ve İnşaat",
         "color": "#78716c",
         "scope": (
-            "Sabit yapı ve inşaat: su sızıntısı, tavan/duvar/zemin hasarı, "
-            "çatlak, tünel yapısı, drenaj, kanalizasyon, ray hattının yapısal "
-            "durumu, merdiven basamağı kırılması, korkuluk, fayans"
+            "İstasyon BİNASININ ve tünelin yapısı, ve binaya giren su: tünelin "
+            "yapısal hasarı, su sızıntısı, tavandan damlama, nemlenme ve "
+            "rutubet, yağmur suyunun içeri girmesi, su baskını, istasyon "
+            "drenajı, gider ve mazgal tıkanıklığı, kanalizasyon taşması, peron "
+            "tavan/duvar/zemin hasarı, çatlak, kolon, kiriş, tesisat, "
+            "korkuluk, fayans dökülmesi, zeminde çukur ve çökme, devam eden "
+            "inşaat faaliyetleri, iş güvenliği riskleri"
         ),
         "exclude": (
-            "Tren içi zemin hasarı 'arac_tren' kategorisine girer. "
-            "Sızıntı kaynaklı kirlilik değil, sızıntının kendisi buraya girer."
-        ),
-    },
-    "yolcu_operasyon": {
-        "display": "Yolcu / Operasyon",
-        "color": "#059669",
-        "scope": (
-            "Sefer ve yolcu yönetimi: sefer gecikmesi, sefer iptali, seferlerin "
-            "seyreltilmesi, anons yapılmaması/yanlış anons, peron yoğunluğu, "
-            "kayıp eşya, yolcu yönlendirme, personel eksikliği, tarife sorunu"
-        ),
-        "exclude": (
-            "Gecikmenin teknik sebebi ayrı bir bildirim olarak geldiyse o "
-            "bildirim kendi teknik kategorisine girer."
-        ),
-    },
-    "temizlik_cevre": {
-        "display": "Temizlik / Çevre",
-        "color": "#65a30d",
-        "scope": (
-            "Temizlik ve çevresel koşullar: kirlilik, çöp birikmesi, koku, "
-            "tuvalet temizliği, döküntü, buzlanma, kaygan zemin, haşere/"
-            "kemirgen, kış şartları (tuzlama), grafiti"
-        ),
-        "exclude": (
-            "Sızıntı kaynaklı ıslaklık 'altyapi_insaat' kategorisine girer "
-            "(kaynak sorunu temizlik değil)."
+            "Rayın, makasın, traversin, balastın kendisi ve ray/hat drenajı "
+            "'yol_yapisal' -- burası bina ve tünel yapısıdır, ray hattı değil. "
+            "Yapısal sorunun sonucu oluşan kirlilik ayrı bir bildirimse "
+            "'temizlik', ama bildirimde su/sızıntı/yapısal hasar geçiyorsa "
+            "kategori her zaman burasıdır."
         ),
     },
 }
+
+
+# ---------------------------------------------------------------------------
+# Intent (niyet) -- kategoriden BAGIMSIZ ikinci boyut
+#
+# Kategori "konu hangi teknik alana ait" sorusunu, intent ise "kullanici ne
+# yapmak istiyor" sorusunu cevaplar. Ayni kategori farkli intent'lerle
+# gelebilir: "asansor bozuk" (fault_report) ile "asansor ne zaman duzelecek"
+# (information_request) ikisi de mekanik_istasyon'dur.
+#
+# Akis: INTENT -> CATEGORY -> ENTITIES -> PRIORITY -> ROUTING
+# ---------------------------------------------------------------------------
+
+INTENTS = {
+    "fault_report": {
+        "display": "Arıza Bildirimi",
+        "scope": (
+            "Teknik bir arızanın veya bozukluğun bildirilmesi -- bir ekipmanın "
+            "çalışmaması, hasar görmesi veya beklenenden farklı davranması"
+        ),
+    },
+    "incident_report": {
+        "display": "Olay Bildirimi",
+        "scope": (
+            "Gerçekleşmekte olan veya gerçekleşmiş bir olayın bildirilmesi -- "
+            "asayiş olayı, acil sağlık durumu, yangın, güvenlik tehdidi. "
+            "Arızadan farkı: ekipman değil bir DURUM söz konusudur ve "
+            "genellikle acil müdahale gerektirir"
+        ),
+    },
+    "information_request": {
+        "display": "Bilgi Talebi",
+        "scope": (
+            "Bir soru sorulması -- durumun ne zaman düzeleceği, seferin ne "
+            "zaman geleceği, bir hattın çalışıp çalışmadığı. Cümle soru "
+            "biçimindedir veya bilgi istemektedir"
+        ),
+    },
+    "complaint": {
+        "display": "Şikayet",
+        "scope": (
+            "Hizmet kalitesinden duyulan memnuniyetsizlik -- personelin "
+            "ilgisizliği, beklemenin uzunluğu, kalabalık, genel rahatsızlık. "
+            "Somut bir arıza bildirilmez, hizmetten şikayet edilir"
+        ),
+    },
+    "suggestion": {
+        "display": "Öneri",
+        "scope": (
+            "İyileştirme önerisi -- yeni bir düzenleme, ek ekipman veya "
+            "işleyiş değişikliği talebi. Mevcut bir sorun değil, gelecekteki "
+            "bir iyileştirme önerilir"
+        ),
+    },
+}
+
+
+# ---------------------------------------------------------------------------
+# Oncelik (priority) -- kategoriden ve intent'ten BAGIMSIZ ucuncu boyut
+#
+# ILK SURUMDE P2/P3 SINIRI SAYIYA DAYANIYORDU ("birden fazla merdiven" P2,
+# "tek merdiven" P3) ve model bunu ogrenemedi: P2 sinif F1 = 0.38, hatalarin
+# cogu P2<->P3 arasindaydi. Sebep, ayrimin metinde cogu zaman HIC GECMEMESI --
+# "merdiven bozuk" cumlesinde kac merdiven oldugu yazmiyor.
+#
+# YENI OLCUT: "sefer veya yolcu akisi aksiyor mu?" Bu bilgi bildirimlerde
+# genellikle aciktir ("sefer aksiyor", "yolcular gecemiyor", "peron doldu").
+# Sayi hala bir sinyal ama TEK belirleyici degil.
+#
+# Ayrica P1 buyuk olcude KURAL ile belirlenebilir (yangin, elektrik carpmasi,
+# intihar...) -- bkz. PRIORITY_RULES asagida. Model sadece kuralin karar
+# veremedigi bildirimleri siniflandirir.
+# ---------------------------------------------------------------------------
+
+PRIORITIES = {
+    "P1": {
+        "display": "Kritik",
+        "color": "#dc2626",
+        "scope": (
+            "CAN GÜVENLİĞİ tehdidi veya hattın tamamen durması: yangın, yoğun "
+            "duman, elektrik çarpması riski, açıkta kalmış enerjili kablo, "
+            "raylara kişi düşmesi veya atlaması, hat üzerinde tren güvenliğini "
+            "tehdit eden nesne, tren kapısının açık seyretmesi, peronda düşme "
+            "riski, su baskını, acil çıkış ve tahliye kapılarının "
+            "çalışmaması, aktif saldırı, şüpheli paket, hayati sağlık acil "
+            "durumu, kendine zarar verme riski, yapısal çökme veya çökme riski"
+        ),
+    },
+    "P2": {
+        "display": "Yüksek",
+        "color": "#ea580c",
+        "scope": (
+            "SEFER VEYA YOLCU AKIŞI AKSIYOR, ama can güvenliği tehdidi yok: "
+            "seferlerin gecikmesi, durması veya seyreltilmesi, sinyalizasyon "
+            "arızası nedeniyle operasyonun aksaması, PAKS arızası, yolcuların "
+            "geçiş yapamaması, birden fazla ekipmanın (merdivenler, "
+            "asansörler, turnikeler) aynı anda devre dışı kalması, birden "
+            "fazla istasyonu etkileyen arıza, istasyonda ciddi su sızıntısı. "
+            "AYIRT EDİCİ SORU: bu bildirim yüzünden yolcu akışı veya sefer "
+            "düzeni bozuluyor mu? Evet ise P2."
+        ),
+    },
+    "P3": {
+        "display": "Orta",
+        "color": "#ca8a04",
+        "scope": (
+            "TEKİL ekipman arızası, sefer ve yolcu akışı normal devam ediyor: "
+            "tek bir yürüyen merdivenin arızalanması, bir asansörün bozuk "
+            "olması, birkaç aydınlatma lambasının yanmaması, klimanın "
+            "çalışmaması, tek bir turnike arızası, tek bir biletmatik "
+            "arızası, bir kameranın görüntü vermemesi. AYIRT EDİCİ SORU: "
+            "arıza var ama yolcular normal şekilde yolculuk edebiliyor mu? "
+            "Evet ise P3."
+        ),
+    },
+    "P4": {
+        "display": "Düşük",
+        "color": "#65a30d",
+        "scope": (
+            "İşleyişi etkilemeyen bildirim: kirlilik ve temizlik talebi, "
+            "hasarlı veya eksik tabela, kozmetik hasar, bilgilendirme "
+            "eksikliği, küçük bakım talepleri, öneriler ve iyileştirme "
+            "istekleri, bilgi talepleri"
+        ),
+    },
+}
+
+
+# P1 KURAL KATMANI -- oncelik tahmininin onunde calisir.
+#
+# NEDEN KURAL: P1 bildirimleri kacirmanin bedeli asimetriktir. Bir yangin
+# bildirimini P3 sanmak kabul edilemez; tersi (P3'u P1 sanmak) sadece gereksiz
+# aciliyet yaratir. Model %61 dogrulukla calisirken bu riski tasiyamayiz.
+#
+# Bu desenler metinde gecerse oncelik KOSULSUZ P1 olur ve modelin tahmini
+# yok sayilir. Desenler normalize edilmis (kucuk harf + aksansiz) metinde
+# aranir. Dar ve kesin tutuldu: her biri tek basina can guvenligi tehdidi
+# anlamina gelen ifadeler. "Genis ve gurultulu kural yerine dar ve kesin
+# kural" ilkesi (bkz. YABANCI bayragi dersi).
+PRIORITY_RULES = [
+    (r"\byangin\b|\balev\b|\bates\b(?! kes)", "yangın"),
+    (r"yogun duman|duman doldu|duman cikiyor|duman var", "yoğun duman"),
+    (r"elektrik carp|akim carp|carpilma riski|carpilacak", "elektrik çarpması riski"),
+    (r"raya atla|raylara atla|raya dus|raylara dus|ray uzerinde kisi", "raylara kişi"),
+    (r"intihar|kendine zarar|kendini asag", "intihar riski"),
+    (r"supheli paket|supheli canta|supheli kutu", "şüpheli paket"),
+    (r"bicak cek|silah|saldiri var|saldirdi", "aktif saldırı"),
+    (r"bayil|kalp krizi|nefes alamiyor|bilinci kapali|hayati tehlike", "sağlık acili"),
+    (r"cokme riski|cokuyor|cokmus|tavan cok", "yapısal çökme"),
+    (r"su baskini|su basti|sel basti", "su baskını"),
+    (r"tahliye kapisi acilmiyor|acil cikis kilitli|acil cikis kapali",
+     "acil çıkış engeli"),
+]
 
 CATEGORY_KEYS = list(CATEGORIES.keys())
 NUM_LABELS = len(CATEGORY_KEYS)
@@ -163,6 +416,28 @@ LABEL2ID = {k: i for i, k in enumerate(CATEGORY_KEYS)}
 ID2LABEL = {i: k for k, i in LABEL2ID.items()}
 DISPLAY_NAME = {k: v["display"] for k, v in CATEGORIES.items()}
 CATEGORY_COLOR = {k: v["color"] for k, v in CATEGORIES.items()}
+
+# Intent ve oncelik, kategoriyle ayni desende turetilir. Model bu uc boyutu
+# TEK govde uzerinde ayri siniflandirma basliklariyla ogrenir (multi-task):
+# ortak BERTurk temsili, uc ayri cikti katmani. Ayri model egitmeye gore hem
+# hizli hem kucuk, ustelik boyutlar arasi ortak sinyal paylasiliyor.
+INTENT_KEYS = list(INTENTS.keys())
+NUM_INTENTS = len(INTENT_KEYS)
+INTENT2ID = {k: i for i, k in enumerate(INTENT_KEYS)}
+ID2INTENT = {i: k for k, i in INTENT2ID.items()}
+INTENT_DISPLAY = {k: v["display"] for k, v in INTENTS.items()}
+
+PRIORITY_KEYS = list(PRIORITIES.keys())
+NUM_PRIORITIES = len(PRIORITY_KEYS)
+PRIORITY2ID = {k: i for i, k in enumerate(PRIORITY_KEYS)}
+ID2PRIORITY = {i: k for k, i in PRIORITY2ID.items()}
+PRIORITY_DISPLAY = {k: v["display"] for k, v in PRIORITIES.items()}
+PRIORITY_COLOR = {k: v["color"] for k, v in PRIORITIES.items()}
+
+# Kategori -> yonlendirilecek birim. Simdilik kategori anahtarinin buyuk harfli
+# hali; kurumun gercek birim kodlari netlestiginde burasi degisir, cagiran
+# kodun hicbiri degismez.
+ROUTING_UNIT = {k: k.upper() for k in CATEGORY_KEYS}
 
 
 # ---------------------------------------------------------------------------
@@ -267,7 +542,14 @@ SLOT_VALUES = {
 # (seed %17, gold %9 isaretli -- Gemini/Groq'tan daha iyi, ustelik ucretsiz).
 SEED_PROVIDER = "openrouter"
 
-GEMINI_MODEL = "gemini-2.5-flash"        # AI Studio'da guncel id'yi teyit et
+# NOT: gemini-2.5-flash 2026 itibariyle YENI kullanicilara kapatildi; API
+# "no longer available to new users" hatasi doner. Bu hata yanlislikla
+# "gecersiz API anahtari" gibi gorunebiliyor (SDK 400 INVALID_ARGUMENT
+# donduruyor, dogrudan REST cagrisi ise net 404 mesaji veriyor) -- anahtari
+# suclamadan once model listesini canli sorgula (Genel Ilke 4).
+# gemini-3.7-flash uretim yukunde surekli 503 ("high demand") donduruyordu;
+# 3.6 ayni istekleri sorunsuz karsiliyor.
+GEMINI_MODEL = "gemini-3.1-flash-lite"        # AI Studio'da guncel id'yi teyit et
 CLAUDE_MODEL = "claude-haiku-4-5-20251001"
 
 # Groq: kredi karti gerektirmez, OpenAI-uyumlu API, genis ucretsiz kota
@@ -539,6 +821,51 @@ STATIONS = [
     "Çekmeköy", "Sancaktepe", "Osmanbey", "Beşiktaş", "Boğaziçi Üniversitesi",
 ]
 
+
+# Istasyon ICINDEKI konum desenleri: (regex, cikti_bicimi). Normalize edilmis
+# (kucuk harf, aksansiz) metinde aranir. Sirali denenir -- ustteki daha
+# spesifik desenler once eslesmeli.
+#
+# Neden ayri bir alan: bir istasyonda ayni ekipmandan birden fazla var. Is
+# emrine "Kadikoy'de merdiven bozuk" yazmak yetmez, hangi merdiven oldugu
+# gerekir. Metro Istanbul'un kendi kayit sisteminde de bu alan ayri tutuluyor.
+LOCATION_PATTERNS = [
+    (r"(\d+)\s*(?:numarali|nolu|no\.?)\s*(giris|cikis|peron|turnike|"
+     r"merdiven|asansor|kapi|vagon|pano)", "{0} numaralı {1}"),
+    (r"(\d+)\s*\.\s*(peron|kat|vagon|giris|cikis)", "{0}. {1}"),
+    (r"(kuzey|guney|dogu|bati)\s*(giris|cikis|peron|kapi)", "{0} {1}"),
+    # Genel kalip: "<ekipman>in yanindaki/oradaki <asil ekipman>". Ilk ekipman
+    # KONUM belirtiyor, asil ekipman sonra geliyor. Bu yakalanmazsa ekipman
+    # aramasi ilk (yanlis) ekipmani secer.
+    (r"(asansor|turnike|merdiven|gise|kapi|peron)\w*\s*"
+     r"(?:yanindaki|oradaki|civarindaki|onundeki|karsisindaki|arkasindaki)",
+     "{0} yanı"),
+    # "turnikelerin oradaki/yanindaki" gibi cogul+ilgec kaliplari da konum
+    # belirtir; bunlar yakalanmazsa ekipman aramasi "turnike"yi ekipman sanar.
+    (r"turnikeler?(?:in|den)?\s*(?:oradaki|yanindaki|civarindaki|onundeki|"
+     r"orada|yaninda|civarinda|onunde|tarafindaki)", "turnike bölgesi"),
+    (r"turnike (?:bolgesi|kati|onu|civari|orasi|tarafi)", "turnike bölgesi"),
+    (r"bilet (?:holu|gisesi|satis)", "bilet holü"),
+    (r"gise (?:onu|civari|tarafi)", "gişe önü"),
+    (r"peron (?:kenari|ucu|sonu|basi)", "peron kenarı"),
+    (r"\bmezzanin\b|\bara kat\b", "mezzanin kat"),
+    (r"\bust kat\b", "üst kat"),
+    (r"\balt kat\b", "alt kat"),
+    (r"\btunel agzi\b|\btunel girisi\b", "tünel ağzı"),
+    (r"\bpersonel kapisi\b", "personel kapısı"),
+    (r"\basansor onu\b", "asansör önü"),
+    (r"\bkoridor\b", "koridor"),
+    (r"\bperon\b", "peron"),
+]
+
+# LOCATION_PATTERNS gruplari normalize edilmis (aksansiz) metinden geldigi
+# icin ciktida dogru Turkce yazimi geri getiren esleme.
+LOCATION_KELIME_DUZELT = {
+    "giris": "giriş", "cikis": "çıkış", "kapi": "kapı", "asansor": "asansör",
+    "merdiven": "merdiven", "guney": "güney", "bati": "batı", "dogu": "doğu",
+}
+
+
 # Ekipman sozlugu. Uzun ifadeler once gelmeli (acgozlu eslesme): "peron kapısı"
 # "kapı"dan once denenmeli, yoksa yanlis kisa eslesme olur.
 EQUIPMENT = [
@@ -565,7 +892,7 @@ EQUIPMENT = [
     # altyapi
     "tavan paneli", "tavan", "tünel duvarı", "duvar",
     "zemin", "fayans",
-    "merdiven basamağı", "korkuluk", "drenaj", "kanalizasyon", "ray",
+    "merdiven basamağı", "merdiven", "korkuluk", "drenaj", "kanalizasyon", "ray",
     "dilatasyon", "kapı kolu",
     # yolcu / temizlik
     "anons sistemi", "anons", "yolcu yönlendirme", "tuvalet", "çöp konteyneri",

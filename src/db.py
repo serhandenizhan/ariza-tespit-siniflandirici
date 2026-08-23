@@ -43,10 +43,18 @@ CREATE TABLE IF NOT EXISTS bildirimler (
     kaynak TEXT NOT NULL,          -- 'gecmis' (mevcut havuz) | 'canli' (API istegi)
     dogrulandi INTEGER,            -- NULL=incelenmedi, 1=dogru, 0=yanlis
     dogru_kategori TEXT,           -- dogrulandi=0 ise kullanicinin duzelttigi kategori
+    -- Yapisal alanlar: duplicate tespiti icin gerekli (ayni istasyon + ayni
+    -- ekipman + kisa zaman araligi = muhtemelen ayni olay). Tahmin aninda
+    -- extract.py'den geliyor, bos olabilir.
+    istasyon TEXT,
+    ekipman TEXT,
+    intent TEXT,
+    oncelik TEXT,
     zaman TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_bildirim_kategori ON bildirimler(kategori);
 CREATE INDEX IF NOT EXISTS idx_bildirim_kaynak ON bildirimler(kaynak);
+CREATE INDEX IF NOT EXISTS idx_bildirim_dup ON bildirimler(istasyon, ekipman, zaman);
 """
 
 
@@ -84,14 +92,52 @@ def init() -> None:
         print(f"[db] gecmis havuz seed'lendi: {len(satirlar)} kayit")
 
 
-def logla(metin: str, kategori: str, guven: float, kaynak: str = "canli") -> int:
+def logla(metin: str, kategori: str, guven: float, kaynak: str = "canli",
+          istasyon: str | None = None, ekipman: str | None = None,
+          intent: str | None = None, oncelik: str | None = None) -> int:
     with _baglanti() as conn:
         cur = conn.execute(
-            "INSERT INTO bildirimler (metin, kategori, guven, kaynak, zaman) "
-            "VALUES (?, ?, ?, ?, ?)",
-            (metin, kategori, guven, kaynak, time.strftime("%Y-%m-%dT%H:%M:%S")),
+            "INSERT INTO bildirimler "
+            "(metin, kategori, guven, kaynak, istasyon, ekipman, intent, "
+            " oncelik, zaman) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (metin, kategori, guven, kaynak, istasyon, ekipman, intent,
+             oncelik, time.strftime("%Y-%m-%dT%H:%M:%S")),
         )
         return cur.lastrowid
+
+
+# Ayni olayin tekrar bildirilmis sayilmasi icin gereken zaman penceresi.
+# 15 dakika: bir arizanin fark edilip birden fazla yolcu/personel tarafindan
+# bildirilmesi icin makul bir sure. Daha uzun tutmak farkli olaylari
+# birlestirme riskini artirir (ayni merdiven sabah bozulup ogleden sonra
+# tekrar bozulabilir ve bu IKI ayri is emridir).
+DUPLICATE_PENCERE_DK = 15
+
+
+def olasi_tekrar(kategori: str, istasyon: str | None, ekipman: str | None,
+                 dakika: int = DUPLICATE_PENCERE_DK) -> dict | None:
+    """Ayni olayin daha once bildirilip bildirilmedigini kontrol eder.
+
+    Olcut: ayni kategori + ayni istasyon + ayni ekipman + son N dakika.
+    Istasyon veya ekipman bilinmiyorsa tekrar KARARI VERILMEZ (None doner) --
+    "Kadikoy'de bir sey bozuk" ile "Levent'te bir sey bozuk" ayni olay
+    sayilamaz, eksik bilgiyle birlestirme yanlis is emri kapatmaya yol acar.
+    """
+    if not istasyon or not ekipman:
+        return None
+    with _baglanti() as conn:
+        satir = conn.execute(
+            "SELECT id, metin, zaman, COUNT(*) OVER () AS toplam "
+            "FROM bildirimler "
+            "WHERE kaynak = 'canli' AND kategori = ? AND istasyon = ? "
+            "  AND ekipman = ? AND zaman >= datetime('now', ?) "
+            "ORDER BY zaman DESC LIMIT 1",
+            (kategori, istasyon, ekipman, f"-{dakika} minutes"),
+        ).fetchone()
+    if not satir:
+        return None
+    return {"ilk_kayit_id": satir["id"], "ilk_metin": satir["metin"],
+            "zaman": satir["zaman"], "sayi": satir["toplam"]}
 
 
 def son_kayit_tekrar_mi(metin: str, saniye: int = 30) -> bool:

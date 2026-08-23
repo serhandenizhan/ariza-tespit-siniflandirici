@@ -59,12 +59,26 @@ def cihaz_sec(tercih: str | None = None) -> torch.device:
 # Veri
 # ---------------------------------------------------------------------------
 
+# CSV sutun adi -> modelin bekledigi etiket adi. Sutun yoksa (eski tek
+# boyutlu veri) o gorev sessizce atlanir ve kaybina katilmaz; boylece eski
+# veriyle de calisabilir.
+ETIKET_SUTUNLARI = {
+    "label": "kategori",
+    "intent_label": "intent",
+    "oncelik_label": "oncelik",
+}
+
+
 class BildirimVeriseti(Dataset):
-    """Tokenize edilmis arıza bildirimleri."""
+    """Tokenize edilmis ariza bildirimleri; uc gorevin etiketini birlikte tasir."""
 
     def __init__(self, satirlar: list[dict], tokenizer, max_length: int):
         self.metinler = [r["metin"] for r in satirlar]
-        self.etiketler = [int(r["label"]) for r in satirlar]
+        self.etiketler = {
+            ad: [int(r[sutun]) for r in satirlar]
+            for sutun, ad in ETIKET_SUTUNLARI.items()
+            if satirlar and sutun in satirlar[0]
+        }
         self.enc = tokenizer(
             self.metinler,
             truncation=True,
@@ -74,14 +88,16 @@ class BildirimVeriseti(Dataset):
         )
 
     def __len__(self) -> int:
-        return len(self.etiketler)
+        return len(self.metinler)
 
     def __getitem__(self, i: int) -> dict:
-        return {
+        parti = {
             "input_ids": self.enc["input_ids"][i],
             "attention_mask": self.enc["attention_mask"][i],
-            "labels": torch.tensor(self.etiketler[i], dtype=torch.long),
         }
+        for ad, degerler in self.etiketler.items():
+            parti[ad] = torch.tensor(degerler[i], dtype=torch.long)
+        return parti
 
 
 def csv_oku(path) -> list[dict]:
@@ -122,30 +138,15 @@ def ascii_cogalt(satirlar: list[dict]) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def model_kur(use_lora: bool):
-    model = AutoModelForSequenceClassification.from_pretrained(
-        C.BASE_MODEL,
-        num_labels=C.NUM_LABELS,
-        id2label=C.ID2LABEL,
-        label2id=C.LABEL2ID,
-    )
+    """Cok basli modeli kurar ve (model, egitilebilir_parametre) doner.
 
-    if not use_lora:
-        return model, sum(p.numel() for p in model.parameters() if p.requires_grad)
+    Tek baslikli AutoModelForSequenceClassification yerine src/model.py'deki
+    CokBaslikliSiniflandirici kullaniliyor: ayni govde uzerinden kategori,
+    intent ve oncelik ayri basliklarla ogreniliyor (gerekcesi o dosyada).
+    """
+    from src.model import CokBaslikliSiniflandirici
 
-    from peft import LoraConfig, TaskType, get_peft_model
-
-    lora = LoraConfig(
-        task_type=TaskType.SEQ_CLS,
-        r=C.LORA_R,
-        lora_alpha=C.LORA_ALPHA,
-        lora_dropout=C.LORA_DROPOUT,
-        target_modules=C.LORA_TARGET_MODULES,
-        # Siniflandirma basligi (classifier) rastgele baslatiliyor, LoRA
-        # adaptorleri disinda o da egitilmeli -- yoksa model hicbir sey
-        # ogrenemez. PEFT bunu modules_to_save ile yapiyor.
-        modules_to_save=["classifier"],
-    )
-    model = get_peft_model(model, lora)
+    model = CokBaslikliSiniflandirici(C.BASE_MODEL, lora=use_lora)
     egitilen = sum(p.numel() for p in model.parameters() if p.requires_grad)
     return model, egitilen
 
@@ -159,28 +160,39 @@ def model_kur(use_lora: bool):
 # seffaf hem yeterli.
 # ---------------------------------------------------------------------------
 
-def degerlendir(model, yukleyici, cihaz) -> tuple[float, float, float]:
-    """(kayip, accuracy, macro_f1) doner.
+def degerlendir(model, yukleyici, cihaz) -> tuple[float, dict]:
+    """(ortalama_kayip, {gorev: {acc, f1}}) doner.
 
     Validation KAYBI da olculuyor: accuracy/F1 plato yaparken kayip yukselmeye
     baslarsa model asiri ogrenmeye gecmis demektir. Bu, sadece F1'e bakarak
     goremeyecegimiz bir sinyal.
     """
+    from src.model import GOREVLER
+
     model.eval()
-    tahminler, gercekler = [], []
+    tahmin = {ad: [] for ad, _ in GOREVLER}
+    gercek = {ad: [] for ad, _ in GOREVLER}
     kayip_top = 0.0
     with torch.no_grad():
         for parti in yukleyici:
             parti = {k: v.to(cihaz) for k, v in parti.items()}
             cikti = model(**parti)
-            kayip_top += cikti.loss.item()
-            tahminler.extend(cikti.logits.argmax(dim=-1).cpu().tolist())
-            gercekler.extend(parti["labels"].cpu().tolist())
-    return (
-        kayip_top / len(yukleyici),
-        accuracy_score(gercekler, tahminler),
-        f1_score(gercekler, tahminler, average="macro", zero_division=0),
-    )
+            kayip_top += cikti["loss"].item()
+            for ad, _ in GOREVLER:
+                if ad not in parti:
+                    continue
+                tahmin[ad].extend(cikti["logits"][ad].argmax(dim=-1).cpu().tolist())
+                gercek[ad].extend(parti[ad].cpu().tolist())
+
+    metrikler = {}
+    for ad, _ in GOREVLER:
+        if not gercek[ad]:
+            continue
+        metrikler[ad] = {
+            "acc": accuracy_score(gercek[ad], tahmin[ad]),
+            "f1": f1_score(gercek[ad], tahmin[ad], average="macro", zero_division=0),
+        }
+    return kayip_top / len(yukleyici), metrikler
 
 
 def egit(args) -> None:
@@ -228,8 +240,8 @@ def egit(args) -> None:
         anneal_strategy="linear",
     )
 
-    print(f"\n{'epoch':>5} {'train kayip':>12} {'val kayip':>10} {'val acc':>9} "
-          f"{'val f1':>8} {'sure':>7}")
+    print(f"\n{'epoch':>5} {'train':>8} {'val':>8} | {'kategori':>9} "
+          f"{'intent':>8} {'oncelik':>8} | {'ortF1':>7} {'sure':>7}")
     en_iyi_f1, en_iyi_epoch = -1.0, -1
     gecmis = []
 
@@ -239,35 +251,50 @@ def egit(args) -> None:
         for parti in train_dl:
             parti = {k: v.to(cihaz) for k, v in parti.items()}
             cikti = model(**parti)
-            cikti.loss.backward()
+            cikti["loss"].backward()
             torch.nn.utils.clip_grad_norm_(
                 [p for p in model.parameters() if p.requires_grad], 1.0
             )
             optim.step()
             plan.step()
             optim.zero_grad()
-            kayip_top += cikti.loss.item()
+            kayip_top += cikti["loss"].item()
 
         train_kayip = kayip_top / len(train_dl)
-        val_kayip, acc, f1 = degerlendir(model, val_dl, cihaz)
+        val_kayip, metrikler = degerlendir(model, val_dl, cihaz)
         sure = time.time() - t0
+
+        # Model secimi UC GOREVIN ORTALAMA macro-F1'ine gore yapilir. Tek bir
+        # goreve (orn. kategori) gore secmek digerlerini kurban ederdi; ortalama
+        # uc basligin birlikte iyi oldugu noktayi bulur.
+        ort_f1 = sum(m["f1"] for m in metrikler.values()) / len(metrikler)
         gecmis.append({
             "epoch": epoch, "train_kayip": train_kayip, "val_kayip": val_kayip,
-            "val_acc": acc, "val_f1": f1,
+            "ortalama_f1": ort_f1,
+            **{f"{ad}_f1": m["f1"] for ad, m in metrikler.items()},
+            **{f"{ad}_acc": m["acc"] for ad, m in metrikler.items()},
         })
 
         isaret = ""
-        if f1 > en_iyi_f1:
-            en_iyi_f1, en_iyi_epoch = f1, epoch
-            model.save_pretrained(C.MODEL_DIR)
+        if ort_f1 > en_iyi_f1:
+            en_iyi_f1, en_iyi_epoch = ort_f1, epoch
+            model.kaydet(C.MODEL_DIR)
             tokenizer.save_pretrained(C.MODEL_DIR)
             isaret = "  <- kaydedildi"
-        print(f"{epoch:>5} {train_kayip:>12.4f} {val_kayip:>10.4f} {acc:>9.4f} "
-              f"{f1:>8.4f} {sure:>6.1f}s{isaret}")
+        print(f"{epoch:>5} {train_kayip:>8.4f} {val_kayip:>8.4f} | "
+              f"{metrikler['kategori']['f1']:>9.4f} "
+              f"{metrikler['intent']['f1']:>8.4f} "
+              f"{metrikler['oncelik']['f1']:>8.4f} | "
+              f"{ort_f1:>7.4f} {sure:>6.1f}s{isaret}")
 
     # En iyi val F1'i veren epoch kaydedilir, sonuncusu degil: son epoch
     # genelde asiri ogrenmis olur ve test skoru dusuk cikar.
-    print(f"\nen iyi: epoch {en_iyi_epoch}, val macro-F1 {en_iyi_f1:.4f}")
+    print(f"\nen iyi: epoch {en_iyi_epoch}, uc gorev ortalama val macro-F1 "
+          f"{en_iyi_f1:.4f}")
+    en_iyi_kayit = next(g for g in gecmis if g["epoch"] == en_iyi_epoch)
+    for ad in ("kategori", "intent", "oncelik"):
+        print(f"    {ad:<10} macro-F1 {en_iyi_kayit[f'{ad}_f1']:.4f}  "
+              f"acc {en_iyi_kayit[f'{ad}_acc']:.4f}")
     print(f"model kaydedildi: {C.MODEL_DIR}")
 
     ozet = {
@@ -284,7 +311,8 @@ def egit(args) -> None:
         "egitilebilir_parametre": egitilen,
         "toplam_parametre": toplam,
         "en_iyi_epoch": en_iyi_epoch,
-        "en_iyi_val_f1": en_iyi_f1,
+        "en_iyi_val_ortalama_f1": en_iyi_f1,
+        "gorevler": {"kategori": C.NUM_LABELS, "intent": C.NUM_INTENTS, "oncelik": C.NUM_PRIORITIES},
         "gecmis": gecmis,
     }
     (C.MODEL_DIR / "egitim_ozeti.json").write_text(

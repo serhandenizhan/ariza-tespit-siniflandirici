@@ -46,6 +46,7 @@ from src.train import BildirimVeriseti, cihaz_sec, csv_oku
 # ---------------------------------------------------------------------------
 
 def model_yukle(cihaz):
+    """Cok basli modeli yukler. (model, tokenizer, egitim_ozeti) doner."""
     if not (C.MODEL_DIR / "egitim_ozeti.json").exists():
         raise SystemExit(
             f"HATA: egitilmis model yok ({C.MODEL_DIR}).\n"
@@ -53,39 +54,33 @@ def model_yukle(cihaz):
         )
     ozet = json.loads((C.MODEL_DIR / "egitim_ozeti.json").read_text(encoding="utf-8"))
 
-    tokenizer = AutoTokenizer.from_pretrained(C.MODEL_DIR)
-    if ozet.get("lora"):
-        from peft import PeftConfig, PeftModel
-        pc = PeftConfig.from_pretrained(C.MODEL_DIR)
-        taban = AutoModelForSequenceClassification.from_pretrained(
-            pc.base_model_name_or_path,
-            num_labels=C.NUM_LABELS,
-            id2label=C.ID2LABEL,
-            label2id=C.LABEL2ID,
-        )
-        model = PeftModel.from_pretrained(taban, C.MODEL_DIR)
-    else:
-        model = AutoModelForSequenceClassification.from_pretrained(C.MODEL_DIR)
+    from src.model import CokBaslikliSiniflandirici
 
+    tokenizer = AutoTokenizer.from_pretrained(C.MODEL_DIR)
+    model = CokBaslikliSiniflandirici.yukle(C.MODEL_DIR)
     model.to(cihaz).eval()
     return model, tokenizer, ozet
 
 
-def tahmin_et(model, tokenizer, satirlar, cihaz):
-    """(tahminler, guvenler, tum_olasiliklar) doner."""
-    ds = BildirimVeriseti(satirlar, tokenizer, C.MAX_LENGTH)
-    dl = DataLoader(ds, batch_size=C.BATCH_SIZE)
-    tahminler, guvenler, olasiliklar = [], [], []
-    with torch.no_grad():
-        for parti in dl:
-            girdi = {k: v.to(cihaz) for k, v in parti.items() if k != "labels"}
-            logit = model(**girdi).logits
-            olasi = torch.softmax(logit, dim=-1).cpu()
-            guven, tahmin = olasi.max(dim=-1)
-            tahminler.extend(tahmin.tolist())
-            guvenler.extend(guven.tolist())
-            olasiliklar.extend(olasi.tolist())
-    return tahminler, guvenler, olasiliklar
+def tahmin_et(model, tokenizer, satirlar, cihaz, gorev: str = "kategori"):
+    """Tek bir gorev icin (tahminler, guvenler, tum_olasiliklar) doner.
+
+    Varsayilan `kategori` -- raporun buyuk kismi kategoriye odakli ve mevcut
+    cagiranlar (calibrate, toplu_test, resolve_logs) bu imzayi bekliyor.
+    Uc gorevin hepsi birden gerekiyorsa `tum_gorevleri_tahmin_et` kullanilir.
+    """
+    hepsi = tum_gorevleri_tahmin_et(model, tokenizer, satirlar, cihaz)
+    olasi = hepsi[gorev]
+    guven, tahmin = olasi.max(dim=-1)
+    return tahmin.tolist(), guven.tolist(), olasi.tolist()
+
+
+def tum_gorevleri_tahmin_et(model, tokenizer, satirlar, cihaz):
+    """{gorev: (N, sinif) olasilik tensoru} doner."""
+    from src.model import tahmin_dagilimlari
+
+    metinler = [r["metin"] for r in satirlar]
+    return tahmin_dagilimlari(model, tokenizer, metinler, cihaz)
 
 
 # ---------------------------------------------------------------------------
@@ -193,6 +188,10 @@ def contamination_kontrolu() -> dict:
     from src import review as R
 
     def norm_kume(path):
+        # Gold opsiyoneldir (taksonomi degisiminde yeniden hazirlanana kadar
+        # bulunmayabilir); yoksa bos kume donulur ve ilgili kesisimler 0 cikar.
+        if not path.exists():
+            return set()
         return {R.normalize(r["metin"]) for r in csv_oku(path)}
 
     train, val = norm_kume(C.TRAIN_FILE), norm_kume(C.VAL_FILE)
@@ -401,6 +400,47 @@ def kalibrasyon_raporu(model, tokenizer, cihaz) -> dict:
 # Ana akis
 # ---------------------------------------------------------------------------
 
+def ek_gorev_raporu(satirlar, model, tokenizer, cihaz) -> None:
+    """Intent ve oncelik basliklarinin metrikleri.
+
+    Kategori raporu yukarida ayrintili veriliyor; burada diger iki gorev
+    ozetleniyor. Oncelik ozellikle izlenmeli: metinden cikarilmasi en zor
+    boyut, cunku ayni ekipman arizasi kapsamina gore P1 de P3 de olabilir
+    ("bir merdiven durdu" P3, "butun merdivenler durdu" P2).
+    """
+    from src.model import GOREVLER
+
+    dagilimlar = tum_gorevleri_tahmin_et(model, tokenizer, satirlar, cihaz)
+    sutunlar = {"intent": ("intent_label", C.ID2INTENT, C.INTENT_DISPLAY),
+                "oncelik": ("oncelik_label", C.ID2PRIORITY, C.PRIORITY_DISPLAY)}
+
+    for gorev, (sutun, id2ad, gorunen) in sutunlar.items():
+        if sutun not in satirlar[0]:
+            continue
+        gercek = [int(r[sutun]) for r in satirlar]
+        tahmin = dagilimlar[gorev].argmax(dim=-1).tolist()
+
+        print(f"\n{'=' * 78}\n{gorev.upper()} BASLIGI  —  {len(gercek)} kayit\n{'=' * 78}")
+        print(f"  accuracy   {accuracy_score(gercek, tahmin):.4f}")
+        print(f"  macro F1   {f1_score(gercek, tahmin, average='macro', zero_division=0):.4f}")
+
+        p, r, f, d = precision_recall_fscore_support(
+            gercek, tahmin, labels=range(len(id2ad)), zero_division=0)
+        print(f"\n{'sinif':<26} {'precision':>10} {'recall':>8} {'F1':>8} {'destek':>7}")
+        for i in range(len(id2ad)):
+            ad = gorunen[id2ad[i]]
+            print(f"{ad:<26} {p[i]:>10.4f} {r[i]:>8.4f} {f[i]:>8.4f} {d[i]:>7}")
+
+        karisan = Counter()
+        for g, t in zip(gercek, tahmin):
+            if g != t:
+                karisan[(id2ad[g], id2ad[t])] += 1
+        if karisan:
+            print("\n  en cok karisan ciftler:")
+            for (g, t), n in karisan.most_common(5):
+                print(f"    {gorunen[g]:<24} -> {gorunen[t]:<24} {n}")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Adim 4b -- degerlendirme")
     ap.add_argument("--hatalari-goster", action="store_true",
@@ -433,15 +473,34 @@ def main() -> None:
     else:
         print("\n  Sonuc: zararli sizinti YOK, skorlar gecerli.")
 
+    # Gold seti opsiyoneldir: taksonomi degistiginde eski gold gecersiz kalir
+    # ve yenisi hazirlanana kadar dosya bulunmayabilir. Rapor bu durumda
+    # sadece test seti uzerinden uretilir, cokmez.
+    setler = [("TEST (cogaltilmis dagilim)", C.TEST_FILE)]
+    if C.GOLD_TEST_FILE.exists():
+        setler.append(("GOLD TEST (bagimsiz, elle gozden gecirilmis)",
+                       C.GOLD_TEST_FILE))
+    else:
+        print(f"\n(NOT: {C.GOLD_TEST_FILE.name} yok -- bagimsiz gold "
+              f"degerlendirmesi atlaniyor.)")
+
     sonuclar = [
         set_degerlendir(ad, csv_oku(path), model, tokenizer, cihaz,
                         args.hatalari_goster)
-        for ad, path in (("TEST (cogaltilmis dagilim)", C.TEST_FILE),
-                         ("GOLD TEST (bagimsiz, elle gozden gecirilmis)",
-                          C.GOLD_TEST_FILE))
+        for ad, path in setler
     ]
 
+    ek_gorev_raporu(csv_oku(C.TEST_FILE), model, tokenizer, cihaz)
+
     kalibrasyon = kalibrasyon_raporu(model, tokenizer, cihaz) if args.kalibrasyon else None
+
+    if len(sonuclar) < 2:
+        cikti = {"contamination": kirlilik, "setler": sonuclar,
+                 "kalibrasyon": kalibrasyon}
+        (C.MODEL_DIR / "degerlendirme.json").write_text(
+            json.dumps(cikti, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"\n-> {C.MODEL_DIR / 'degerlendirme.json'}")
+        return
 
     t, g = sonuclar[0], sonuclar[1]
     print(f"\n{'=' * 78}\nTEST vs GOLD — sentetik veri ne kadar gercekci?\n{'=' * 78}")

@@ -88,8 +88,19 @@ def _call_ollama(prompt: str) -> str:
     return resp.json()["message"]["content"]
 
 
+# Gemini ve Groq cagrilari generate_seed.py'de zaten tanimli ve ayni imzaya
+# sahip (prompt -> str); burada yeniden yazmak yerine import ediliyor.
+# Gerekce: OpenRouter'in gunluk ucretsiz kotasi (~50 istek) bittiginde tek
+# alternatif Ollama kaliyordu ve yerel modelin kalitesi olculerek yetersiz
+# bulunmustu (bkz. CLAUDE.md, Adim 2b kiyaslamasi). Ucuncu/dorduncu bir bulut
+# saglayicisi, kota bitiminde uretimi durdurmak zorunda kalmadan devam
+# edebilmeyi sagliyor.
+from src.generate_seed import _call_gemini, _call_groq  # noqa: E402
+
 PROVIDERS = {
     "openrouter": _call_openrouter,
+    "gemini": _call_gemini,
+    "groq": _call_groq,
     "ollama": _call_ollama,
 }
 
@@ -463,7 +474,8 @@ def _rapor(records, caller, reddedilen, hedef, kategoriler) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Adim 2b -- seed'den cogaltma")
-    ap.add_argument("--provider", choices=["hybrid", "openrouter", "ollama"],
+    ap.add_argument("--provider",
+                    choices=["hybrid", "openrouter", "gemini", "groq", "ollama"],
                     default=C.AMPLIFY_PROVIDER)
     ap.add_argument("--target", type=int, default=C.TARGET_PER_CATEGORY,
                     help="kategori basina hedef ornek sayisi")

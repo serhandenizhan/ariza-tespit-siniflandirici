@@ -90,8 +90,8 @@ def istasyon_bul(metin: str) -> str | None:
     return None
 
 
-def ekipman_bul(metin: str) -> str | None:
-    n = normalize(metin)
+def ekipman_bul(metin: str, konumu_disla: bool = True) -> str | None:
+    n = _konumu_maskele(metin) if konumu_disla else normalize(metin)
     for norm_ad, ad in _EKIPMAN:
         if norm_ad in n:
             return ad
@@ -106,15 +106,120 @@ def belirti_bul(metin: str) -> str | None:
     return None
 
 
-def cikar(metin: str) -> dict:
+def konum_bul(metin: str) -> str | None:
+    """Istasyon ICINDEKI konum: "2 numarali giris", "turnike kati", "1. peron".
+
+    Istasyon adindan AYRIDIR ve onunla birlikte anlam kazanir: Metro
+    Istanbul'un kendi ariza kayitlarinda da hat + istasyon + konum + ekipman
+    ayri alanlar olarak tutuluyor, cunku "Kadikoy'deki merdiven" yeterli bir
+    is emri degil -- hangi merdiven oldugu gerekiyor.
+
+    Numarali kaliplar once denenir ("2 numarali giris"), cunku daha spesifik
+    ve daha bilgilendiricidirler.
+    """
+    n = normalize(metin)
+    for desen, bicim in C.LOCATION_PATTERNS:
+        m = re.search(desen, n)
+        if m:
+            try:
+                # Yakalanan gruplar normalize edilmis metinden geliyor, yani
+                # aksansiz. Ciktida dogru Turkce yazim gosterilsin diye geri
+                # ceviriliyor ("giris" -> "giriş").
+                gruplar = [C.LOCATION_KELIME_DUZELT.get(g, g) for g in m.groups()]
+                return bicim.format(*gruplar) if gruplar else bicim
+            except (IndexError, KeyError):
+                return bicim
+    return None
+
+
+def _konumu_maskele(metin: str) -> str:
+    """Konum ifadesini metinden cikarir.
+
+    Gerekce: "turnikelerin oradaki merdiven calismiyor" cumlesinde ekipman
+    MERDIVEN, turnike ise konum belirtiyor. Ekipman aramasi ham metinde
+    yapilirsa "turnike" once eslesir ve yanlis ekipman doner. Once konumu
+    bulup o parcayi maskeleyerek bu karisiklik onlenir.
+    """
+    n = normalize(metin)
+    for desen, _ in C.LOCATION_PATTERNS:
+        m = re.search(desen, n)
+        if m:
+            return n[:m.start()] + " " + n[m.end():]
+    return n
+
+
+# Sebep bildiren baglaclar. Bunlardan biri gecmezse root_cause DOLDURULMAZ --
+# halusinasyon engelleyici kuralin uygulanisi budur: kullanici "galiba motoru
+# yanmis" dediginde model buna teknik teshis koymamali, cunku bu kullanicinin
+# TAHMINI. Sadece cumlede acikca "X yuzunden Y" yapisi varsa sebep yazilir.
+_SEBEP_DESENI = re.compile(
+    r"(.{3,60}?)\s*(?:yuzunden|nedeniyle|sebebiyle|dolayi|kaynakli|"
+    r"oldugu icin|kesildigi icin|olmadigi icin)"
+)
+
+# "galiba", "sanirim" gibi ifadeler kullanicinin emin OLMADIGINI gosterir;
+# bunlar varsa sebep cikarilmaz.
+_SPEKULASYON = re.compile(
+    r"galiba|sanirim|herhalde|belki|olabilir|gibi geldi|zannedersem|heralde"
+)
+
+
+def sebep_bul(metin: str) -> str | None:
+    """Bildirimde ACIKCA belirtilen kok sebebi doner, yoksa None.
+
+    Model teknik teshis UYDURMAZ. "Yuruyen merdiven calismiyor" -> None
+    (kullanici sebebi bilmiyor). "Elektrik kesildigi icin merdiven
+    calismiyor" -> "elektrik kesildigi" (kullanici sebebi soyluyor).
+    """
+    n = normalize(metin)
+    if _SPEKULASYON.search(n):
+        return None
+    m = _SEBEP_DESENI.search(n)
+    if not m:
+        return None
+    sebep = m.group(1).strip(" ,.;:")
+    # Cok kisa veya cok uzun yakalamalar guvenilir degil
+    if not 3 <= len(sebep) <= 60:
+        return None
+    return sebep
+
+
+def eksik_bilgi(alanlar: dict, kategori: str | None = None) -> list[str]:
+    """Is emri acmak icin gereken ama bildirimde bulunmayan alanlar.
+
+    Arayuz bunu kullanip kullaniciya soru sorar ("Hangi istasyondaki
+    asansorde sorun var?"). Hangi alanin gerekli oldugu KATEGORIYE gore
+    degisir: tren arizasinda istasyon zorunlu degil (tren hareket halinde),
+    ama hat/sefer bilgisi onemli; istasyon ekipmaninda istasyon sart.
+    """
+    eksik = []
+    if not alanlar.get("station"):
+        eksik.append("station")
+    if not alanlar.get("equipment"):
+        eksik.append("equipment")
+    # Konum sadece istasyon ekipmani icin anlamli: bir istasyonda ayni
+    # ekipmandan birden fazla var ("hangi merdiven?"), trende yok.
+    if kategori in ("mekanik_istasyon", "elektronik_sistemler") \
+            and not alanlar.get("location"):
+        eksik.append("location")
+    if kategori == "arac_tren" and not alanlar.get("line"):
+        eksik.append("line")
+    return eksik
+
+
+def cikar(metin: str, kategori: str | None = None) -> dict:
     """Bir bildirimden yapisal alanlari cikarir (kategori HARIC -- o modelden
     geliyor, bkz. backend/main.py)."""
-    return {
+    alanlar = {
         "line": hat_bul(metin),
         "station": istasyon_bul(metin),
+        "location": konum_bul(metin),
         "equipment": ekipman_bul(metin),
         "symptom": belirti_bul(metin),
+        "root_cause": sebep_bul(metin),
     }
+    alanlar["missing_information"] = eksik_bilgi(alanlar, kategori)
+    return alanlar
 
 
 # ---------------------------------------------------------------------------

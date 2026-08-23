@@ -22,11 +22,7 @@
   "lora_ga_config": null,
   "megatron_config": null,
   "megatron_core": "megatron.core",
-  "modules_to_save": [
-    "classifier",
-    "classifier",
-    "score"
-  ],
+  "modules_to_save": null,
   "monteclora_config": null,
   "peft_type": "LORA",
   "peft_version": "0.20.0",
@@ -35,11 +31,11 @@
   "rank_pattern": {},
   "revision": null,
   "target_modules": [
-    "value",
-    "query"
+    "query",
+    "value"
   ],
   "target_parameters": null,
-  "task_type": "SEQ_CLS",
+  "task_type": "FEATURE_EXTRACTION",
   "trainable_token_indices": null,
   "use_bdlora": null,
   "use_dora": false,

@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import random
 import threading
 import time
@@ -45,6 +46,7 @@ from src import config as C
 from src import db
 from src import similarity
 from src.extract import cikar as yapisal_cikar
+from src.evidence import kanit_cikar
 
 # ---------------------------------------------------------------------------
 # Model durumu
@@ -164,8 +166,43 @@ class PredictResponse(BaseModel):
     # cogu zaman None, cunku bildirimlerin sadece ~%6'sinda hat kodu geciyor.
     line: str | None = Field(None, description="Hat kodu, örn. M4")
     station: str | None = Field(None, description="İstasyon adı")
+    location: str | None = Field(
+        None, description="İstasyon İÇİNDEKİ konum, örn. '2 numaralı giriş'")
     equipment: str | None = Field(None, description="Arızalı ekipman")
     symptom: str | None = Field(None, description="Belirti (kanonik tip)")
+    root_cause: str | None = Field(
+        None, description="Bildirimde AÇIKÇA belirtilen kök sebep. Kullanıcı "
+        "tahmin yürütüyorsa ('galiba motoru yanmış') null döner — model "
+        "teknik teşhis uydurmaz.")
+    missing_information: list[str] = Field(
+        default_factory=list,
+        description="İş emri açmak için gereken ama bildirimde bulunmayan "
+        "alanlar; arayüz bunları kullanıcıya sorar")
+
+    # --- intent ve oncelik (model basliklari) ------------------------------
+    intent: str = Field(..., description="Kullanıcının amacı, örn. fault_report")
+    intent_label: str
+    intent_confidence: float
+    priority: str = Field(..., description="P1 (kritik) - P4 (düşük)")
+    priority_label: str
+    priority_color: str
+    priority_confidence: float
+    priority_rule: str | None = Field(
+        None, description="P1 kural katmanı tetiklendiyse sebebi, örn. 'yangın'. "
+        "Doluysa öncelik modelden değil kuraldan gelmiştir.")
+    routing_unit: str = Field(..., description="Yönlendirilecek birim kodu")
+
+    # --- aciklanabilirlik ---------------------------------------------------
+    evidence: list[str] = Field(
+        default_factory=list,
+        description="Karara en çok katkıda bulunan kelimeler (gradient × input). "
+        "Modelin duyarlı olduğu token'ları gösterir; sözlük eşleşmesi DEĞİLDİR.")
+
+    # --- tekrar tespiti -----------------------------------------------------
+    possible_duplicate: bool = Field(
+        False, description="Aynı kategori + istasyon + ekipman son 15 dakikada "
+        "zaten bildirilmiş mi")
+    duplicate_of: dict | None = None
 
     low_confidence: bool = Field(..., description="confidence < CONFIDENCE_THRESHOLD")
     manual_review: bool = Field(
@@ -251,6 +288,9 @@ class ModelInfo(BaseModel):
     confidence_threshold: float
     margin_threshold: float
     num_labels: int
+    num_intents: int = 0
+    num_priorities: int = 0
+    tasks: dict = {}
 
 
 class ExampleItem(BaseModel):
@@ -261,6 +301,38 @@ class ExampleItem(BaseModel):
 # ---------------------------------------------------------------------------
 # Cikarim
 # ---------------------------------------------------------------------------
+
+
+# Normalize edilmis metinde P1 kural desenlerini arar. Eslesirse oncelik
+# kosulsuz P1 olur -- gerekcesi config.PRIORITY_RULES yorumunda.
+_ONCELIK_DESENLERI = [(re.compile(d), ad) for d, ad in C.PRIORITY_RULES]
+
+
+def oncelik_kurali(metin: str) -> str | None:
+    """P1 tetikleyen kural eslesirse sebebini doner, yoksa None."""
+    from src.extract import normalize
+
+    n = normalize(metin)
+    for desen, ad in _ONCELIK_DESENLERI:
+        if desen.search(n):
+            return ad
+    return None
+
+
+def kanit_cikar_guvenli(metin: str) -> list[str]:
+    """Kanit cikarimi -- hata durumunda BOS liste doner, tahmini cokertmez.
+
+    Gradient hesabi modelin ic yapisina bagli; bir gun model degisirse burasi
+    sessizce bosa dusmeli, /predict calismaya devam etmeli. Aciklama guzel
+    ama tahminin kendisi kadar kritik degil.
+    """
+    try:
+        with LOCK:
+            return kanit_cikar(STATE["model"], STATE["tokenizer"], metin,
+                               STATE["device"])
+    except Exception:                                          # noqa: BLE001
+        return []
+
 
 def run_prediction(text: str) -> dict:
     model, tokenizer, device = STATE["model"], STATE["tokenizer"], STATE["device"]
@@ -274,9 +346,12 @@ def run_prediction(text: str) -> dict:
     )
     encoded = {k: v.to(device) for k, v in encoded.items()}
 
+    # Cok basli model: tek ileri gecis, uc gorevin logiti birden doner.
     with LOCK, torch.no_grad():
-        logits = model(**encoded).logits
-    probs = torch.softmax(logits, dim=-1)[0].cpu()
+        cikti = model(**encoded)
+    probs = torch.softmax(cikti["logits"]["kategori"], dim=-1)[0].cpu()
+    intent_probs = torch.softmax(cikti["logits"]["intent"], dim=-1)[0].cpu()
+    oncelik_probs = torch.softmax(cikti["logits"]["oncelik"], dim=-1)[0].cpu()
 
     order = torch.argsort(probs, descending=True)
     first, second = int(order[0]), int(order[1])
@@ -286,6 +361,20 @@ def run_prediction(text: str) -> dict:
     primary = C.ID2LABEL[first]
     low_confidence = confidence < C.CONFIDENCE_THRESHOLD
     borderline = margin < C.MARGIN_THRESHOLD
+
+    intent_id = int(intent_probs.argmax())
+    intent = C.ID2INTENT[intent_id]
+
+    # ONCELIK: once kural katmani. P1 (can guvenligi) kacirmanin bedeli
+    # asimetrik oldugu icin belirli desenler modelin tahminini EZER.
+    oncelik_id = int(oncelik_probs.argmax())
+    oncelik = C.ID2PRIORITY[oncelik_id]
+    oncelik_guven = float(oncelik_probs[oncelik_id])
+    kural_sebebi = oncelik_kurali(text)
+    if kural_sebebi:
+        oncelik, oncelik_guven = "P1", 1.0
+
+    yapisal = yapisal_cikar(text, primary)
 
     result = {
         "category": primary,
@@ -305,10 +394,24 @@ def run_prediction(text: str) -> dict:
         "secondary_confidence": None,
         "secondary_message": None,
         "margin": margin,
+        # --- Ikinci boyut: intent ---
+        "intent": intent,
+        "intent_label": C.INTENT_DISPLAY[intent],
+        "intent_confidence": float(intent_probs[intent_id]),
+        # --- Ucuncu boyut: oncelik ---
+        "priority": oncelik,
+        "priority_label": C.PRIORITY_DISPLAY[oncelik],
+        "priority_color": C.PRIORITY_COLOR[oncelik],
+        "priority_confidence": oncelik_guven,
+        "priority_rule": kural_sebebi,
+        # --- Yonlendirme ---
+        "routing_unit": C.ROUTING_UNIT[primary],
         # Yapisal alanlar siniflandirmadan BAGIMSIZ uretiliyor; biri
         # digerini beslemiyor. Kurallı katman modelden hizli oldugu icin
         # yanit suresine anlamli bir yuk bindirmiyor.
-        **yapisal_cikar(text),
+        **yapisal,
+        # Modelin karara katkida bulunan kelimeleri (gradient x input).
+        "evidence": kanit_cikar_guvenli(text),
     }
 
     # Marj kucukse model iki kategori arasinda kararsiz demektir. Taksonomide
@@ -349,8 +452,20 @@ def run_prediction(text: str) -> dict:
     # Loglama: her istek DB'ye yazilir ama ETIKET OLARAK KULLANILMAZ -- bkz.
     # src/db.py modul notu. Ayni metin kisa surede tekrar gelirse (dene-yanila)
     # loglamayi atla, grafik/log tablosu tek kisinin denemesiyle sismesin.
+    # Ayni olay kisa sure once bildirilmis mi? (ayni kategori + istasyon +
+    # ekipman + son 15 dk). Amac: 30 kisinin ayni arizayi bildirmesi 30 ayri
+    # is emri acmasin.
+    tekrar = db.olasi_tekrar(primary, yapisal.get("station"),
+                             yapisal.get("equipment"))
+    result["possible_duplicate"] = tekrar is not None
+    result["duplicate_of"] = tekrar
+
     if not db.son_kayit_tekrar_mi(text):
-        result["log_id"] = db.logla(text, primary, confidence, kaynak="canli")
+        result["log_id"] = db.logla(
+            text, primary, confidence, kaynak="canli",
+            istasyon=yapisal.get("station"), ekipman=yapisal.get("equipment"),
+            intent=intent, oncelik=oncelik,
+        )
     else:
         result["log_id"] = -1
 
@@ -385,7 +500,8 @@ def model_info():
         "trainable_params": meta["egitilebilir_parametre"],
         "total_params": meta["toplam_parametre"],
         "best_epoch": meta["en_iyi_epoch"],
-        "best_val_macro_f1": meta["en_iyi_val_f1"],
+        "best_val_macro_f1": meta.get("en_iyi_val_ortalama_f1")
+                              or meta.get("en_iyi_val_f1", 0.0),
         "epochs": meta["epochs"],
         "learning_rate": meta["learning_rate"],
         "batch_size": meta["batch_size"],
@@ -398,6 +514,9 @@ def model_info():
         "confidence_threshold": C.CONFIDENCE_THRESHOLD,
         "margin_threshold": C.MARGIN_THRESHOLD,
         "num_labels": C.NUM_LABELS,
+        "num_intents": C.NUM_INTENTS,
+        "num_priorities": C.NUM_PRIORITIES,
+        "tasks": meta.get("gorevler", {}),
     }
 
 
@@ -414,6 +533,33 @@ def categories():
         }
         for k in C.CATEGORY_KEYS
     ]
+
+
+@app.get("/intents", tags=["taxonomy"])
+def intents():
+    """Intent taksonomisi -- arayuz rozet ve aciklama gosterebilsin diye."""
+    return [
+        {"intent": k, "label": v["display"], "scope": v["scope"]}
+        for k, v in C.INTENTS.items()
+    ]
+
+
+@app.get("/priorities", tags=["taxonomy"])
+def priorities():
+    """Oncelik taksonomisi + P1 kural katmaninin varligi.
+
+    `rule_based_p1` alani, onceligin her zaman modelden gelmedigini arayuze
+    bildirir: belirli desenler (yangin, elektrik carpmasi, intihar...) modeli
+    ezip kosulsuz P1 verir.
+    """
+    return {
+        "priorities": [
+            {"priority": k, "label": v["display"], "color": v["color"],
+             "scope": v["scope"]}
+            for k, v in C.PRIORITIES.items()
+        ],
+        "rule_based_p1": [ad for _, ad in C.PRIORITY_RULES],
+    }
 
 
 @app.get("/examples", response_model=list[ExampleItem], tags=["taxonomy"])
