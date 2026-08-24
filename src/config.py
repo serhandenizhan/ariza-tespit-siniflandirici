@@ -30,6 +30,15 @@ MODEL_DIR = ROOT_DIR / "model"
 
 SEED_FILE = SEED_DIR / "seed.jsonl"        # few-shot yemi olarak kullanilir
 GOLD_FILE = SEED_DIR / "gold.jsonl"        # few-shot'ta ASLA kullanilmaz, saf test
+# v1 taksonomisine aitti (bkz. CLAUDE.md Acik Nokta #4), Taksonomi v2'de
+# devre disi -- artik var olmadigi icin GOLD_FILE'a bagli her sey (ornekler
+# ucnoktasi, preprocess sizinti kontrolu) sessizce bos/atlanmis durumda.
+# EXAMPLES_FILE ayri tutuluyor cunku kullanicinin bagimsiz test seti
+# (yeni_gold_deneme.jsonl) GOLD_FILE'a atanirsa generate_seed.py/
+# apply_review.py bir sonraki calistirmada onun UZERINE yazabilir --
+# egitimde hic kullanilmamis bagimsiz bir seti riske atmamak icin
+# /examples ucnoktasi kendi ayri sabitini kullaniyor.
+EXAMPLES_FILE = SEED_DIR / "yeni_gold_deneme.jsonl"
 RAW_FILE = RAW_DIR / "amplified.jsonl"     # Ollama ciktisi (ham)
 CLEAN_FILE = PROCESSED_DIR / "clean.csv"   # temizlenmis + dedup
 

@@ -567,12 +567,17 @@ def priorities():
 def examples(count: int = 8):
     """Arayuzdeki 'tek tikla doldur' listesi.
 
-    Kaynak gold.jsonl: elle gozden gecirilmis, EGITIME HIC GIRMEMIS kayitlar.
-    Egitim verisinden ornek gostermek demoyu oldugundan iyi gosterirdi.
+    Kaynak EXAMPLES_FILE (yeni_gold_deneme.jsonl): kullanicinin BASKA bir
+    LLM'den bagimsiz olarak uretip getirdigi, EGITIME HIC GIRMEMIS 80
+    kayit. v1'in gold.jsonl'i Taksonomi v2'ye gecince devre disi kaldigi
+    icin (bkz. config.py notu) bu dosya onun yerini aliyor -- ustelik
+    "egitimde hic kullanilmadi" garantisi burada DAHA GUCLU: farkli bir
+    saglayicidan geldigi icin modelin kendi uretim kaliplarini ezberlemis
+    olma ihtimali de yok.
     """
-    if not C.GOLD_FILE.exists():
+    if not C.EXAMPLES_FILE.exists():
         return []
-    records = [json.loads(s) for s in C.GOLD_FILE.open(encoding="utf-8") if s.strip()]
+    records = [json.loads(s) for s in C.EXAMPLES_FILE.open(encoding="utf-8") if s.strip()]
     rng = random.Random(C.SEED)
     # Her kategoriden en fazla bir ornek -- liste tek kategoriye yigilmasin
     by_category: dict[str, list[dict]] = {}

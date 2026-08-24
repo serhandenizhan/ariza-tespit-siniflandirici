@@ -551,17 +551,21 @@ ile seed eğitime katılırsa ortaya çıkar.
    test setinde öncelik doğruluğu %73.8 → **%81.2**. Tavan hâlâ var (kappa
    ~0.72-0.77 aralığında dalgalanıyor) ama önemli bir sıçrama yapıldı.
 
-4. **Gold test seti YOK** ama **bağımsız doğrulama VAR.** Kullanıcı
-   `data/seed/yeni_gold_deneme.jsonl` adıyla 80 kayıtlık, farklı bir LLM'den
-   üretilmiş bağımsız bir test seti getirdi. `src/toplu_test.py` bu dosyayla
-   (ve üç boyutu birden destekleyecek şekilde) çalışıyor. Bu dosya resmi
-   `gold_test.csv` YERİNE geçmiyor (farklı bir amaç: hızlı doğrulama), ama
-   aynı işlevi görüyor. Resmi gold hâlâ isteğe bağlı bir sonraki adım.
+4. **Resmi `gold_test.csv` YOK** ama **bağımsız doğrulama VAR ve artık aktif
+   kullanılıyor.** Kullanıcının getirdiği `data/seed/yeni_gold_deneme.jsonl`
+   (80 kayıt, farklı bir LLM'den, eğitime hiç girmemiş) hem `toplu_test.py`
+   ile hızlı doğrulama için hem de (24 Ağu 2026'dan itibaren) `/examples`
+   uç noktasının kaynağı olarak kullanılıyor (`config.EXAMPLES_FILE`, bkz.
+   Adım 11 sonu). v1'in `gold.jsonl`'i taksonomi değişince devre dışı kaldığı
+   için `/examples` boş dönüyordu; bu dosya onun yerini fiilen aldı. Resmi
+   `gold_test.csv` üretimi hâlâ isteğe bağlı bir sonraki adım.
 
 5. ✅ **~~Frontend güncellenmedi~~ KAPANDI (23 Ağu 2026, Adım 11).** Bkz.
    "Adım 11" bölümü aşağıda.
 
-6. **Testler güncellenmedi.** `tests/test_api.py` v1 alanlarını doğruluyor.
+6. ✅ **~~Testler güncellenmedi~~ KAPANDI (24 Ağu 2026).** `tests/test_api.py`
+   v1 kategori adlarını (`istasyon_mekanik`, `guvenlik_emniyet`) bekliyordu;
+   6 test v2 taksonomisine göre güncellendi, 31/31 test geçiyor.
 
 7. **`calibrate.py` güncellenmedi** — tek başlıklı modele göre yazılmış, çok
    başlıklı modelle çalışması için `model_yukle`/`tahmin_et` çağrılarının
@@ -1706,6 +1710,46 @@ tetiklenen yangın bildirimi (KURAL etiketi + kırmızı ortam ışığı doğru
 model tabanlı P1 (KURAL etiketi YOK, ayrım doğru çalışıyor), canlı kategori
 grafiğinin her tahminde güncellenmesi, ve mobil yerleşim (375px). `Doğru`/
 `Yanlış` onay akışı ve taksonomi paneli değişmeden korundu.
+
+### İkinci tur uçtan uca kontrol (24 Ağu 2026) — üç gerçek hata daha bulundu
+
+Kullanıcı arayüzü kendisi denemeye başlamadan önce ayrı bir uçtan uca kontrol
+turu istendi. Üç gerçek hata bulundu, üçü de düzeltildi:
+
+1. **`src/config.py` — numaralı ekipman ifadeleri kayboluyordu.**
+   `LOCATION_PATTERNS`'teki ilk (numaralı) desen `asansor|merdiven|turnike|
+   pano` kelimelerini de içeriyordu — bunlar aynı zamanda `EQUIPMENT`
+   sözlüğünde birebir geçen kelimeler. "3 numaralı asansör kapısı sıkıştı"
+   gibi bir bildirimde `_konumu_maskele()` tüm ifadeyi (ekipman kelimesi
+   dahil) metinden silip `ekipman_bul()`'un "asansör"ü bulmasını
+   engelliyordu; `equipment: null` dönüyordu. Bu dört kelime desenden
+   çıkarıldı — gerçek konum-belirteci kullanımlar ("X'in yanındaki Y") zaten
+   ayrı bir desenle karşılanıyor. `extraction_degerlendirme.json`'daki
+   sayılar bu değişiklikten ETKİLENMEDİ (git stash ile doğrulandı, sorun
+   zaten var olan 40 kayıtlık referans setinde bu senaryoyu hiç içermiyordu).
+2. **`src/db.py` — zaman damgası yerel saatte, sorgular UTC'de (daha ciddi).**
+   `time.strftime()` YEREL saati (Türkiye UTC+3) yazıyordu, ama tekrar/
+   dene-yanıla sorguları SQLite'ın UTC döndüren `datetime('now', ...)`
+   fonksiyonuyla karşılaştırıyordu. Sonuç: 30 saniyelik dene-yanıla koruması
+   ve 15 dakikalık "olası tekrar bildirim" penceresi fiilen ~3 saate
+   genişlemişti. Canlı testte tam olarak bu şekilde yakalandı: dakikalar önce
+   gönderilmiş bir metin yanlışlıkla "az önce tekrar gönderildi" sayıldı.
+   `_simdi_utc()` eklendi (`time.gmtime()`), mevcut `data/logs.db`'deki
+   ~2574 kayıt da `-3 saat` kaydırılarak düzeltildi (tek seferlik veri
+   onarımı, koda dahil değil).
+3. **`/examples` boş dönüyordu.** v1'in `gold.jsonl`'i Taksonomi v2'ye
+   geçince devre dışı bırakılmıştı (bkz. Açık Nokta #4) ama `/examples`
+   hâlâ ona bakıyordu. `config.EXAMPLES_FILE` adında ayrı bir sabit eklendi
+   (`data/seed/yeni_gold_deneme.jsonl`'e işaret ediyor) — `GOLD_FILE`'ın
+   kendisi DEĞİŞTİRİLMEDİ, çünkü `generate_seed.py`/`apply_review.py` hâlâ
+   ona yazıyor ve kullanıcının bağımsız test setini üzerine yazma riski
+   taşırdı. Frontend'deki "gold test setinden geliyor" notu da gerçeğe
+   uyacak şekilde güncellendi.
+
+Ayrıca `tests/test_api.py`'deki 6 başarısız test (v1 kategori adları
+`istasyon_mekanik`/`guvenlik_emniyet` bekliyordu, `/examples` testi
+`GOLD_FILE`'a bakıyordu) v2 taksonomisine göre düzeltildi — **31/31 test
+geçiyor.**
 
 ## Genel İlkeler (her adımda geçerli)
 

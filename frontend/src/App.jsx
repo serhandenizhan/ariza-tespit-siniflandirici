@@ -149,8 +149,8 @@ export default function App() {
         <section className="ornekler">
           <h3 className="bolum-baslik">Örnek bildirimler</h3>
           <p className="ornek-not">
-            Bu örnekler modelin eğitiminde <b>hiç kullanılmamış</b> gold test
-            setinden geliyor.
+            Bu örnekler modelin eğitiminde <b>hiç kullanılmamış</b>, bağımsız
+            bir kaynaktan üretilmiş test setinden geliyor.
           </p>
           <div className="ornek-liste">
             {ornekler.map((o) => (

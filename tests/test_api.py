@@ -71,9 +71,11 @@ def test_categories_taksonominin_tamamini_dondurur(client):
         assert d["label"] and d["color"].startswith("#") and d["scope"]
 
 
-def test_examples_gold_setinden_gelir_ve_egitimde_yok(client):
-    """Ornekler gold'dan gelmeli: egitim verisinden ornek gostermek demoyu
-    oldugundan iyi gosterirdi."""
+def test_examples_bagimsiz_setten_gelir_ve_egitimde_yok(client):
+    """Ornekler EXAMPLES_FILE'dan gelmeli: egitim verisinden ornek gostermek
+    demoyu oldugundan iyi gosterirdi. v1'in gold.jsonl'i Taksonomi v2'de
+    devre disi (bkz. config.py notu); yerini kullanicinin bagimsiz test
+    seti (yeni_gold_deneme.jsonl) aliyor."""
     import csv
     import json
 
@@ -82,13 +84,13 @@ def test_examples_gold_setinden_gelir_ve_egitimde_yok(client):
     ornekler = r.json()
     assert 0 < len(ornekler) <= 5
 
-    gold = {json.loads(s)["metin"]
-            for s in C.GOLD_FILE.open(encoding="utf-8") if s.strip()}
+    bagimsiz = {json.loads(s)["metin"]
+                for s in C.EXAMPLES_FILE.open(encoding="utf-8") if s.strip()}
     with C.TRAIN_FILE.open(encoding="utf-8") as f:
         train = {satir["metin"] for satir in csv.DictReader(f)}
 
     for o in ornekler:
-        assert o["text"] in gold, "ornek gold setinden gelmeli"
+        assert o["text"] in bagimsiz, "ornek EXAMPLES_FILE'dan gelmeli"
         assert o["text"] not in train, "ornek egitim verisinde OLMAMALI"
 
 
@@ -136,7 +138,7 @@ def test_predict_bilinen_bildirimi_dogru_siniflandirir(client):
     bozulursa (yanlis checkpoint, bozuk adapter) bu test duser."""
     veri = client.post("/predict",
                        json={"text": "Yürüyen merdiven durdu 2. peron"}).json()
-    assert veri["category"] == "istasyon_mekanik"
+    assert veri["category"] == "mekanik_istasyon"
     assert veri["confidence"] > 0.8
 
 
@@ -147,7 +149,7 @@ def test_predict_aksansiz_metni_de_dogru_siniflandirir(client):
                           json={"text": "Asansör çalışmıyor Kadıköy üst kat"}).json()
     aksansiz = client.post("/predict",
                            json={"text": "asansor calismiyo kadikoy ust kat"}).json()
-    assert aksanli["category"] == aksansiz["category"] == "istasyon_mekanik"
+    assert aksanli["category"] == aksansiz["category"] == "mekanik_istasyon"
 
 
 # ---------------------------------------------------------------------------
@@ -230,7 +232,7 @@ def test_predict_yapisal_alanlari_dondurur(client):
     veri = client.post(
         "/predict", json={"text": "M4 Ünalan'da yürüyen merdiven çok ses yapıyor"}
     ).json()
-    assert veri["category"] == "istasyon_mekanik"
+    assert veri["category"] == "mekanik_istasyon"
     assert veri["line"] == "M4"
     assert veri["station"] == "Ünalan"
     assert veri["equipment"] == "yürüyen merdiven"
@@ -290,7 +292,7 @@ def test_benzer_kayitlar_ayni_kategoriye_agirlikli_cikiyor(client):
         "/predict", json={"text": "Yürüyen merdiven durdu 2. peron"}
     ).json()
     dagilim = {d["category"]: d["ratio"] for d in veri["similar"]["distribution"]}
-    assert dagilim.get("istasyon_mekanik", 0) > 0.5
+    assert dagilim.get("mekanik_istasyon", 0) > 0.5
 
 
 def test_ayni_metin_tekrar_gonderilince_loglanmiyor(client):
@@ -318,12 +320,12 @@ def test_logs_verify_yanlis_kategori_duzeltmesiyle(client):
     veri = client.post("/predict", json={"text": "benzersiz test cumlesi xyzabc"}).json()
     r = client.post("/logs/verify", json={
         "log_id": veri["log_id"], "correct": False,
-        "corrected_category": "guvenlik_emniyet",
+        "corrected_category": "guvenlik_asayis_olay",
     })
     assert r.status_code == 200
 
     disa = client.get("/logs/export").text
-    assert '"kategori": "guvenlik_emniyet"' in disa
+    assert '"kategori": "guvenlik_asayis_olay"' in disa
     assert '"kaynak": "api_onayli:duzeltildi"' in disa
 
 
