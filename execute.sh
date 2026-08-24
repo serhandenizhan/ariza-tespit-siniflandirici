@@ -43,8 +43,9 @@ if [[ "$MODE" != "frontend" ]]; then
     echo "  python3 -m venv venv && ./venv/bin/pip install -r requirements.txt" >&2
     exit 1
   fi
-  if [[ ! -f "$ROOT_DIR/model/adapter_model.safetensors" ]]; then
-    echo "HATA: egitilmis model yok (model/adapter_model.safetensors)." >&2
+  if [[ ! -f "$ROOT_DIR/model/govde/adapter_model.safetensors" ]] \
+      || [[ ! -f "$ROOT_DIR/model/basliklar.pt" ]]; then
+    echo "HATA: egitilmis model yok (model/govde/ + model/basliklar.pt)." >&2
     echo "Once calistirin: ./venv/bin/python -m src.train" >&2
     exit 1
   fi
