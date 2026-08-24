@@ -55,7 +55,10 @@ load_dotenv()
 # ---------------------------------------------------------------------------
 
 def _call_ollama(prompt: str) -> str:
-    """Yerel Ollama'ya sorar. Kota yok, bedel yok; karsiliginda daha kucuk model."""
+    """Ollama'ya sorar (yerel veya `<model>:cloud` bulut modeli).
+
+    Model gemma4:cloud -- uretim VE etiketleme rolunde qwen2.5:14b'ye karsi
+    olculup kazandi, ayrintili gerekce config.OLLAMA_MODEL yorumunda."""
     try:
         resp = requests.post(
             f"{C.OLLAMA_HOST}/api/chat",
@@ -88,13 +91,6 @@ def _call_ollama(prompt: str) -> str:
     return resp.json()["message"]["content"]
 
 
-# Gemini ve Groq cagrilari generate_seed.py'de zaten tanimli ve ayni imzaya
-# sahip (prompt -> str); burada yeniden yazmak yerine import ediliyor.
-# Gerekce: OpenRouter'in gunluk ucretsiz kotasi (~50 istek) bittiginde tek
-# alternatif Ollama kaliyordu ve yerel modelin kalitesi olculerek yetersiz
-# bulunmustu (bkz. CLAUDE.md, Adim 2b kiyaslamasi). Ucuncu/dorduncu bir bulut
-# saglayicisi, kota bitiminde uretimi durdurmak zorunda kalmadan devam
-# edebilmeyi sagliyor.
 from src.generate_seed import _call_gemini, _call_groq  # noqa: E402
 
 PROVIDERS = {

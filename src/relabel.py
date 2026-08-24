@@ -80,9 +80,12 @@ KURALLAR:
 1. Her bildirim için SADECE bir kategori, bir intent, bir öncelik seç.
 2. Kategori anahtarlarını birebir yukarıdaki gibi yaz (küçük harf, alt çizgi).
 3. HARIC satırlarını dikkatle uygula -- sınırdaki durumlar orada yazıyor.
-4. Öncelik, konudan değil ETKİDEN belirlenir: tek bir ekipmanın arızası P3,
-   birden fazla ekipmanı veya seferi etkileyen arıza P2, can güvenliği
-   tehdidi P1, acil olmayan kozmetik/bilgi eksikliği P4.
+4. Önceliği MERDİVEN gibi sırayla belirle, yukarıdaki ÖNCELİK bölümündeki
+   "SORU 1/2/3/4" sırasını izle: can güvenliği tehdidi mi (P1)? Değilse:
+   sefer durdu mu / birden fazla ekipman mı / yolcu fiziksel geçemiyor mu
+   (P2)? Değilse: tek ekipman arızası var ama yolculuk mümkün mü (P3)?
+   Değilse: hiç arıza yok, sadece görünüm/bilgi/öneri mi (P4)? İlk EVET
+   cevabında dur, sonraki sorulara bakma.
 5. Bildirimin yazım hatası içermesi kategoriyi değiştirmez, anlamına bak.
 6. Numaraları ATLAMA, {len(cumleler)} bildirimin HEPSİNİ döndür.
 
@@ -145,8 +148,12 @@ def kayitlari_oku(path) -> list[dict]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Havuzu yeni taksonomiye gore etiketle")
-    ap.add_argument("--provider", default="gemini",
-                    choices=["hybrid", "openrouter", "gemini", "groq", "ollama"])
+    # Varsayilan ollama: gemma4:cloud, 120 kayitlik olcumde en iyi sonuc +
+    # kota yok (bkz. config.OLLAMA_MODEL yorumu). Bulut saglayicilar farkli
+    # bir model denemek icin secilebilir.
+    ap.add_argument("--provider", default="ollama",
+                    choices=["hybrid", "openrouter", "gemini", "groq",
+                             "ollama"])
     ap.add_argument("--limit", type=int, help="sadece ilk N kaydi isle (deneme icin)")
     ap.add_argument("--dry-run", action="store_true",
                     help="LLM cagirmadan ilk prompt'u yazdir ve cik")

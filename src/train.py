@@ -243,12 +243,31 @@ def egit(args) -> None:
     print(f"\n{'epoch':>5} {'train':>8} {'val':>8} | {'kategori':>9} "
           f"{'intent':>8} {'oncelik':>8} | {'ortF1':>7} {'sure':>7}")
     en_iyi_f1, en_iyi_epoch = -1.0, -1
+    en_iyi_val_kayip, sabir_sayaci = float("inf"), 0   # early stopping takibi
     gecmis = []
+    batch_gecmisi = []          # canli grafik icin: epoch'un ortasinda da veri
+
+    def _canli_yaz(durum: str) -> None:
+        """Canli izleme dosyasi -- CANLI_KAYIP_FILE. Web sayfasi bunu her
+        1-2 saniyede bir okuyup grafigi gunceller (bkz. dev/canli_kayip.html).
+        Epoch basina bir kez yazmak grafigi 55-70 saniyede bir zıplatirdi;
+        birkac batch'te bir yazmak akici bir egri verir."""
+        (C.MODEL_DIR / "canli_kayip.json").write_text(json.dumps({
+            "durum": durum, "guncel_epoch": epoch, "toplam_epoch": epochs,
+            "adim_epoch_basina": len(train_dl),
+            "en_iyi_f1": en_iyi_f1, "en_iyi_epoch": en_iyi_epoch,
+            # inf JSON'da GECERSIZ (JS JSON.parse patlar) -- ilk epoch
+            # bitmeden bu deger hala sonsuz, null'a cevriliyor.
+            "en_iyi_val_kayip": None if en_iyi_val_kayip == float("inf") else en_iyi_val_kayip,
+            "sabir_sayaci": sabir_sayaci,
+            "early_stopping_patience": C.EARLY_STOPPING_PATIENCE,
+            "epoch_gecmisi": gecmis, "batch_gecmisi": batch_gecmisi[-300:],
+        }, ensure_ascii=False), encoding="utf-8")
 
     for epoch in range(1, epochs + 1):
         model.train()
         t0, kayip_top = time.time(), 0.0
-        for parti in train_dl:
+        for adim, parti in enumerate(train_dl, 1):
             parti = {k: v.to(cihaz) for k, v in parti.items()}
             cikti = model(**parti)
             cikti["loss"].backward()
@@ -258,7 +277,15 @@ def egit(args) -> None:
             optim.step()
             plan.step()
             optim.zero_grad()
-            kayip_top += cikti["loss"].item()
+            kayip = cikti["loss"].item()
+            kayip_top += kayip
+
+            if adim % 5 == 0:
+                batch_gecmisi.append({
+                    "epoch": epoch, "adim": adim, "toplam_adim": len(train_dl),
+                    "kayip": kayip,
+                })
+                _canli_yaz("egitiliyor")
 
         train_kayip = kayip_top / len(train_dl)
         val_kayip, metrikler = degerlendir(model, val_dl, cihaz)
@@ -281,11 +308,28 @@ def egit(args) -> None:
             model.kaydet(C.MODEL_DIR)
             tokenizer.save_pretrained(C.MODEL_DIR)
             isaret = "  <- kaydedildi"
+        # Early stopping: val_kayip DUZELDIYSE sabir sifirlanir, DUZELMEDIYSE
+        # sayac artar. F1 secimiyle (yukarida) kasten AYRI -- gerekcesi
+        # config.EARLY_STOPPING_PATIENCE yorumunda.
+        if val_kayip < en_iyi_val_kayip:
+            en_iyi_val_kayip, sabir_sayaci = val_kayip, 0
+        else:
+            sabir_sayaci += 1
+            isaret += f"  (val_kayip {sabir_sayaci}/{C.EARLY_STOPPING_PATIENCE} epoch iyilesmedi)"
+
         print(f"{epoch:>5} {train_kayip:>8.4f} {val_kayip:>8.4f} | "
               f"{metrikler['kategori']['f1']:>9.4f} "
               f"{metrikler['intent']['f1']:>8.4f} "
               f"{metrikler['oncelik']['f1']:>8.4f} | "
               f"{ort_f1:>7.4f} {sure:>6.1f}s{isaret}")
+        _canli_yaz("egitiliyor")
+
+        if sabir_sayaci >= C.EARLY_STOPPING_PATIENCE:
+            print(f"\nEARLY STOPPING: val_kayip {C.EARLY_STOPPING_PATIENCE} "
+                  f"epoch boyunca iyilesmedi, epoch {epoch}/{epochs}'te durduruldu.")
+            break
+
+    _canli_yaz("tamamlandi")
 
     # En iyi val F1'i veren epoch kaydedilir, sonuncusu degil: son epoch
     # genelde asiri ogrenmis olur ve test skoru dusuk cikar.
@@ -301,6 +345,8 @@ def egit(args) -> None:
         "base_model": C.BASE_MODEL,
         "lora": not args.no_lora,
         "epochs": epochs,
+        "calisan_epoch": gecmis[-1]["epoch"],
+        "early_stopped": sabir_sayaci >= C.EARLY_STOPPING_PATIENCE,
         "batch_size": C.BATCH_SIZE,
         "learning_rate": args.lr or C.LEARNING_RATE,
         "max_length": C.MAX_LENGTH,

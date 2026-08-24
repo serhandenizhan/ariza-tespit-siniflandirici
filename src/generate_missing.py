@@ -142,7 +142,9 @@ def yanit_coz(ham: str) -> list[dict]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Eksik kategori/intent bosluklarini uret")
-    ap.add_argument("--provider", default="gemini",
+    # Varsayilan ollama: gemma4:cloud, hem uretim hem etiketleme rolunde
+    # kalitesi olculdu (bkz. config.OLLAMA_MODEL), kota siniri yok.
+    ap.add_argument("--provider", default="ollama",
                     choices=["hybrid", "openrouter", "gemini", "groq", "ollama"])
     ap.add_argument("--plan", choices=["kategori", "intent", "hepsi"], default="hepsi")
     ap.add_argument("--dry-run", action="store_true")

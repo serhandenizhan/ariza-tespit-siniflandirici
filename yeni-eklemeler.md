@@ -219,14 +219,23 @@ model bellekte tutulurdu (3 × 440 MB).
 modelde değil, **etiket tanımının belirsizliğindeydi** — model zaten
 %62 ile tavana yakındı.
 
-**Yeni ölçüt** — sayı yerine operasyonel etki:
+**Ölçüt operasyonel etkiye çevrildi ve "merdiven" mantığıyla SIRALI hale
+getirildi** — her seviye net bir evet/hayır sorusu, ilk EVET'te dur:
 
 | öncelik | ayırt edici soru | kapsam |
 | --- | --- | --- |
-| **P1 Kritik** | Can güvenliği tehdidi var mı? | Yangın, yoğun duman, elektrik çarpması riski, raylara kişi düşmesi, hat üzerinde nesne, tren kapısının açık seyretmesi, su baskını, acil çıkışın kapalı olması, aktif saldırı, şüpheli paket, hayati sağlık acili, intihar riski, yapısal çökme |
-| **P2 Yüksek** | Sefer veya yolcu akışı aksıyor mu? | Sefer gecikmesi/durması/seyreltilmesi, sinyalizasyon kaynaklı aksama, PAKS arızası, yolcuların geçiş yapamaması, birden fazla ekipmanın aynı anda devre dışı kalması, ciddi su sızıntısı |
+| **P1 Kritik** | Can güvenliği tehdidi **gerçekleşmiş/gerçekleşiyor mu**? | Yangın, yoğun duman, elektrik çarpması riski, raylara kişi düşmesi, hat üzerinde nesne, tren kapısının açık seyretmesi, su baskını, acil çıkışın kapalı olması, aktif saldırı, şüpheli paket, hayati sağlık acili, intihar riski, yapısal çökme |
+| **P2 Yüksek** | Sefer durdu mu / birden çok ekipman mı / yolcu fiziksel geçemiyor mu? | Sefer gecikmesi/durması/seyreltilmesi, sinyalizasyon kaynaklı aksama, PAKS arızası, yolcuların geçiş yapamaması, **"hiçbiri çalışmıyor"/"hepsi bozuk"/"bütün X'ler durdu" gibi dolaylı çoğulluk ifadeleri dahil** birden fazla ekipmanın aynı anda devre dışı kalması, ciddi su sızıntısı |
 | **P3 Orta** | Arıza var ama yolculuk normal mi? | Tek bir merdiven/asansör/turnike/biletmatik arızası, birkaç lambanın yanmaması, klima çalışmaması, bir kameranın görüntü vermemesi |
 | **P4 Düşük** | İşleyişi hiç etkilemiyor mu? | Kirlilik, hasarlı tabela, kozmetik hasar, bilgilendirme eksikliği, öneriler, bilgi talepleri |
+
+**P1'de kritik bir ayrım: gerçekleşmiş tehdit ↔ varsayımsal/koşullu ifade.**
+*"Yangın var", "duman doldu"* → P1. *"Yangın çıksa tüpe erişilemez", "bir şey
+olursa acil çıkış kilitli"* → **P1 DEĞİL** (henüz gerçekleşmemiş bir riske
+karşı önlem eksikliği bildirir), P3/P4'e düşer. Bu ayrım modelin kendi kural
+katmanında da (`config.PRIORITY_RULES`) negatif lookahead ile uygulanıyor —
+aksi halde "yangın tüpüne erişim yok" gibi önlem-eksikliği cümleleri de P1
+kuralını yanlışlıkla tetikliyordu.
 
 **P1 kural katmanı.** P1'i kaçırmanın bedeli asimetriktir: bir yangın
 bildirimini P3 sanmak kabul edilemez, tersi sadece gereksiz aciliyet yaratır.
@@ -234,7 +243,18 @@ Bu yüzden belirli desenler modelin tahminini **ezer** ve koşulsuz P1 verir:
 yangın, yoğun duman, elektrik çarpması, raylara kişi, intihar, şüpheli paket,
 aktif saldırı, sağlık acili, yapısal çökme, su baskını, acil çıkış engeli.
 Desenler dar ve kesin tutuldu (`config.PRIORITY_RULES`); her biri tek başına
-can güvenliği tehdidi anlamına gelen ifadeler.
+can güvenliği tehdidi anlamına gelen ifadeler; ekipman adları (`yangın
+tüpü`, `yangın merdiveni`) ve koşullu bağlaçlar (`çıksa`, `olursa`) hariç
+tutuluyor.
+
+**Bağımsız (farklı kaynaktan üretilmiş, elle etiketlenmiş) 80 kayıtlık test
+setinde ölçülen ilerleme:** öncelik doğruluğu **%73.8 → %81.2**. Üç
+iyileştirme birlikte etkili oldu: merdiven mantığının netleştirilmesi, P1
+kural motorundaki varsayımsal-ifade hatasının düzeltilmesi, ve P2'nin
+dolaylı çoğulluk ifadelerini kaçırdığı 20 hedefli örnekle giderilmesi. Etiket
+tutarlılığı (kappa) bu turlar boyunca 0.584 → 0.766 → 0.721 arasında
+dalgalandı — tavan hâlâ küçük örneklemin gürültüsüne tabi, ama modelin
+gerçek genelleme başarısı bağımsız sette net şekilde arttı.
 
 ---
 

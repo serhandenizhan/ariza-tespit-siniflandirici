@@ -26,7 +26,7 @@ from collections import Counter
 
 from src import config as C
 from src.generate_data import Caller
-from src.relabel import BATCH, oncelik_kilavuzu, yanit_coz
+from src.relabel import BATCH, oncelik_kilavuzu
 
 KAYNAK = C.RAW_DIR / "relabeled.jsonl"
 
@@ -45,9 +45,10 @@ def prompt_kur(cumleler: list[str]) -> str:
 KURALLAR:
 1. Her bildirim için tam olarak bir öncelik seç: P1, P2, P3 veya P4.
 2. Öncelik konudan değil ETKİDEN belirlenir.
-3. Ayırt edici soru: can güvenliği tehdidi var mı (P1)? Sefer/yolcu akışı
-   aksıyor mu (P2)? Arıza var ama yolculuk normal mi (P3)? İşleyişi hiç
-   etkilemiyor mu (P4)?
+3. Merdiven mantığıyla sırayla sor: can güvenliği tehdidi mi (P1)? Değilse
+   sefer durdu mu / birden fazla ekipman mı / yolcu fiziksel geçemiyor mu
+   (P2)? Değilse tek ekipman arızası var ama yolculuk mümkün mü (P3)?
+   Değilse hiç arıza yok mu, sadece görünüm/bilgi/öneri mi (P4)?
 4. {len(cumleler)} bildirimin HEPSİNİ döndür, numara atlama.
 
 BİLDİRİMLER:
@@ -60,10 +61,43 @@ NOT: category ve intent alanlarini yok sayabilirsin, sadece priority onemli --
 ama sema bozulmasin diye yine de doldur."""
 
 
+
+def yanit_coz_gevsek(ham: str, n: int) -> dict[int, str]:
+    """{no: priority} doner -- SADECE priority alanini dogrular.
+
+    src.relabel.yanit_coz() uc alanin (category/intent/priority) da gecerli
+    olmasini sart kosuyor; bu olcum SADECE onceligin tutarliligina bakiyor,
+    modelin bazen kisaltilmis kategori adi dondurmesi (orn. "guvenlik_"
+    "asayis_olay" yerine "guvenlik") yuzunden gecerli bir priority'yi
+    atmak yanlis olur -- ornek boyutunu gereksiz kucultup olcumu gurultuye
+    cevirir (bkz. CLAUDE.md, "az orneklem = gurultu" dersi).
+    """
+    ham = ham.strip()
+    if ham.startswith("```"):
+        ham = ham.split("```")[1].removeprefix("json").strip()
+    try:
+        veri = json.loads(ham)
+    except json.JSONDecodeError:
+        bas, son = ham.find("{"), ham.rfind("}")
+        if bas < 0 or son < 0:
+            raise
+        veri = json.loads(ham[bas:son + 1])
+
+    sonuc: dict[int, str] = {}
+    for e in veri.get("etiketler", []):
+        try:
+            no = int(e["no"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        onc = e.get("priority")
+        if onc in C.PRIORITY_KEYS and 1 <= no <= n:
+            sonuc[no] = onc
+    return sonuc
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Oncelik etiket tutarliligi olcumu")
     ap.add_argument("--n", type=int, default=120, help="kac kayit orneklenecek")
-    ap.add_argument("--provider", default="gemini")
+    ap.add_argument("--provider", default="ollama")
     ap.add_argument("--seed", type=int, default=C.SEED)
     args = ap.parse_args()
 
@@ -88,13 +122,13 @@ def main() -> None:
         print(f"  [{i + len(parti)}/{len(ornek)}] ...", end=" ", flush=True)
         try:
             ham, saglayici = caller.ask(prompt_kur([r["metin"] for r in parti]))
-            cozum = yanit_coz(ham, len(parti))
+            cozum = yanit_coz_gevsek(ham, len(parti))
         except Exception as exc:                                  # noqa: BLE001
             print(f"atlandi ({str(exc)[:60]})")
             continue
         for j, r in enumerate(parti, 1):
             if j in cozum:
-                ikinci[r["metin"]] = cozum[j]["oncelik"]
+                ikinci[r["metin"]] = cozum[j]
         print(f"+{len(cozum)} ({saglayici})")
 
     ortak = [r for r in ornek if r["metin"] in ikinci]

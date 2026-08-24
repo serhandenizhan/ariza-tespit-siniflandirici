@@ -1798,3 +1798,203 @@
 {"metin": "Şişhane yürüyen merdiven tutamağı yapışkan", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "gemini:amplify"}
 {"metin": "Kartal peron duvarında yazı var", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "gemini:amplify"}
 {"metin": "Bağcılar istasyon girişi buzlanma tuzlanmadı", "kategori": "temizlik_cevre", "stil": "cok_kisa", "kaynak": "gemini:amplify"}
+{"metin": "Şirinevler istasyonu güney çıkışında görevli personelin telsizi çalışmadığı için iletişim kurulamamaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Levent istasyonu turnike bölgesinde seyyar satıcılara müdahale edilmesi için destek talep edilmektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Yenikapı istasyonu 2. peron bölgesinde yoğun yanık kokusu tespit edilmiş olup kontrol gerekmektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Ataköy istasyonu kuzey girişindeki yangın tüpünün önüne malzeme konulmuş, erişim engellenmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Gece vardiyasında peron bölgesinde yapılması gereken rutin devriyelerin gerçekleştirilmediği tespit edilmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Servis başlangıcında turnike alanındaki kameranın görüş açısının reklam panosu tarafından kapandığı görülmüştür.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Çalışmıyor telsizler Şişli güney çıkış", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Kapatmışlar yangın tüpü önünü Yenikapı", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Yok güvenlik personeli Sanayi Mahallesi", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Yanık kokusu geliyor bilet holü", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Engellenmiş kamera açısı asansör önü", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Söndürücü erişimi yok BSO-02 önü", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Gayrettepe turnikelerde seyyar satici var müdahale edilmedi", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "alt katta yangin tüpünün önü kapali erisilemiyor", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Vezneciler personel kapisi acik kalmis kimse yok", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "telsizden ses gelmiyor haberlesme saglanamiyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Kadikoy peronda yanik kokusu var acil bakilsin", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "kamera acisi reklam panosu yuzunden kapandi", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Levent bilet holü dilenci var", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Şişhane personel kapısı açık kalmış", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın tüpü önü kapalı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Uzunçayır tünel ağzı yanık kokusu", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Güvenlik telsizi çalışmıyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Şişli gişe önü seyyar satıcı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Kadıköy istasyonu üst kat alanında rutin devriye faaliyetlerinin aksadığı tespit edilmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Şişli istasyonu 2. peron bölgesinde yer alan yangın tüplerinin önü kapatılmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Levent istasyonu tünel ağzında görevli personelin telsiz bataryasının bittiği bildirilmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Kartal istasyonu giriş bölgesinde dilenci faaliyetlerine karşı personel müdahalesi talep edilmektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Yenikapı istasyonu 1. peron bölgesinde yoğun duman kokusu hissedilmektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Gayrettepe istasyonu turnike alanında görevli personelin iletişim cihazı fiziksel olarak hasarlıdır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Mecidiyeköy istasyonu üst katındaki kamera açısının yanındaki tabela ile kapandığı görülmüştür.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Beşiktaş istasyonu 2. peron bölgesinde yangın algılama sistemi alarm vermektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Üsküdar istasyonu çıkış kapısında seyyar satıcıların yolcu geçişini engellediği tespit edilmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Bakırköy istasyonu tünel ağzı bölgesinde gece vardiyası devriye raporları eksiktir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Haliç istasyonu 1. peron bölgesindeki yangın dolabına erişim engellenmiş durumdadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Zincirlikuyu istasyonu turnike bölgesinde görevli personelin telsiz kanalında parazit mevcuttur.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Çağlayan istasyonu üst kat alanında şüpheli yanık kokusu tespit edilmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Söğütlüçeşme istasyonu peron bölgesinde dilencilere karşı önlem alınması gerekmektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Karaköy istasyonu 2. peron bölgesinde güvenlik personeli yerinde bulunmamaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Taksim istasyonu tünel ağzındaki kamera görüş açısı istiflenen malzemelerle kapanmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Kabataş istasyonu girişinde yangın söndürme ekipmanlarının önü geçici olarak kapatılmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Kuzey Marmara hattı istasyonunda gece vardiyası devriye kontrolleri yapılmamıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Eyüp istasyonu 1. peron bölgesinde duman dedektörleri aktif hale gelmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Hagia Sophia istasyonu turnike alanında seyyar satıcılar için müdahale gerekmektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Sultanahmet istasyonu üst kat bölgesinde personel telsizleri üzerinden iletişim kurulamamaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Eminönü istasyonu 2. peron bölgesinde yoğun bir yanık kokusu yayılmaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Hacıosman istasyonu girişindeki yangın tüpü dolabının kapakları kilitli kalmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Kağıthane istasyonu tünel ağzı bölgesinde rutin denetimlerin yapılmadığı saptanmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Karaköy istasyonu üst kat kamera açısı reklam giydirmeleri nedeniyle kısıtlanmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Şişli istasyonu 1. peron bölgesinde görevli personelin telsizi çalışmamaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Levent istasyonu turnike girişlerinde dilencilere karşı etkin önlem alınmalıdır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Kartal istasyonu 2. peron bölgesinde yangın söndürme tüplerine erişilememektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Kadıköy istasyonu tünel ağzı bölgesinde duman algılama sinyali alınmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Gayrettepe istasyonu gece vardiyasında peron içi devriye kayıtları girilmemiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Mecidiyeköy istasyonu üst kat bölgesinde yoğun yanık kokusu tespit edilmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Beşiktaş istasyonu turnike alanında seyyar satıcılar tarafından yolcu geçişi zorlaştırılmaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Üsküdar istasyonu 1. peron bölgesindeki kamera açısı dekoratif panolarla kapanmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Bakırköy istasyonu tünel ağzında görevli personelin iletişim cihazı çalışmamaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Zincirlikuyu istasyonu üst kat yangın ekipmanlarının önü malzeme ile kapatılmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Çağlayan istasyonu peron bölgesinde rutin güvenlik turlarının aksadığı belirlenmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Söğütlüçeşme istasyonu 2. peron bölgesinde duman algılayıcılar uyarı vermektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Taksim istasyonu giriş alanında dilenci faaliyetlerine müdahale edilmesi gerekmektedir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Kabataş istasyonu turnike bölgesinde personelin kullandığı telsiz cihazı arızalıdır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Haliç istasyonu üst kat bölgesinde yanık kokusu olduğu bildirilmiştir.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Ataköy istasyonu asansör önünde konumlandırılan yangın tüpünün önü malzemelerle kapatılmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Gayrettepe istasyonu 2. peronda görevli personelin telsiz bataryası bitmiş durumdadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Vezneciler istasyonu turnike bölgesinde dilenci faaliyetleri nedeniyle yolcu akışı aksamaktadır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Yenikapı istasyonu 1. peronda rutin devriye turlarının gerçekleştirilmediği saptanmıştır.", "kategori": "istasyon_guvenlik", "stil": "standart", "kaynak": "ollama_label:amplify"}
+{"metin": "Dilenci var turnike bölgesi Taksim", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz çekmiyor alt kat Şişhane", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Kapanmış yangın çıkışı Bağcılar", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Görüş kapalı kamera 3. peron", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Seyyar satıcı girdi güney çıkış", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Yok personel devriye Kartal", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Yanık kokusu var üst kat", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Erişim engelli söndürücü BSO-05", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Duman geliyor tünel girişi", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Cihaz çalışmıyor telsiz Yenikapı", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Görmüyor kamera turnike önü", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Müdahale lazım dilenciye Hacıosman", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Boş duruyor nöbet kulübesi", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Koku geliyor yanık kablo", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz bataryası bitik servis başında", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Engellenmiş bakış açısı kamera", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Satıcı var peron arası", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Kapanmış erişim yangın tüpü", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Çalışmıyor telsiz kanalı Gayrettepe", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Devriye atmıyor personel üst kat", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Söndürücü önü dolu kutular", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Duman algılandı 2. peron", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Kamera açısı kaymış asansör", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Dilenci dolaşıyor turnike bölgesi", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz cızırtılı geliyor servis sonunda", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Personel yok güney çıkış", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Koku var yanık plastik", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Erişilemiyor yangın hortumu", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Kapatmışlar kamera görüşünü", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Seyyar satıcı var Taksim", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz bozuk PSD-12 yanı", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Görünmüyor kör nokta kamera", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Personel gelmiyor devriyeye", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın alarmı çaldı üst kat", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Kilitli yangın kapısı Bağcılar", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "İletişim yok telsizle alt kat", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Erişim yok söndürücüye", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Müdahale edilmiyor dilenciye", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Yanık kokusu geliyor Şişli peron", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Kapatmışlar söndürücü önünü Kartal", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Devriye atmıyor personel Gayrettepe", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Görüş yok kamera BSO-02", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "İşgal etmiş seyyar satıcı çıkışı", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Duman algıladı sensör turnike bölgesi", "kategori": "istasyon_guvenlik", "stil": "devrik", "kaynak": "ollama_label:amplify"}
+{"metin": "Atakoy bilet holunde devriye gezen yok kimse gorunmuyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "telsiz bataryasi bitik haberlesme kopuk acil bakilsin", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Kadikoy ust kat duman sensoru calisiyo koku yok", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "tünel agzinda yg tüpünün onune esya konulmus", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Şişli gişe onunde dilenciler toplandi müdahale edilmiyor", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Kartal peron ucunda yanik kokusu geliyor acil", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "kamera gorüs acisi afis yuzunden kapandi bilet holünde", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "güvenlik personeli telsizi bozuk ses gitmiyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "yeniköprü peronlarda devriye gezilmiyor personel yok", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "yangın dolabının kapağı kilitli acil durumda acilmaz", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "seyyar satici bilet holünde ısrarla satis yapiyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "beşiktaş üst katta duman algilandi kontrol edilsin", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "güvenlik personeli yerinde yok gişeler bos kalmis", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "telsiz anteni kirilmis sinyal almiyo servis sonunda", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Bakırköy peron girişinde yanık kokusu var", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "kamera acısı yanındaki pano yuzunden daralmis", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "yangın söndürücü tüpü bosaltılmıs yenilenmesi lazim", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "dilenci grupları turnike önünde yolcu engelliyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Gayrettepe tünel ağzı devriyesi gecikmeli yapılıyor", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "telsizden sadece cızırtı geliyor konusulmuyor", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "üsküdar bilet holünde duman kokusu var", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "yangın butonu onu reklam standiyla kapatilmis", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "personel devriye saatlerine uymuyo gece vardiyasinda", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Söğütlüçeşme gişe önü seyyar satıcılardan temizlenmedi", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Sinyalizasyon odası kapısı acik kimse yok", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "kamera gorüsü tabela yuzunden kisitlanmis", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "telsiz mandalı takili kalmıs haberlesme saglanamiyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Yenikapı üst katlarda yanık kokusu yayılmış", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "yangın tüpü yere dusmus hasarli gorunuyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "devriye personeli telsizini yanina almamıs", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "dilenciler turnike önünde ısrar ediyor müdahale yok", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "tünel agzı aydınlatma az güvenlik riski var", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Acıbadem bilet holünde duman sensoru uyarı veriyor", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "yangın hortumu sızdırıyor yerler su oldu", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "güvenlik personeli uyuyakalmıs peron ortasında", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "telsiz kanalı karisik diger istasyonlar duyuluyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "kamera acısı sarki söyleyen adam yuzunden kapandi", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Haliç peronda yanık kokusu geliyor acil bakin", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "güvenlik personeli devriyesini eksik yapmis", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "seyyar saticilar bilet holunu isgal etmis", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "sirinevler turnike yaninda dilenci var kimse bakmiyo", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "levent alt kat duman detektoru calisiyor acil", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "sisli peronda telsiz cekmiyo haberlesme cok zor", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "yenikapi personel kapisi onunde yg tupu kapanmis", "kategori": "istasyon_guvenlik", "stil": "yazim_yanlisi", "kaynak": "ollama_label:amplify"}
+{"metin": "Hacıosman peronda dilenci var", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Mecidiyeköy koridor seyyar satıcı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Şişli alt kat yanık kokusu", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Sanayi Mahallesi tünel duman var", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Kamera açısı tabela tarafından kapalı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın hortumu önü malzeme dolu", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Güvenlik personeli devriyede yok", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz bataryası şarj tutmuyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yenikapı girişinde seyyar satıcı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Gayrettepe 1. peron duman kokusu", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Kadıköy bilet holü dilenci", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yalova kapısı önü kutular var", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın paneli önü engellenmiş", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz anteni fiziksel olarak kırık", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Kamera görüşü reklam panosu kapalı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Taksim alt geçit seyyar satıcı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Üsküdar peron duman algılama aktif", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Güvenlik telsizi cızırtı yapıyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Söndürme tüpü yeri boş", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yolcu koridoru devriye eksik", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Bakırköy gişe önü dilenci", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Kamera açısı yan duvar dönük", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın dolabı kapağı kilitli", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz mandalı basmıyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Halkalı peron seyyar satıcı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Kamera önü afiş asılmış", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Personel telsizi ses vermiyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Hatun Tepe peron duman kokusu", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın tüpü askısı kırık", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Devriye personeli bölgede yok", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz şarj ünitesi çalışmıyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Söndürme ekipmanı önü kapalı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Tünel içi yanık kokusu var", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Güvenlik telsizi kanal hatası", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın alarmı duman algıladı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Giriş holü devriye eksik", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Bağcılar koridor duman kokusu", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın paneli kırmızı ışık yanıyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Söndürme tüpü önü kolili", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Şişli alt kat seyyar satıcı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Telsiz hoparlörü ses vermiyor", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Yangın alarmı buton kapalı", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "BSO-02 erişimi eşya ile engelli", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}
+{"metin": "Vezneciler holü yangın kokusu", "kategori": "istasyon_guvenlik", "stil": "cok_kisa", "kaynak": "ollama_label:amplify"}

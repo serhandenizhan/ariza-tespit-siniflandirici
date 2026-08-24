@@ -37,6 +37,17 @@ başlığı ortak gövdeyi paylaşır; eğitilen parametre 605K (%0.54), adaptö
 **2.3 MB**. Ayrı üç model eğitmek yerine multi-task seçildi — gerekçesi
 `src/model.py` modül notunda.
 
+**Eğitim:** cross-entropy + L2 (AdamW `weight_decay`) + gradient clipping,
+ve validation loss'a dayalı **early stopping** (`EARLY_STOPPING_PATIENCE`,
+varsayılan 3 epoch). En iyi checkpoint val loss'a değil, üç görevin ortalama
+macro-F1'ine göre seçilir — iki sinyal bilinçli olarak ayrı tutuluyor. Eğitim
+sırasında `model/canli_kayip.json` canlı güncellenir; `dev/canli_kayip.html`
+sayfası (`http.server` ile `:8799`) bunu tarayıcıda grafik olarak gösterir.
+
+**Doğrulama:** model, eğitim verisini üreten LLM'den **bağımsız** başka bir
+kaynaktan gelen 80 kayıtlık elle etiketlenmiş bir test setiyle de ayrıca
+sınanıyor (`python -m src.toplu_test <dosya.jsonl>`), ezber riskine karşı.
+
 ## Kategoriler (11)
 
 | kategori | kapsam (özet) |
@@ -115,7 +126,7 @@ Arayüz: http://localhost:5173 · Swagger: http://localhost:8000/docs
 | 2c — üç boyutlu etiketleme | `python -m src.relabel` | `data/raw/relabeled.jsonl` |
 | 2d — eksik kategori/intent üretimi | `python -m src.generate_missing` | `data/raw/relabeled.jsonl` (ekler) |
 | 3 — ön işleme | `python -m src.preprocess` | `data/processed/*.csv` |
-| 4a — eğitim (multi-task) | `python -m src.train` | `model/govde/` + `model/basliklar.pt` |
+| 4a — eğitim (multi-task, early stopping + canlı loss) | `python -m src.train` | `model/govde/` + `model/basliklar.pt` |
 | 4b — değerlendirme | `python -m src.evaluate --hatalari-goster` | `model/degerlendirme.json` |
 | 4c — eşik kalibrasyonu | `python -m src.calibrate` | `model/kalibrasyon.json` |
 | 4d — öncelik etiket tutarlılığı | `python -m src.oncelik_tutarlilik` | `model/oncelik_tutarlilik.json` |

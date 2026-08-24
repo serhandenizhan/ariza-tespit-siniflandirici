@@ -126,9 +126,15 @@ CATEGORIES = {
             "Anonsun İÇERİĞİ -- yanlış bilgi, ses seviyesi, anonsların "
             "karışması, anons yapılmaması -- 'yolcu_hizmetleri'. Ayrım net: "
             "cihaz BOZUKSA burası, cihaz çalışıyor ama SÖYLEDİĞİ ŞEY "
-            "yanlış/eksikse yolcu_hizmetleri. Kameranın önünün afiş veya "
-            "eşyayla kapatılması (ekipman sağlam, görüş engelli) "
-            "'istasyon_guvenlik'."
+            "yanlış/eksikse yolcu_hizmetleri. "
+            "DİKKAT -- metinde 'cihaz' veya 'sistem' kelimesi geçmesi TEK "
+            "BAŞINA bu kategoriyi göstermez: 'cihazın SESİ KISIK/DÜŞÜK' ve "
+            "'anons/duyuru YAPILMADI/yapılmıyor' ifadeleri her zaman "
+            "'yolcu_hizmetleri'ne gider, cihaz kelimesi geçse bile -- "
+            "buradaki 'cihaz arızası' SADECE cihazın hiç ses ÜRETEMEMESİ, "
+            "hiç ÇALIŞMAMASI, tamamen BOZUK/SUSMUŞ olmasıdır. "
+            "Kameranın önünün afiş veya eşyayla kapatılması (ekipman "
+            "sağlam, görüş engelli) 'istasyon_guvenlik'."
         ),
     },
     "elektronik_sistemler": {
@@ -212,9 +218,12 @@ CATEGORIES = {
             "peron yoğunluğu, personelin yolcuya karşı ilgisizliği"
         ),
         "exclude": (
-            "Anons ve ekran sisteminin TEKNİK arızası "
+            "Anons ve ekran sisteminin TEKNİK arızası (cihaz hiç ses "
+            "üretmiyor, tamamen susmuş, ekran hiç açılmıyor) "
             "'sinyalizasyon_haberlesme'. Ayrım: sistem bozuksa oraya, sistem "
-            "çalışıyor ama verdiği bilgi yanlış veya eksikse buraya."
+            "çalışıyor ama verdiği bilgi yanlış, eksik veya SESİ KISIKSA "
+            "buraya -- 'cihaz' kelimesinin metinde geçmesi kategoriyi "
+            "sinyalizasyon_haberlesme yapmaz."
         ),
     },
     "guvenlik_asayis_olay": {
@@ -317,16 +326,30 @@ INTENTS = {
 #
 # ILK SURUMDE P2/P3 SINIRI SAYIYA DAYANIYORDU ("birden fazla merdiven" P2,
 # "tek merdiven" P3) ve model bunu ogrenemedi: P2 sinif F1 = 0.38, hatalarin
-# cogu P2<->P3 arasindaydi. Sebep, ayrimin metinde cogu zaman HIC GECMEMESI --
-# "merdiven bozuk" cumlesinde kac merdiven oldugu yazmiyor.
+# cogu P2<->P3 arasindaydi. Iki tur bagimsiz etiketleme uyumu da dusuktu
+# (bkz. src/oncelik_tutarlilik.py): ham uyum %69.8, kappa 0.584, P2'de %38.
 #
-# YENI OLCUT: "sefer veya yolcu akisi aksiyor mu?" Bu bilgi bildirimlerde
-# genellikle aciktir ("sefer aksiyor", "yolcular gecemiyor", "peron doldu").
-# Sayi hala bir sinyal ama TEK belirleyici degil.
+# IKINCI SURUM (bu blok): "sefer/yolcu akisi aksiyor mu?" tek basina hala
+# yoruma acikti -- "aksama" ne demek net degildi. MERDIVEN MANTIGINA
+# gecildi: dort tanim YUKARIDAN ASAGIYA, BIRBIRINI DISLAYACAK sekilde
+# siralanmis, her birinde tek bir EVET/HAYIR sorusu var:
 #
-# Ayrica P1 buyuk olcude KURAL ile belirlenebilir (yangin, elektrik carpmasi,
-# intihar...) -- bkz. PRIORITY_RULES asagida. Model sadece kuralin karar
-# veremedigi bildirimleri siniflandirir.
+#   1. Can guvenligi tehdidi mi?                              -> P1
+#   2. Sefer durdu/iptal oldu MI, veya BIRDEN FAZLA ekipman   -> P2
+#      ayni anda devre disi mi, veya yolcu FIZIKSEL OLARAK
+#      gecemiyor mu?
+#   3. TEK ekipman arizali ama yolcu ALTERNATIFLE devam        -> P3
+#      edebiliyor mu?
+#   4. Hicbir ARIZA yok, sadece gorunum/bilgi/oneri mi?        -> P4
+#
+# Sorular arka arkaya sorulur (P1 degilse P2'ye bak, o da degilse P3'e...),
+# yani ayni bildirim iki soruya birden "evet" diyemez -- bu tasarimla
+# amaclanan, P2/P3 arasindaki "aksiyor mu" belirsizligini somut olceklerle
+# (sefer durdu mu / birden fazla mi / alternatif var mi) degistirmek.
+#
+# P1 ayrica KURAL ile de belirlenir (yangin, elektrik carpmasi, intihar...)
+# -- bkz. PRIORITY_RULES asagida. Model sadece kuralin karar veremedigi
+# bildirimleri siniflandirir.
 # ---------------------------------------------------------------------------
 
 PRIORITIES = {
@@ -334,50 +357,80 @@ PRIORITIES = {
         "display": "Kritik",
         "color": "#dc2626",
         "scope": (
-            "CAN GÜVENLİĞİ tehdidi veya hattın tamamen durması: yangın, yoğun "
-            "duman, elektrik çarpması riski, açıkta kalmış enerjili kablo, "
-            "raylara kişi düşmesi veya atlaması, hat üzerinde tren güvenliğini "
-            "tehdit eden nesne, tren kapısının açık seyretmesi, peronda düşme "
-            "riski, su baskını, acil çıkış ve tahliye kapılarının "
-            "çalışmaması, aktif saldırı, şüpheli paket, hayati sağlık acil "
-            "durumu, kendine zarar verme riski, yapısal çökme veya çökme riski"
+            "SORU 1 -- CAN GÜVENLİĞİ tehdidi var mı? Yangın, yoğun duman, "
+            "elektrik çarpması riski, açıkta kalmış enerjili kablo, raylara "
+            "kişi düşmesi veya atlaması, hat üzerinde tren güvenliğini tehdit "
+            "eden nesne veya engel (kaya, cisim, çökme parçası), tren "
+            "kapısının açık seyretmesi, fren sisteminin arızalı olması veya "
+            "basıncının düşük olması, peronda düşme riski, su baskını, acil "
+            "çıkış ve tahliye kapılarının çalışmaması, acil yardım/çağrı "
+            "butonunun yanıt vermemesi, FİZİKSEL saldırı (darp, bıçak, "
+            "silah, personele veya yolcuya yönelik fiili saldırı), şüpheli "
+            "paket, hayati sağlık acil durumu, kendine zarar verme riski, "
+            "yapısal çökme veya çökme riski. EVET ise P1, bu bildirim burada "
+            "biter -- alttaki sorulara bakılmaz.\n"
+            "AÇIKÇA P1 DEĞİL: mala yönelik ve şiddet İÇERMEYEN suçlar -- "
+            "yankesicilik, hırsızlık, kayıp eşya, zorla para isteme (fiziksel "
+            "şiddet yoksa), yasak madde kullanımı, dilencilik, sözlü sataşma. "
+            "Bunlar guvenlik_asayis_olay KATEGORİSİNE girer ama önceliği "
+            "P1 DEĞİL, olayın ciddiyetine göre P2'dir (müdahale gerektirir, "
+            "can tehdidi yoktur) -- 'asayiş olayı = otomatik P1' VARSAYMA.\n"
+            "AYRICA P1 DEĞİL: VARSAYIMSAL/KOŞULLU tehlike ifadeleri -- 'yangın "
+            "ÇIKSA tüpe erişilemez', 'bir şey OLURSA acil çıkış kilitli', "
+            "'yangın İHTİMALİNE karşı' gibi cümleler HENÜZ GERÇEKLEŞMEMİŞ bir "
+            "riske karşı ÖNLEM EKSİKLİĞİ bildirir, gerçekleşmiş bir tehlike "
+            "DEĞİLDİR. Bunlar P3 veya P4'tür (önlem eksikliği ciddiyetine "
+            "göre). Sadece GERÇEKLEŞMİŞ veya ŞU AN gerçekleşmekte olan tehdit "
+            "P1'dir -- 'yangın var', 'duman doldu', 'yanıyor' P1; 'yangın "
+            "çıksa napcaz', 'tüpe erişim yok' (yangın olmadan) P1 DEĞİL."
         ),
     },
     "P2": {
         "display": "Yüksek",
         "color": "#ea580c",
         "scope": (
-            "SEFER VEYA YOLCU AKIŞI AKSIYOR, ama can güvenliği tehdidi yok: "
-            "seferlerin gecikmesi, durması veya seyreltilmesi, sinyalizasyon "
-            "arızası nedeniyle operasyonun aksaması, PAKS arızası, yolcuların "
-            "geçiş yapamaması, birden fazla ekipmanın (merdivenler, "
-            "asansörler, turnikeler) aynı anda devre dışı kalması, birden "
-            "fazla istasyonu etkileyen arıza, istasyonda ciddi su sızıntısı. "
-            "AYIRT EDİCİ SORU: bu bildirim yüzünden yolcu akışı veya sefer "
-            "düzeni bozuluyor mu? Evet ise P2."
+            "(P1 değilse) SORU 2 -- şu ÜÇ somut durumdan biri var mı? "
+            "(a) Sefer DURDU, İPTAL edildi veya ciddi şekilde seyreltildi; "
+            "(b) AYNI TÜRDEN İKİ VEYA DAHA FAZLA ekipman (iki+ merdiven, "
+            "iki+ asansör, birden fazla turnike, PAKS) AYNI ANDA devre "
+            "dışı; (c) yolcular FİZİKSEL OLARAK geçiş/giriş/çıkış "
+            "YAPAMIYOR (turnikelerin tamamı kapalı, tüm girişler kapalı, "
+            "istasyon kapatıldı), istasyonda ciddi su sızıntısı sefer "
+            "hattını tehdit ediyor. Üçünden biri EVET ise P2 -- SORU 3'e "
+            "bakılmaz. HİÇBİRİ değilse P3'e geç.\n"
+            "(b) MADDESİ İÇİN DİKKAT: 'birden fazla' her zaman SAYIYLA "
+            "yazılmaz -- 'hiçbiri çalışmıyor', 'bütün merdivenler durdu', "
+            "'tamamı devre dışı', 'hepsi bozuk', 'cihazların hepsi aynı "
+            "anda durmuş' gibi ifadeler de AYNI ANLAMA gelir ve P2'dir. "
+            "'iki/üç/birden fazla' sadece örnek, tek geçerli ifade biçimi "
+            "DEĞİL -- anlam olarak 'tek bir ekipman değil, birden çoğu' "
+            "diyen her ifade bu maddeyi tetikler."
         ),
     },
     "P3": {
         "display": "Orta",
         "color": "#ca8a04",
         "scope": (
-            "TEKİL ekipman arızası, sefer ve yolcu akışı normal devam ediyor: "
-            "tek bir yürüyen merdivenin arızalanması, bir asansörün bozuk "
-            "olması, birkaç aydınlatma lambasının yanmaması, klimanın "
-            "çalışmaması, tek bir turnike arızası, tek bir biletmatik "
-            "arızası, bir kameranın görüntü vermemesi. AYIRT EDİCİ SORU: "
-            "arıza var ama yolcular normal şekilde yolculuk edebiliyor mu? "
-            "Evet ise P3."
+            "(P1 ve P2 değilse) SORU 3 -- TEK bir ekipmanın arızası var ve "
+            "yolcu bu ekipman olmadan veya bekleyerek yolculuğuna DEVAM "
+            "EDEBİLİYOR mu? Tek yürüyen merdiven/asansör/turnike/biletmatik "
+            "arızası, birkaç aydınlatma lambasının yanmaması, klimanın "
+            "çalışmaması, bir kameranın görüntü vermemesi, sinyalizasyonun "
+            "sefer akışını DURDURMADAN aksatması. EVET (yolculuk mümkün) "
+            "ise P3. Arıza YOKSA P4'e geç."
         ),
     },
     "P4": {
         "display": "Düşük",
         "color": "#65a30d",
         "scope": (
-            "İşleyişi etkilemeyen bildirim: kirlilik ve temizlik talebi, "
-            "hasarlı veya eksik tabela, kozmetik hasar, bilgilendirme "
-            "eksikliği, küçük bakım talepleri, öneriler ve iyileştirme "
-            "istekleri, bilgi talepleri"
+            "(P1, P2, P3 değilse) SORU 4 -- hiçbir ekipman ARIZASI yok mu, "
+            "bildirim sadece görünüm/bilgi/öneri mi? Kirlilik ve temizlik "
+            "talebi, hasarlı veya eksik tabela, kozmetik hasar, "
+            "bilgilendirme eksikliği, küçük bakım talepleri, öneriler ve "
+            "iyileştirme istekleri, bilgi talepleri, personelin ilgisizliği "
+            "gibi arıza içermeyen şikayetler. Buraya kadar geldiyse zaten "
+            "P4 -- başka soru yok."
         ),
     },
 }
@@ -395,18 +448,40 @@ PRIORITIES = {
 # anlamina gelen ifadeler. "Genis ve gurultulu kural yerine dar ve kesin
 # kural" ilkesi (bkz. YABANCI bayragi dersi).
 PRIORITY_RULES = [
-    (r"\byangin\b|\balev\b|\bates\b(?! kes)", "yangın"),
+    # "yangin" tek basina yeterli degil -- iki yanlis pozitif kaynagi var:
+    # (1) ekipman adi ("yangin tupu/sondurme/algilama/dolabi/merdiveni" bir
+    #     OLAY degil, cihaz ismi); (2) kosullu/varsayimsal cumle ("yangin
+    #     CIKSA/OLURSA/ihtimaline karsi" henuz gerceklesmemis bir risk).
+    # Ikisi de negatif bakis (lookahead) ile disariya alindi. 23 Agu 2026,
+    # bagimsiz test setinde bulundu: "yangin tupu... yangin CIKSA tupe
+    # erisim engellenmis" (gercek P4) modelde/kuralda P1 cikiyordu.
+    (r"\byangin\b(?!\s*(tup|sondur|algila|dolab|merdiven|ciksa|cikarsa|"
+     r"olursa|olsa|ihtimal))|\balev\b|\bates\b(?! kes)", "yangın"),
     (r"yogun duman|duman doldu|duman cikiyor|duman var", "yoğun duman"),
     (r"elektrik carp|akim carp|carpilma riski|carpilacak", "elektrik çarpması riski"),
     (r"raya atla|raylara atla|raya dus|raylara dus|ray uzerinde kisi", "raylara kişi"),
     (r"intihar|kendine zarar|kendini asag", "intihar riski"),
     (r"supheli paket|supheli canta|supheli kutu", "şüpheli paket"),
-    (r"bicak cek|silah|saldiri var|saldirdi", "aktif saldırı"),
+    (r"bicak cek|silah|saldiri var|saldirdi|fiili saldiri|saldiriya ugra|"
+     r"saldirida bulun|darp edildi|darbedildi", "fiziksel saldırı"),
     (r"bayil|kalp krizi|nefes alamiyor|bilinci kapali|hayati tehlike", "sağlık acili"),
     (r"cokme riski|cokuyor|cokmus|tavan cok", "yapısal çökme"),
     (r"su baskini|su basti|sel basti", "su baskını"),
     (r"tahliye kapisi acilmiyor|acil cikis kilitli|acil cikis kapali",
      "acil çıkış engeli"),
+    # Bu iki kural src/oncelik_tutarlilik.py olcumunde bulundu: birinci tur
+    # etiketleme bunlari kacirip P2/P3 vermisti, ikinci tur (ayni model,
+    # farkli cagri) P1'e duzeltti -- yani config metni dogru okunuyor ama
+    # LLM her seferinde ayni sekilde yakalamiyordu. Kural katmani bu
+    # tutarsizligi ortadan kaldirir.
+    (r"kaya parcasi|yabanci cisim|hat\w*\s+uzerinde.{0,25}(kaya|cisim|engel|"
+     r"nesne)|yolu.{0,15}kapat|raylar\w*.{0,15}kapat|tren gecemiyo",
+     "hat üzerinde engel"),
+    (r"acil yardim butonu.*(yanit vermiyor|calismiyor|bozuk)|"
+     r"acil cagri butonu.*(yanit vermiyor|calismiyor|bozuk)",
+     "acil yardım butonu arızası"),
+    (r"fren basinci dusuk|fren tutmuyor|fren arizali|fren calismiyor",
+     "fren arızası"),
 ]
 
 CATEGORY_KEYS = list(CATEGORIES.keys())
@@ -535,6 +610,23 @@ SLOT_VALUES = {
 
 # ---------------------------------------------------------------------------
 # LLM saglayici ayarlari
+#
+# GENEL POLITIKA (23 Agu 2026): ONEMLI islerde Nemotron (OpenRouter), DIGER
+# islerde gemma4:cloud (Ollama).
+#   ONEMLI  = seed/gold uretimi -- kucuk hacimli (12-10/kategori) ama few-shot
+#             yemi ve degerlendirme tabani olarak butun projeyi etkiliyor.
+#             SEED_PROVIDER = "openrouter" (asagida).
+#   DIGER   = coklu boyutlu etiketleme (relabel/generate_missing/
+#             oncelik_tutarlilik) -- yuksek hacimli (1000+ kayit), hiz ve
+#             kota-sizlik burada Nemotron'un kalitesinden daha degerli.
+#             OLLAMA_MODEL = "gemma4:cloud" (asagida), varsayilan saglayici.
+# Gerekce: gemma4:cloud relabel gorevinde qwen2.5:14b'yi acik farkla gecti
+# (bkz. OLLAMA_MODEL yorumu) ve kota siniri yok; Nemotron kalitede guclu ama
+# ~50 istek/gun kotasi + yavasligi (120 kayit ~8 dk) yuksek hacimli islerde
+# pratik degil. Groq denendi (once llama-3.3-70b-versatile'in kataloktan
+# kaldirildigi, sonra tek alternatif gpt-oss-120b'nin 15+ kayitlik
+# partilerde JSON semasini bozdugu goruldu) -- bu proje icin kullanisli
+# bulunmadi.
 # ---------------------------------------------------------------------------
 
 # Seed ve gold uretimi icin: "gemini" | "claude" | "groq" | "openrouter"
@@ -554,11 +646,17 @@ CLAUDE_MODEL = "claude-haiku-4-5-20251001"
 
 # Groq: kredi karti gerektirmez, OpenAI-uyumlu API, genis ucretsiz kota
 # (30 istek/dk, 14.400 istek/gun civari -- modele gore degisir).
-# NOT (13 Agu 2026): llama-3.3-70b-versatile bu proje icin YETERSIZ cikti --
-# coklu kisit (kategori + stil + uzunluk + kod orani) icin talimat takibi
-# zayif. Config'teki Turkce metnin ASCII olmasi da katkida bulunmus olabilir
-# (simdi duzeltildi) -- yeniden denenmeli.
-GROQ_MODEL = "llama-3.3-70b-versatile"
+# NOT (13 Agu 2026): llama-3.3-70b-versatile bu proje icin YETERSIZ cikti.
+# NOT (23 Agu 2026): llama-3.3-70b-versatile canli katalogdan TAMAMEN
+# KALKMIS (Groq'ta artik hic Llama sohbet modeli yok, sadece prompt-guard
+# gibi kucuk yardimci modeller). En buyuk genel amacli secenek
+# openai/gpt-oss-120b'ye gecildi, ama PRATIK DEGIL: relabel gorevinde
+# (kategori+intent+oncelik JSON'u) 10 kayitlik partide calisiyor, 15+
+# kayitta JSON semasini bozup 400 hatasi veriyor -- bu projenin standart
+# BATCH=40'iyla uyumsuz, kullanmak icin ozel kucuk-batch mantigi gerekir.
+# Bu yuzden POLITIKA disinda tutuldu (bkz. "GENEL POLITIKA" yorumu yukarida):
+# Nemotron (onemli isler) + gemma4:cloud (diger isler) yeterli bulundu.
+GROQ_MODEL = "openai/gpt-oss-120b"
 
 # OpenRouter: kredi karti istemeyen ikinci ucretsiz secenek (gunde 50 istek).
 # Katalog surekli degisiyor, sadece acik agirlikli modeller ucretsiz.
@@ -583,7 +681,25 @@ LLM_MAX_RETRIES = 3
 AMPLIFY_PROVIDER = "hybrid"     # "hybrid" | "openrouter" | "ollama"
 
 OLLAMA_HOST = "http://localhost:11434"
-OLLAMA_MODEL = "qwen2.5:14b"
+
+# NOT (23 Agu 2026): qwen2.5:14b TAMAMEN BIRAKILDI, tek Ollama modeli
+# gemma4:cloud oldu. Once ETIKETLEME rolunde kiyaslandi (120 kayitlik
+# referans set, bulut-etiketli kayitlarla kiyas):
+#     model           kategori   intent   oncelik      sure (120 kayit)
+#     qwen2.5:14b       %62.4     %71.8     %36.8      10 dk  9 sn
+#     gemma4:cloud      %90.8     %94.2     %58.3          41 sn
+# Sonra URETIM rolunde de test edildi: gemma4:cloud ile Istasyon Guvenligi
+# kategorisi icin 200 kayit uretildi (bu kategori 113 kayitla en zayif
+# kategoriydi, F1 0.6154), elle okundu -- qwen'in bilinen zayifligi olan
+# uydurma istasyon adi/teknik terim HIC gorulmedi (Adim 2b'de qwen
+# "marmaraisi", "yersenlik" gibi terimler uydurmustu). gemma4:cloud iki
+# rolde de UC BOYUTTA ONDE ve on be kat hizli -- qwen'i tutmak icin bir
+# gerekce kalmadi.
+#
+# Tek degisken yeterli: iki rol (uretim + etiketleme) artik ayni modeli
+# kullaniyor, ayri OLLAMA_LABEL_MODEL degiskeni gereksizdi ve silindi.
+OLLAMA_MODEL = "gemma4:cloud"
+
 OLLAMA_TIMEOUT = 300            # 14B model Apple Silicon'da yavas olabilir
 
 # Ollama'nin varsayilan baglam penceresi 2048 token. Cogaltma prompt'u
@@ -621,6 +737,17 @@ BASE_MODEL = "dbmdz/bert-base-turkish-cased"
 
 MAX_LENGTH = 64             # ariza bildirimleri kisa; 64 token fazlasiyla yeter
 NUM_EPOCHS = 12
+
+# Early stopping: validation KAYBI (loss) art arda EARLY_STOPPING_PATIENCE
+# epoch boyunca iyilesmezse egitim NUM_EPOCHS'a ulasmadan durur.
+#
+# DIKKAT -- bu, model_kaydet() secimiyle AYNI SEY DEGIL: en iyi checkpoint
+# hala uc gorevin ORTALAMA macro-F1'ine gore seciliyor (val_kayip'e gore
+# degil). Sebep: F1 asil basari kriteri, val_kayip sadece "asiri ogrenmeye
+# basladi mi" sinyali icin izleniyor -- ikisi bazen ayni epoch'ta pik
+# yapmaz (bu projede de val_kayip epoch 6-7'den sonra yukselirken F1 hala
+# artabiliyordu, bkz. egitim_ozeti.json gecmisi).
+EARLY_STOPPING_PATIENCE = 3
 BATCH_SIZE = 16
 
 # DIKKAT (19 Agu 2026): burada onceden 2e-5 yaziyordu ve model OGRENMIYORDU.

@@ -532,40 +532,47 @@ ile seed eğitime katılırsa ortaya çıkar.
    kazandıracağı bir şey yok.
 5. **Adım 2b model kararı verildi:** hibrit (aşağıda).
 
-## ⚠️ Güncel Açık Noktalar (21 Ağu 2026, Taksonomi v2 sonrası)
+## ⚠️ Güncel Açık Noktalar (23 Ağu 2026, Adım 10 sonrası)
 
 1. **`Metro_Istanbul_Ariza_Tespit_Raporu.docx` GÜNCELLENMELİ.** Rapor v1
    taksonomisine (8 kategori, tek boyut) göre yazıldı ve artık geçerli değil.
    Proje bitince yeniden üretilmeli: 11 kategori, üç boyutlu mimari, yeni
-   metrikler, öncelik tutarlılık ölçümü, evidence yöntemi, kaldırılan
-   `personel_bilgi` kategorisi. **Bu maddeyi kapatmadan projeyi bitmiş sayma.**
+   metrikler, öncelik tutarlılık ölçümü, evidence yöntemi, early stopping +
+   canlı loss izleme, bağımsız test doğrulaması. **Bu maddeyi kapatmadan
+   projeyi bitmiş sayma.**
 
-2. **`İstasyon Güvenliği` kategorisi veri açısından zayıf** — 95 kayıt
-   (diğerleri 172–269), test F1 **0.6154** (başarı kriteri 0.75). Precision
-   1.00 / recall 0.44: model kategoriyi tanıyor ama tahmin etmekten çekiniyor.
-   Kota yenilenince `generate_missing.py` ile ~100 kayıt daha üretilmeli.
+2. ✅ **~~İstasyon Güvenliği veri açığı~~ KAPANDI** — 95 → 270 kayıt,
+   test F1 0.6154 → 0.8235'e çıktı (Adım 9 sonu).
 
-3. **Öncelik başlığı etiket tavanına yakın** (model 0.62, tavan ~0.70).
-   Buradan fazlası ancak etiketler daha tutarlı hale gelirse mümkün. Yapılacak:
-   yeni P2/P3 tanımıyla TÜM veriyi yeniden etiketlemek (bu turda kota
-   yetmediği için sadece 567 kayıt yeni tanımla etiketlendi) ve tutarlılığı
-   yeniden ölçmek.
+3. ✅ **~~Öncelik etiket tavanı~~ İYİLEŞTİRİLDİ** — Adım 10'da üç turlu
+   iyileştirme yapıldı: merdiven mantığı netleştirildi, P1 kural motorundaki
+   iki gerçek hata (ekipman adı + koşullu ifade yanlış pozitifi) düzeltildi,
+   20 hedefli örnekle "dolaylı çoğulluk" boşluğu dolduruldu. Sonuç: bağımsız
+   test setinde öncelik doğruluğu %73.8 → **%81.2**. Tavan hâlâ var (kappa
+   ~0.72-0.77 aralığında dalgalanıyor) ama önemli bir sıçrama yapıldı.
 
-4. **Gold test seti YOK.** v1 gold'u eski taksonomiye ait olduğu için devre
-   dışı bırakıldı (`data/seed/gold_eski_taksonomi_backup.jsonl`). Kullanıcı
-   yeni gold'u **farklı bir kaynaktan** üretip getirecek — bu bilinçli bir
-   karar: eğitim verisini üreten modelden gelen test seti iyimser metrik verir
-   (ölçüldü: aynı model gold'da %91, bağımsız sette %71).
+4. **Gold test seti YOK** ama **bağımsız doğrulama VAR.** Kullanıcı
+   `data/seed/yeni_gold_deneme.jsonl` adıyla 80 kayıtlık, farklı bir LLM'den
+   üretilmiş bağımsız bir test seti getirdi. `src/toplu_test.py` bu dosyayla
+   (ve üç boyutu birden destekleyecek şekilde) çalışıyor. Bu dosya resmi
+   `gold_test.csv` YERİNE geçmiyor (farklı bir amaç: hızlı doğrulama), ama
+   aynı işlevi görüyor. Resmi gold hâlâ isteğe bağlı bir sonraki adım.
 
 5. **Frontend güncellenmedi.** Backend üç boyut + yeni alanlar döndürüyor ama
    arayüz hâlâ v1 sözleşmesini bekliyor. Yapılacak: intent/öncelik rozetleri,
-   evidence gösterimi, eksik bilgi sorusu, tekrar uyarısı.
+   evidence gösterimi, eksik bilgi sorusu, tekrar uyarısı. **Sıradaki adım.**
 
 6. **Testler güncellenmedi.** `tests/test_api.py` v1 alanlarını doğruluyor.
 
 7. **`calibrate.py` güncellenmedi** — tek başlıklı modele göre yazılmış, çok
    başlıklı modelle çalışması için `model_yukle`/`tahmin_et` çağrılarının
    gözden geçirilmesi gerekiyor.
+
+8. **Kalan bir öncelik sınırı belirsizliği:** "Asansörde mahsur kaldık,
+   kapılar fiziksel olarak sıkıştı" tarzı cümleler modelde P1'e kayıyor
+   (doğrusu P2 -- can tehdidi yok, ama ciddi bir aksama var). P1 kural
+   motorunda da böyle bir senaryo yok. Küçük, ince bir sınır sorunu;
+   şimdilik bilinçli olarak ertelendi (bkz. Adım 10 sonu).
 
 ## Yol Haritası — Kalan Adımlar
 
@@ -1511,6 +1518,122 @@ tek sağlayıcıyla mümkün olmadı. Uygulanan strateji:
    3-flash-preview → flash-latest → 3.1-flash-lite sırasıyla kullanıldı.
 3. **Devam edilebilirlik şart.** `relabel.py` çıktı dosyasını her partide
    yazıyor ve yeniden çalıştırıldığında kaldığı yerden devam ediyor.
+
+## Adım 10 — LLM sağlayıcı kararı, eğitim altyapısı, bağımsız doğrulama (23 Ağu 2026)
+
+### Sağlayıcı sadeleştirmesi: qwen çıkarıldı, nihai politika "önemli işte Nemotron, geri kalanda gemma"
+
+`qwen2.5:14b` hem üretim hem etiketleme rolünde aynı görevde ölçülüp
+Nemotron/gemma4:cloud'un gerisinde kaldığı zaten Adım 2b'de kanıtlanmıştı;
+bu turda kodun kendisinden de tamamen çıkarıldı — kullanılmayan sağlayıcı
+kodu tutmanın gerekçesi yok. `OLLAMA_MODEL = "gemma4:cloud"` tek değişkene
+indirildi (önceden üretim/etiketleme için ayrı ayrı tutulmuştu).
+
+**Cerebras denendi, iki ayrı API key ile de `402 Payment Required` verdi**
+(hesap bazlı faturalama sorunu, key'e özel değil) — kod tabanına hiç
+eklenmedi; "doğrulanmamış/çalışmayan sağlayıcıyı asla wire etme" ilkesi.
+
+**Groq (`openai/gpt-oss-120b`) 15+ kayıtlık partilerde JSON şemasını
+bozuyordu** (10'da çalışıyor, 15/20/25'te `400 - Failed to validate JSON`).
+Nemotron ile aynı görevde kıyaslama başlatıldı ama kullanıcı "bu kadar
+sürecekse salalım, Nemotron zaten önde çıkacak" dedi ve iş durduruldu.
+
+**Nihai karar:** önemli/yüksek riskli işler (seed/gold üretimi) → Nemotron
+(OpenRouter); toplu üretim/etiketleme → gemma4:cloud (Ollama, çok daha
+hızlı, kalitesi yeterli).
+
+### Eğitim altyapısı — loss fonksiyonu doğrulaması, early stopping, canlı izleme
+
+Kullanıcı eğitimi canlı loss grafiğiyle izlemek istedi ve mevcut
+düzenlileştirme tekniklerinin doğrulanmasını istedi. Kontrol edildi:
+cross-entropy (`src/model.py`, her başlık için ayrı, toplanıyor) ve L2
+(AdamW `weight_decay=0.01`) zaten vardı; ekstra teknik istenmedi (kullanıcı
+seçimi: "mevcut üçü yeterli").
+
+**Early stopping eklendi** — validation loss'a dayalı, training loss'a DEĞİL
+(kullanıcı bunu özellikle netleştirdi ve doğru anladığını teyit için sordu).
+`config.EARLY_STOPPING_PATIENCE = 3`: val_kayip 3 epoch üst üste iyileşmezse
+eğitim durur. **En iyi checkpoint seçimi bilinçli olarak AYRI bir sinyale
+dayanıyor** — val_kayip'e değil, üç görevin ortalama macro-F1'ine. Sebep:
+val_kayip düzleşse bile bir başlığın F1'i hâlâ iyileşiyor olabilir (nitekim
+son eğitimde epoch 8, val_kayip epoch 7'den yüksek olduğu halde ortF1 en
+yüksek noktaydı).
+
+**Canlı loss izleme:** `src/train.py` eğitim sırasında (her 5 batch'te bir +
+her epoch sonunda) `model/canli_kayip.json`'a yazıyor; `dev/canli_kayip.html`
+saf SVG ile (dış kütüphane yok) bunu tarayıcıda çiziyor,
+`.claude/launch.json`'daki `canli-kayip` (`python -m http.server 8799`)
+sunucusuyla servis ediliyor. Uçtan uca doğrulandı: ekran görüntüleri gerçek
+zamanlı güncellenen kayıp eğrisi ve epoch 10/12'de early-stop'un tetiklendiği
+anı gösterdi.
+
+**Bulunan gerçek hata:** `float("inf")` içeren bir JSON alanı (`en_iyi_val_kayip`
+başlangıç değeri) `json.dumps` ile `Infinity` literaline dönüşüyordu — bu
+JSON spesifikasyonuna göre GEÇERSİZ, tarayıcının `JSON.parse()`'ı sessizce
+patlıyor ve grafik sonsuza kadar "veri bekleniyor…" durumunda kalıyordu.
+`None`'a çevrilerek düzeltildi.
+
+**Nihai eğitim sonucu (early-stopped, epoch 8/12 seçildi, epoch 10'da
+durduruldu):**
+
+| görev | macro F1 | accuracy |
+| --- | --- | --- |
+| Kategori | 0.8844 | 0.8837 |
+| Intent | 0.9285 | 0.9535 |
+| Öncelik | 0.7374 | 0.7403 |
+
+### Bağımsız test seti ile üç gerçek hata bulundu ve ikisi tam, biri kısmen düzeltildi
+
+Kullanıcı `data/seed/yeni_gold_deneme.jsonl` adıyla **farklı bir LLM'den
+üretilmiş, elle etiketlenmiş 80 kayıtlık** bağımsız bir test seti getirdi
+(proje boyunca tekrar eden "değerlendirme verisi üretim verisiyle aynı
+kaynaktan gelmemeli" ilkesinin bir uygulaması). `src/toplu_test.py` üç
+görevi birden (kategori/intent/öncelik) destekleyecek şekilde yeniden
+yazıldı — İngilizce/Türkçe alan adı takma adlarını (`priority`/`oncelik`
+gibi) kabul ediyor, `evaluate.tum_gorevleri_tahmin_et()` ile tek geçişte tüm
+başlıkları tahmin ediyor.
+
+**İç test seti vs bağımsız test seti (öncelik doğruluğu):**
+
+| aşama | iç test seti (relabel kaynaklı) | bağımsız set (80 kayıt) |
+| --- | --- | --- |
+| düzeltme öncesi | — | %73.8 (F1 0.7224) |
+| düzeltme sonrası | 0.6951 (gerileme) | **%81.2** (F1 0.7473) |
+
+İç test setinde küçük bir gerileme görüldü ama bağımsız sette net iyileşme
+oldu — sonuç: iç test setinin kendi etiketleri (aynı LLM'in tekrar
+etiketlemesiyle) hafif tutarsızlaştı, ama modelin gerçek genelleme başarısı
+arttı. Bu gözlem kullanıcıya saklanmadan, iki tabloyla birlikte raporlandı.
+
+**Bulunan 3 bug:**
+
+1. **`sinyalizasyon_haberlesme` ↔ `yolcu_hizmetleri` sınırı** — "cihaz arızası"
+   ifadesi CCTV/anons CİHAZININ teknik arızası (`sinyalizasyon_haberlesme`)
+   ile "anons yapılmadı/yanlış anons" (`yolcu_hizmetleri`, cihaz sağlam ama
+   içerik/hizmet eksik) arasında net ayrılmamıştı. `config.py`'deki iki
+   kategorinin `exclude` metinlerine karşılıklı netleştirme eklendi. **Tam
+   düzeltildi** (3/3 hedef cümle), ters yönde 1 yeni hata çıktı (kabul
+   edilebilir, net kazanç).
+2. **P1 kural motorunun varsayımsal/koşullu ifadeyi yakalaması** — "yangın
+   çıksa tüpe erişilemez" gibi henüz gerçekleşmemiş risk cümleleri yanlışlıkla
+   P1 tetikliyordu. Regex'e negatif lookahead eklendi (`çıksa`, `olursa`,
+   `ihtimal` gibi kelimeler ve ekipman adları `tüp`/`merdiven` hariç
+   tutuldu). **Tam düzeltildi** (P1 için tüm bağımsız test kayıtları doğru).
+3. **P2'nin dolaylı çoğulluk ifadelerini kaçırması** — "hiçbiri çalışmıyor",
+   "hepsi bozuk" gibi sayı içermeyen ama "birden fazla ekipman" anlamına
+   gelen ifadeler P3'e düşüyordu (kural sadece "iki/üç/birden fazla" gibi
+   sayısal ifadeleri tanıyordu). `config.py`'deki P2 kapsam metni
+   genişletildi VE 20 elle gözden geçirilmiş hedefli örnek üretilip
+   (`data/raw/p2_dolayli_cogulluk.jsonl`, kullanıcı tarafından bağımsız
+   olarak üretilip getirildi) eğitim havuzuna eklendi. **Kısmen düzeltildi**
+   (0/3 → 2/3 hedef cümle), kalan 1 vaka farklı bir yönde başarısız oluyor
+   (P3 yerine artık P1'e kayıyor — fiziksel mahsur kalma ifadesi, "can
+   güvenliği" ile "operasyonel aksama" arasında gerçekten belirsiz bir sınır).
+   Azalan getiri noktası olarak kabul edildi, ileri düzeltme ertelendi.
+
+Bu bulgu-düzeltme döngüsü, projenin "az örneklem + tek ölçüm = gürültü"
+dersinin dördüncü örneği: iç test setindeki görünür gerileme, bağımsız
+doğrulama olmasaydı yanlış yorumlanıp geri alınabilirdi.
 
 
 ## Genel İlkeler (her adımda geçerli)
