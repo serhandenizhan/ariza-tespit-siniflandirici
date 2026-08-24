@@ -957,8 +957,17 @@ STATIONS = [
 # emrine "Kadikoy'de merdiven bozuk" yazmak yetmez, hangi merdiven oldugu
 # gerekir. Metro Istanbul'un kendi kayit sisteminde de bu alan ayri tutuluyor.
 LOCATION_PATTERNS = [
-    (r"(\d+)\s*(?:numarali|nolu|no\.?)\s*(giris|cikis|peron|turnike|"
-     r"merdiven|asansor|kapi|vagon|pano)", "{0} numaralı {1}"),
+    # NOT: asansor/merdiven/turnike/pano bilerek DISLANDI -- bunlar ayni
+    # zamanda EQUIPMENT sozlugunde birebir gecen kelimeler. "3 numarali
+    # asansor" cogu zaman "asansor #3" (yani ekipmanin KENDISI, hangi
+    # ornek oldugunu belirtiyor) demektir; bu kelimeler buraya eklenirse
+    # _konumu_maskele tum ifadeyi (ekipman kelimesi dahil) metinden silip
+    # ekipman_bul()'un ayni kelimeyi bulmasini engelliyordu (gercek hata,
+    # bkz. CLAUDE.md Adim 11). "X numarali asansorun YANINDAKI Y" gibi asil
+    # konum-belirteci kullanimlar zaten asagidaki ayri "yanindaki/oradaki"
+    # deseniyle yakalaniyor.
+    (r"(\d+)\s*(?:numarali|nolu|no\.?)\s*(giris|cikis|peron|kapi|vagon)",
+     "{0} numaralı {1}"),
     (r"(\d+)\s*\.\s*(peron|kat|vagon|giris|cikis)", "{0}. {1}"),
     (r"(kuzey|guney|dogu|bati)\s*(giris|cikis|peron|kapi)", "{0} {1}"),
     # Genel kalip: "<ekipman>in yanindaki/oradaki <asil ekipman>". Ilk ekipman

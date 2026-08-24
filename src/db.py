@@ -58,6 +58,19 @@ CREATE INDEX IF NOT EXISTS idx_bildirim_dup ON bildirimler(istasyon, ekipman, za
 """
 
 
+def _simdi_utc() -> str:
+    """Suanki zamani UTC olarak ISO bicimde doner.
+
+    GERCEK HATA (bulundu 24 Agu 2026): daha once time.strftime() YEREL saat
+    dilimini kullaniyordu, ama olasi_tekrar() ve son_kayit_tekrar_mi()
+    SQLite'in datetime('now', ...) fonksiyonuyla karsilastiriyor -- o da
+    UTC doner. Turkiye UTC+3 oldugu icin her kayit gercekte "3 saat sonraya"
+    yazilmis gibi duruyordu; sonuc: 30 saniyelik dene-yanila korumasi ve
+    15 dakikalik tekrar-bildirim penceresi fiilen ~3 saate genisliyordu.
+    """
+    return time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime())
+
+
 @contextmanager
 def _baglanti():
     conn = sqlite3.connect(C.LOG_DB_FILE)
@@ -83,7 +96,7 @@ def init() -> None:
             return
         with C.CLEAN_FILE.open(encoding="utf-8") as f:
             satirlar = list(csv.DictReader(f))
-        simdi = time.strftime("%Y-%m-%dT%H:%M:%S")
+        simdi = _simdi_utc()
         conn.executemany(
             "INSERT INTO bildirimler (metin, kategori, guven, kaynak, zaman) "
             "VALUES (?, ?, NULL, 'gecmis', ?)",
@@ -101,7 +114,7 @@ def logla(metin: str, kategori: str, guven: float, kaynak: str = "canli",
             "(metin, kategori, guven, kaynak, istasyon, ekipman, intent, "
             " oncelik, zaman) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (metin, kategori, guven, kaynak, istasyon, ekipman, intent,
-             oncelik, time.strftime("%Y-%m-%dT%H:%M:%S")),
+             oncelik, _simdi_utc()),
         )
         return cur.lastrowid
 
