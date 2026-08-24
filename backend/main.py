@@ -92,7 +92,8 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Metro İstanbul Arıza Tespit Sınıflandırıcı",
     description=(
-        "Serbest metinli arıza bildirimlerini 8 bakım kategorisinden birine "
+        "Serbest metinli arıza bildirimlerini intent + 11 kategori + öncelik "
+        "olmak üzere üç boyutta sınıflandırır ve ilgili bakım ekibine "
         "yönlendirir. Düşük güven ve sınırda bildirim durumlarını ayrı ayrı "
         "işaretler."
     ),

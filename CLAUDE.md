@@ -532,7 +532,7 @@ ile seed eğitime katılırsa ortaya çıkar.
    kazandıracağı bir şey yok.
 5. **Adım 2b model kararı verildi:** hibrit (aşağıda).
 
-## ⚠️ Güncel Açık Noktalar (23 Ağu 2026, Adım 10 sonrası)
+## ⚠️ Güncel Açık Noktalar (23 Ağu 2026, Adım 11 sonrası)
 
 1. **`Metro_Istanbul_Ariza_Tespit_Raporu.docx` GÜNCELLENMELİ.** Rapor v1
    taksonomisine (8 kategori, tek boyut) göre yazıldı ve artık geçerli değil.
@@ -558,9 +558,8 @@ ile seed eğitime katılırsa ortaya çıkar.
    `gold_test.csv` YERİNE geçmiyor (farklı bir amaç: hızlı doğrulama), ama
    aynı işlevi görüyor. Resmi gold hâlâ isteğe bağlı bir sonraki adım.
 
-5. **Frontend güncellenmedi.** Backend üç boyut + yeni alanlar döndürüyor ama
-   arayüz hâlâ v1 sözleşmesini bekliyor. Yapılacak: intent/öncelik rozetleri,
-   evidence gösterimi, eksik bilgi sorusu, tekrar uyarısı. **Sıradaki adım.**
+5. ✅ **~~Frontend güncellenmedi~~ KAPANDI (23 Ağu 2026, Adım 11).** Bkz.
+   "Adım 11" bölümü aşağıda.
 
 6. **Testler güncellenmedi.** `tests/test_api.py` v1 alanlarını doğruluyor.
 
@@ -1635,6 +1634,78 @@ Bu bulgu-düzeltme döngüsü, projenin "az örneklem + tek ölçüm = gürült�
 dersinin dördüncü örneği: iç test setindeki görünür gerileme, bağımsız
 doğrulama olmasaydı yanlış yorumlanıp geri alınabilirdi.
 
+## Adım 11 — Frontend'in üç boyutlu sözleşmeye taşınması + iki gerçek backend hatası (23 Ağu 2026)
+
+### Frontend: intent/öncelik rozetleri, yapısal bilgiler, kanıt, eksik bilgi, tekrar uyarısı
+
+`frontend/src/components/SonucKarti.jsx` v1 sözleşmesinde kalmıştı (sadece
+kategori + güven + ikincil kategori). Backend zaten Adım 9'da üç boyutu
+döndürüyordu ama arayüz bunları hiç göstermiyordu. Eklenenler (hepsi mevcut
+koyu tema tasarım diliyle: cam yüzeyler, `color-mix` ile kategori/öncelik
+rengine uyarlanan rozetler, `--vurgu` ile ortam ışığı):
+
+- **Meta satırı** — kategori rozetinin altında intent rozeti (nötr) + öncelik
+  rozeti (öncelik rengiyle boyalı, `priority_color`). Öncelik P1 kural
+  katmanından geldiyse rozetin yanında küçük bir **"KURAL"** etiketi çıkıyor
+  — kullanıcı önceliğin modelden mi kuraldan mı geldiğini görsel olarak
+  ayırt edebiliyor.
+- **Yapısal Bilgiler** paneli — `line`/`station`/`location`/`equipment`/
+  `symptom`/`root_cause` alanlarından doğru olanlar bir ızgarada gösteriliyor;
+  hiçbiri yoksa panel hiç render edilmiyor.
+- **Kanıt** paneli — `evidence` dizisi (gradient × input) kelime kelime
+  "chip" olarak gösteriliyor, "modelin en çok dikkate aldığı kelimeler"
+  notuyla.
+- **Eksik Bilgi** kutusu — `missing_information` doluysa nötr/bilgi renginde
+  (mavi, uyarıdan ayrı bir görsel dil — bu bir hata değil, eksik bir alan)
+  bir kutuda hangi alanların eksik olduğu **Türkçe etiketle** gösteriliyor
+  (ilk sürümde İngilizce alan adı `equipment` gibi ham haliyle çıkıyordu,
+  aynı `VARLIK_ETIKETLERI` sözlüğüyle çeviri eklendi).
+- **Olası Tekrar Bildirim** uyarısı — `possible_duplicate` + `duplicate_of`
+  doluysa mevcut `.uyari` bileşeni yeniden kullanılarak "aynı arıza son 15
+  dakikada N kez bildirilmiş, ilk bildirim: …" gösteriliyor.
+
+### Bulunan iki gerçek backend hatası — frontend'i uçtan uca test ederken ortaya çıktı
+
+Bunlar frontend değişikliği DEĞİL; Adım 9'da mimari tek başlıktan çok başlığa
+geçerken (`AutoModelForSequenceClassification` → `CokBaslikliSiniflandirici`)
+güncellenmeyi atlayan iki backend modülüydü. Arayüz gerçek bir tahmin
+isteyene kadar hiçbiri fark edilmemişti.
+
+1. **`src/similarity.py` — backend hiç ayağa kalkmıyordu.**
+   `_bert_govde()` fonksiyonu hâlâ eski mimarinin `model.base_model.model.bert`
+   yolunu arıyordu; yeni `CokBaslikliSiniflandirici`'de böyle bir öznitelik
+   yok (gövde `self.govde` altında duruyor ve zaten doğrudan çağrılabilir
+   BertModel). Sonuç: `AttributeError`, lifespan çöküyor, backend hiç
+   başlamıyordu. Düzeltme: gövdeye doğrudan `model.govde` ile erişip,
+   `pooler_output` yerine sınıflandırma başlıklarının da kullandığı **aynı
+   [CLS] temsilini** (`last_hidden_state[:, 0]`) kullanacak şekilde
+   `_embed()` yeniden yazıldı — "modelin kendi iç temsili" iddiası artık
+   gerçekten doğru, çünkü benzerlik ve sınıflandırma aynı vektörü kullanıyor.
+2. **`src/extract.py` — `root_cause` alanı bazen NEREDEYSE TÜM cümleyi
+   yakalıyordu.** `_SEBEP_DESENI` regex'inin yakalama grubu (`.{3,60}?`)
+   nokta karakteri de dahil her şeyi eşleştirebiliyordu; `re.search` en
+   erken başlangıç noktasını denediği için (cümle başından itibaren), cümle
+   içinde birden fazla virgülle ayrılmış madde varsa yakalama en baştan
+   başlayıp istenmeyen şekilde uzuyordu (örn. "…çalışmıyor, elektrik
+   kesildiği için durdu" → `root_cause: "y 2 numarali giristeki yuruyen
+   merdiven calismiyor, elektrik"`). Düzeltme: yakalama sınıfı noktalama
+   işaretlerini (`,` `.` `;` `:`) dışlayacak şekilde `[^,.;:]{3,60}?`
+   yapıldı — artık yakalama bir önceki noktalama işaretini geçemiyor, aynı
+   cümle artık doğru şekilde `root_cause: "elektrik"` veriyor.
+
+Backend'in üç ay önce yazılan bir bölümünün, mimari değiştiğinde SESSİZCE
+bozulmuş olması ve bunun ancak uçtan uca (gerçek HTTP isteğiyle) test
+edilince ortaya çıkması — projenin "type checking/test suite doğruluk
+kanıtlamaz, gerçekten çalıştırmak kanıtlar" ilkesinin somut bir örneği daha.
+
+### Doğrulama
+
+Backend + frontend birlikte tarayıcıda uçtan uca test edildi: normal arıza
+bildirimi (yapısal alanlar + kanıt + eksik bilgi doğru çıktı), P1 kural
+tetiklenen yangın bildirimi (KURAL etiketi + kırmızı ortam ışığı doğru),
+model tabanlı P1 (KURAL etiketi YOK, ayrım doğru çalışıyor), canlı kategori
+grafiğinin her tahminde güncellenmesi, ve mobil yerleşim (375px). `Doğru`/
+`Yanlış` onay akışı ve taksonomi paneli değişmeden korundu.
 
 ## Genel İlkeler (her adımda geçerli)
 

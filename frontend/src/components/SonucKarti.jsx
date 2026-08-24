@@ -5,6 +5,17 @@ import { tahminiDogrula } from "../api";
 
 const yuzde = (x) => `${(x * 100).toFixed(1)}%`;
 
+// Yapisal alanlar (Adim 7/9) icin goruntu adi -- backend anahtar Ingilizce
+// donuyor (extract.py sozlesmesi), arayuzde Turkce etiket gosteriliyor.
+const VARLIK_ETIKETLERI = [
+  ["line", "Hat"],
+  ["station", "İstasyon"],
+  ["location", "Konum"],
+  ["equipment", "Ekipman"],
+  ["symptom", "Belirti"],
+  ["root_cause", "Kök Sebep"],
+];
+
 export default function SonucKarti({ sonuc, kategoriler, onDogrulandi }) {
   const [onayDurumu, setOnayDurumu] = useState(null); // null | "dogru" | "yanlis" | "duzeltiliyor"
   const [gonderiliyor, setGonderiliyor] = useState(false);
@@ -18,6 +29,12 @@ export default function SonucKarti({ sonuc, kategoriler, onDogrulandi }) {
       renk: kategoriler[anahtar]?.color ?? "#7a828f",
     }))
     .sort((a, b) => b.olasilik - a.olasilik);
+
+  const varliklar = VARLIK_ETIKETLERI.filter(([anahtar]) => sonuc[anahtar]);
+  const VARLIK_ETIKET_SOZLUGU = Object.fromEntries(VARLIK_ETIKETLERI);
+  const eksikBilgiEtiketli = sonuc.missing_information.map(
+    (anahtar) => VARLIK_ETIKET_SOZLUGU[anahtar] ?? anahtar
+  );
 
   const dogrulanabilir = sonuc.log_id > 0 && onayDurumu === null;
 
@@ -56,6 +73,25 @@ export default function SonucKarti({ sonuc, kategoriler, onDogrulandi }) {
         )}
       </header>
 
+      <div className="meta-satir">
+        <span className="meta-cip meta-intent" title="Kullanıcının amacı">
+          {sonuc.intent_label}
+        </span>
+        <span
+          className="meta-cip meta-oncelik"
+          style={{ "--k": sonuc.priority_color }}
+          title={
+            sonuc.priority_rule
+              ? `Kural katmanı tetiklendi: ${sonuc.priority_rule}`
+              : `Model güveni: ${yuzde(sonuc.priority_confidence)}`
+          }
+        >
+          <span className="nokta" />
+          {sonuc.priority_label}
+          {sonuc.priority_rule && <span className="meta-kural">kural</span>}
+        </span>
+      </div>
+
       <div className="guven">
         <div className="guven-ust">
           <span className="guven-etiket">Güven</span>
@@ -68,6 +104,65 @@ export default function SonucKarti({ sonuc, kategoriler, onDogrulandi }) {
           />
         </div>
       </div>
+
+      {varliklar.length > 0 && (
+        <div className="varliklar">
+          <h3 className="bolum-baslik">Yapısal Bilgiler</h3>
+          <dl className="varlik-liste">
+            {varliklar.map(([anahtar, etiket]) => (
+              <div className="varlik-satir" key={anahtar}>
+                <dt>{etiket}</dt>
+                <dd>{sonuc[anahtar]}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+
+      {sonuc.evidence.length > 0 && (
+        <div className="kanit">
+          <h3 className="bolum-baslik">
+            Kanıt
+            <span className="benzer-sayi">
+              {" "}
+              — modelin en çok dikkate aldığı kelimeler
+            </span>
+          </h3>
+          <div className="kanit-liste">
+            {sonuc.evidence.map((kelime, i) => (
+              <span className="kanit-cip" key={`${kelime}-${i}`}>
+                {kelime}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {sonuc.missing_information.length > 0 && (
+        <div className="bilgi">
+          <div className="bilgi-baslik">
+            <span aria-hidden="true">ⓘ</span> Eksik Bilgi
+          </div>
+          <p>
+            İş emri için şu bilgiler bildirimde yer almıyor:{" "}
+            {eksikBilgiEtiketli.join(", ")}.
+          </p>
+        </div>
+      )}
+
+      {sonuc.possible_duplicate && sonuc.duplicate_of && (
+        <div className="uyari">
+          <div className="uyari-baslik">
+            <span aria-hidden="true">⟳</span> Olası Tekrar Bildirim
+          </div>
+          <ul>
+            <li>
+              Aynı arıza son 15 dakikada <b>{sonuc.duplicate_of.sayi}</b> kez
+              bildirilmiş. İlk bildirim: “{sonuc.duplicate_of.ilk_metin}”
+            </li>
+          </ul>
+        </div>
+      )}
 
       {sonuc.manual_review && (
         <div className="uyari">

@@ -153,7 +153,7 @@ def _konumu_maskele(metin: str) -> str:
 # yanmis" dediginde model buna teknik teshis koymamali, cunku bu kullanicinin
 # TAHMINI. Sadece cumlede acikca "X yuzunden Y" yapisi varsa sebep yazilir.
 _SEBEP_DESENI = re.compile(
-    r"(.{3,60}?)\s*(?:yuzunden|nedeniyle|sebebiyle|dolayi|kaynakli|"
+    r"([^,.;:]{3,60}?)\s*(?:yuzunden|nedeniyle|sebebiyle|dolayi|kaynakli|"
     r"oldugu icin|kesildigi icin|olmadigi icin)"
 )
 

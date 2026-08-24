@@ -7,10 +7,11 @@ raporlar: "Bu cumleye benzer 18 kayit bulundu: %61 İstasyon Mekanik,
 %22 Elektrik/Enerji, %17 Güvenlik/Emniyet".
 
 YONTEM: ayri bir embedding modeli KURULMADI. Zaten yuklu olan BERTurk+LoRA
-siniflandirma modelinin kendi ic temsili (.bert alt-modulunun pooler_output'u)
-kullaniliyor. Bu model siniflandirma icin fine-tune edildigi icin ic temsili
-kategoriye gore anlamli sekilde kumelenmis olmasi beklenir -- bu varsayim
-KOR KOR kabul edilmedi, olculdu (bkz. config.SIMILARITY_THRESHOLD).
+cok basli siniflandirma modelinin kendi ic temsili (govde'nin [CLS] token
+ciktisi -- CokBaslikliSiniflandirici.temsil ile ayni temsil) kullaniliyor.
+Bu model siniflandirma icin fine-tune edildigi icin ic temsili kategoriye
+gore anlamli sekilde kumelenmis olmasi beklenir -- bu varsayim KOR KOR kabul
+edilmedi, olculdu (bkz. config.SIMILARITY_THRESHOLD).
 
 Corpus embedding'leri LIFESPAN SIRASINDA bir kez hesaplanir (bkz.
 backend/main.py), diske ONBELLEKLENMEZ: ~1700 kayit icin birkac saniye surer,
@@ -41,28 +42,25 @@ class Corpus:
     embedding: np.ndarray   # (N, 768), L2-normalize edilmis
 
 
-def _bert_govde(model):
-    """PEFT sarmalamasindan gercek BertModel'e iner.
-
-    get_peft_model() cagrisindan sonra orijinal model model.base_model.model
-    altinda durur (PeftModel -> LoraModel -> BertForSequenceClassification).
-    LoRA kapaliysa (--no-lora) model zaten dogrudan BertForSequenceClassification.
-    """
-    taban = model.base_model.model if hasattr(model, "base_model") else model
-    return taban.bert
-
-
 def _embed(metinler: list[str], model, tokenizer, cihaz, batch: int = 64) -> np.ndarray:
-    bert = _bert_govde(model)
-    bert.eval()
+    """CokBaslikliSiniflandirici.govde'den [CLS] temsili cikarir.
+
+    Eskiden BertForSequenceClassification'in pooler_output'u kullaniliyordu;
+    cok basli mimariye gecince siniflandirma basliklarinin kendisi de artik
+    pooler yerine dogrudan [CLS] gizli durumunu kullaniyor (bkz.
+    CokBaslikliSiniflandirici.temsil) -- benzerlik de ayni temsili kullanmali,
+    aksi halde "modelin ic temsili" iddiasi gercegi yansitmaz.
+    """
+    govde = model.govde
+    govde.eval()
     parcalar = []
     with torch.no_grad():
         for i in range(0, len(metinler), batch):
             grup = metinler[i:i + batch]
             enc = tokenizer(grup, truncation=True, padding=True,
                             max_length=C.MAX_LENGTH, return_tensors="pt").to(cihaz)
-            cikti = bert(**enc)
-            parcalar.append(cikti.pooler_output.cpu().numpy())
+            cikti = govde(**enc)
+            parcalar.append(cikti.last_hidden_state[:, 0].cpu().numpy())
     E = np.concatenate(parcalar).astype(np.float32)
     E /= np.linalg.norm(E, axis=1, keepdims=True).clip(min=1e-8)
     return E
