@@ -2487,6 +2487,26 @@ Vezneciler holü yangın kokusu,istasyon_guvenlik,6,incident_report,1,P1,0,cok_k
 "Bostancı girişindeki yangın tüplerinin tamamı kilitli dolaplarda sıkışmış durumda, acil bir olayda hiçbirine erişim sağlanamıyor.",istasyon_guvenlik,6,fault_report,0,P2,1,,manuel_hedefli:p2_dolayli_cogulluk
 "Pendik metrosundaki çöp kovalarının bütünü ağzına kadar dolup taşmış, yerler döküntü ve atık içinde yürünmüyor.",temizlik,7,fault_report,0,P2,1,,manuel_hedefli:p2_dolayli_cogulluk
 "Hattaki makas sistemlerinin hepsi kilitlenip arızaya geçti, trenler tünel girişlerinde bekletiliyor seferler durdu.",yol_yapisal,5,fault_report,0,P2,1,,manuel_hedefli:p2_dolayli_cogulluk
+"Perondaki bilgilendirme ekranı kapkaranlık, elektrik gelmiyor herhalde hiçbir şey yazmıyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Ekran cam gibi parlak çalışıyor ama tren saati yazmıyor, sadece belediye reklamları dönüp duruyor.",yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Tavandaki sürenin yazdığı ekranın camı kırılmış cihaz paramparça, haliyle süre müre yazmıyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Tavandaki ekranda '2 dk kaldı' yazıyor ama 20 dakika geçti, bilgi yanlış güncellenmiyor.",yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Anons hoparlöründen sadece inanılmaz bir cızırtı ve dip ses geliyor, ne söylendiği anlaşılmıyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Anons pırıl pırıl duyuluyor ama adam sürekli M4 hattı arızası diyor, biz M5'teyiz yanlış bilgi veriyor.",yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Turnike girişindeki yolcu sayım sensörü kopmuş sarkıyor, bilgi veremez o cihaz.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Gişedeki görevliye tren neden durdu diye soruyoruz, yüzümüze bakıp hiçbir bilgi vermiyor.",yolcu_hizmetleri,8,complaint,3,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Yolcu ekranının pikselleri yanmış, yazılar birbirine girmiş okunamıyor cihaz arızalı.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Ekran sorunsuz çalışıyor ana menüde duruyor ama sefer bilgisi kısmı bomboş, bilgi akışı yok.",yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Güvenliğin elindeki telsizden hiç ses çıkmıyor, telsizi bozulmuş merkeze bilgi veremiyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+Güvenlik görevlisi anons cihazından yolcuları yönlendirmek yerine kendi arasında muhabbet ediyor.,yolcu_hizmetleri,8,complaint,3,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"PID ekranlarında 'Sinyal yok' uyarısı var, cihazın kablosu falan koptu herhalde saat yazmıyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Durak tabelası sökülmüş yerinde yok, hangi durakta olduğumuzu göremiyoruz yönlendirme eksik.",yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Acil durum bilgilendirme panosunun fişi çekilmiş, cihaz enerjisiz kaldığı için çalışmıyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Acil durum anonsu geçtiler ama ses o kadar kısıktı ki kimse duymadı, panik yaşadık.",yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Tren içi ekranın yarısı beyaz görünüyor, panel çatlamış durak isimleri belli olmuyor.",arac_tren,2,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+Tren içi ekran gayet net ama Şişli'de olmamıza rağmen ekranda hala Levent yazıyor.,yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Merkezi anons sistemi donanımsal arıza vermiş, hiçbir istasyona ses gitmiyor.",sinyalizasyon_haberlesme,3,fault_report,0,P2,1,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Sefer iptal olmuş ama bir Allahın kulu çıkıp da anons yapmıyor, bilgi sızdırmıyorlar resmen.",yolcu_hizmetleri,8,complaint,3,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
 Vagon kapısı açılmıyor 2. vagon,arac_tren,2,fault_report,0,P3,2,devrik,relabel:gemini
 Fren basıncı düşük 4. vagon,arac_tren,2,fault_report,0,P2,1,devrik,relabel:gemini
 Makinist kabini anons mikrofonu çalişmiyor,arac_tren,2,fault_report,0,P3,2,devrik,relabel:gemini

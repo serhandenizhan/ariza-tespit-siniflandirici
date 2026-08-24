@@ -1751,6 +1751,59 @@ Ayrıca `tests/test_api.py`'deki 6 başarısız test (v1 kategori adları
 `GOLD_FILE`'a bakıyordu) v2 taksonomisine göre düzeltildi — **31/31 test
 geçiyor.**
 
+## Adım 12 — Hard-negative örneklerle sinyalizasyon/yolcu_hizmetleri sınırının düzeltilmesi (24 Ağu 2026)
+
+### Bulunan overfitting
+
+Kullanıcı arayüzü kendi denerken `sinyalizasyon_haberlesme` (donanım/cihaz
+arızası) ile `yolcu_hizmetleri` (bilgi/içerik eksikliği) kategorileri
+arasında modelin sınırı net ayıramadığını fark etti — aynı yüzeysel kelimeler
+("ekran", "anons") iki farklı kök sebep için kullanılabiliyor ama model
+sözcüksel örtüşmeye takılıp kök sebebi (donanım mı bozuk, yoksa içerik mi
+eksik/yanlış) ayırt edemiyordu.
+
+**Çözüm: 10 çift (20 kayıt) elle hazırlanmış "hard negative" — kasıtlı zıt
+ikili.** Her çift AYNI yüzeysel senaryoyu (ekran karanlık, anons duyulmuyor,
+turnike sensörü...) iki farklı kök sebeple veriyor: biri donanımın FİZİKSEL/
+TEKNİK olarak bozuk olduğu durum (`sinyalizasyon_haberlesme`), diğeri
+donanım sağlam ama İÇERİK/BİLGİ yanlış veya eksik olduğu durum
+(`yolcu_hizmetleri`). Örnek: "Ekran cam gibi parlak çalışıyor ama tren saati
+yazmıyor, sadece reklamlar dönüyor" (donanım sağlam → yolcu_hizmetleri) vs.
+"Tavandaki ekranın camı kırılmış, süre yazmıyor" (donanım bozuk →
+sinyalizasyon_haberlesme). Kontrastif çiftler, sınırın SÖZCÜKLERDE değil
+ANLAMDA olduğunu modele doğrudan öğretmenin bir yolu.
+
+`data/raw/hard_negative_sinyalizasyon_yolcu.jsonl` — 20 kayıt, `relabeled.jsonl`'e
+eklenmeden önce doğrulandı: tüm kategori/intent/öncelik anahtarları geçerli,
+mevcut 2488 kayıtla birebir tekrar VE `review.similarity ≥ 0.80` yakın kopya
+**yok**. `relabeled_v5_backup.jsonl` ekleme öncesi yedek.
+
+### Sonuç
+
+| ölçüm | önce | sonra |
+| --- | --- | --- |
+| 20 hedefli çiftte kategori doğruluğu | — | **19/20 (%95)** |
+| Bağımsız sette (80 kayıt) kategori doğruluğu | — | **%91.2** (F1 0.9084) |
+| Bağımsız sette sinyalizasyon↔yolcu_hizmetleri karışması | — | **0** |
+| Bağımsız sette öncelik doğruluğu | %81.2 | %78.8 (F1 0.7785) |
+
+Hedeflenen sınır düzeldi: bağımsız test setinde bu iki kategori arasında artık
+hiç karışma yok (önceki confusion matrix'te de zaten görünmüyordu ama iç
+test setinde ve kullanıcının canlı denemesinde tekrar tekrar çıkıyordu — bu
+turun asıl motivasyonu buydu). Kalan tek hata ("ekran kapkaranlık, elektrik
+gelmiyor" → yanlışlıkla yolcu_hizmetleri) muhtemelen "elektrik" kelimesinin
+`elektrik_enerji` sinyaliyle karışıp asıl ayırt edici sinyali (ekranın
+tamamen karanlık/çalışmaz durumda olması) gölgelemesinden kaynaklanıyor.
+
+**Öncelik doğruluğu 2.4 puan düştü (%81.2→%78.8), muhtemelen gürültü.** Bu
+turda önceliğe yönelik hedefli veri eklenmedi (hard negative'lerin öncelik
+etiketleri yan ürün); projenin kendi "az örneklem + tek ölçüm = gürültü"
+dersi burada da geçerli olabilir (n=80, tek eğitim koşusu). Takip edilmeli
+ama tek başına endişe verici değil.
+
+Eğitim early-stopped (epoch 7/12'de durdu, epoch 5 en iyi ortF1 0.8312 ile
+seçildi): kategori F1 0.8980, intent F1 0.8647, öncelik F1 0.7310.
+
 ## Genel İlkeler (her adımda geçerli)
 
 1. **`config.py` tek doğruluk kaynağı.** Yeni bir modül yazarken kategori/
