@@ -2507,6 +2507,19 @@ Güvenlik görevlisi anons cihazından yolcuları yönlendirmek yerine kendi ara
 Tren içi ekran gayet net ama Şişli'de olmamıza rağmen ekranda hala Levent yazıyor.,yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
 "Merkezi anons sistemi donanımsal arıza vermiş, hiçbir istasyona ses gitmiyor.",sinyalizasyon_haberlesme,3,fault_report,0,P2,1,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
 "Sefer iptal olmuş ama bir Allahın kulu çıkıp da anons yapmıyor, bilgi sızdırmıyorlar resmen.",yolcu_hizmetleri,8,complaint,3,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Tren geldi durdu ama perondaki cam kapılar bir türlü açılmadı, trenin kapıları açılmasına rağmen çıkamadık.",sinyalizasyon_haberlesme,3,fault_report,0,P2,1,,manuel_hedefli:hard_negative_kapi
+"Tren geldi durdu, peronun kapıları açıldı ama bizim vagonun kendi kapısı kilitli kaldı inemedik.",arac_tren,2,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"Raylarla yolcu arasındaki güvenlik kapısı sensörü bozulmuş, tren gelmeden kendiliğinden açılıyor.",sinyalizasyon_haberlesme,3,fault_report,0,P1,0,,manuel_hedefli:hard_negative_kapi
+İstasyona dışarıdan giriş yaptığımız otomatik fotoselli kapının sensörü bozulmuş kapanmıyor.,mekanik_istasyon,0,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"Tren yanaşırken PAKS kapılarından birinin motoru sıkıştı yarı açık kaldı, sinyalizasyon hatası veriyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"Perona inen asansörün kapı motoru sıkıştı, kapı tam kapanmadığı için asansör aşağı hareket etmiyor.",mekanik_istasyon,0,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"Tren peron kapılarına tam hizalanamadı, senkronizasyon koptuğu için peron kapıları manuel açıldı.",sinyalizasyon_haberlesme,3,fault_report,0,P2,1,,manuel_hedefli:hard_negative_kapi
+"Turnike yanındaki engelli geçiş kapısının menteşesi kırılmış, kapı fiziksel olarak yere sürtüyor.",mekanik_istasyon,0,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"Perondaki sürgülü ayırıcı kapıların camı boydan boya çatlamış, trene binerken fark ettim.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"Seyir halindeki trenin kapı camı boydan boya çatlamış, tünelde giderken kırılacak diye korktuk.",arac_tren,2,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"M7 hattında peron ayırıcı kapılar tren yokken açık kalmış, birisi raylara düşebilir!",sinyalizasyon_haberlesme,3,fault_report,0,P1,0,,manuel_hedefli:hard_negative_kapi
+"Metro girişindeki demir kepenk kapılar yarıya kadar inmiş takılı kalmış, insanlar eğilerek giriyor.",mekanik_istasyon,0,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
+"Makinist kabininin kapısı arızalanmış, tren kapıları kontrol edemediği için sefer gecikiyor.",arac_tren,2,fault_report,0,P2,1,,manuel_hedefli:hard_negative_kapi
 Vagon kapısı açılmıyor 2. vagon,arac_tren,2,fault_report,0,P3,2,devrik,relabel:gemini
 Fren basıncı düşük 4. vagon,arac_tren,2,fault_report,0,P2,1,devrik,relabel:gemini
 Makinist kabini anons mikrofonu çalişmiyor,arac_tren,2,fault_report,0,P3,2,devrik,relabel:gemini

@@ -1804,6 +1804,43 @@ ama tek başına endişe verici değil.
 Eğitim early-stopped (epoch 7/12'de durdu, epoch 5 en iyi ortF1 0.8312 ile
 seçildi): kategori F1 0.8980, intent F1 0.8647, öncelik F1 0.7310.
 
+### İkinci tur: kapı/kapak arızalarında sinyalizasyon/mekanik/araç sınırı
+
+Aynı gün kullanıcı benzer bir sınır sorununu daha buldu: **peron ayırıcı
+kapı (PAKS, `sinyalizasyon_haberlesme`)** ile **vagon kapısı (`arac_tren`)**
+ve **istasyon giriş/asansör kapısı (`mekanik_istasyon`)** arasında model
+"kapı" kelimesine takılıp hangi kapının (peron mu, vagon mu, istasyon
+girişi mi) arızalı olduğunu ayırt edemiyordu. Aynı yöntemle 13 hard-negative
+kayıt eklendi (`data/raw/hard_negative_kapi.jsonl`, 6 üçlü/ikili karşılaştırma
+grubu) — her grup aynı "kapı açılmadı/sıkıştı" senaryosunu üç farklı kapı
+türüyle veriyor. Ekleme öncesi doğrulandı (geçerli anahtarlar, birebir tekrar
+yok, yakın kopya yok); `relabeled_v6_backup.jsonl` yedek.
+
+Model yeniden eğitildi (early-stopped, epoch 8/12'de durdu, epoch 6 seçildi,
+ortF1 0.8467 — önceki turdan yüksek): kategori F1 0.9158, intent F1 0.8623,
+öncelik F1 0.7620.
+
+**Sonuç:**
+
+| ölçüm | önceki tur | bu tur |
+| --- | --- | --- |
+| 13 hedefli kapı çiftinde kategori doğruluğu | — | **13/13 (%100)** |
+| Önceki 20 sinyalizasyon/yolcu çiftinde regresyon | — | **yok** (%100 korundu) |
+| Bağımsız sette (80 kayıt) kategori doğruluğu | %91.2 | %88.8 |
+| Bağımsız sette öncelik doğruluğu | %78.8 | %76.2 |
+
+Hedeflenen iki sınır sorunu da (sinyalizasyon/yolcu_hizmetleri VE
+sinyalizasyon/mekanik/araç-kapı) tam çözüldü, birbirini bozmadı. Ama bağımsız
+sette ~2.5 puanlık ek bir düşüş var. Hata döküntüsüne bakıldığında düşüşün
+kaynağı yeni eklenen kapı verisiyle **doğrudan ilgisiz** kategoriler
+(Elektrik/Enerji↔Sinyalizasyon, Altyapı↔Yol ve Hat) — yani muhtemelen
+projenin daha önce ölçtüğü **tohum varyansı** fenomeni (bkz. "Tohum varyansı"
+bölümü, Adım 5 sonu: aynı veriyle bile farklı tohumlar gold F1'i 0.91-0.96
+arası oynatabiliyor), tek koşunun gürültüsü — ama bu tek koşuyla kesin
+kanıtlanamaz. Takip edilmesi gereken bir gözlem olarak not düşüldü, ikinci
+bir tohumla doğrulama şimdilik yapılmadı (kullanıcı kararı: mevcut sonuçla
+devam).
+
 ## Genel İlkeler (her adımda geçerli)
 
 1. **`config.py` tek doğruluk kaynağı.** Yeni bir modül yazarken kategori/

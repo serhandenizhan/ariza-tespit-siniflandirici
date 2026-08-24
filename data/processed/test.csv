@@ -1,30 +1,31 @@
 metin,kategori,label,intent,intent_label,oncelik,oncelik_label,stil,kaynak
-Yoğun saatlerde turnike geçişlerini hızlandırmak için döner kolların hafifletilmiş alaşımla değiştirilmesini teklif ediyorum.,mekanik_istasyon,0,suggestion,4,P4,3,standart,relabel:ollama
-Bariyer ne zaman takılır?,mekanik_istasyon,0,information_request,2,P4,3,cok_kisa,relabel:ollama
-Asansör düğme paneli sökük,mekanik_istasyon,0,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Hacıosman yürüyen merdiven titreşiyor,mekanik_istasyon,0,fault_report,0,P3,2,cok_kisa,relabel:ollama
-sirkeci peron asansr cks buzlnma,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Necip Fazıl istasyonu asansör fren patinleri aşındı ani duruşta kayma yapıyor.,mekanik_istasyon,0,fault_report,0,P1,0,standart,relabel:ollama
-Asansör freni tutmuyor Bostancı acil,mekanik_istasyon,0,fault_report,0,P1,0,devrik,relabel:ollama
-Hacıosman turnike 1 gövde çatlak,mekanik_istasyon,0,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Asansör içi ayna takılsın.,mekanik_istasyon,0,suggestion,4,P4,3,cok_kisa,relabel:ollama
+Turnike 9 kapı kilidi açılmıyor,mekanik_istasyon,0,fault_report,0,P3,2,cok_kisa,relabel:ollama
+Merdiven paleti söküldü Vezneciler tünel ağzı,mekanik_istasyon,0,fault_report,0,P1,0,devrik,relabel:ollama
+yuruyen merdiven yandan cikti bostanci,mekanik_istasyon,0,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
+sisli bilet holundeki kapi ne zaman acilacak?,mekanik_istasyon,0,information_request,2,P4,3,yazim_yanlisi,relabel:ollama
+Fikirtepe istasyonu turnike kolu pimi çıktı kol serbest dönüyor geçiş kontrolsüz.,mekanik_istasyon,0,fault_report,0,P3,2,standart,relabel:ollama
+mecidiyekoy cks merdvn buz tzlnms,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Otomatik kapı rayından çıktı Ataşehir,mekanik_istasyon,0,fault_report,0,P3,2,devrik,relabel:ollama
+Kirazlı istasyonu çıkış kapısı hidrolik Direk sızdırıyor yere yağ damlıyor.,mekanik_istasyon,0,fault_report,0,P3,2,standart,relabel:ollama
+Otomatik kapı açılmıyor Levent kuzey giriş,mekanik_istasyon,0,fault_report,0,P3,2,devrik,relabel:ollama
+Turnike gövdesi güçlendirilmeli.,mekanik_istasyon,0,suggestion,4,P4,3,cok_kisa,relabel:ollama
 Turnike kapağı takılı Yenikapı Marmaray aktarma,mekanik_istasyon,0,fault_report,0,P3,2,devrik,relabel:ollama
-"Levent'teki engelli asansörlerinin tamamı bozuk, tekerlekli sandalyeli yolcu geçiş yapamıyor.",mekanik_istasyon,0,fault_report,0,P2,1,,manuel_hedefli:p2_dolayli_cogulluk
-Merdiven yanlarına fırça eklensin.,mekanik_istasyon,0,suggestion,4,P4,3,cok_kisa,relabel:ollama
+Asansör butonu takıldı Şişhane,mekanik_istasyon,0,fault_report,0,P3,2,devrik,relabel:ollama
+sirinevler turnike kollarina kaucuk kilif takilsa hasar azalir,mekanik_istasyon,0,suggestion,4,P4,3,yazim_yanlisi,relabel:ollama
 Asansör kapı lastiği kopuk,mekanik_istasyon,0,fault_report,0,P3,2,cok_kisa,relabel:ollama
 Kadıköy istasyonu bilet holündeki hasarlı turnike kapağının değişim tarihi hakkında detaylı bilgi rica ediyoruz.,mekanik_istasyon,0,information_request,2,P4,3,standart,relabel:ollama
 kadikoy girisindeki bariyer nezaman tamir edilcek?,mekanik_istasyon,0,information_request,2,P4,3,yazim_yanlisi,relabel:ollama
-Takılmış turnike kanadı açık şekilde kaçak geçişe uygun.,mekanik_istasyon,0,fault_report,0,P3,2,devrik,relabel:ollama
-Gayrettepe istasyonu kuzey girişindeki asansör kapı raylarına fırça sistemi eklenmesi tıkanmaları önleyecektir.,mekanik_istasyon,0,suggestion,4,P4,3,standart,relabel:ollama
+turnike donmesi var haciosman,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:gemini
+"Mecidiyeköy girişindeki turnike kollarının hepsi kilitlenmiş, fiziksel olarak dönmüyorlar içeri giremiyoruz.",mekanik_istasyon,0,fault_report,0,P2,1,,manuel_hedefli:p2_dolayli_cogulluk
 Şirinevler 1. peron merdiven durdu,mekanik_istasyon,0,fault_report,0,P3,2,cok_kisa,relabel:ollama
 kozyatagi turnike kapisi acilmiyor kart gecerli,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 asansor durdu dudullu servis basi,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 Kapı kontrol donması,mekanik_istasyon,0,fault_report,0,P3,2,cok_kisa,relabel:ollama
 Uzunçayır B çıkışı asansörü katlarda duruyor kapı açılmıyor yolcular bekliyor.,mekanik_istasyon,0,fault_report,0,P2,1,standart,relabel:ollama
 Gerekli kauçuk kaplama turnike kollarına.,mekanik_istasyon,0,suggestion,4,P4,3,devrik,relabel:ollama
-Asansör butonu takıldı Şişhane,mekanik_istasyon,0,fault_report,0,P3,2,devrik,relabel:ollama
-Kapi acilmiyor yolcu saglam cikis.,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:gemini
-Yürüyen merdiven titrıyor Gayrettepe 2 numara,mekanik_istasyon,0,fault_report,0,P3,2,devrik,relabel:ollama
+asansor 2 numara hata verdi sisli,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Gayrettepe istasyonu turnike gövdesi hasarlı kol sabitleyici kırık geçiş sağlanamıyor.,mekanik_istasyon,0,fault_report,0,P2,1,standart,relabel:ollama
+ym 01 motor sesi cikar osmanbey,mekanik_istasyon,0,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 Jeneratör yağ basıncı düşük alarm,elektrik_enerji,1,fault_report,0,P3,2,devrik,relabel:ollama
 Trafoya gövde koruması çalıştı,elektrik_enerji,1,fault_report,0,P3,2,cok_kisa,relabel:ollama
 yenikapi marmaray aktarma kat aydinlatma yarisi kapali,elektrik_enerji,1,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
@@ -47,12 +48,12 @@ mecidiyekoy peron aydinlatma fotosel calismiyor gece karanlik,elektrik_enerji,1,
 Dudullu istasyonunda acil durma butonları aydınlatması yanmıyor.,elektrik_enerji,1,fault_report,0,P3,2,standart,relabel:ollama
 Trafo sesi anormal arttı gece Kadıköy,elektrik_enerji,1,fault_report,0,P3,2,devrik,relabel:ollama
 Katener isolatörü kırık tespit edildi,elektrik_enerji,1,fault_report,0,P3,2,devrik,relabel:ollama
-Makinist kabini anons bozuk,arac_tren,2,fault_report,0,P3,2,cok_kisa,relabel:gemini
-Uzunçayır yönlü trende 1 numaralı vagon freni basınçsız.,arac_tren,2,fault_report,0,P1,0,standart,relabel:ollama
-makinist fren manivela gec kaliyo,arac_tren,2,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
-Vagon 7 kapı kapanmıyor,arac_tren,2,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Mecidiyeköy istasyonunda 3 numaralı vagondaki kapı kapanmıyor.,arac_tren,2,fault_report,0,P1,0,standart,relabel:ollama
-frenlerden gelen ses icin bakim yapildimi ogrenmek istiyoruz.,arac_tren,2,information_request,2,P3,2,yazim_yanlisi,relabel:ollama
+Makinist kabini camı çatlak,arac_tren,2,fault_report,0,P4,3,devrik,relabel:ollama
+Vagon camı ne zaman değişir?,arac_tren,2,information_request,2,P3,2,cok_kisa,relabel:ollama
+Vagon kapısı tampon lastiği sökülmüş,arac_tren,2,fault_report,0,P3,2,devrik,relabel:ollama
+Tekerlekten çarpma sesi geliyor,arac_tren,2,fault_report,0,P3,2,devrik,relabel:ollama
+Söğütlüçeşme başlangıçlı seferde 6 numaralı vagon pantograf arızası var.,arac_tren,2,fault_report,0,P3,2,standart,relabel:ollama
+tren cami kirik acil mudahale gereklimi nezaman gelinir?,arac_tren,2,information_request,2,P3,2,yazim_yanlisi,relabel:ollama
 YM-04 kapı kontrol ünitesi arızalı,arac_tren,2,fault_report,0,P3,2,devrik,relabel:ollama
 Sabah seferinde 4 nolu vagon acil fren hattı uyarısı verdi.,arac_tren,2,fault_report,0,P1,0,standart,relabel:ollama
 Vagon içi yolcu sayaç bozuk,arac_tren,2,fault_report,0,P3,2,devrik,relabel:ollama
@@ -68,191 +69,191 @@ esenler hattindaki trenin kapi arizasi nezaman giderilcek bilgi verin?,arac_tren
 Vagon koltuğu çatlak yolcu şikayeti,arac_tren,2,complaint,3,P4,3,devrik,relabel:ollama
 Makinist kabini ısıtıcı arızalı,arac_tren,2,fault_report,0,P3,2,cok_kisa,relabel:ollama
 Vagon ısıtıcısı çalışmıyor soğuk hava,arac_tren,2,fault_report,0,P3,2,devrik,relabel:ollama
-Vagon 27 kapı sıkışıyor,arac_tren,2,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Vagon kliması ısıtma modunda kalıyor,arac_tren,2,fault_report,0,P3,2,devrik,relabel:ollama
-motor surucusu hata kodu veriyo,arac_tren,2,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Konulmalı daha çok buton acil durumlar için.,sinyalizasyon_haberlesme,3,suggestion,4,P4,3,devrik,relabel:ollama
+ceker motorundan duman cikiyo sefer 42,arac_tren,2,incident_report,1,P1,0,yazim_yanlisi,relabel:ollama
+Vagon içi anons bozuk 2. vagon,arac_tren,2,fault_report,0,P3,2,devrik,relabel:ollama
+Cumhuriyet başlangıçlı seferde 3 nolu vagon pencere camı kırık.,arac_tren,2,fault_report,0,P3,2,standart,relabel:ollama
+Yazılım izleme servisi yeniden başladı sistem aydınlandı,sinyalizasyon_haberlesme,3,information_request,2,P4,3,devrik,relabel:ollama
+Kartal acil buton çağrısı yanıt vermiyor,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,cok_kisa,relabel:ollama
+Söğütlüçeşme istasyonu 2. peron bölgesinde duman algılayıcılar uyarı vermektedir.,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,standart,relabel:ollama
 kadikoy scada sunucusu ping atmiyor ulasilmiyor,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Yangın paneli kırmızı ışık yanıyor,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:ollama
-PSD kamalı kilidi bozulmuş,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Bilgi ekranı boş,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:ollama
-psd 12 kilitlenmiyo topkapi peron,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Ötmüyor sarı çizgi ihlal uyarı sistemi peronda.,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,devrik,relabel:ollama
-vagon ici gozlem kamerasi kararmis,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Dudullu istasyonunda PSD-08 peron kapı aydınlatmaları tamamen söndü.,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,standart,relabel:ollama
+Görünmüyor kör nokta kamera,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,devrik,relabel:ollama
+Gayrettepe istasyonu 2. peronda görevli personelin telsiz bataryası bitmiş durumdadır.,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,standart,relabel:ollama
+1. peron sarı çizgi uyarısı çalışmıyor,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:ollama
+Levent istasyonunda sıklaşan şüpheli paket ihbarlarını azaltmak için yolcuları bilgilendiren sesli uyarı sistemleri güncellenmelidir.,sinyalizasyon_haberlesme,3,suggestion,4,P4,3,standart,relabel:ollama
+uskudar peron 2 yangin algilama dedektoru kirmizi isigi surekli yanip sonuyo,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Kozyatağı M8 peron kapısı motor yuvası kırıldı kapı sallanıyor vida çıktığı görülüyor.,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,standart,relabel:ollama
+PSD kapı kilitlenmiyor Şişhane peron,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,devrik,relabel:ollama
+telsizden sadece cızırtı geliyor konusulmuyor,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 Üçüncü ray izolatörü kırık,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:ollama
-telsiz bataryasi bitik haberlesme kopuk acil bakilsin,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Telsiz mandalı basmıyor,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:ollama
 Taksim istasyonu bilet holündeki acil durum butonunun koruma kapağı kırılmış olup cihaz sinyal vermemektedir.,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,standart,relabel:ollama
-Haliç istasyonu PID sunucusu yeniden başlatma sonrası verisi gelmedi.,sinyalizasyon_haberlesme,3,fault_report,0,P2,1,standart,relabel:ollama
+acil buton calismiyo kartal istasyon,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,yazim_yanlisi,relabel:gemini
 Kozyatağı istasyonunda YM-03 katener kesici aparatı isolasyon hatası veriyor.,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,standart,relabel:ollama
 telsiz anteni kirilmis sinyal almiyo servis sonunda,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 yangın dolabının kapağı kilitli acil durumda acilmaz,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-"Perondaki bilgilendirme ekranı kapkaranlık, elektrik gelmiyor herhalde hiçbir şey yazmıyor.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
+"Perondaki sürgülü ayırıcı kapıların camı boydan boya çatlamış, trene binerken fark ettim.",sinyalizasyon_haberlesme,3,fault_report,0,P3,2,,manuel_hedefli:hard_negative_kapi
 kartal 2 peron sari cizgi ikaz dudugu otmuyo yolcu riski var,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
 peron kapisi kapanma gecikiyo aksaray,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 Basılamıyor yardım butonu mekanik aksam takılmış 2. peron.,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,devrik,relabel:ollama
 Mahmutbey M7 peronunda PSD kapısı yavaş kapanıyor zamanlayıcı ayarı bozulmuş olabilir.,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,standart,relabel:ollama
 Esenler SCADA bağlantı sorunu,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:ollama
-guvenlik kamerasi goruntusu gelmiyo merkeze,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,yazim_yanlisi,relabel:gemini
-Hacıosman peron ihbar butonu basılı.,sinyalizasyon_haberlesme,3,fault_report,0,P1,0,cok_kisa,relabel:ollama
-Sultanbeyli istasyonunda YKS-01 yerli katener kontrol ünitesi hata veriyor.,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,standart,relabel:ollama
-Yangın sensörü arızalı,sinyalizasyon_haberlesme,3,fault_report,0,P2,1,cok_kisa,relabel:gemini
-4 levent istasyonkart yazilimi guncelleme sonrasi hata,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Veritabanı kilitlenme hatası,elektronik_sistemler,4,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Turnike reader kapağı yok,elektronik_sistemler,4,fault_report,0,P3,2,cok_kisa,relabel:ollama
-İstanbulkart okuyucu hatası,elektronik_sistemler,4,fault_report,0,P3,2,cok_kisa,relabel:ollama
-BSO-02 kart yazma hatası,elektronik_sistemler,4,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Ne zaman tamir olur turnike Taksim?,elektronik_sistemler,4,information_request,2,P3,2,devrik,relabel:ollama
-Göztepe gişe otomatı NFC modülü sürücü hatası veriyor.,elektronik_sistemler,4,fault_report,0,P3,2,standart,relabel:ollama
-kartal bso 1 ekran siyah cursor titriyor,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-"Aksaray BSO otomatı iade hopperı boş uyarısı veriyor, dolu iken.",elektronik_sistemler,4,fault_report,0,P3,2,standart,relabel:ollama
-Turnike 4 ne zaman açılır?,elektronik_sistemler,4,information_request,2,P4,3,cok_kisa,relabel:ollama
-Maltepe merkezi sistemde bilet tarife tablosu güncellenmediği bildirildi.,elektronik_sistemler,4,fault_report,0,P3,2,standart,relabel:ollama
-ikitelli istasyonkart okuyucu yazilim versiyon eski,elektronik_sistemler,4,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
-Veritabanı yedek alma hatası,elektronik_sistemler,4,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Uygulama çöktü bilet geçmişi görünmüyor,elektronik_sistemler,4,fault_report,0,P3,2,devrik,relabel:ollama
-İMES bilet otomatı reçete basma komutuna yanıt vermiyor.,elektronik_sistemler,4,fault_report,0,P3,2,standart,relabel:ollama
-kadikoy turnike 5 okumuyo kart gecerli yaziyo,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Biletmatik ne zaman çalışacak?,elektronik_sistemler,4,information_request,2,P3,2,cok_kisa,relabel:ollama
-4 levent istasyonkart bakiye yukleme basarisiz hata,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-"Gayrettepe istasyonunda rayların üzerine büyük bir metal levha düştü, tren seferleri acilen durdurulmalıdır.",yol_yapisal,5,incident_report,1,P2,1,standart,relabel:ollama
-"Üsküdar makas bölgesinde balast tabakasının dağılması sebebiyle raylarda esneme meydana gelmektedir, kontrolü gerekiyor.",yol_yapisal,5,fault_report,0,P3,2,standart,relabel:ollama
-Makas göbeğinde aşınma var.,yol_yapisal,5,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Travers çatlak Mecidiyeköy.,yol_yapisal,5,fault_report,0,P3,2,cok_kisa,relabel:ollama
-"Esenler istasyonu 2. peron hattında ray gövdesinde aşınma belirlendi, trenler yavaş geçiş yapıyor.",yol_yapisal,5,fault_report,0,P3,2,standart,relabel:ollama
-Vezneciler istasyonunda ray hattının üzerine düşen büyük bir reklam panosu nedeniyle seferler geçici olarak durduruldu.,yol_yapisal,5,incident_report,1,P2,1,standart,relabel:ollama
-Deforme olmuş ray hattı Bağcılar girişinde.,yol_yapisal,5,fault_report,0,P3,2,devrik,relabel:ollama
-Üsküdar makas çıkışında yabancı demir parçası rayların arasına sıkışarak tren geçişini engellemektedir.,yol_yapisal,5,fault_report,0,P2,1,standart,relabel:ollama
-"Sanayi Mahallesi tünel içi ray bağlantı klempleri gevşemiş, yolcu güvenliği açısından risk oluşturmaktadır.",yol_yapisal,5,fault_report,0,P1,0,standart,relabel:ollama
-Makasta mekanik sıkışma.,yol_yapisal,5,fault_report,0,P2,1,cok_kisa,relabel:ollama
-Kartal istasyonu giriş makasında ray bağlantı cıvatalarının koptuğu sabah vardiyasında teknik ekip tarafından rapor edildi.,yol_yapisal,5,fault_report,0,P3,2,standart,relabel:ollama
-Traverslerde çatlak var.,yol_yapisal,5,fault_report,0,P3,2,cok_kisa,relabel:ollama
-uzuncayir makas gobeginn civatalari kopmus tren sarsiliyo,yol_yapisal,5,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
-Esenler rayı kırık.,yol_yapisal,5,fault_report,0,P2,1,cok_kisa,relabel:ollama
-Gece vardiyasında yapılan kontrollerde Kartal makas bölgesinde ray üzerinde derin bir çatlak belirlenmiştir.,yol_yapisal,5,fault_report,0,P3,2,standart,relabel:ollama
-Levent 2. peron ray hattinda yabanci cisim var tren gecemiyo acil.,yol_yapisal,5,fault_report,0,P2,1,yazim_yanlisi,relabel:ollama
+CCTV kamera bozuk,sinyalizasyon_haberlesme,3,fault_report,0,P3,2,cok_kisa,relabel:gemini
+atakoy bso 3 kart okumuyo hata 12,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+BSO banknot kabul etmiyor sistem uyarısı,elektronik_sistemler,4,fault_report,0,P3,2,devrik,relabel:ollama
+Yamanevler BSO-05 otomatı iade çekmekte hata kodu 101 veriyor.,elektronik_sistemler,4,fault_report,0,P3,2,standart,relabel:ollama
+sirinevler tarife hatasi ucret fazla alindi,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Başakşehir Mérkez BSO cihazı yeni banknot serisini tanımıyor.,elektronik_sistemler,4,fault_report,0,P3,2,standart,relabel:ollama
+Kirazlı üst kat veritabanı bağlantısı kopuk,elektronik_sistemler,4,fault_report,0,P3,2,cok_kisa,relabel:ollama
+Tarife hatasi karttan para cekilmiyor aksaray,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Taksim bilet otomatı dil menüsü dönmüyor,elektronik_sistemler,4,fault_report,0,P3,2,devrik,relabel:ollama
+Bilet makinesi calismiyo pendik nakit odeme yok,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Geldi mi teknik servis bilet holüne?,elektronik_sistemler,4,information_request,2,P3,2,devrik,relabel:ollama
+kagithane turnike acil durum butonu yazilim hatasi,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+BSO bozuk para kutusu dolu uyarısı yanlış,elektronik_sistemler,4,fault_report,0,P3,2,devrik,relabel:ollama
+kadikoy istasyonunda kart okuyucu nezman duzelir acaba?,elektronik_sistemler,4,information_request,2,P3,2,yazim_yanlisi,relabel:ollama
+Bilet işlemi yavaşladı,elektronik_sistemler,4,complaint,3,P4,3,cok_kisa,relabel:ollama
+BSO-01 ekran karardı,elektronik_sistemler,4,fault_report,0,P3,2,cok_kisa,relabel:ollama
+İstanbulkart bakiye yanlış,elektronik_sistemler,4,fault_report,0,P4,3,cok_kisa,relabel:ollama
+Kart okumuyor ucret odendi bilet alamadi.,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:gemini
+imam hatip mobil qr kod uretmiyor hata,elektronik_sistemler,4,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Travers vidaları sökülmüş Üsküdar.,yol_yapisal,5,fault_report,0,P3,2,cok_kisa,relabel:ollama
+Kaçtı kedi rayların arasına Şişhane istasyonunda.,yol_yapisal,5,incident_report,1,P1,0,devrik,relabel:ollama
+Sarsıyor treni raydaki aşınma Mecidiyeköy girişinde.,yol_yapisal,5,fault_report,0,P3,2,devrik,relabel:ollama
+Kırılmış travers sabitleme cıvatası Levent peron girişinde.,yol_yapisal,5,fault_report,0,P3,2,devrik,relabel:ollama
+atakoy yonu ray koku kirildi sabah vardiyasinda fark ettik.,yol_yapisal,5,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Bağcılar yönü tünel ağzında rayların birbirine bağlandığı cebire cıvatalarında kırılma meydana gelmiştir.,yol_yapisal,5,fault_report,0,P3,2,standart,relabel:ollama
+Taksim makasinda ray kenetleri kirildi her geciste cok ses cikiyo.,yol_yapisal,5,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 Ray kırıldı acil müdahale.,yol_yapisal,5,fault_report,0,P1,0,cok_kisa,relabel:ollama
-Kapatmışlar kamera görüşünü,istasyon_guvenlik,6,fault_report,0,P3,2,devrik,relabel:ollama
-Şişhane acil durum kapısı önü kapalı,istasyon_guvenlik,6,fault_report,0,P1,0,cok_kisa,relabel:ollama
-Taksim istasyonu giriş alanında dilenci faaliyetlerine müdahale edilmesi gerekmektedir.,istasyon_guvenlik,6,incident_report,1,P2,1,standart,relabel:ollama
+kartal istasyonu 1. peron girisinde travers catlamis yolcu guvenligi riskli.,yol_yapisal,5,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
+Sıkıştı yabancı cisim makas dillerinin arasına.,yol_yapisal,5,fault_report,0,P1,0,devrik,relabel:ollama
+Kırıldı travers altındaki beton blok Şişli.,yol_yapisal,5,fault_report,0,P3,2,devrik,relabel:ollama
+halkali viyadukt ray alt beton ctlak buyudu,yol_yapisal,5,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Vezneciler istasyonunda ray hattının üzerine düşen büyük bir reklam panosu nedeniyle seferler geçici olarak durduruldu.,yol_yapisal,5,incident_report,1,P2,1,standart,relabel:ollama
+"Bağcılar makas makinesi bölgesindeki balast yatağında ciddi boşalma var, trenler sarsıntılı geçiş yapıyor.",yol_yapisal,5,fault_report,0,P1,0,standart,relabel:ollama
+"Hacıosman istasyonu 2. peron çıkışındaki ray bağlantı elemanlarında gevşeme tespit edildi, seferler tedbir amaçlı yavaşlatıldı.",yol_yapisal,5,fault_report,0,P2,1,standart,relabel:ollama
+ray catladi sanayi mahallesi girisinde treni acil durdurun,yol_yapisal,5,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
+Rayda engel Bağcılar.,yol_yapisal,5,fault_report,0,P1,0,cok_kisa,relabel:ollama
+Yenikapı istasyonu X-ray cihazı başında görevli personel bulunmadığı için çanta kontrolleri yapılamamaktadır.,istasyon_guvenlik,6,complaint,3,P2,1,standart,relabel:ollama
+dilenciler turnike önünde ısrar ediyor müdahale yok,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
+sirinevler turnike bolgesinde gecenin bu saatinde hic personel yok,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
+gayrettepe tunel ici balastlar alev aldi elektrik kesilmeli hemen.,istasyon_guvenlik,6,incident_report,1,P1,0,yazim_yanlisi,relabel:ollama
+Şişli gişe onunde dilenciler toplandi müdahale edilmiyor,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
+Tünel ağzı rayda yangın.,istasyon_guvenlik,6,incident_report,1,P1,0,cok_kisa,relabel:ollama
+Kurulsun güvenlik bariyeri tünel ağzı girişine.,istasyon_guvenlik,6,suggestion,4,P4,3,devrik,relabel:ollama
+Erişim engelli söndürücü BSO-05,istasyon_guvenlik,6,fault_report,0,P3,2,devrik,relabel:ollama
+Güvenlik personeli devriyede yok,istasyon_guvenlik,6,complaint,3,P4,3,cok_kisa,relabel:ollama
+topkapi istasyonu acil durum cikis kapisi kilitli kalmis acilmiyo,istasyon_guvenlik,6,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
+4. Levent istasyonunda sabah vardiyası personel eksiliği yaşandı.,istasyon_guvenlik,6,complaint,3,P4,3,standart,relabel:ollama
+Karaköy istasyonu 2. peron bölgesinde güvenlik personeli yerinde bulunmamaktadır.,istasyon_guvenlik,6,fault_report,0,P4,3,standart,relabel:ollama
+Müdahale lazım dilenciye Hacıosman,istasyon_guvenlik,6,incident_report,1,P2,1,devrik,relabel:ollama
+Şişli istasyonu tünel çıkışındaki ray traverslerinde duman çıkışı gözlenmesi üzerine yangın söndürme tüpleriyle müdahale ediliyor.,istasyon_guvenlik,6,incident_report,1,P1,0,standart,relabel:ollama
+Levent bilet holü çanta kontrolü yapılmıyor,istasyon_guvenlik,6,complaint,3,P4,3,cok_kisa,relabel:ollama
+topkapi gise bolgesinde kacak gecis yapanlar var guvenlik devriye atmiyo,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
+Durmuyor güvenlik noktasında personel öğle saatlerinde Kadıköy'de.,istasyon_guvenlik,6,complaint,3,P3,2,devrik,relabel:ollama
+Kadıköy peronda güvenlik personeli yok,istasyon_guvenlik,6,complaint,3,P4,3,cok_kisa,relabel:ollama
+Personel kapısı kilitlenmiyor yetkisiz giriş var.,istasyon_guvenlik,6,incident_report,1,P2,1,cok_kisa,relabel:ollama
 Girişe x-ray cihazı takviyesi.,istasyon_guvenlik,6,suggestion,4,P4,3,cok_kisa,relabel:ollama
-Çağlayan istasyonu peron bölgesinde rutin güvenlik turlarının aksadığı belirlenmiştir.,istasyon_guvenlik,6,complaint,3,P4,3,standart,relabel:ollama
-Karaköy istasyonu girişinde çanta tarama cihazının başında görevli personel eksikliği gözlemlenmiştir.,istasyon_guvenlik,6,complaint,3,P4,3,standart,relabel:ollama
-Kapatılmış kamera önü reklam panosuyla Levent istasyonunda.,istasyon_guvenlik,6,fault_report,0,P3,2,devrik,relabel:ollama
-Bakırköy gişe önü dilenci,istasyon_guvenlik,6,incident_report,1,P4,3,cok_kisa,relabel:ollama
-Üsküdar istasyonu 1. peron bölgesindeki kamera açısı dekoratif panolarla kapanmıştır.,istasyon_guvenlik,6,fault_report,0,P4,3,standart,relabel:ollama
-Sinyalizasyon odası kapısı acik kimse yok,istasyon_guvenlik,6,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
-sirinevler turnike yaninda dilenci var kimse bakmiyo,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
-Yangın söndürme tüpünün önü kapatılmış,istasyon_guvenlik,6,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Peron guvensiz personel goremedik kirazli,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
-taksim koridorundaki yangin tupu dolabinin onu reklam panosuyla kapatilmis,istasyon_guvenlik,6,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-personel devriye saatlerine uymuyo gece vardiyasinda,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
-Kamera açısı kaymış asansör,istasyon_guvenlik,6,fault_report,0,P4,3,devrik,relabel:ollama
-Üsküdar istasyonu B3 katındaki yangın söndürme tüpünün basınç göstergesinin kırmızı bölgede olduğu görüldü.,istasyon_guvenlik,6,fault_report,0,P3,2,standart,relabel:ollama
-Görülmedi devriye gezen güvenlik görevlisi az önce.,istasyon_guvenlik,6,complaint,3,P4,3,devrik,relabel:ollama
-kamera gorüs acisi afis yuzunden kapandi bilet holünde,istasyon_guvenlik,6,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Seyyar satıcı var Taksim,istasyon_guvenlik,6,incident_report,1,P4,3,devrik,relabel:ollama
-Servis başlangıcında turnike alanındaki kameranın görüş açısının reklam panosu tarafından kapandığı görülmüştür.,istasyon_guvenlik,6,fault_report,0,P4,3,standart,relabel:ollama
-Söndürme ekipmanı önü kapalı,istasyon_guvenlik,6,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Yangın alarmı buton kapalı,istasyon_guvenlik,6,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Söndürücü erişimi yok BSO-02 önü,istasyon_guvenlik,6,fault_report,0,P3,2,devrik,relabel:ollama
-bostanci turnike girisinde tek guvenlik personeli var yetersiz kaliyo,istasyon_guvenlik,6,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
-yangın söndürücü tüpü bosaltılmıs yenilenmesi lazim,istasyon_guvenlik,6,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Peron kalabalık güvenlik uyardı Gayrettepe,istasyon_guvenlik,6,incident_report,1,P4,3,devrik,relabel:ollama
+Girdi yetkisiz kişiler hat bakım kapısından Kirazlı'da.,istasyon_guvenlik,6,incident_report,1,P2,1,devrik,relabel:ollama
+Hacıosman istasyonu girişindeki yangın tüpü dolabının kapakları kilitli kalmıştır.,istasyon_guvenlik,6,fault_report,0,P4,3,standart,relabel:ollama
+Gayrettepe istasyonu turnike alanında görevli personelin iletişim cihazı fiziksel olarak hasarlıdır.,istasyon_guvenlik,6,fault_report,0,P3,2,standart,relabel:ollama
+Karaköy istasyonu üst kat kamera açısı reklam giydirmeleri nedeniyle kısıtlanmıştır.,istasyon_guvenlik,6,fault_report,0,P4,3,standart,relabel:ollama
+Levent istasyonu turnike bölgesinde seyyar satıcılara müdahale edilmesi için destek talep edilmektedir.,istasyon_guvenlik,6,incident_report,1,P2,1,standart,relabel:ollama
+Müdahale edilmiyor dilenciye,istasyon_guvenlik,6,complaint,3,P4,3,devrik,relabel:ollama
+Şişli alt kat yanık kokusu,istasyon_guvenlik,6,incident_report,1,P1,0,cok_kisa,relabel:ollama
+Şişli peron 2 kenarı fasulye tabağı,temizlik,7,fault_report,0,P4,3,cok_kisa,relabel:ollama
+"Pendik peronunda sigara izmariti ve kabuk birikimi, süpürme gerekli.",temizlik,7,fault_report,0,P4,3,standart,relabel:ollama
+Koku şiddetli üst geçit túneli Vezneciler,temizlik,7,complaint,3,P4,3,devrik,relabel:ollama
+Plastik poşetler uçuşuyor peron rüzgarıyla,temizlik,7,fault_report,0,P4,3,devrik,relabel:ollama
+Sağmalcılar çıkış merdiven basamaklarında dökülen yağ kayganlık yapıyor.,temizlik,7,fault_report,0,P1,0,standart,relabel:ollama
+"Bakırköy-Sahil peronunda dökülen şarap lekesi kokuyor, kimyasal temizlik lazım.",temizlik,7,fault_report,0,P3,2,standart,relabel:ollama
+Kozyatağı istasyonu acil çıkış kapısı önünde bulunan atıklar tahliye koridorunu engellemektedir.,temizlik,7,fault_report,0,P1,0,standart,relabel:ollama
+mecidiyekoy alt gcit krl cp var,temizlik,7,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
 bostanci peron kose fare goruldu cop yan,temizlik,7,incident_report,1,P4,3,yazim_yanlisi,relabel:ollama
-kirazli tuvalet zemn krl kagt dolu,temizlik,7,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
-"Bahçelievler giriş katında çöp konteyneri çevresi kirli, boşaltma gecikmiş.",temizlik,7,complaint,3,P4,3,standart,relabel:ollama
-"Kocatepe istasyonu tünel içinde kemirgen fecesleri görüldü, hijyen riski var.",temizlik,7,fault_report,0,P4,3,standart,relabel:ollama
-Bostancı asansör pano tuvaleti kilitli kirli,temizlik,7,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Çamur ayakkabılarından peron zeminine bulaştı,temizlik,7,fault_report,0,P4,3,devrik,relabel:ollama
-kirazli asansr kabn ic cok krl,temizlik,7,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
-"Alibeyköy Cep Otogarı tuvaletlerinde temizlik malzemesi tükenmiş, tedarik bekleniyor.",temizlik,7,complaint,3,P4,3,standart,relabel:ollama
-"Topkapı-Ulubatlı peron kenarında çöp yığını, konteyner eksikliği hissediliyor.",temizlik,7,complaint,3,P4,3,standart,relabel:ollama
-Bağcılar gişe önü dökülen kahve,temizlik,7,fault_report,0,P4,3,cok_kisa,relabel:ollama
-Yenikapı aktarma koridorundaki temizlik personel sayısının sabah vardiyasında artırılması hijyen standartlarını önemli ölçüde iyileştirecektir.,temizlik,7,suggestion,4,P4,3,standart,relabel:ollama
+uskudar peron kmluk tasiyr cp,temizlik,7,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
+zeytnbrnu peron tuvalet kp krl,temizlik,7,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
 Duvar yazılı boyalı peron sonu Sanayi Mahallesi,temizlik,7,fault_report,0,P4,3,devrik,relabel:ollama
-Karton kutular birikmiş servis kapısı yanında,temizlik,7,fault_report,0,P4,3,devrik,relabel:ollama
-Kirazlı perona gece ilaçlama.,temizlik,7,suggestion,4,P4,3,cok_kisa,relabel:ollama
-Vezneciler peron bankı altında eski gazete,temizlik,7,fault_report,0,P4,3,cok_kisa,relabel:ollama
-"Pendik metrosundaki çöp kovalarının bütünü ağzına kadar dolup taşmış, yerler döküntü ve atık içinde yürünmüyor.",temizlik,7,fault_report,0,P2,1,,manuel_hedefli:p2_dolayli_cogulluk
-Pendik istasyonu geçişinde dökülen meyve suyu mide bulandırıcısı kokuyor.,temizlik,7,fault_report,0,P4,3,standart,relabel:ollama
-Sakız yeri koltuk altı Hacıosman,temizlik,7,fault_report,0,P4,3,devrik,relabel:ollama
-Tabela eksik yolcular kayboldu Şişli kuzey,yolcu_hizmetleri,8,fault_report,0,P4,3,devrik,relabel:ollama
-Yönlendirme levhaları yenilenmeli,yolcu_hizmetleri,8,suggestion,4,P4,3,cok_kisa,relabel:ollama
-Tren içi ekran gayet net ama Şişli'de olmamıza rağmen ekranda hala Levent yazıyor.,yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
-Hava durumu sefer,yolcu_hizmetleri,8,information_request,2,P4,3,cok_kisa,relabel:ollama
-Yazılsın bekleme süreleri giriş turnikelerine,yolcu_hizmetleri,8,suggestion,4,P4,3,devrik,relabel:ollama
-Sefer iptali art arda ikinci Levent,yolcu_hizmetleri,8,fault_report,0,P2,1,devrik,relabel:ollama
-Yenikapı peron 2 PID boş görünüyor,yolcu_hizmetleri,8,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Peron ekranları aynı saati gösteriyor kilitli,yolcu_hizmetleri,8,fault_report,0,P4,3,devrik,relabel:ollama
-Anons sesi yok duyulmuyor Mahmutbey,yolcu_hizmetleri,8,fault_report,0,P4,3,devrik,relabel:ollama
-Eklensin İngilizce anonslar turist yoğunluğunda,yolcu_hizmetleri,8,suggestion,4,P4,3,devrik,relabel:ollama
-gayrettepe tabela karisik yolcu yanlis yon,yolcu_hizmetleri,8,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
+Kadıköy B1 giriş camı grafiti çekilmiş,temizlik,7,fault_report,0,P4,3,cok_kisa,relabel:ollama
+"Kocatepe istasyonu tünel içinde kemirgen fecesleri görüldü, hijyen riski var.",temizlik,7,fault_report,0,P4,3,standart,relabel:ollama
+Bostancı peron çöp torbaları toplanmadı,temizlik,7,fault_report,0,P4,3,cok_kisa,relabel:ollama
+İzmarit birikimi bank arkası Kağıthane,temizlik,7,fault_report,0,P4,3,devrik,relabel:ollama
+kadikoy biletmtk ustu izmarit dolu,temizlik,7,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
+Sakız yapışık dolu merdiven başları,temizlik,7,fault_report,0,P4,3,devrik,relabel:ollama
+Gecikme nedeni bilinmiyor,yolcu_hizmetleri,8,complaint,3,P3,2,cok_kisa,relabel:ollama
+acil durum duyurulari daha anlasilir kelimelerle yeniden duzenlenmeli bence,yolcu_hizmetleri,8,suggestion,4,P4,3,yazim_yanlisi,relabel:ollama
+Yönlendirme personeli yok kalabalık Vezneciler,yolcu_hizmetleri,8,complaint,3,P4,3,devrik,relabel:ollama
+Yolcu bilgilendirme sistemi ses gelmiyor yazılım,yolcu_hizmetleri,8,fault_report,0,P4,3,devrik,relabel:ollama
 "Sefer iptal olmuş ama bir Allahın kulu çıkıp da anons yapmıyor, bilgi sızdırmıyorlar resmen.",yolcu_hizmetleri,8,complaint,3,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
-sabah vardiyasinda neden bu kadar cok sefer iptali oluyo?,yolcu_hizmetleri,8,complaint,3,P2,1,yazim_yanlisi,relabel:ollama
+Peron ekranı saat hatalı,yolcu_hizmetleri,8,fault_report,0,P4,3,cok_kisa,relabel:ollama
+Uzunçayır peronunda ses seviyesinin yetersiz olması sebebiyle anonsların duyulmadığına dair geri bildirim ne zaman incelenecek?,yolcu_hizmetleri,8,information_request,2,P4,3,standart,relabel:ollama
+Peron cok kalabalik sisane yonlendirme yok,yolcu_hizmetleri,8,complaint,3,P4,3,yazim_yanlisi,relabel:ollama
+Anonslar daha sık yapılmalı,yolcu_hizmetleri,8,suggestion,4,P4,3,cok_kisa,relabel:ollama
+Ataköy istasyonunda sabah vardiyasında yaşanan sefer gecikmeleri için yolculara bir özür anonsu geçilecek mi?,yolcu_hizmetleri,8,information_request,2,P2,1,standart,relabel:ollama
+atakoy peron ekranina anlik sefer iptal sebebi eklenmeli yolcu soruyo,yolcu_hizmetleri,8,suggestion,4,P4,3,yazim_yanlisi,relabel:ollama
+Sefer gelmedi açıklama yok Mahmutbey,yolcu_hizmetleri,8,fault_report,0,P2,1,devrik,relabel:ollama
+levent asansor onü pid sefer saati yanlis,yolcu_hizmetleri,8,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
+Sefer gecikmesi sürekli Atatürk Oto Sanayi,yolcu_hizmetleri,8,complaint,3,P4,3,devrik,relabel:ollama
+Sefer iptali art arda ikinci Levent,yolcu_hizmetleri,8,fault_report,0,P2,1,devrik,relabel:ollama
+sisli peronuna daha buyuk bilgilendirme ekrani lazim yolcu goremiyo,yolcu_hizmetleri,8,suggestion,4,P4,3,yazim_yanlisi,relabel:ollama
+Anons eksik bilgilendirme,yolcu_hizmetleri,8,complaint,3,P4,3,cok_kisa,relabel:ollama
+Seferler seyreltildi kadikoy yo gunluk saglam,yolcu_hizmetleri,8,fault_report,0,P2,1,yazim_yanlisi,relabel:ollama
+Peron dolu seferler gecikiyor Şişli,yolcu_hizmetleri,8,complaint,3,P4,3,devrik,relabel:ollama
+sisli yonunde seferlerin gecikme sebebi hakkinda anons yapilcakmi?,yolcu_hizmetleri,8,information_request,2,P4,3,yazim_yanlisi,relabel:ollama
+Peron bos tren gelmedi bostanci bekliyoruz,yolcu_hizmetleri,8,fault_report,0,P2,1,yazim_yanlisi,relabel:ollama
+Bostancı istasyonunda anons yapılmaması sonucu yolcular yanlış perona yönelmiştir.,yolcu_hizmetleri,8,fault_report,0,P3,2,standart,relabel:ollama
 Şirinevler istasyonunda peron yoğunluğunu azaltmak adına alternatif güzergah bilgilerinin anons sistemine dahil edilmesi önerilmektedir.,yolcu_hizmetleri,8,suggestion,4,P4,3,standart,relabel:ollama
-Uzunçayır peronunda anons eksikliği yolcuların yanlış yöne gitmesine neden oldu.,yolcu_hizmetleri,8,fault_report,0,P3,2,standart,relabel:ollama
-Servis başlangıcı gecikti,yolcu_hizmetleri,8,complaint,3,P4,3,cok_kisa,relabel:ollama
-Peron değişimi anons edilmedi Seyrantepe,yolcu_hizmetleri,8,fault_report,0,P4,3,devrik,relabel:ollama
-bogazici uni pid reklam dondu sefer yok,yolcu_hizmetleri,8,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
-Tarife uyuşmazlığı yolcu şikayetçi Kağıthane,yolcu_hizmetleri,8,complaint,3,P4,3,devrik,relabel:ollama
-Şişhane PID yer istasyonu adı yazmıyor,yolcu_hizmetleri,8,fault_report,0,P4,3,devrik,relabel:ollama
-Tarife değişikliği yolcular habersiz Olimpiyat,yolcu_hizmetleri,8,complaint,3,P4,3,devrik,relabel:ollama
-"Anons pırıl pırıl duyuluyor ama adam sürekli M4 hattı arızası diyor, biz M5'teyiz yanlış bilgi veriyor.",yolcu_hizmetleri,8,fault_report,0,P4,3,,manuel_hedefli:hard_negative_sinyalizasyon_yolcu
-Gerekiyor ek tabela Bağcılar güney çıkış bilet holüne.,yolcu_hizmetleri,8,suggestion,4,P4,3,devrik,relabel:ollama
-kadikoy peron pid dondu onceki sefer kalmis,yolcu_hizmetleri,8,fault_report,0,P4,3,yazim_yanlisi,relabel:ollama
-Mecidiyeköy istasyonu aktarma koridorunda kadın yolcuya tacizde bulunan şüpheli yakalanarak polis noktasına götürüldü.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
-sisli istasyonunda perona atlayan yolcu intihar girisiminde bulundu,guvenlik_asayis_olay,9,incident_report,1,P1,0,yazim_yanlisi,relabel:ollama
+Kartal istasyonunda bilet holü yoğunluğu sefer gecikmesine neden oldu.,yolcu_hizmetleri,8,fault_report,0,P3,2,standart,relabel:ollama
+mecidiyekoy peron ortasinda bagirip kufur eden sahis durduruldu,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
+kartal istasyonu guney cikista uusturucu madde kullanan sahis alindi,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
+Gayrettepe bilet holünde kavga çıktı.,guvenlik_asayis_olay,9,incident_report,1,P2,1,cok_kisa,relabel:ollama
+Vagonda bir kişi sigara içiyor.,guvenlik_asayis_olay,9,incident_report,1,P2,1,cok_kisa,relabel:ollama
+Kartal istasyonu peron alanında ray hattına girmeye çalışan şahıs güvenlik personeli tarafından engellendi.,guvenlik_asayis_olay,9,incident_report,1,P1,0,standart,relabel:ollama
+Bırakılmış şüpheli çanta Şişli üst kat merdivenlerinde.,guvenlik_asayis_olay,9,incident_report,1,P1,0,devrik,relabel:ollama
+raylarin arasina supheli canta atildi sishane metro peronu acil durum.,guvenlik_asayis_olay,9,incident_report,1,P1,0,yazim_yanlisi,relabel:ollama
+Yolcu düşmesi sefer iptal Sanayi,guvenlik_asayis_olay,9,incident_report,1,P1,0,devrik,relabel:ollama
+İndirildi vagondan yüksek sesle söven agresif yolcu.,guvenlik_asayis_olay,9,incident_report,1,P2,1,devrik,relabel:ollama
+Maltepe istasyonu kuzey çıkışında yolculara hakaret eden alkollü şahıs kolluk kuvvetlerine teslim edildi.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
+PSD-08 kapısı önünde taciz vakası.,guvenlik_asayis_olay,9,incident_report,1,P2,1,cok_kisa,relabel:ollama
+Saldırdı yumrukla diğer yolcuya Levent aktarma katında.,guvenlik_asayis_olay,9,incident_report,1,P1,0,devrik,relabel:ollama
+Yenikapı istasyonu M2 aktarma tünelinde dolaşan şüpheli şahıs hakkında kumanda merkezine bilgi verilmiştir.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
+Peronda yankesicilik olayı yaşandı.,guvenlik_asayis_olay,9,incident_report,1,P2,1,cok_kisa,relabel:ollama
+Yolcu alkollü müdahale,guvenlik_asayis_olay,9,incident_report,1,P2,1,cok_kisa,relabel:ollama
 Peron sonuna doğru intihar teşebbüsü.,guvenlik_asayis_olay,9,incident_report,1,P1,0,cok_kisa,relabel:ollama
 Çaldı cep telefonunu kalabalıkta kaçtı Levent yönüne.,guvenlik_asayis_olay,9,incident_report,1,P2,1,devrik,relabel:ollama
 Çaldı kadının çantasını A2 vagonunda yankesici.,guvenlik_asayis_olay,9,incident_report,1,P2,1,devrik,relabel:ollama
-Vezneciler istasyonundaki bayılma vakalarına hızlı müdahale için peron katına acil yardım kiti ve sedye konulmalıdır.,guvenlik_asayis_olay,9,suggestion,4,P4,3,standart,relabel:ollama
+Sabah vardiyasında Şişli-Mecidiyeköy istasyonu gişe bölgesinde turnikeden atlayarak kaçak geçiş yapan şahıslar tespit edilmiştir.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
 bagcilar bilet holunde cuzdan calan yankesici polise teslim edildi,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
-Tespit edildi yasak madde satmaya çalışan şahıs.,guvenlik_asayis_olay,9,incident_report,1,P2,1,devrik,relabel:ollama
-Maltepe istasyonu peron alanında uçucu madde koklayan şahıs emniyet güçlerine teslim edilmek üzere tutuldu.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
-Yenikapı bilet holünde fiziki kavga.,guvenlik_asayis_olay,9,incident_report,1,P1,0,cok_kisa,relabel:ollama
-Bırakılmış sahipsiz sırt çantası tünel ağzında akşam.,guvenlik_asayis_olay,9,incident_report,1,P1,0,devrik,relabel:ollama
-Kartal istasyonu peron alanında ray hattına girmeye çalışan şahıs güvenlik personeli tarafından engellendi.,guvenlik_asayis_olay,9,incident_report,1,P1,0,standart,relabel:ollama
-haciosman bilet holunde kimlik ibraz etmeyen sahis polise bildirildi,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
-Eklensin sağlık kabini Taksim peronuna.,guvenlik_asayis_olay,9,suggestion,4,P4,3,devrik,relabel:ollama
-Yenikapı istasyonu peronunda yolculara bıçak çekerek para isteyen şahıs emniyetçe etkisiz hale getirildi.,guvenlik_asayis_olay,9,incident_report,1,P1,0,standart,relabel:ollama
-sisli gise tarafinda genc bir grup turnikeden atlayip kacti,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
-Makas bölgesinde şüpheli paket.,guvenlik_asayis_olay,9,incident_report,1,P1,0,cok_kisa,relabel:ollama
-taksim PSD-02 kapisinda tren onune atlamaya calisan yolcu kurtarildi,guvenlik_asayis_olay,9,incident_report,1,P1,0,yazim_yanlisi,relabel:ollama
-Bilet holünde sahipsiz çanta var,guvenlik_asayis_olay,9,incident_report,1,P1,0,cok_kisa,relabel:ollama
-kartal bilet bolgesinde yasak madde satan sahis polise yakalattirildi,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
-dilenci grupları turnike önünde yolcu engelliyo,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
-Yenikapı istasyonunda kayıp eşya teslim prosedürü hemen başlatıldı.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
-taksim asansor onu supheli siyah sirt cantasi var polis cagirildi,guvenlik_asayis_olay,9,incident_report,1,P1,0,yazim_yanlisi,relabel:ollama
-Çocuk kaybı bildirildi,guvenlik_asayis_olay,9,incident_report,1,P1,0,cok_kisa,relabel:ollama
-Ayrılık Çeşmesi istasyonunda havalandırma boşluğu yakınında uçucu madde kullanan şahıs emniyet ekiplerine teslim edildi.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
-Aksaray istasyonu bilet holünde sözlü tartışmayı kavgaya dönüştüren şahıslar güvenlikçe ayrıldı.,guvenlik_asayis_olay,9,incident_report,1,P2,1,standart,relabel:ollama
+Basmadan geçiyor turnikeden kaçak yolcular Şirinevler'de.,guvenlik_asayis_olay,9,incident_report,1,P2,1,devrik,relabel:ollama
+Bilet holünde kadın yolcu taciz edildi.,guvenlik_asayis_olay,9,incident_report,1,P2,1,cok_kisa,relabel:ollama
+Israrla para istedi yolculardan vagondaki dilenci.,guvenlik_asayis_olay,9,incident_report,1,P2,1,devrik,relabel:ollama
+Hacıosman peronunda fiziksel darp var.,guvenlik_asayis_olay,9,incident_report,1,P1,0,cok_kisa,relabel:ollama
+kadikoy istasyonunda bayan yolcuyu taciz eden sahis karakola goturuldu,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
+Kimlik ibraz etmedi güvenlik görevlisine bilet holünde.,guvenlik_asayis_olay,9,incident_report,1,P2,1,devrik,relabel:ollama
 BSO-01 alanında uyuşturucu kullanımı.,guvenlik_asayis_olay,9,incident_report,1,P2,1,cok_kisa,relabel:ollama
-Engel olundu peronda intihar etmeye çalışan şahsa.,guvenlik_asayis_olay,9,incident_report,1,P1,0,devrik,relabel:ollama
+kirazli istasyonu T-04 vagonda sigara icen iki kisi karakolluk oldu,guvenlik_asayis_olay,9,incident_report,1,P2,1,yazim_yanlisi,relabel:ollama
+Kapanmış yangın çıkışı Bağcılar,altyapi_insaat,10,fault_report,0,P1,0,devrik,relabel:ollama
+taksim transfer koridor zeminde buyuk cukur olustu,altyapi_insaat,10,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
+topkapi asansor kuyusuna yagmur suyu giris yapti,altyapi_insaat,10,fault_report,0,P2,1,yazim_yanlisi,relabel:ollama
+Aksaray yönlü tünel duvarında alg oluşumu,altyapi_insaat,10,fault_report,0,P4,3,devrik,relabel:ollama
+Peronlara kaydırmaz zemin solüsyonu.,altyapi_insaat,10,suggestion,4,P4,3,cok_kisa,relabel:ollama
+Yenikapı Marmaray transfer tüneli drenaj pompa havuzu taşması meydana geldi.,altyapi_insaat,10,fault_report,0,P1,0,standart,relabel:gemini
+"Yakacık-Adnan Kahveci istasyonunda tuvalet musluğu akmıyor, ama lavabo kirli.",altyapi_insaat,10,fault_report,0,P3,2,standart,relabel:ollama
 Soğanlık yeni istasyon asansör hücresi ıslak,altyapi_insaat,10,fault_report,0,P3,2,devrik,relabel:ollama
 Huzurevi çıkış catlası suyu içeri kaçıyor,altyapi_insaat,10,fault_report,0,P3,2,devrik,relabel:ollama
-Gayrettepe istasyonu peron katındaki acil çıkış kapısı kilit mekanizması sıkıştığı için dışarıdan açılamamaktadır.,altyapi_insaat,10,fault_report,0,P1,0,standart,relabel:ollama
+merdıven basamak boyaları yenılense yolcu daha ıyı gorur.,altyapi_insaat,10,suggestion,4,P4,3,yazim_yanlisi,relabel:ollama
 bagcilar istasyon tunel duvarindan su damliyo,altyapi_insaat,10,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-Tuvalet musluğu akıyor su birikimi yok temizlik,altyapi_insaat,10,fault_report,0,P3,2,devrik,relabel:ollama
-Şişli-Mecidiyeköy istasyonu peron katındaki yangın dolabı kapağının kilidi bozuk olduğundan kendiliğinden açılmaktadır.,altyapi_insaat,10,fault_report,0,P3,2,standart,relabel:ollama
-Vezneciler geçit catlağı altı nemli koku,altyapi_insaat,10,fault_report,0,P3,2,cok_kisa,relabel:ollama
-bagcilar tunelindeki catlaklar icin guclendirme ne vakit baslicak acaba?,altyapi_insaat,10,information_request,2,P3,2,yazim_yanlisi,relabel:ollama
+Biter mi inşaat faaliyeti akşama kadar?,altyapi_insaat,10,information_request,2,P4,3,devrik,relabel:ollama
+Yapılmalı zemin revizyonu yürüyen merdiven girişine.,altyapi_insaat,10,suggestion,4,P4,3,devrik,relabel:ollama
+"Kadıköy istasyonu koridorlarındaki rutubet ve nemlenme sorunu yolcu konforunu bozuyor, bu konuda bir iyileştirme var mı?",altyapi_insaat,10,complaint,3,P4,3,standart,relabel:ollama
+Yamanevler çıkış catlası altından su geliyor,altyapi_insaat,10,fault_report,0,P3,2,devrik,relabel:ollama
 Kozyatağı M8 tünel drenaj borusu tıklı,altyapi_insaat,10,fault_report,0,P3,2,devrik,relabel:ollama
-Bostancı acil çıkış kapısı kilitli.,altyapi_insaat,10,fault_report,0,P1,0,cok_kisa,relabel:ollama
+Bağcılar hattındaki tünel çatlakları ile ilgili planlanan güçlendirme çalışmaları tam olarak ne kadar süre devam edecektir?,altyapi_insaat,10,information_request,2,P3,2,standart,relabel:ollama
+yenikapi marmaray giris merdiven basamak betonu ctlak,altyapi_insaat,10,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
 Üsküdar asansör kuyusu su doldu pompa arızalı,altyapi_insaat,10,fault_report,0,P2,1,devrik,relabel:ollama
 Sabiha Gökçen M4 tünel duvar fayans dökülmeleri devam ediyor.,altyapi_insaat,10,fault_report,0,P4,3,standart,relabel:ollama
 ataturk havalimani park yeri rampada beton curumesi,altyapi_insaat,10,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 vezneciler peron tavan betonarme donati gorunuyor,altyapi_insaat,10,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
 Sultanbeyli M8 viyadük dilatasyon boşluğundan su kaçağı.,altyapi_insaat,10,fault_report,0,P3,2,standart,relabel:ollama
-Esenler çıkış merdiveni basamak betonu kırık,altyapi_insaat,10,fault_report,0,P1,0,devrik,relabel:ollama
-taksim transfer koridor zeminde buyuk cukur olustu,altyapi_insaat,10,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
-Hava şaftı duvarı fayans dökülüyor,altyapi_insaat,10,fault_report,0,P4,3,cok_kisa,relabel:ollama
-Yenikapı peron sonu acil çıkış kilitli,altyapi_insaat,10,fault_report,0,P1,0,cok_kisa,relabel:ollama
-Tünel içi ıslaklık yayılıyor,altyapi_insaat,10,fault_report,0,P3,2,cok_kisa,relabel:ollama
-uskudar metro merdiven basamak alt kapagi sokuldu,altyapi_insaat,10,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
-mahmutbey peron zemin dilatasyon catlasi genisliyor,altyapi_insaat,10,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
+Ataköy peron duvarı sızıntısı,altyapi_insaat,10,fault_report,0,P3,2,cok_kisa,relabel:ollama
 Peron Köprüsü dilatasyon kauçuk sökük,altyapi_insaat,10,fault_report,0,P3,2,cok_kisa,relabel:ollama
-Zemin dilatasyon kapakları kalkmış,altyapi_insaat,10,fault_report,0,P1,0,cok_kisa,relabel:ollama
-İnşaat alanı ne zaman açılacak?,altyapi_insaat,10,information_request,2,P4,3,cok_kisa,relabel:ollama
-yangın hortumu sızdırıyor yerler su oldu,altyapi_insaat,10,fault_report,0,P3,2,yazim_yanlisi,relabel:ollama
-yenikapi marmaray giris merdiven basamak betonu ctlak,altyapi_insaat,10,fault_report,0,P1,0,yazim_yanlisi,relabel:ollama
+Kartal yönlü viyadukt direk altı beton hasarlı,altyapi_insaat,10,fault_report,0,P4,3,devrik,relabel:ollama
+Fayanslar değişecek mi girişteki acil acaba?,altyapi_insaat,10,information_request,2,P4,3,devrik,relabel:ollama
